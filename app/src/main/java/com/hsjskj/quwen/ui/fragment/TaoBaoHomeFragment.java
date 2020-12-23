@@ -33,6 +33,12 @@ public class TaoBaoHomeFragment extends MyFragment<HomeActivity> {
     }
 
     @Override
+    public boolean isStatusBarEnabled() {
+        // 使用沉浸式状态栏
+        return !super.isStatusBarEnabled();
+    }
+
+    @Override
     protected void initView() {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager2 = findViewById(R.id.view_pager);

@@ -93,6 +93,15 @@ public final class MyApplication extends Application implements LifecycleOwner {
             public Drawable getBackIcon() {
                 return getDrawable(R.drawable.arrows_left_ic);
             }
+
+//            @Override
+//            public float getTitleSize() {
+//                return sp2px(18);//设置标题字号 默认16
+//            }
+            /**
+             * //参考设置标题加粗
+             * getTitleBar().getTitleView().setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+             */
         });
 
         // 本地异常捕捉

@@ -13,6 +13,7 @@ import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.ui.dialog.AddressDialog;
 import com.hsjskj.quwen.ui.dialog.DateDialog;
+import com.hsjskj.quwen.ui.dialog.GraphicInputDialog;
 import com.hsjskj.quwen.ui.dialog.HintDialog;
 import com.hsjskj.quwen.ui.dialog.InputDialog;
 import com.hsjskj.quwen.ui.dialog.MenuDialog;
@@ -36,10 +37,10 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/12/02
- *    desc   : 对话框使用案例
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/12/02
+ * desc   : 对话框使用案例
  */
 public final class DialogActivity extends MyActivity {
 
@@ -58,7 +59,7 @@ public final class DialogActivity extends MyActivity {
                 R.id.btn_dialog_pay, R.id.btn_dialog_address,
                 R.id.btn_dialog_date, R.id.btn_dialog_time,
                 R.id.btn_dialog_update, R.id.btn_dialog_share,
-                R.id.btn_dialog_safe, R.id.btn_dialog_custom);
+                R.id.btn_dialog_safe, R.id.btn_dialog_custom, R.id.btn_dialog_graphic);
     }
 
     @Override
@@ -459,6 +460,16 @@ public final class DialogActivity extends MyActivity {
                             toast("按键代码：" + event.getKeyCode());
                             return false;
                         })
+                        .show();
+                break;
+            case R.id.btn_dialog_graphic:
+                /**
+                 * 因为没有具体设计图 和ios沟通即可，修改具体页面
+                 */
+                new GraphicInputDialog.Builder(this)
+                        .setHint("请输入验证码")
+                        .setUrlString("https://www.baidu.com/img/bd_logo.png")
+                        .setListener((dialog, content) -> toast("输入内容" + content))
                         .show();
                 break;
             default:

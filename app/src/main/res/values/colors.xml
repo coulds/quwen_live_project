@@ -3,13 +3,13 @@
     <!-- App 样式中引用的颜色 -->
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/black</color>
-    <color name="colorAccent">#5A8DDF</color>
+    <color name="colorAccent">#69E8FE</color>
     <color name="windowBackground">#F4F4F4</color>
     <color name="textColor">#333333</color>
     <color name="textColorHint">#757575</color>
 
     <!-- 按钮按压时的颜色 -->
-    <color name="colorButtonPressed">#AA5A8DDF</color>
+    <color name="colorButtonPressed">#AA69E8FE</color>
     <!-- 按钮禁用时的颜色 -->
     <color name="colorButtonDisable">#BBBBBB</color>
     <!-- 分割线的颜色 -->
