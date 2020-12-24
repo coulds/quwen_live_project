@@ -1,3 +1,4 @@
+include ':title_bar'
 include ':audio'
 include ':app'
 include ':base'

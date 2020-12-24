@@ -20,6 +20,7 @@ import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
 import com.hjq.widget.view.SwitchButton;
+import com.hsjskj.quwen.ui.user.LoginActivity;
 
 /**
  *    author : Android 轮子哥

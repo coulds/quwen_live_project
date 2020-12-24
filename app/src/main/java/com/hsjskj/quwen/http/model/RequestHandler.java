@@ -23,7 +23,7 @@ import com.hsjskj.quwen.http.json.IntegerTypeAdapter;
 import com.hsjskj.quwen.http.json.ListTypeAdapter;
 import com.hsjskj.quwen.http.json.LongTypeAdapter;
 import com.hsjskj.quwen.http.json.StringTypeAdapter;
-import com.hsjskj.quwen.ui.activity.LoginActivity;
+import com.hsjskj.quwen.ui.user.LoginActivity;
 import com.hjq.http.EasyLog;
 import com.hjq.http.config.IRequestHandler;
 import com.hjq.http.exception.CancelException;

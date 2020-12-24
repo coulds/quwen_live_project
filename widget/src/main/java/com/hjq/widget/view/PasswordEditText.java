@@ -18,15 +18,16 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import com.hjq.widget.R;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/08/25
- *    desc   : 密码隐藏显示 EditText
+ * @author : Jun
+ * time   : 2020年12月24日13:07:56
+ * desc   : 密码隐藏显示 EditText
  */
 public final class PasswordEditText extends RegexEditText
         implements View.OnTouchListener,
         View.OnFocusChangeListener, TextWatcher {
 
+    /**默认是否显示眼睛图标*/
+    private static final boolean isDefaultShow = true;
     private Drawable mCurrentDrawable;
     private final Drawable mVisibleDrawable;
     private final Drawable mInvisibleDrawable;
@@ -46,12 +47,12 @@ public final class PasswordEditText extends RegexEditText
     @SuppressLint("ClickableViewAccessibility")
     public PasswordEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
+        int areaSize = getResources().getDimensionPixelOffset(R.dimen.input_psw_size);
         mVisibleDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.password_off_ic));
-        mVisibleDrawable.setBounds(0, 0, mVisibleDrawable.getIntrinsicWidth(), mVisibleDrawable.getIntrinsicHeight());
+        mVisibleDrawable.setBounds(0, 0, areaSize, areaSize);
 
         mInvisibleDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.password_on_ic));
-        mInvisibleDrawable.setBounds(0, 0, mInvisibleDrawable.getIntrinsicWidth(), mInvisibleDrawable.getIntrinsicHeight());
+        mInvisibleDrawable.setBounds(0, 0, areaSize, areaSize);
 
         mCurrentDrawable = mVisibleDrawable;
 
@@ -62,14 +63,14 @@ public final class PasswordEditText extends RegexEditText
             setInputRegex(REGEX_NONNULL);
         }
 
-        setDrawableVisible(false);
+        setDrawableVisible(true);
         super.setOnTouchListener(this);
         super.setOnFocusChangeListener(this);
         super.addTextChangedListener(this);
     }
 
     private void setDrawableVisible(boolean visible) {
-        if (mCurrentDrawable.isVisible() == visible) {
+        if (mCurrentDrawable==null||mCurrentDrawable.isVisible() == visible) {
             return;
         }
 
@@ -115,6 +116,9 @@ public final class PasswordEditText extends RegexEditText
         if (mOnFocusChangeListener != null) {
             mOnFocusChangeListener.onFocusChange(view, hasFocus);
         }
+        if (isDefaultShow) {
+            setDrawableVisible(true);
+        }
     }
 
     /**
@@ -156,11 +160,16 @@ public final class PasswordEditText extends RegexEditText
         if (isFocused()) {
             setDrawableVisible(s.length() > 0);
         }
+        if (isDefaultShow) {
+            setDrawableVisible(true);
+        }
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
 
     @Override
-    public void afterTextChanged(Editable s) {}
+    public void afterTextChanged(Editable s) {
+    }
 }

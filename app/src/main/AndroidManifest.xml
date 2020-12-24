@@ -92,14 +92,14 @@
 
         <!-- 登录界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.LoginActivity"
+            android:name="com.hsjskj.quwen.ui.user.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <!-- 注册界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.RegisterActivity"
+            android:name="com.hsjskj.quwen.ui.user.RegisterActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -115,6 +115,12 @@
         <!-- 忘记密码 -->
         <activity
             android:name="com.hsjskj.quwen.ui.activity.PasswordForgetActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/password_forget_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hsjskj.quwen.ui.user.PhoneMailForgetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/password_forget_title"
             android:launchMode="singleTop"

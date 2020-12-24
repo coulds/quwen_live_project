@@ -21,5 +21,7 @@
     <color name="colorConfirm">#007AFF</color>
     <!-- 对话框取消按钮文本颜色 -->
     <color name="colorCancel">#F44336</color>
+    <!--  注册提示文本颜色  -->
+    <color name="color999">#999999</color>
 
 </resources>

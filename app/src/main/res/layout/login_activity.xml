@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="top|center_horizontal"
     android:orientation="vertical"
-    tools:context="com.hsjskj.quwen.ui.activity.LoginActivity"
+    tools:context="com.hsjskj.quwen.ui.user.LoginActivity"
     tools:layoutAnimation="@null">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -37,7 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,24 +47,35 @@
                 android:gravity="center_horizontal"
                 android:layoutAnimation="@anim/from_bottom_layout"
                 android:orientation="vertical"
-                tools:context="com.hsjskj.quwen.ui.activity.LoginActivity"
+                tools:context="com.hsjskj.quwen.ui.user.LoginActivity"
                 tools:layoutAnimation="@null">
 
-                <View
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="130dp" />
+                    android:layout_height="130dp">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:background="@drawable/login_bg_fff_tl_tr" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:text="@string/login_welcome_tip"
+                        android:textColor="@color/white"
+                        android:textSize="28sp" />
+
+                </FrameLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_login_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@drawable/login_bg_fff_tl_tr"
                     android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
 
                     <com.hjq.widget.view.ClearEditText
                         android:id="@+id/et_login_phone"
@@ -137,14 +150,12 @@
                     android:layout_marginVertical="20dp"
                     app:srcCompat="@drawable/login_wechat_ic" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_login_protocol"
-                    android:layout_width="wrap_content"
+                <com.hsjskj.quwen.widget.LoginProtocolView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
-                    android:text="登录/注册即代表同意《用户服务协议》和《隐私政策》"
-                    android:textSize="12sp" />
+                    android:gravity="center_horizontal" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

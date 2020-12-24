@@ -1,9 +1,12 @@
 package com.hsjskj.quwen.common;
 
 import android.app.Application;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,7 +18,7 @@ import androidx.lifecycle.LifecycleRegistry;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.billy.android.swipe.SmartSwipeBack;
 import com.hjq.bar.TitleBar;
-import com.hjq.bar.style.TitleBarLightStyle;
+import com.hjq.bar.initializer.LightBarInitializer;
 import com.hsjskj.quwen.BuildConfig;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.SwipeAction;
@@ -36,6 +39,8 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import okhttp3.OkHttpClient;
+
+import static com.scwang.smartrefresh.layout.util.SmartUtil.dp2px;
 
 /**
  * author : Android 轮子哥
@@ -81,28 +86,33 @@ public final class MyApplication extends Application implements LifecycleOwner {
                 return intercept;
             }
         });
-
-        // 初始化标题栏全局样式
-        TitleBar.initStyle(new TitleBarLightStyle(application) {
-
+        TitleBar.setDefaultInitializer(new LightBarInitializer() {
             @Override
-            public Drawable getBackground() {
-                return new ColorDrawable(ContextCompat.getColor(application, R.color.colorPrimary));
+            public TextView getTitleView(Context context) {
+                TextView titleView = super.getTitleView(context);
+                titleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                titleView.setTextSize(18);
+                return titleView;
             }
 
             @Override
-            public Drawable getBackIcon() {
-                return getDrawable(R.drawable.arrows_left_ic);
+            public TextView getRightView(Context context) {
+                TextView rightView = super.getRightView(context);
+                rightView.setTextSize(15);
+                return rightView;
             }
 
-//            @Override
-//            public float getTitleSize() {
-//                return sp2px(18);//设置标题字号 默认16
-//            }
-            /**
-             * //参考设置标题加粗
-             * getTitleBar().getTitleView().setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-             */
+            @Override
+            public Drawable getBackgroundDrawable(Context context) {
+                return super.getBackgroundDrawable(context);
+            }
+
+            @Override
+            public Drawable getBackIcon(Context context) {
+                Drawable backIcon = getDrawableResources(context, R.drawable.arrows_left_ic);
+                backIcon.setBounds(0, 0, dp2px(20), dp2px(20));
+                return backIcon;
+            }
         });
 
         // 本地异常捕捉

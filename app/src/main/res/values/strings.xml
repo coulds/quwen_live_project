@@ -5,6 +5,9 @@
     <string name="common_phone_input_hint">输入手机号码</string>
     <string name="common_phone_input_error">手机号输入不正确</string>
 
+    <string name="common_mail_input_hint">输入邮箱</string>
+    <string name="common_mail_input_error">邮箱输入不正确</string>
+
     <string name="common_phone_and_email_input_hint">请输入手机号/邮箱</string>
     <string name="common_phone_and_email_input_error">手机号/邮箱输入不正确</string>
 
@@ -120,8 +123,10 @@
     <!-- 注册 -->
     <string name="register_title">注册</string>
     <string name="register_hint">手机号仅用于登录和保护账号安全</string>
-    <string name="register_password_hint1">设置6&#8211;18位登录密码</string>
+    <string name="register_password_hint1">请输入6–18位，数字、字母和特殊符号的密码</string>
     <string name="register_password_hint2">请再次输入一次密码</string>
+    <string name="register_password_hint3">请输入密码</string>
+    <string name="register_password_hint4">确认密码</string>
     <string name="register_succeed">注册成功</string>
 
     <!-- 设置 -->
@@ -151,6 +156,7 @@
 
     <!-- 忘记密码 -->
     <string name="password_forget_title">忘记密码</string>
+    <string name="password_forget_tip">通过注册手机/邮箱找回</string>
 
     <!-- 重置密码 -->
     <string name="password_reset_title">设置登录密码</string>
@@ -202,5 +208,15 @@
     <!-- 拍照 -->
     <string name="camera_launch_fail">无法启动相机</string>
     <string name="camera_image_error">目标地址错误</string>
+
+    <string name="login_welcome_tip">您好，\n欢迎来到去问</string>
+    <string name="login_protocol_str1">登录/注册即代表同意</string>
+    <string name="login_protocol_and">和</string>
+    <string name="login_protocol_user_1">《用户服务协议》</string>
+    <string name="login_protocol_user_2">《隐私政策》</string>
+    <string name="register_account_tip">注册账号</string>
+    <string name="register_method_tip">通过注册手机/邮箱注册</string>
+    <string name="register_switch_mailbox">切换邮箱</string>
+    <string name="register_switch_phone">切换手机号</string>
 
 </resources>

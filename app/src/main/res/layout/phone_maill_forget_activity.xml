@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:fillViewport="true"
-        android:scrollbars="none">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,14 +31,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="@string/register_account_tip"
+                android:text="@string/password_forget_title"
                 android:textColor="@color/textColor"
                 android:textSize="28sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/register_method_tip"
+                android:text="@string/password_forget_tip"
                 android:textColor="@color/color999"
                 android:textSize="14sp" />
 
@@ -156,24 +155,13 @@
 
             <View style="@style/HorizontalLineStyle" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_register_commit"
                 style="@style/ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
                 android:text="@string/common_confirm" />
-
-            <com.hsjskj.quwen.widget.LoginProtocolView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal" />
 
         </LinearLayout>
 

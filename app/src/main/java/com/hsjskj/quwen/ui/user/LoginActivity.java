@@ -1,49 +1,39 @@
-package com.hsjskj.quwen.ui.activity;
+package com.hsjskj.quwen.ui.user;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.hjq.base.route.RouteUtil;
+import com.hjq.widget.view.RegexEditText;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.DebugLog;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
+import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.helper.InputTextHelper;
-import com.hsjskj.quwen.helper.SpannableStringHelper;
-import com.hsjskj.quwen.http.model.HttpData;
-import com.hsjskj.quwen.http.request.LoginApi;
-import com.hsjskj.quwen.http.response.LoginBean;
 import com.hsjskj.quwen.other.IntentKey;
+import com.hsjskj.quwen.ui.activity.HomeActivity;
 import com.hsjskj.quwen.wxapi.WXEntryActivity;
-import com.hjq.http.EasyConfig;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 import com.hsjskj.umeng.Platform;
 import com.hsjskj.umeng.UmengClient;
 import com.hsjskj.umeng.UmengLogin;
 
+import java.util.regex.Pattern;
+
 /**
- * author : Jun
+ * @author : Jun
  * time   : 2020年12月24日10:58:33
  * desc   : 登录界面
  */
 @Route(path = RouteUtil.PATH_LOGIN_INVALID)
 public final class LoginActivity extends MyActivity
-        implements UmengLogin.OnLoginListener, SpannableStringHelper.ProtocolHelperListener {
+        implements UmengLogin.OnLoginListener {
 
     @DebugLog
     public static void start(Context context, String phone, String password) {
@@ -53,12 +43,10 @@ public final class LoginActivity extends MyActivity
         context.startActivity(intent);
     }
 
-    private ViewGroup mBodyLayout;
     private EditText mPhoneView;
     private EditText mPasswordView;
 
     private View mForgetView;
-    private TextView tvLoginProtocol;
     private Button mCommitView;
     private View mWeChatView;
 
@@ -69,13 +57,11 @@ public final class LoginActivity extends MyActivity
 
     @Override
     protected void initView() {
-        mBodyLayout = findViewById(R.id.ll_login_body);
         mPhoneView = findViewById(R.id.et_login_phone);
         mPasswordView = findViewById(R.id.et_login_password);
         mForgetView = findViewById(R.id.tv_login_forget);
         mCommitView = findViewById(R.id.btn_login_commit);
         mWeChatView = findViewById(R.id.iv_login_wechat);
-        tvLoginProtocol = findViewById(R.id.tv_login_protocol);
         setOnClickListener(mForgetView, mCommitView, mWeChatView);
 
         InputTextHelper.with(this)
@@ -87,7 +73,6 @@ public final class LoginActivity extends MyActivity
 
     @Override
     protected void initData() {
-        post(this::initProtocol);
         // 判断用户当前有没有安装微信
         if (!UmengClient.isAppInstalled(this, Platform.WECHAT)) {
             mWeChatView.setVisibility(View.GONE);
@@ -98,16 +83,6 @@ public final class LoginActivity extends MyActivity
         mPasswordView.setText(getString(IntentKey.PASSWORD));
     }
 
-    private void initProtocol() {
-        String str1 = "登录/注册即代表同意";
-        String str2 = "和";
-        String protocol = "《用户服务协议》";
-        String secrecy = "《隐私政策》";
-
-        tvLoginProtocol.setMovementMethod(LinkMovementMethod.getInstance());
-        tvLoginProtocol.setText(SpannableStringHelper.setProtocolString(this, str1, str2, protocol, secrecy, this));
-        tvLoginProtocol.setHighlightColor(ContextCompat.getColor(this, android.R.color.transparent));
-    }
 
     @Override
     public void onRightClick(View v) {
@@ -127,39 +102,26 @@ public final class LoginActivity extends MyActivity
     @Override
     public void onClick(View v) {
         if (v == mForgetView) {
-            startActivity(PasswordForgetActivity.class);
+            startActivity(PhoneMailForgetActivity.class);
         } else if (v == mCommitView) {
-            if (mPhoneView.getText().toString().length() != 11) {
-                toast(R.string.common_phone_input_error);
+            String inputAccount = mPhoneView.getText().toString();
+            boolean matches = Pattern.compile(RegexEditText.REGEX_EMAIL).matcher(inputAccount).matches();
+            boolean matches2 = Pattern.compile(RegexEditText.REGEX_MOBILE).matcher(inputAccount).matches();
+            if (matches || matches2) {
+                toast(R.string.common_phone_and_email_input_error);
                 return;
             }
 
-            if (true) {
-                showDialog();
-                postDelayed(() -> {
-                    hideDialog();
-                    startActivity(HomeActivity.class);
-                    finish();
-                }, 2000);
-                return;
-            }
+            showDialog();
+            postDelayed(() -> {
+                hideDialog();
+                //TODO 网络请求模拟
+                MyUserInfo.getInstance().setToken("token");
+                // 跳转到主页
+                startActivity(HomeActivity.class);
+                finish();
+            }, 2000);
 
-            EasyHttp.post(this)
-                    .api(new LoginApi()
-                            .setPhone(mPhoneView.getText().toString())
-                            .setPassword(mPasswordView.getText().toString()))
-                    .request(new HttpCallback<HttpData<LoginBean>>(this) {
-
-                        @Override
-                        public void onSucceed(HttpData<LoginBean> data) {
-                            // 更新 Token
-                            EasyConfig.getInstance()
-                                    .addParam("token", data.getData().getToken());
-                            // 跳转到主页
-                            startActivity(HomeActivity.class);
-                            finish();
-                        }
-                    });
         } else if (v == mWeChatView) {
             toast("记得改好第三方 AppID 和 AppKey，否则会调不起来哦");
             Platform platform;
@@ -234,15 +196,5 @@ public final class LoginActivity extends MyActivity
     @Override
     protected boolean isStatusBarDarkFont() {
         return false;
-    }
-
-    @Override
-    public void protocolClick() {
-        toast("用户服务协议");
-    }
-
-    @Override
-    public void secrecyClick() {
-        toast("点击隐私政策");
     }
 }
