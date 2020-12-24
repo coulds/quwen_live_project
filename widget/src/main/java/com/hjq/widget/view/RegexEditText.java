@@ -3,6 +3,7 @@ package com.hjq.widget.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -14,27 +15,49 @@ import com.hjq.widget.R;
 import java.util.regex.Pattern;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/06/29
- *    desc   : 正则输入限制编辑框
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/06/29
+ * desc   : 正则输入限制编辑框
  */
 public class RegexEditText extends AppCompatEditText implements InputFilter {
 
-    /** 手机号（只能以 1 开头） */
+    /**
+     * 手机号（只能以 1 开头）
+     */
     public static final String REGEX_MOBILE = "[1]\\d{0,10}";
-    /** 中文（普通的中文字符） */
+    /**
+     * 中文（普通的中文字符）
+     */
     public static final String REGEX_CHINESE = "[\\u4e00-\\u9fa5]*";
-    /** 英文（大写和小写的英文） */
+    /**
+     * 英文（大写和小写的英文）
+     */
     public static final String REGEX_ENGLISH = "[a-zA-Z]*";
-    /** 计数（非 0 开头的数字） */
+    /**
+     * 计数（非 0 开头的数字）
+     */
     public static final String REGEX_COUNT = "[1-9]\\d*";
-    /** 用户名（中文、英文、数字） */
+    /**
+     * 用户名（中文、英文、数字）
+     */
     public static final String REGEX_NAME = "[[\\u4e00-\\u9fa5]|[a-zA-Z]|\\d]*";
-    /** 非空格的字符（不能输入空格） */
+    /**
+     * 非空格的字符（不能输入空格）
+     */
     public static final String REGEX_NONNULL = "\\S+";
+    /**
+     * 密码规则（8~16位，包含数字、字母）
+     */
+    public static String REGEX_PSW = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
+    /**
+     * 邮箱正则
+     */
+    public static String REGEX_EMAIL = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*.[a-zA-Z0-9]{2,6}$";
 
-    /** 正则表达式规则 */
+    /**
+     * 正则表达式规则
+     */
     private Pattern mPattern;
 
     public RegexEditText(Context context) {
@@ -52,6 +75,8 @@ public class RegexEditText extends AppCompatEditText implements InputFilter {
 
         if (array.hasValue(R.styleable.RegexEditText_inputRegex)) {
             setInputRegex(array.getString(R.styleable.RegexEditText_inputRegex));
+        } else if (array.hasValue(R.styleable.RegexEditText_inputDecimal)) {
+            setInputDecimal(array.getInt(R.styleable.RegexEditText_inputDecimal, 2));
         } else {
             if (array.hasValue(R.styleable.RegexEditText_regexType)) {
                 int regexType = array.getInt(R.styleable.RegexEditText_regexType, 0);
@@ -74,6 +99,12 @@ public class RegexEditText extends AppCompatEditText implements InputFilter {
                     case 0x06:
                         setInputRegex(REGEX_NONNULL);
                         break;
+                    case 0x07:
+                        setInputRegex(REGEX_PSW);
+                        break;
+                    case 0x08:
+                        setInputRegex(REGEX_EMAIL);
+                        break;
                     default:
                         break;
                 }
@@ -81,6 +112,11 @@ public class RegexEditText extends AppCompatEditText implements InputFilter {
         }
 
         array.recycle();
+    }
+
+    private void setInputDecimal(int decimal) {
+        setInputRegex("^(\\d)(.\\d{0," + decimal + "})?$");
+        setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
     /**
@@ -151,13 +187,13 @@ public class RegexEditText extends AppCompatEditText implements InputFilter {
     /**
      * {@link InputFilter}
      *
-     * @param source        新输入的字符串
-     * @param start         新输入的字符串起始下标，一般为0
-     * @param end           新输入的字符串终点下标，一般为source长度-1
-     * @param dest          输入之前文本框内容
-     * @param destStart     原内容起始坐标，一般为0
-     * @param destEnd       原内容终点坐标，一般为dest长度-1
-     * @return              返回字符串将会加入到内容中
+     * @param source    新输入的字符串
+     * @param start     新输入的字符串起始下标，一般为0
+     * @param end       新输入的字符串终点下标，一般为source长度-1
+     * @param dest      输入之前文本框内容
+     * @param destStart 原内容起始坐标，一般为0
+     * @param destEnd   原内容终点坐标，一般为dest长度-1
+     * @return 返回字符串将会加入到内容中
      */
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int destStart, int destEnd) {

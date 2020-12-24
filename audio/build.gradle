@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+apply from: '../config.gradle'
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    // 基类库
+    implementation project(':base')
+}

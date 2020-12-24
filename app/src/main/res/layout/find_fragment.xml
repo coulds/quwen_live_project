@@ -275,6 +275,14 @@
                 android:hint="这里只能输入非空格的字符"
                 app:regexType="nonnull" />
 
+            <com.hjq.widget.view.RegexEditText
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:hint="小数点位数限制4位"
+                app:inputDecimal="4"/>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

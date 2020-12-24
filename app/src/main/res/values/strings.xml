@@ -5,6 +5,9 @@
     <string name="common_phone_input_hint">输入手机号码</string>
     <string name="common_phone_input_error">手机号输入不正确</string>
 
+    <string name="common_phone_and_email_input_hint">请输入手机号/邮箱</string>
+    <string name="common_phone_and_email_input_error">手机号/邮箱输入不正确</string>
+
     <string name="common_password_input_error">请输入密码</string>
     <string name="common_password_input_unlike">两次密码输入不一致，请重新输入</string>
 
@@ -112,7 +115,7 @@
     <string name="login_forget">忘记密码？</string>
     <string name="login_text">登录</string>
 
-    <string name="login_other">其他登录方式</string>
+    <string name="login_other">- 其他方式 -</string>
 
     <!-- 注册 -->
     <string name="register_title">注册</string>

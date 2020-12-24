@@ -13,7 +13,7 @@
     <!-- 按钮禁用时的颜色 -->
     <color name="colorButtonDisable">#BBBBBB</color>
     <!-- 分割线的颜色 -->
-    <color name="colorLine">#ECECEC</color>
+    <color name="colorLine">#CCCCCC</color>
     <!-- 图标颜色 -->
     <color name="colorIcon">#7C7C7C</color>
 

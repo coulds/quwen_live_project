@@ -51,6 +51,7 @@ public final class MyApplication extends Application implements LifecycleOwner {
     public void onCreate() {
         super.onCreate();
         mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
+        MyUserInfo.getInstance().initContext(this);
         initSdk(this);
     }
 

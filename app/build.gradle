@@ -160,10 +160,12 @@ dependencies {
     implementation 'com.billy.android:smart-swipe-x:1.1.0'
 
     // 日志调试：https://github.com/getActivity/Logcat
-    debugImplementation 'com.hjq:logcat:8.2'
+//    debugImplementation 'com.hjq:logcat:8.2'
 
     // 内存泄漏：https://github.com/square/leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+
+    implementation 'com.tencent:mmkv-static:1.2.2'
 
     // 国际化：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast

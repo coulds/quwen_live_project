@@ -16,6 +16,7 @@ import com.hsjskj.quwen.helper.ActivityStackManager;
 import com.hsjskj.quwen.helper.DoubleClickHelper;
 import com.hsjskj.quwen.other.KeyboardWatcher;
 import com.hsjskj.quwen.ui.fragment.FindFragment;
+import com.hsjskj.quwen.ui.fragment.HomeFragment;
 import com.hsjskj.quwen.ui.fragment.MeFragment;
 import com.hsjskj.quwen.ui.fragment.MessageFragment;
 import com.hsjskj.quwen.ui.fragment.TaoBaoHomeFragment;
@@ -56,8 +57,8 @@ public final class HomeActivity extends MyActivity
     @Override
     protected void initData() {
         mPagerAdapter = new BaseFragmentAdapter<>(this);
-//        mPagerAdapter.addFragment(HomeFragment.newInstance());
-        mPagerAdapter.addFragment(TaoBaoHomeFragment.newInstance());
+        mPagerAdapter.addFragment(HomeFragment.newInstance());
+//        mPagerAdapter.addFragment(TaoBaoHomeFragment.newInstance());
         mPagerAdapter.addFragment(FindFragment.newInstance());
         mPagerAdapter.addFragment(MessageFragment.newInstance());
         mPagerAdapter.addFragment(MeFragment.newInstance());

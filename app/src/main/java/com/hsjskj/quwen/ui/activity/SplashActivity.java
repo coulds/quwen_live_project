@@ -1,35 +1,27 @@
 package com.hsjskj.quwen.ui.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-import com.hjq.base.route.RouteUtil;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
-import com.hsjskj.quwen.http.model.HttpData;
-import com.hsjskj.quwen.http.request.UserInfoApi;
-import com.hsjskj.quwen.http.response.UserInfoBean;
+import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.other.AppConfig;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
+
+import me.jessyan.autosize.internal.CancelAdapt;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 闪屏界面
+ * @author : Jun
+ * time   : 2020年12月24日10:58:14
+ * desc   : 闪屏界面
  */
-@Route(path = RouteUtil.PATH_LAUNCHER)
-public final class SplashActivity extends MyActivity {
+public final class SplashActivity extends MyActivity implements CancelAdapt {
 
-    private LottieAnimationView mLottieView;
     private View mDebugView;
 
     @Override
@@ -39,17 +31,7 @@ public final class SplashActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        mLottieView = findViewById(R.id.iv_splash_lottie);
         mDebugView = findViewById(R.id.iv_splash_debug);
-        // 设置动画监听
-        mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                startActivity(HomeActivity.class);
-                finish();
-            }
-        });
     }
 
     @Override
@@ -60,19 +42,22 @@ public final class SplashActivity extends MyActivity {
             mDebugView.setVisibility(View.INVISIBLE);
         }
 
-        if (true) {
+        if (!MyUserInfo.getInstance().isLogin()) {
+            startActivity(LoginActivity.class);
+            finish();
             return;
+        } else {
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //没有网络请求验证token直接进首页
+                    startActivity(HomeActivity.class);
+                    finish();
+                }
+            }, 1000);
         }
         // 刷新用户信息
-        EasyHttp.post(this)
-                .api(new UserInfoApi())
-                .request(new HttpCallback<HttpData<UserInfoBean>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<UserInfoBean> data) {
-
-                    }
-                });
+        //TODO 网络请求
     }
 
     @NonNull
@@ -85,8 +70,7 @@ public final class SplashActivity extends MyActivity {
 
     @Override
     public void onBackPressed() {
-        //禁用返回键
-        //super.onBackPressed();
+        super.onBackPressed();
     }
 
     @Override
@@ -96,7 +80,6 @@ public final class SplashActivity extends MyActivity {
 
     @Override
     protected void onDestroy() {
-        mLottieView.removeAllAnimatorListeners();
         super.onDestroy();
     }
 }
