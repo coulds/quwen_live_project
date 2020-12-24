@@ -18,7 +18,7 @@ import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.helper.InputTextHelper;
 import com.hsjskj.quwen.other.IntentKey;
-import com.hsjskj.quwen.ui.activity.HomeActivity;
+import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.wxapi.WXEntryActivity;
 import com.hsjskj.umeng.Platform;
 import com.hsjskj.umeng.UmengClient;
@@ -107,7 +107,7 @@ public final class LoginActivity extends MyActivity
             String inputAccount = mPhoneView.getText().toString();
             boolean matches = Pattern.compile(RegexEditText.REGEX_EMAIL).matcher(inputAccount).matches();
             boolean matches2 = Pattern.compile(RegexEditText.REGEX_MOBILE).matcher(inputAccount).matches();
-            if (matches || matches2) {
+            if (!matches && !matches2) {
                 toast(R.string.common_phone_and_email_input_error);
                 return;
             }

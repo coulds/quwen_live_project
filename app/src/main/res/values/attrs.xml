@@ -15,4 +15,10 @@
         <attr name="linearProgress" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="HomeBottomNavigationChildView">
+        <attr name="check" format="boolean" />
+        <attr name="icon" format="reference" />
+        <attr name="title" format="string" />
+    </declare-styleable>
+
 </resources>

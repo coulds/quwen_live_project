@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
+import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.pager.GuidePagerAdapter;
 import com.rd.PageIndicatorView;
 

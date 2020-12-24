@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.fragment;
+package com.hsjskj.quwen.ui.home.fragment;
 
 import android.util.TypedValue;
 import android.view.View;
@@ -9,7 +9,7 @@ import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.http.glide.GlideApp;
-import com.hsjskj.quwen.ui.activity.HomeActivity;
+import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;

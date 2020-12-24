@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <com.hsjskj.quwen.widget.HomeBottomNavigationChildView
+        android:id="@+id/bottom_0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:icon="@drawable/home_1_unselect"
+        app:title="@string/home_nav_index"
+        app:check="true"/>
+
+    <com.hsjskj.quwen.widget.HomeBottomNavigationChildView
+        android:id="@+id/bottom_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:icon="@drawable/home_2_unselect"
+        app:title="@string/home_nav_ask" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottom_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/home_center" />
+
+    <com.hsjskj.quwen.widget.HomeBottomNavigationChildView
+        android:id="@+id/bottom_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:icon="@drawable/home_3_unselect"
+        app:title="@string/home_nav_message" />
+
+
+    <com.hsjskj.quwen.widget.HomeBottomNavigationChildView
+        android:id="@+id/bottom_4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:icon="@drawable/home_4_unselect"
+        app:title="@string/home_nav_me" />
+
+
+</LinearLayout>

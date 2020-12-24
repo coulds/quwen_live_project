@@ -72,7 +72,7 @@ public class MyUserInfo {
 
     public void setToken(String token) {
         checkNullPointer(mmkv);
-        mmkv.decodeString(KEY_USER_TOKEN, token);
+        mmkv.encode(KEY_USER_TOKEN, token);
     }
 
     public void setId(String id) {

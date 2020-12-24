@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.fragment;
+package com.hsjskj.quwen.ui.home.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,7 +11,7 @@ import com.hsjskj.quwen.ui.activity.AboutActivity;
 import com.hsjskj.quwen.ui.activity.BrowserActivity;
 import com.hsjskj.quwen.ui.activity.DialogActivity;
 import com.hsjskj.quwen.ui.activity.GuideActivity;
-import com.hsjskj.quwen.ui.activity.HomeActivity;
+import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
 import com.hsjskj.quwen.ui.user.LoginActivity;

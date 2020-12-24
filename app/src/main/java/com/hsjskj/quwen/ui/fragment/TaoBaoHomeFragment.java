@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyFragment;
-import com.hsjskj.quwen.ui.activity.HomeActivity;
+import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 
 /**
  * @author : Jun

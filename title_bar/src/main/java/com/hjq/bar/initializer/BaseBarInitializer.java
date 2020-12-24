@@ -24,7 +24,8 @@ public abstract class BaseBarInitializer implements ITitleBarInitializer {
     @Override
     public TextView getLeftView(Context context) {
         TextView leftView = createTextView(context);
-        leftView.setCompoundDrawablesWithIntrinsicBounds(getBackIcon(context), null, null, null);
+//        leftView.setCompoundDrawablesWithIntrinsicBounds(getBackIcon(context), null, null, null);
+        leftView.setCompoundDrawables(getBackIcon(context), null, null, null);
         leftView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.START));
         leftView.setGravity(Gravity.CENTER_VERTICAL);
         leftView.setFocusable(true);

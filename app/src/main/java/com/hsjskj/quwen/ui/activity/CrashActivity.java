@@ -29,6 +29,7 @@ import com.hsjskj.quwen.other.AppConfig;
 import com.hsjskj.quwen.other.IntentKey;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
+import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

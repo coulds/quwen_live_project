@@ -24,4 +24,7 @@
     <!--  注册提示文本颜色  -->
     <color name="color999">#999999</color>
 
+    <color name="homeBottomColorYes">@color/colorAccent</color>
+    <color name="homeBottomColorNo">#CCCCCC</color>
+
 </resources>

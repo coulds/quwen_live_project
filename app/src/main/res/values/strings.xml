@@ -112,6 +112,8 @@
     <string name="home_nav_found">发现</string>
     <string name="home_nav_message">消息</string>
     <string name="home_nav_me">我的</string>
+    <string name="home_nav_ask">去问</string>
+    <string name="home_nav_live">直播</string>
 
     <!-- 登录 -->
     <string name="login_register">注册</string>

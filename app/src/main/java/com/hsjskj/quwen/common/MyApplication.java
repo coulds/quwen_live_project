@@ -116,7 +116,7 @@ public final class MyApplication extends Application implements LifecycleOwner {
         });
 
         // 本地异常捕捉
-        CrashHandler.register(application);
+//        CrashHandler.register(application);
 
         // 友盟统计、登录、分享 SDK
         UmengClient.init(application);

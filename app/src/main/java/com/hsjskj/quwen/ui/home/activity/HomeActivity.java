@@ -1,13 +1,10 @@
-package com.hsjskj.quwen.ui.activity;
+package com.hsjskj.quwen.ui.home.activity;
 
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hjq.base.BaseFragmentAdapter;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
@@ -15,24 +12,22 @@ import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.helper.ActivityStackManager;
 import com.hsjskj.quwen.helper.DoubleClickHelper;
 import com.hsjskj.quwen.other.KeyboardWatcher;
-import com.hsjskj.quwen.ui.fragment.FindFragment;
-import com.hsjskj.quwen.ui.fragment.HomeFragment;
-import com.hsjskj.quwen.ui.fragment.MeFragment;
-import com.hsjskj.quwen.ui.fragment.MessageFragment;
-import com.hsjskj.quwen.ui.fragment.TaoBaoHomeFragment;
+import com.hsjskj.quwen.ui.home.fragment.FindFragment;
+import com.hsjskj.quwen.ui.home.fragment.HomeFragment;
+import com.hsjskj.quwen.ui.home.fragment.MeFragment;
+import com.hsjskj.quwen.ui.home.fragment.MessageFragment;
+import com.hsjskj.quwen.widget.HomeBottomNavigationView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 主页界面
+ * @author : Jun
+ * time   : 2020年12月24日15:50:05
+ * desc   : 主页界面
  */
 public final class HomeActivity extends MyActivity
-        implements KeyboardWatcher.SoftKeyboardStateListener,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+        implements KeyboardWatcher.SoftKeyboardStateListener, HomeBottomNavigationView.ItemSelectedListener {
 
     private ViewPager mViewPager;
-    private BottomNavigationView mBottomNavigationView;
+    private HomeBottomNavigationView mBottomNavigationView;
 
     private BaseFragmentAdapter<MyFragment> mPagerAdapter;
 
@@ -47,7 +42,6 @@ public final class HomeActivity extends MyActivity
         mBottomNavigationView = findViewById(R.id.bv_home_navigation);
 
         // 不使用图标默认变色
-        mBottomNavigationView.setItemIconTintList(null);
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         KeyboardWatcher.with(this)
@@ -58,38 +52,13 @@ public final class HomeActivity extends MyActivity
     protected void initData() {
         mPagerAdapter = new BaseFragmentAdapter<>(this);
         mPagerAdapter.addFragment(HomeFragment.newInstance());
-//        mPagerAdapter.addFragment(TaoBaoHomeFragment.newInstance());
+        mPagerAdapter.addFragment(HomeFragment.newInstance());
         mPagerAdapter.addFragment(FindFragment.newInstance());
         mPagerAdapter.addFragment(MessageFragment.newInstance());
         mPagerAdapter.addFragment(MeFragment.newInstance());
         // 设置成懒加载模式
         mPagerAdapter.setLazyMode(true);
         mViewPager.setAdapter(mPagerAdapter);
-    }
-
-    /**
-     * {@link BottomNavigationView.OnNavigationItemSelectedListener}
-     */
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_home:
-                mViewPager.setCurrentItem(0);
-                return true;
-            case R.id.home_found:
-                mViewPager.setCurrentItem(1);
-                return true;
-            case R.id.home_message:
-                mViewPager.setCurrentItem(2);
-                return true;
-            case R.id.home_me:
-                mViewPager.setCurrentItem(3);
-                return true;
-            default:
-                break;
-        }
-        return false;
     }
 
     /**
@@ -141,6 +110,12 @@ public final class HomeActivity extends MyActivity
 
     @Override
     public boolean isSwipeEnable() {
+        return false;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(int position) {
+        mViewPager.setCurrentItem(position);
         return false;
     }
 }

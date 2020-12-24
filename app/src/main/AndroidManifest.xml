@@ -85,7 +85,7 @@
 
         <!-- App 首页 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.HomeActivity"
+            android:name="com.hsjskj.quwen.ui.home.activity.HomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
