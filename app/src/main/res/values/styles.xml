@@ -113,4 +113,34 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!-- 首页星座男标签 -->
+    <style name="HomeConstellationMaleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:background">@drawable/home_question_sex_blue</item>
+        <item name="android:drawableStart">@drawable/home_sex_male</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textColor">@color/homeColorMale</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingTop">1dp</item>
+        <item name="android:paddingBottom">1dp</item>
+    </style>
+
+    <!-- 首页星座女标签 -->
+    <style name="HomeConstellationFaMaleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:background">@drawable/home_question_sex_pink</item>
+        <item name="android:drawableStart">@drawable/home_sex_female</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textColor">@color/homeColorFaMale</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingTop">1dp</item>
+        <item name="android:paddingBottom">1dp</item>
+    </style>
+
 </resources>

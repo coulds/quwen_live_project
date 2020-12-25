@@ -4,7 +4,7 @@
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorAccent">#69E8FE</color>
-    <color name="windowBackground">#F4F4F4</color>
+    <color name="windowBackground">@color/white</color>
     <color name="textColor">#333333</color>
     <color name="textColorHint">#757575</color>
 
@@ -28,5 +28,15 @@
     <color name="homeBottomColorNo">#CCCCCC</color>
     <color name="homeItemTitleColor">#09090b</color>
     <color name="homeItemMoreColor">#989898</color>
+    <color name="homeNoticeBgColor">#EAFCFF</color>
+    <color name="homeColor1a1a1a">#1a1a1a</color>
+    <color name="homeColor696969">#696969</color>
+    <color name="homeColor2c2c2c">#2c2c2c</color>
+    <color name="homeColor000024">#000024</color>
+    <color name="homeColor010024">#010024</color>
+    <color name="homeColor6b6d99">#6b6d99</color>
+
+    <color name="homeColorMale">#8AE7FF</color>
+    <color name="homeColorFaMale">#FD617C</color>
 
 </resources>

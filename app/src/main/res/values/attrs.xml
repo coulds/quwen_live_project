@@ -78,4 +78,9 @@
         <attr name="clip_background" />
     </declare-styleable>
 
+    <declare-styleable name="MarqueeViewStyle">
+        <attr name="mvInterval" format="integer|reference" />
+        <attr name="mvAnimDuration" format="integer|reference" />
+    </declare-styleable>
+
 </resources>

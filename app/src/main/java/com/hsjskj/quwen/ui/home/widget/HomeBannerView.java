@@ -1,6 +1,7 @@
 package com.hsjskj.quwen.ui.home.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.ui.home.activity.ConstellationActivity;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
@@ -51,19 +54,23 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Stri
 
         banner = view.findViewById(R.id.banner);
         bannerPic = new ArrayList<>();
+
+        banner.setIndicator(new CircleIndicator(getContext()));
+        banner.start();
         addView(view);
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        banner.setIndicator(new CircleIndicator(getContext()));
-        banner.setOnBannerListener(this);
     }
 
-    public void addBannerLifecycleObserver(FragmentActivity activity) {
-        //添加生命周期观察者
-        banner.addBannerLifecycleObserver(activity);
+    @Override
+    public void onViewRemoved(View child) {
+        super.onViewRemoved(child);
+        if (banner != null) {
+            banner.stop();
+        }
     }
 
     public void setBannerPic(List<String> b) {
@@ -73,6 +80,20 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Stri
         this.bannerPic.clear();
         this.bannerPic.addAll(b);
         this.banner.setAdapter(new BannerImageAdapter<String>(bannerPic) {
+
+            @Override
+            public BannerImageHolder onCreateHolder(ViewGroup parent, int viewType) {
+                RoundedImageView imageView = new RoundedImageView(parent.getContext());
+                //注意，必须设置为match_parent，这个是viewpager2强制要求的
+                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+                imageView.setLayoutParams(params);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setCornerRadius(dp2px(8));
+                return new BannerImageHolder(imageView);
+            }
+
             @Override
             public void onBindView(BannerImageHolder holder, String data, int position, int size) {
                 //图片加载自己实现
@@ -83,10 +104,16 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Stri
                         .into(holder.imageView);
             }
         });
+        banner.setOnBannerListener(this);
     }
 
     @Override
     public void OnBannerClick(String data, int position) {
         ToastUtils.show("轮播图点击");
+        getContext().startActivity(new Intent(getContext(), ConstellationActivity.class));
+    }
+
+    public int dp2px(float value) {
+        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getContext().getResources().getDisplayMetrics()) + 0.5f);
     }
 }

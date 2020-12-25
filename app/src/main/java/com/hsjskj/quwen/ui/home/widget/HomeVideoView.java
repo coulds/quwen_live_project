@@ -42,6 +42,11 @@ public class HomeVideoView extends LinearLayout {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         adapter = new HomeVideoAdapter(getContext());
+        adapter.setOnItemClickListener((recyclerView, itemView, position) -> {
+            if (listener != null) {
+                listener.onItemVideoClick(position, adapter.getItem(position));
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
@@ -57,12 +62,6 @@ public class HomeVideoView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
-        adapter.setOnItemClickListener((recyclerView, itemView, position) -> {
-            if (listener != null) {
-                listener.onItemVideoClick(position, adapter.getItem(position));
-            }
-        });
     }
 
     public void setData(List<String> datas) {

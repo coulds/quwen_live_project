@@ -3,13 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:text="问问列表" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_item_avatar"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:src="@color/colorAccent"
+            app:riv_oval="true" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_item_avatar"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/iv_item_avatar"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="去问一哥"
+            android:textColor="@color/homeColor696969"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="2020/12/07 12:56"
+            android:textColor="@color/color999"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_item_constellation"
+            style="@style/HomeConstellationMaleStyle"
+            android:layout_below="@id/tv_item_name"
+            android:layout_alignStart="@id/tv_item_name"
+            android:layout_marginTop="2dp"
+            android:text="狮子座" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="新去问来啦！"
+        android:textColor="@color/homeColor2c2c2c"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="外观升级后，新版去问有哪些变化呢，点击“公告”带您一图解锁去问新玩法..."
+        android:textColor="@color/homeColor2c2c2c"
+        android:textSize="12sp" />
+
+    <com.lzy.ninegrid.NineGridView
+        android:id="@+id/nineGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
 
 </LinearLayout>

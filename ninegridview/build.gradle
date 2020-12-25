@@ -1,0 +1,9 @@
+apply plugin: 'com.android.library'
+apply from: '../config.gradle'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.github.chrisbanes.photoview:library:1.2.4'
+}
+
+//apply from: '../bintray.gradle'

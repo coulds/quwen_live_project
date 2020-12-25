@@ -3,14 +3,12 @@ package com.hsjskj.quwen.common;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
@@ -27,12 +25,13 @@ import com.hsjskj.quwen.http.model.RequestHandler;
 import com.hsjskj.quwen.http.server.ReleaseServer;
 import com.hsjskj.quwen.http.server.TestServer;
 import com.hsjskj.quwen.other.AppConfig;
-import com.hsjskj.quwen.other.CrashHandler;
 import com.hjq.http.EasyConfig;
 import com.hjq.http.config.IRequestServer;
 import com.hjq.toast.ToastInterceptor;
 import com.hjq.toast.ToastUtils;
+import com.hsjskj.quwen.other.GlideImageLoader;
 import com.hsjskj.umeng.UmengClient;
+import com.lzy.ninegrid.NineGridView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -57,6 +56,7 @@ public final class MyApplication extends Application implements LifecycleOwner {
         super.onCreate();
         mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         MyUserInfo.getInstance().initContext(this);
+        NineGridView.setImageLoader(new GlideImageLoader());
         initSdk(this);
     }
 

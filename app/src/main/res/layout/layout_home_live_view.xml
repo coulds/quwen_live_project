@@ -18,7 +18,7 @@
         android:textSize="16sp" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.hjq.widget.layout.WrapRecyclerView
         android:layout_marginTop="10dp"
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"

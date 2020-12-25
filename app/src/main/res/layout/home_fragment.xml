@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/refresh_layout"
+    android:id="@+id/ll_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.hsjskj.quwen.ui.home.fragment.HomeFragment"
-    tools:ignore="HardcodedText">
+    android:layout_height="match_parent">
 
-    <com.hjq.widget.layout.WrapRecyclerView
-        android:id="@+id/recyclerview"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.hsjskj.quwen.ui.home.widget.HomeBannerView
+                    android:id="@+id/bannerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.hsjskj.quwen.ui.home.widget.HomeVideoView
+                    android:id="@+id/videoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.hsjskj.quwen.ui.home.widget.HomeLiveView
+                    android:id="@+id/liveView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.hsjskj.quwen.ui.home.widget.HomeNoticeView
+                    android:id="@+id/noticeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
 
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+                <com.hjq.widget.layout.WrapRecyclerView
+                    android:id="@+id/recyclerviewQuerstion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#F8F8F8"
+                    tools:listitem="@layout/home_item_question"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</FrameLayout>

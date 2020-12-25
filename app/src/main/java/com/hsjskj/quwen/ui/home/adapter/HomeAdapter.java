@@ -5,8 +5,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.hjq.base.UiUtlis;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
+import com.lzy.ninegrid.ImageInfo;
+import com.lzy.ninegrid.NineGridView;
+import com.lzy.ninegrid.preview.NineGridViewClickAdapter;
+
+import java.util.ArrayList;
 
 /**
  * @author : Jun
@@ -19,11 +25,6 @@ public final class HomeAdapter extends MyAdapter<String> {
         super(context);
     }
 
-    @Override
-    public int getItemCount() {
-        return 10;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,14 +32,26 @@ public final class HomeAdapter extends MyAdapter<String> {
     }
 
     private final class ViewHolder extends MyAdapter.ViewHolder {
+        private NineGridView nineGridView;
 
         private ViewHolder() {
             super(R.layout.home_item_question);
+            nineGridView = (NineGridView) findViewById(R.id.nineGridView);
+            nineGridView.setGridSpacing(10);
+            nineGridView.setMaxSize(3);
+            nineGridView.setSingleImageSize(UiUtlis.dp2px(getContext(),110));
         }
 
         @Override
         public void onBindView(int position) {
-
+            ArrayList<ImageInfo> imageInfo = new ArrayList<>();
+            for (int i = 0; i < position + 1; i++) {
+                ImageInfo info = new ImageInfo();
+                info.setThumbnailUrl(getItem(position));
+                info.setBigImageUrl(getItem(position));
+                imageInfo.add(info);
+            }
+            nineGridView.setAdapter(new NineGridViewClickAdapter(getContext(), imageInfo));
         }
     }
 }

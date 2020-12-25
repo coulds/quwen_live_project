@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/home_constellation_query"
+        android:textColor="@color/homeColor000024"
+        android:textSize="20sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:text="@string/home_please_provide_this_information"
+        android:textColor="@color/homeColor000024"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="50dp"
+        android:gravity="center">
+
+        <FrameLayout
+            android:id="@+id/fl_click_1"
+            android:layout_width="85dp"
+            android:layout_height="85dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_male_1"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/star_male" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_male_2"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/star_select_1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                app:srcCompat="@drawable/star_select_male" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="0dp" />
+
+        <FrameLayout
+            android:id="@+id/fl_click_2"
+            android:layout_width="85dp"
+            android:layout_height="85dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_female_1"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/star_female" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_female_2"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/star_select_1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                app:srcCompat="@drawable/star_select_female" />
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <com.hsjskj.quwen.ui.home.widget.HomeStarSelectDateView
+        android:id="@+id/star_date_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_submit"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:text="@string/common_confirm" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+</LinearLayout>

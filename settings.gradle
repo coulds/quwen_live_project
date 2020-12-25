@@ -1,3 +1,4 @@
+include ':ninegridview'
 include ':title_bar'
 include ':audio'
 include ':app'

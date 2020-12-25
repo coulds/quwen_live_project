@@ -16,6 +16,7 @@ import com.hsjskj.quwen.ui.home.fragment.FindFragment;
 import com.hsjskj.quwen.ui.home.fragment.HomeFragment;
 import com.hsjskj.quwen.ui.home.fragment.MeFragment;
 import com.hsjskj.quwen.ui.home.fragment.MessageFragment;
+import com.hsjskj.quwen.ui.home.fragment.ToAskFragment;
 import com.hsjskj.quwen.ui.home.widget.HomeBottomNavigationView;
 
 /**
@@ -52,7 +53,7 @@ public final class HomeActivity extends MyActivity
     protected void initData() {
         mPagerAdapter = new BaseFragmentAdapter<>(this);
         mPagerAdapter.addFragment(HomeFragment.newInstance());
-        mPagerAdapter.addFragment(HomeFragment.newInstance());
+        mPagerAdapter.addFragment(ToAskFragment.newInstance());
         mPagerAdapter.addFragment(FindFragment.newInstance());
         mPagerAdapter.addFragment(MessageFragment.newInstance());
         mPagerAdapter.addFragment(MeFragment.newInstance());

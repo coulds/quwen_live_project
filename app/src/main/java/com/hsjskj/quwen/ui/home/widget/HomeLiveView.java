@@ -1,12 +1,16 @@
 package com.hsjskj.quwen.ui.home.widget;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +45,27 @@ public class HomeLiveView extends LinearLayout {
         initView();
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         adapter = new HomeLiveAdapter(getContext());
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.bottom = dp2px(5);
+                //因为是GridLayoutManager所以这里写死
+                int layoutPosition = parent.getChildLayoutPosition(view);
+                if (layoutPosition % 2 == 0) {
+                    outRect.right = dp2px(5);
+                }else {
+                    outRect.left = dp2px(5);
+                }
+            }
+        });
+        adapter.setOnItemClickListener((recyclerView, itemView, position) -> {
+            if (listener != null) {
+                listener.onItemLiveClick(position);
+            }
+        });
         recyclerView.setAdapter(adapter);
+
     }
 
     private void initView() {
@@ -51,11 +75,6 @@ public class HomeLiveView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        adapter.setOnItemClickListener((recyclerView, itemView, position) -> {
-            if (listener != null) {
-                listener.onItemLiveClick(position);
-            }
-        });
     }
 
     public void setData(List<Object> datas) {
@@ -70,5 +89,9 @@ public class HomeLiveView extends LinearLayout {
 
     public interface HomeVideoViewListener {
         void onItemLiveClick(int index);
+    }
+
+    public int dp2px(float value) {
+        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getContext().getResources().getDisplayMetrics()) + 0.5f);
     }
 }

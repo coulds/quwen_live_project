@@ -169,6 +169,8 @@ dependencies {
 
     implementation 'com.tencent:mmkv-static:1.2.2'
     implementation 'com.youth.banner:banner:2.1.0'
+    implementation project(":ninegridview")
+//    implementation 'com.lzy.widget:ninegridview:0.2.0'
     // 国际化：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast
     // 工具类：https://github.com/Blankj/AndroidUtilCode
