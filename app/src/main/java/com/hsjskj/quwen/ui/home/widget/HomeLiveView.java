@@ -39,6 +39,9 @@ public class HomeLiveView extends LinearLayout {
         setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         LayoutInflater.from(context).inflate(R.layout.layout_home_live_view, this);
         initView();
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        adapter = new HomeLiveAdapter(getContext());
+        recyclerView.setAdapter(adapter);
     }
 
     private void initView() {
@@ -48,9 +51,6 @@ public class HomeLiveView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        adapter = new HomeLiveAdapter(getContext());
-        recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener((recyclerView, itemView, position) -> {
             if (listener != null) {
                 listener.onItemLiveClick(position);
