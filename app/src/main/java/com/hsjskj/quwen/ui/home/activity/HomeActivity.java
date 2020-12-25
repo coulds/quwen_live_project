@@ -16,7 +16,7 @@ import com.hsjskj.quwen.ui.home.fragment.FindFragment;
 import com.hsjskj.quwen.ui.home.fragment.HomeFragment;
 import com.hsjskj.quwen.ui.home.fragment.MeFragment;
 import com.hsjskj.quwen.ui.home.fragment.MessageFragment;
-import com.hsjskj.quwen.widget.HomeBottomNavigationView;
+import com.hsjskj.quwen.ui.home.widget.HomeBottomNavigationView;
 
 /**
  * @author : Jun

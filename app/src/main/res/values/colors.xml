@@ -26,5 +26,7 @@
 
     <color name="homeBottomColorYes">@color/colorAccent</color>
     <color name="homeBottomColorNo">#CCCCCC</color>
+    <color name="homeItemTitleColor">#09090b</color>
+    <color name="homeItemMoreColor">#989898</color>
 
 </resources>

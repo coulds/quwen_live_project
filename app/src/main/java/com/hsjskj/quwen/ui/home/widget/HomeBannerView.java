@@ -1,25 +1,27 @@
-package com.hsjskj.quwen.widget;
+package com.hsjskj.quwen.ui.home.widget;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +31,9 @@ import java.util.List;
  * time          : 2020年12月24日 16:59
  * description   : quwen_live
  */
-public class HomeBannerView extends FrameLayout {
+public class HomeBannerView extends FrameLayout implements OnBannerListener<String> {
 
-    private Banner banner;
+    private Banner<String, BannerImageAdapter> banner;
     private List<String> bannerPic;
 
     public HomeBannerView(@NonNull Context context) {
@@ -55,8 +57,8 @@ public class HomeBannerView extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        banner.setAdapter(bannerImageAdapter);
         banner.setIndicator(new CircleIndicator(getContext()));
+        banner.setOnBannerListener(this);
     }
 
     public void addBannerLifecycleObserver(FragmentActivity activity) {
@@ -64,19 +66,27 @@ public class HomeBannerView extends FrameLayout {
         banner.addBannerLifecycleObserver(activity);
     }
 
-    public void setBannerPic(List<String> bannerPic) {
-        if (bannerPic == null) {
+    public void setBannerPic(List<String> b) {
+        if (b == null) {
             return;
         }
-        this.bannerPic.addAll(bannerPic);
-        this.bannerImageAdapter.notifyDataSetChanged();
+        this.bannerPic.clear();
+        this.bannerPic.addAll(b);
+        this.banner.setAdapter(new BannerImageAdapter<String>(bannerPic) {
+            @Override
+            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
+                //图片加载自己实现
+                GlideApp.with(getContext())
+                        .load(data)
+                        .transform(new RoundedCorners((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
+                                , 20, getContext().getResources().getDisplayMetrics())))
+                        .into(holder.imageView);
+            }
+        });
     }
 
-    public BannerImageAdapter bannerImageAdapter = new BannerImageAdapter<String>(bannerPic) {
-        @Override
-        public void onBindView(BannerImageHolder holder, String data, int position, int size) {
-            //图片加载自己实现
-            GlideApp.with(holder.itemView).load("").transform(new RoundedCorners(30)).into(holder.imageView);
-        }
-    };
+    @Override
+    public void OnBannerClick(String data, int position) {
+        ToastUtils.show("轮播图点击");
+    }
 }

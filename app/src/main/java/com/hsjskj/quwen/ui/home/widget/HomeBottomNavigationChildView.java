@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.widget;
+package com.hsjskj.quwen.ui.home.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

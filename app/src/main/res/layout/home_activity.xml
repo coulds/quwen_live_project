@@ -16,7 +16,7 @@
 <!--        style="@style/HorizontalLineStyle"-->
 <!--        android:layout_height="1dp" />-->
 
-    <com.hsjskj.quwen.widget.HomeBottomNavigationView
+    <com.hsjskj.quwen.ui.home.widget.HomeBottomNavigationView
         android:id="@+id/bv_home_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

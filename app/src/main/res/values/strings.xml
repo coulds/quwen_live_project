@@ -221,4 +221,8 @@
     <string name="register_switch_mailbox">切换邮箱</string>
     <string name="register_switch_phone">切换手机号</string>
 
+    <string name="home_go_ask_the_video">去问视频</string>
+    <string name="home_live_recommendation">直播推荐</string>
+    <string name="home_see_more">查看更多</string>
+
 </resources>
