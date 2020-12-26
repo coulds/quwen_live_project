@@ -42,6 +42,11 @@ public class UserPreviewActivity extends MyMvvmActivity<UserPreviewViewModel> {
         scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > (height / 2)) {
+                    setLeftIcon(R.drawable.arrows_left_ic);
+                } else {
+                    setLeftIcon(R.drawable.arrow_back_fff);
+                }
                 if (scrollY >= height) {
                     setTitleBarColor(Color.WHITE);
                 } else if (scrollY >= 0) {

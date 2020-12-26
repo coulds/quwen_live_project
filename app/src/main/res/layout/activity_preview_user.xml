@@ -120,5 +120,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#0fff"
-        app:leftIcon="@drawable/arrow_back_fff" />
+        app:leftIcon="@drawable/arrow_back_fff"
+        app:lineColor="#00000000" />
 </FrameLayout>
