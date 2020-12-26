@@ -53,6 +53,11 @@
         <item name="android:background">@drawable/button_rect_selector</item>
     </style>
 
+    <style name="BorderButtonStyle" parent="ButtonStyle">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@drawable/countdown_selector</item>
+    </style>
+
     <!-- 默认文本框样式 -->
     <style name="EditTextStyle">
         <item name="android:background">@null</item>
@@ -153,6 +158,20 @@
         <item name="android:paddingRight">44dp</item>
         <item name="android:paddingTop">7.5dp</item>
         <item name="android:paddingBottom">7.5dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 关注按钮 -->
+    <style name="HomeFollowStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/countdown_selector</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:paddingLeft">18dp</item>
+        <item name="android:paddingRight">18dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
         <item name="android:gravity">center</item>
     </style>
 

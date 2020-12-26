@@ -37,6 +37,11 @@
     <color name="homeColor6b6d99">#6b6d99</color>
     <color name="homeColor30369b">#30369b</color>
     <color name="homeColor2d2d2d">#2d2d2d</color>
+    <color name="homeColor616161">#616161</color>
+    <color name="homeColor2a2a2a">#2a2a2a</color>
+    <color name="homeColor2f2f2f">#2f2f2f</color>
+    <color name="homeColor5f5f5f">#5f5f5f</color>
+    <color name="homeColor212121">#212121</color>
 
     <color name="homeColorMale">#8AE7FF</color>
     <color name="homeColorFaMale">#FD617C</color>

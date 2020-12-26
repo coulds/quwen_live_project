@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="top|center_horizontal"
     android:orientation="vertical"
-    tools:context="com.hsjskj.quwen.ui.user.LoginActivity"
+    tools:context="com.hsjskj.quwen.ui.user.activity.LoginActivity"
     tools:layoutAnimation="@null">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -47,7 +47,7 @@
                 android:gravity="center_horizontal"
                 android:layoutAnimation="@anim/from_bottom_layout"
                 android:orientation="vertical"
-                tools:context="com.hsjskj.quwen.ui.user.LoginActivity"
+                tools:context="com.hsjskj.quwen.ui.user.activity.LoginActivity"
                 tools:layoutAnimation="@null">
 
                 <FrameLayout

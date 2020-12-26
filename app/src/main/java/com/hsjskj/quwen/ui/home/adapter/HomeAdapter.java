@@ -1,13 +1,16 @@
 package com.hsjskj.quwen.ui.home.adapter;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.hjq.base.UiUtlis;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
+import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
 import com.lzy.ninegrid.ImageInfo;
 import com.lzy.ninegrid.NineGridView;
 import com.lzy.ninegrid.preview.NineGridViewClickAdapter;
@@ -33,10 +36,12 @@ public final class HomeAdapter extends MyAdapter<String> {
 
     private final class ViewHolder extends MyAdapter.ViewHolder {
         private NineGridView nineGridView;
+        private ImageView iv_item_avatar;
 
         private ViewHolder() {
             super(R.layout.home_item_question);
             nineGridView = (NineGridView) findViewById(R.id.nineGridView);
+            iv_item_avatar = (ImageView) findViewById(R.id.iv_item_avatar);
             nineGridView.setGridSpacing(10);
             nineGridView.setMaxSize(3);
             nineGridView.setSingleImageSize(UiUtlis.dp2px(getContext(),110));
@@ -52,6 +57,10 @@ public final class HomeAdapter extends MyAdapter<String> {
                 imageInfo.add(info);
             }
             nineGridView.setAdapter(new NineGridViewClickAdapter(getContext(), imageInfo));
+
+            iv_item_avatar.setOnClickListener(v -> {
+                UserPreviewActivity.start(getContext());
+            });
         }
     }
 }

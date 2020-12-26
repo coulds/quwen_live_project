@@ -6,7 +6,7 @@ import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
-import com.hsjskj.quwen.ui.user.LoginActivity;
+import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hsjskj.quwen.ui.activity.SettingActivity;
 
 /**

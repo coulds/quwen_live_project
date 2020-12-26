@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.user;
+package com.hsjskj.quwen.ui.user.activity;
 
 import android.content.Intent;
 import android.view.View;
@@ -9,23 +9,23 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import com.hjq.bar.TitleBar;
+import com.hjq.widget.view.CountdownView;
 import com.hjq.widget.view.RegexEditText;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.helper.InputTextHelper;
 import com.hsjskj.quwen.other.IntentKey;
-import com.hjq.widget.view.CountdownView;
 import com.hsjskj.quwen.ui.dialog.GraphicInputDialog;
 
 import java.util.regex.Pattern;
 
 /**
  * @author : Jun
- * time   : 2020年12月24日13:42:25
- * desc   : 注册界面
+ * time   : 2020年12月24日14:42:13
+ * desc   : 忘记密码
  */
-public final class RegisterActivity extends MyActivity {
+public final class PhoneMailForgetActivity extends MyActivity {
 
     public static final int REGISTER_TYPE_PHONE = 0;
     public static final int REGISTER_TYPE_MAIL = 1;
@@ -51,7 +51,7 @@ public final class RegisterActivity extends MyActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.register_activity;
+        return R.layout.phone_maill_forget_activity;
     }
 
     @Override

@@ -92,14 +92,14 @@
 
         <!-- 登录界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.user.LoginActivity"
+            android:name="com.hsjskj.quwen.ui.user.activity.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <!-- 注册界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.user.RegisterActivity"
+            android:name="com.hsjskj.quwen.ui.user.activity.RegisterActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -120,7 +120,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hsjskj.quwen.ui.user.PhoneMailForgetActivity"
+            android:name="com.hsjskj.quwen.ui.user.activity.PhoneMailForgetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/password_forget_title"
             android:launchMode="singleTop"
@@ -242,6 +242,11 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.user.activity.UserPreviewActivity"
+            android:launchMode="singleTop"
+            android:exported="true">
+        </activity>
 
         <activity
             android:name="com.hsjskj.quwen.ui.copy.CopyActivity"

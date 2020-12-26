@@ -18,7 +18,7 @@ public class RouteUtil {
      * Intent隐式启动 action
      */
     public static final String PATH_LAUNCHER = "/ui/activity/SplashActivity";
-    public static final String PATH_LOGIN_INVALID = "/ui/activity/LoginActivity";
+    public static final String PATH_LOGIN_INVALID = "/ui/user/activity/LoginActivity";
 
     /**
      * 这是个模拟，可复制页面

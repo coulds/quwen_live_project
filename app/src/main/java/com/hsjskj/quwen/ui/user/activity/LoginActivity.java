@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.user;
+package com.hsjskj.quwen.ui.user.activity;
 
 import android.content.Context;
 import android.content.Intent;

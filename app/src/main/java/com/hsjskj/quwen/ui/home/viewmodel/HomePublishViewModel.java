@@ -31,15 +31,15 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
         MutableLiveData<Object> mutableLiveData = new MutableLiveData<>();
         if (TextUtils.isEmpty(title)) {
             ToastUtils.show(R.string.home_please_enter_the_title_to_be_published);
-            mutableLiveData.postValue(null);
+            return mutableLiveData;
         }
         if (TextUtils.isEmpty(content)) {
             ToastUtils.show(R.string.home_please_enter_what_needs_to_be_published);
-            mutableLiveData.postValue(null);
+            return mutableLiveData;
         }
         if (list.size() <= 1) {
             ToastUtils.show(R.string.home_please_select_the_picture_to_be_published);
-            mutableLiveData.postValue(null);
+            return mutableLiveData;
         }
 
         //图片真实路径

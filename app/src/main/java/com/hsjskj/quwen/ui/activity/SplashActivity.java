@@ -13,7 +13,7 @@ import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.other.AppConfig;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
-import com.hsjskj.quwen.ui.user.LoginActivity;
+import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 
 import me.jessyan.autosize.internal.CancelAdapt;
 
