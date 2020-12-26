@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -42,13 +42,12 @@
             android:textColor="@color/color999"
             android:textSize="11sp" />
 
-        <TextView
-            android:id="@+id/tv_item_constellation"
-            style="@style/HomeConstellationMaleStyle"
+        <com.hsjskj.quwen.ui.home.widget.StarTagView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_item_name"
             android:layout_alignStart="@id/tv_item_name"
-            android:layout_marginTop="2dp"
-            android:text="狮子座" />
+            android:layout_marginTop="2dp" />
 
     </RelativeLayout>
 

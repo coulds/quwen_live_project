@@ -1,5 +1,6 @@
 package com.hsjskj.quwen.ui.home.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.view.View;
 
@@ -12,7 +13,9 @@ import com.hjq.base.UiUtlis;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyFragment;
+import com.hsjskj.quwen.ui.activity.VideoPlayActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
+import com.hsjskj.quwen.ui.home.activity.HomeVideoListActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomeAdapter;
 import com.hsjskj.quwen.ui.home.widget.HomeBannerView;
 import com.hsjskj.quwen.ui.home.widget.HomeLiveView;
@@ -76,7 +79,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.getItemOffsets(outRect, view, parent, state);
-                if (getContext()!=null){
+                if (getContext() != null) {
                     outRect.bottom = UiUtlis.dp2px(getContext(), 10);
                 }
             }
@@ -168,12 +171,12 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
 
     @Override
     public void onMoreClick() {
-        toast("更多视频");
+        startActivity(new Intent(getContext(), HomeVideoListActivity.class));
     }
 
     @Override
     public void onItemVideoClick(int index, String url) {
-        toast("视频" + index);
+        VideoPlayActivity.start(getAttachActivity(), "http://vfx.mtime.cn/Video/2019/06/29/mp4/190629004821240734.mp4", "速度与激情特别行动");
     }
 
     @Override

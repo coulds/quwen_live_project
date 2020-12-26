@@ -231,5 +231,6 @@
     <string name="home_please_provide_this_information">请您提供这些信息</string>
     <string name="home_date_of_birth">出生日期</string>
     <string name="home_please_select_a_date">请选择一个日期</string>
+    <string name="home_today_s_fortune">今日运势</string>
 
 </resources>

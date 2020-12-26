@@ -109,7 +109,6 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Stri
 
     @Override
     public void OnBannerClick(String data, int position) {
-        ToastUtils.show("轮播图点击");
         getContext().startActivity(new Intent(getContext(), ConstellationActivity.class));
     }
 
