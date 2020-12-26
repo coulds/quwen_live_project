@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/home_go_ask_for_details" />
+
+    <com.hsjskj.quwen.widget.HintLayout
+        android:id="@+id/hint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/iv_item_avatar"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginVertical="10dp"
+                        android:src="@color/colorAccent"
+                        app:riv_oval="true" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/iv_item_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/iv_item_avatar"
+                        android:layout_marginStart="12dp"
+                        android:layout_toEndOf="@id/iv_item_avatar"
+                        android:ellipsize="end"
+                        android:maxWidth="200dp"
+                        android:singleLine="true"
+                        android:text="用户名或者昵称"
+                        android:textColor="@color/homeColor2d2d2d"
+                        android:textSize="15sp" />
+
+                    <com.hsjskj.quwen.ui.home.widget.StarTagView
+                        android:id="@+id/star_tag"
+                        android:layout_marginStart="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/iv_item_name"
+                        android:layout_alignBottom="@id/iv_item_name"
+                        android:layout_toEndOf="@id/iv_item_name" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_item_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_item_name"
+                        android:layout_alignStart="@id/iv_item_name"
+                        android:text="2020/12/07 12:56"
+                        android:textColor="@color/color999"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_item_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="新去问来啦！"
+                    android:textColor="@color/homeColor2c2c2c"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_item_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="外观升级后，新版去问有哪些变化呢，点击“公告”带您一图解锁去问新玩法..."
+                    android:textColor="@color/homeColor2c2c2c"
+                    android:textSize="12sp" />
+
+                <com.lzy.ninegrid.NineGridView
+                    android:id="@+id/nineGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </com.hsjskj.quwen.widget.HintLayout>
+
+</LinearLayout>

@@ -36,8 +36,13 @@
     <color name="homeColor010024">#010024</color>
     <color name="homeColor6b6d99">#6b6d99</color>
     <color name="homeColor30369b">#30369b</color>
+    <color name="homeColor2d2d2d">#2d2d2d</color>
 
     <color name="homeColorMale">#8AE7FF</color>
     <color name="homeColorFaMale">#FD617C</color>
+
+    <color name="homeColorHomeDialogButton">#F9C959</color>
+    <color name="homeColorHomeDialogButton2">#AAF9C959</color>
+    <color name="homeColorHomeDialogButtonText">#F32929</color>
 
 </resources>

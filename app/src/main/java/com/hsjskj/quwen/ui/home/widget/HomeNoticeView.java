@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.ui.activity.BrowserActivity;
 import com.hsjskj.quwen.widget.MarqueeView;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class HomeNoticeView extends FrameLayout {
         }
         marqueeView.startWithList(notices);
         marqueeView.setOnItemClickListener((position, textView) -> {
-            ToastUtils.show("通知点击");
+            BrowserActivity.start(getContext(), "https://www.baidu.com");
         });
     }
 

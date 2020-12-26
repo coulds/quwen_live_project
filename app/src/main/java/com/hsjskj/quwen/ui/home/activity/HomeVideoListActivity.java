@@ -67,6 +67,10 @@ public class HomeVideoListActivity extends MyMvvmActivity<HomeVideoViewModel> im
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         showLoading();
         onRefresh(mRefreshLayout);
+        postDelayed(() -> {
+            //显示广告弹窗
+
+        },1000);
     }
 
     @Override

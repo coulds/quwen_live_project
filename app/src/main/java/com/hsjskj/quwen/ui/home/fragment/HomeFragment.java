@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.base.BaseAdapter;
 import com.hjq.base.UiUtlis;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyFragment;
+import com.hsjskj.quwen.ui.activity.BrowserActivity;
 import com.hsjskj.quwen.ui.activity.VideoPlayActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
+import com.hsjskj.quwen.ui.home.activity.HomeQuestionDetails;
 import com.hsjskj.quwen.ui.home.activity.HomeVideoListActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomeAdapter;
 import com.hsjskj.quwen.ui.home.widget.HomeBannerView;
@@ -33,7 +36,7 @@ import java.util.List;
  * time   : 2020年12月24日15:47:50
  * desc   : 项目首页
  */
-public final class HomeFragment extends MyFragment<HomeActivity> implements OnRefreshLoadMoreListener, HomeVideoView.HomeVideoViewListener, HomeLiveView.HomeVideoViewListener {
+public final class HomeFragment extends MyFragment<HomeActivity> implements OnRefreshLoadMoreListener, HomeVideoView.HomeVideoViewListener, HomeLiveView.HomeVideoViewListener, BaseAdapter.OnItemClickListener {
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView recyclerviewQuerstion;
@@ -84,6 +87,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
                 }
             }
         });
+        mAdapter.setOnItemClickListener(this);
         recyclerviewQuerstion.setAdapter(mAdapter);
         initListener();
     }
@@ -107,7 +111,6 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             homeVideoView.setData(videoData());
             homeLiveView.setData(liveData());
             homeNoticeView.setNotices(noticeData());
-            toast("刷新完成");
         }, 1000);
     }
 
@@ -182,5 +185,12 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
     @Override
     public void onItemLiveClick(int index) {
         toast("直播" + index);
+    }
+
+    @Override
+    public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+        if (recyclerView == recyclerviewQuerstion) {
+            startActivity(new Intent(getContext(), HomeQuestionDetails.class));
+        }
     }
 }
