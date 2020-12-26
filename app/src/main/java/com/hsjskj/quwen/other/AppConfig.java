@@ -3,10 +3,9 @@ package com.hsjskj.quwen.other;
 import com.hsjskj.quwen.BuildConfig;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/09/02
- *    desc   : App 配置管理类
+ * @author : Jun
+ * time   : 2020-12-26 14:04:35
+ * desc   : App 配置管理类
  */
 public final class AppConfig {
 
@@ -43,5 +42,15 @@ public final class AppConfig {
      */
     public static String getBuglyId() {
         return BuildConfig.BUGLY_ID;
+    }
+
+    /**
+     * 获取当前公钥
+     */
+    public static String getRsaPublic() {
+        return "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5S456hcCgbmoGen0gFLdHerV1\n" +
+                "ww2HcW0PqonoqixADuy4XWH+2gvoF0nN3bbpaNpLbV4Rq9l+j1PBOKAhmB6hqJ05\n" +
+                "Us2Z7TM6lrPGnXqipbnvB5karI7uPYT4dktLEwktziKulcU1f0VyLd+qSmh8/coG\n" +
+                "Eig2RsHcnY80uJIt7QIDAQAB\n";
     }
 }

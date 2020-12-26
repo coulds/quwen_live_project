@@ -5,20 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hsjskj.quwen.ui.home.fragment.MessageFragment"
-    tools:ignore="HardcodedText">
+    tools:context="com.hsjskj.quwen.ui.fragment.CopyFragment">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backButton="false"
-        app:title="@string/home_nav_message" />
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    </androidx.core.widget.NestedScrollView>
+        app:title="标题" />
 
 </LinearLayout>

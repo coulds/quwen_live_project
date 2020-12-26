@@ -14,6 +14,7 @@ import com.hsjskj.quwen.helper.DoubleClickHelper;
 import com.hsjskj.quwen.other.KeyboardWatcher;
 import com.hsjskj.quwen.ui.home.fragment.FindFragment;
 import com.hsjskj.quwen.ui.home.fragment.HomeFragment;
+import com.hsjskj.quwen.ui.home.fragment.HomeLiveFragment;
 import com.hsjskj.quwen.ui.home.fragment.MeFragment;
 import com.hsjskj.quwen.ui.home.fragment.MessageFragment;
 import com.hsjskj.quwen.ui.home.fragment.ToAskFragment;
@@ -54,7 +55,7 @@ public final class HomeActivity extends MyActivity
         mPagerAdapter = new BaseFragmentAdapter<>(this);
         mPagerAdapter.addFragment(HomeFragment.newInstance());
         mPagerAdapter.addFragment(ToAskFragment.newInstance());
-        mPagerAdapter.addFragment(FindFragment.newInstance());
+        mPagerAdapter.addFragment(HomeLiveFragment.newInstance());
         mPagerAdapter.addFragment(MessageFragment.newInstance());
         mPagerAdapter.addFragment(MeFragment.newInstance());
         // 设置成懒加载模式

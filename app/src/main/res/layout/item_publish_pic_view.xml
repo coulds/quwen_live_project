@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_item_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        app:srcCompat="@drawable/publish_defalut_icon" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_item_deleted"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_gravity="right|top"
+        app:srcCompat="@drawable/publish_deleted_icon" />
+</FrameLayout>

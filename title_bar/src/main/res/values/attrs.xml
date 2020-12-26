@@ -40,6 +40,8 @@
         <attr name="rightTint" format="color" />
         <attr name="rightColor" format="color" />
         <attr name="rightSize" format="dimension" />
+        <attr name="rightHeight" format="dimension" />
+        <attr name="rightWidth" format="dimension" />
         <attr name="rightBackground" format="reference|color" />
         <!-- 分割线 -->
         <attr name="lineVisible" format="boolean" />

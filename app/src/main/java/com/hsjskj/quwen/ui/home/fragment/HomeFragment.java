@@ -3,18 +3,19 @@ package com.hsjskj.quwen.ui.home.fragment;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseAdapter;
+import com.hjq.base.BaseDialog;
 import com.hjq.base.UiUtlis;
+import com.hjq.toast.ToastUtils;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyFragment;
-import com.hsjskj.quwen.ui.activity.BrowserActivity;
 import com.hsjskj.quwen.ui.activity.VideoPlayActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeQuestionDetails;
@@ -73,6 +74,9 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
 
         mRefreshLayout.autoRefresh();
+
+        //TODO 需要网络请求 显示广告弹窗
+        postDelayed(this::showRewardDialog, 1000);
     }
 
     @Override
@@ -129,6 +133,21 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         if (homeNoticeView != null) {
             homeNoticeView.stopFlipping();
         }
+    }
+
+
+    private void showRewardDialog() {
+        new BaseDialog.Builder(getActivity())
+                .setContentView(R.layout.dialog_home_reward_view)
+                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                .setOnClickListener(R.id.tv_yes_dialog, (BaseDialog.OnClickListener<View>) (dialog, view) -> {
+                    dialog.dismiss();
+                    ToastUtils.show("立即领取点击");
+                })
+                .setOnClickListener(R.id.iv_cancel_dialog, (BaseDialog.OnClickListener<View>) (dialog, view) -> {
+                    dialog.dismiss();
+                })
+                .show();
     }
 
     private List<String> analogData() {
@@ -193,4 +212,5 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             startActivity(new Intent(getContext(), HomeQuestionDetails.class));
         }
     }
+
 }

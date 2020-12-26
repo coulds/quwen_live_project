@@ -27,31 +27,43 @@ import com.hjq.bar.initializer.RippleBarInitializer;
 import com.hjq.bar.initializer.TransparentBarInitializer;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/TitleBar
- *    time   : 2018/08/17
- *    desc   : Android 通用标题栏
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/TitleBar
+ * time   : 2018/08/17
+ * desc   : Android 通用标题栏
  */
 public class TitleBar extends FrameLayout
         implements View.OnClickListener,
         View.OnLayoutChangeListener {
 
-    /** 默认初始化器 */
+    /**
+     * 默认初始化器
+     */
     private static ITitleBarInitializer sGlobalInitializer;
-    /** 当前初始化器 */
+    /**
+     * 当前初始化器
+     */
     private final ITitleBarInitializer mCurrentInitializer;
 
-    /** 监听器对象 */
+    /**
+     * 监听器对象
+     */
     private OnTitleBarListener mListener;
 
-    /** 标题栏子控件 */
+    /**
+     * 标题栏子控件
+     */
     private final TextView mLeftView, mTitleView, mRightView;
     private final View mLineView;
 
-    /** 控件内间距 */
+    /**
+     * 控件内间距
+     */
     private int mHorizontalPadding, mVerticalPadding;
 
-    /** 图标显示大小 */
+    /**
+     * 图标显示大小
+     */
     private int mDrawableSize = -1;
 
     public TitleBar(Context context) {
@@ -126,13 +138,18 @@ public class TitleBar extends FrameLayout
                             // 设置标题
                             setTitle(label);
                         }
-                    } catch (PackageManager.NameNotFoundException ignored) {}
+                    } catch (PackageManager.NameNotFoundException ignored) {
+                    }
                 }
             }
         }
 
         if (array.hasValue(R.styleable.TitleBar_rightTitle)) {
             setRightTitle(array.getString(R.styleable.TitleBar_rightTitle));
+        }
+        if (array.hasValue(R.styleable.TitleBar_rightHeight) && array.hasValue(R.styleable.TitleBar_rightWidth)) {
+            setRightTitleWidthHeight(array.getDimensionPixelOffset(R.styleable.TitleBar_rightWidth, 0)
+                    , array.getDimensionPixelOffset(R.styleable.TitleBar_rightHeight, 0));
         }
 
         // 图标设置
@@ -407,6 +424,16 @@ public class TitleBar extends FrameLayout
 
     public TitleBar setRightTitle(CharSequence text) {
         mRightView.setText(text);
+        return this;
+    }
+
+    public TitleBar setRightTitleWidthHeight(int w, int h) {
+        MarginLayoutParams layoutParams = new MarginLayoutParams(w, h);
+        layoutParams.setMarginEnd(dp2px(15));
+        FrameLayout.LayoutParams layoutParams1 = new FrameLayout.LayoutParams(layoutParams);
+        layoutParams1.gravity = (Gravity.CENTER_VERTICAL | Gravity.END);
+        mRightView.setGravity(Gravity.CENTER);
+        mRightView.setLayoutParams(layoutParams1);
         return this;
     }
 
@@ -694,5 +721,9 @@ public class TitleBar extends FrameLayout
      */
     public static void setDefaultInitializer(ITitleBarInitializer initializer) {
         TitleBar.sGlobalInitializer = initializer;
+    }
+
+    public int dp2px(float value) {
+        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getContext().getResources().getDisplayMetrics()) + 0.5f);
     }
 }

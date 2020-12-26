@@ -3,6 +3,7 @@ package com.hsjskj.quwen.action;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -105,6 +106,13 @@ public interface TitleBarAction extends OnTitleBarListener {
             return getTitleBar().getRightTitle();
         }
         return "";
+    }
+
+    default TextView getRightView() {
+        if (getTitleBar() != null) {
+            return getTitleBar().getRightView();
+        }
+        return null;
     }
 
     /**

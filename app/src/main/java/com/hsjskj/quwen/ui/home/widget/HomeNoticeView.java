@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.ui.activity.BrowserActivity;
+import com.hsjskj.quwen.ui.home.activity.HomePublishActivity;
 import com.hsjskj.quwen.widget.MarqueeView;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
  * time          : 2020年12月25日 13:18
  * description   : quwen_live
  */
-public class HomeNoticeView extends FrameLayout {
+public class HomeNoticeView extends FrameLayout implements View.OnClickListener {
 
     private MarqueeView marqueeView;
 
@@ -39,6 +40,7 @@ public class HomeNoticeView extends FrameLayout {
         setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         View view = LayoutInflater.from(context).inflate(R.layout.layout_home_notice_view, this, false);
         marqueeView = view.findViewById(R.id.marqueeView);
+        view.findViewById(R.id.tv_publish).setOnClickListener(this);
         addView(view);
     }
 
@@ -48,7 +50,7 @@ public class HomeNoticeView extends FrameLayout {
     }
 
     public void setNotices(List<String> notices) {
-        if (marqueeView==null){
+        if (marqueeView == null) {
             return;
         }
         marqueeView.startWithList(notices);
@@ -67,5 +69,10 @@ public class HomeNoticeView extends FrameLayout {
         if (marqueeView != null) {
             marqueeView.stopFlipping();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        HomePublishActivity.start(getContext());
     }
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightBackground="@drawable/button_selector_shape_30"
+        app:rightColor="@color/white"
+        app:rightHeight="26dp"
+        app:rightSize="12sp"
+        app:rightTitle="@string/home_release"
+        app:rightWidth="60dp"
+        app:title="@string/home_release" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#FAFAFA" />
+
+
+    <com.hjq.widget.view.ClearEditText
+        android:id="@+id/et_publish_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:background="@color/white"
+        android:hint="@string/home_please_enter_the_title_to_be_published"
+        android:paddingVertical="15dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColorHint"
+        android:textSize="14sp" />
+
+    <View
+        style="@style/HorizontalLineStyle"
+        android:layout_marginHorizontal="15dp"
+        android:background="#E6E6E6" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_publish_content"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@color/white"
+        android:gravity="left|top"
+        android:hint="@string/home_please_enter_what_needs_to_be_published"
+        android:paddingVertical="10dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColorHint"
+        android:textSize="14sp" />
+
+    <com.hjq.widget.layout.WrapRecyclerView
+        android:id="@+id/publish_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp"
+        tools:itemCount="3"
+        tools:layoutManager="GridLayoutManager"
+        tools:listitem="@layout/item_publish_pic_view"
+        tools:spanCount="3" />
+
+</LinearLayout>
