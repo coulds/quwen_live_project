@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 
 import androidx.lifecycle.LifecycleOwner;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -132,7 +133,8 @@ public final class RequestHandler implements IRequestHandler {
                             .registerTypeHierarchyAdapter(List.class, new ListTypeAdapter())
                             .create();
                 }
-                result = mGson.fromJson(text, type);
+                result= JSON.parseObject(text,type);
+//                result = mGson.fromJson(text, type);
             } catch (JsonSyntaxException e) {
                 // 返回结果读取异常
                 throw new DataException(mApplication.getString(R.string.http_data_explain_error), e);

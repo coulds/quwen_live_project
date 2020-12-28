@@ -1,19 +1,18 @@
 package com.hsjskj.quwen.http.model;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/12/07
+ *    @author : Jun
+ *    time   : 2020年12月28日15:05:30
  *    desc   : 统一接口数据结构
  */
 public class HttpData<T> {
 
     /** 返回码 */
-    private int code;
+    public int code;
     /** 提示语 */
-    private String msg;
+    public String msg;
     /** 数据 */
-    private T data;
+    public T data;
 
     public int getCode() {
         return code;

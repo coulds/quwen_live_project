@@ -86,6 +86,7 @@
                         android:layout_marginTop="10dp"
                         android:hint="@string/common_phone_and_email_input_hint"
                         android:inputType="textVisiblePassword"
+                        android:maxLength="@integer/email_length"
                         android:singleLine="true" />
 
                     <View
@@ -100,7 +101,7 @@
                         android:layout_marginHorizontal="30dp"
                         android:layout_marginTop="30dp"
                         android:hint="@string/common_password_input_error"
-                        android:maxLength="20"
+                        android:maxLength="@integer/password_length"
                         android:maxLines="1" />
 
                     <View

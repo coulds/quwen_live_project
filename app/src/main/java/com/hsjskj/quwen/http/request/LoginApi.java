@@ -16,9 +16,9 @@ public final class LoginApi implements IRequestApi {
     }
 
     /** 手机号 */
-    private String username;
+    public String username;
     /** 登录密码 */
-    private String password;
+    public String password;
 
     public LoginApi setUsername(String username) {
         this.username = username;

@@ -175,6 +175,8 @@ dependencies {
     implementation 'com.youth.banner:banner:2.1.0'
     implementation project(":ninegridview")
     implementation 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'com.alibaba:fastjson:1.2.40'
+
 //    implementation 'com.lzy.widget:ninegridview:0.2.0'
     // 国际化：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast
