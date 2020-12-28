@@ -1,7 +1,9 @@
 package com.hsjskj.quwen.ui.user.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,13 +14,16 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.hjq.base.route.RouteUtil;
 import com.hjq.widget.view.RegexEditText;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.action.EditCloseAction;
 import com.hsjskj.quwen.aop.DebugLog;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.helper.InputTextHelper;
+import com.hsjskj.quwen.http.response.LoginBean;
 import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
+import com.hsjskj.quwen.ui.user.viewmodel.LoginViewModel;
 import com.hsjskj.quwen.wxapi.WXEntryActivity;
 import com.hsjskj.umeng.Platform;
 import com.hsjskj.umeng.UmengClient;
@@ -33,7 +38,7 @@ import java.util.regex.Pattern;
  */
 @Route(path = RouteUtil.PATH_LOGIN_INVALID)
 public final class LoginActivity extends MyActivity
-        implements UmengLogin.OnLoginListener {
+        implements UmengLogin.OnLoginListener, EditCloseAction {
 
     @DebugLog
     public static void start(Context context, String phone, String password) {
@@ -49,6 +54,7 @@ public final class LoginActivity extends MyActivity
     private View mForgetView;
     private Button mCommitView;
     private View mWeChatView;
+    private LoginViewModel loginViewModel;
 
     @Override
     protected int getLayoutId() {
@@ -57,6 +63,7 @@ public final class LoginActivity extends MyActivity
 
     @Override
     protected void initView() {
+        loginViewModel = new LoginViewModel();
         mPhoneView = findViewById(R.id.et_login_phone);
         mPasswordView = findViewById(R.id.et_login_password);
         mForgetView = findViewById(R.id.tv_login_forget);
@@ -104,24 +111,7 @@ public final class LoginActivity extends MyActivity
         if (v == mForgetView) {
             startActivity(PhoneMailForgetActivity.class);
         } else if (v == mCommitView) {
-            String inputAccount = mPhoneView.getText().toString();
-            boolean matches = Pattern.compile(RegexEditText.REGEX_EMAIL).matcher(inputAccount).matches();
-            boolean matches2 = Pattern.compile(RegexEditText.REGEX_MOBILE).matcher(inputAccount).matches();
-            if (!matches && !matches2) {
-                toast(R.string.common_phone_and_email_input_error);
-                return;
-            }
-
-            showDialog();
-            postDelayed(() -> {
-                hideDialog();
-                //TODO 网络请求模拟
-                MyUserInfo.getInstance().setToken("token");
-                // 跳转到主页
-                startActivity(HomeActivity.class);
-                finish();
-            }, 2000);
-
+            login();
         } else if (v == mWeChatView) {
             toast("记得改好第三方 AppID 和 AppKey，否则会调不起来哦");
             Platform platform;
@@ -132,6 +122,38 @@ public final class LoginActivity extends MyActivity
                 throw new IllegalStateException("are you ok?");
             }
             UmengClient.login(this, platform, this);
+        }
+    }
+
+    private void login() {
+        String inputAccount = mPhoneView.getText().toString();
+        boolean matches = Pattern.compile(RegexEditText.REGEX_EMAIL).matcher(inputAccount).matches();
+        boolean matches2 = Pattern.compile(RegexEditText.REGEX_MOBILE).matcher(inputAccount).matches();
+        if (!matches && !matches2) {
+            toast(R.string.common_phone_and_email_input_error);
+            return;
+        }
+        String password = mPasswordView.getText().toString();
+        boolean matches3 = Pattern.compile(RegexEditText.REGEX_PSW).matcher(password).matches();
+        if (!matches3) {
+            toast(R.string.register_password_hint1);
+            return;
+        }
+        showDialog();
+        loginViewModel.sendLogin(this, inputAccount, password).observe(this, a -> {
+            hideDialog();
+            loginResult(a);
+        });
+    }
+
+    private void loginResult(LoginBean a) {
+        if (a != null) {
+            MyUserInfo.getInstance().setToken(a.token);
+            MyUserInfo.getInstance().setId(a.id);
+            MyUserInfo.getInstance().setLogin(a);
+            // 跳转到主页
+            startActivity(HomeActivity.class);
+            finish();
         }
     }
 
@@ -196,5 +218,16 @@ public final class LoginActivity extends MyActivity
     @Override
     protected boolean isStatusBarDarkFont() {
         return false;
+    }
+
+    @Override
+    public Activity getCurrentActivity() {
+        return this;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        dispatchTouchEventEdit(ev);
+        return super.dispatchTouchEvent(ev);
     }
 }

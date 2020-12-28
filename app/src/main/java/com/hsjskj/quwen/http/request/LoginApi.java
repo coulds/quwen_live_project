@@ -1,32 +1,32 @@
 package com.hsjskj.quwen.http.request;
 
 import com.hjq.http.config.IRequestApi;
+import com.hsjskj.quwen.other.AppConfig;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/12/07
+ *    @author : Jun
+ *    time   : 2020年12月28日13:56:42
  *    desc   : 用户登录
  */
 public final class LoginApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "user/login";
+        return "Passport/login";
     }
 
     /** 手机号 */
-    private String phone;
+    private String username;
     /** 登录密码 */
     private String password;
 
-    public LoginApi setPhone(String phone) {
-        this.phone = phone;
+    public LoginApi setUsername(String username) {
+        this.username = username;
         return this;
     }
 
     public LoginApi setPassword(String password) {
-        this.password = password;
+        this.password = AppConfig.rsa(password);
         return this;
     }
 }

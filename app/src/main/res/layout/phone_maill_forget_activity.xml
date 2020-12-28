@@ -15,8 +15,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fillViewport="true">
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,10 +66,6 @@
                     style="@style/SwitchMailboxViewStyle"
                     android:text="@string/register_switch_mailbox" />
             </LinearLayout>
-
-            <View
-                style="@style/HorizontalLineStyle"
-                android:layout_gravity="bottom" />
 
             <LinearLayout
                 android:id="@+id/ll_type_mail"
@@ -138,8 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:hint="@string/register_password_hint3"
-                android:maxLines="1"
-                app:regexType="password" />
+                android:maxLines="1" />
 
             <View style="@style/HorizontalLineStyle" />
 
@@ -150,8 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:hint="@string/register_password_hint4"
-                android:maxLines="1"
-                app:regexType="password" />
+                android:maxLines="1"/>
 
             <View style="@style/HorizontalLineStyle" />
 

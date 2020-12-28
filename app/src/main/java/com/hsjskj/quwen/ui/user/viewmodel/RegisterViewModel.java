@@ -12,6 +12,7 @@ import com.hjq.http.listener.HttpCallback;
 import com.hjq.http.listener.OnDownloadListener;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.http.model.HttpData;
+import com.hsjskj.quwen.http.request.ForgetPasswordApi;
 import com.hsjskj.quwen.http.request.GetCodeApi;
 import com.hsjskj.quwen.http.request.RegisterApi;
 
@@ -47,7 +48,60 @@ public class RegisterViewModel extends ViewModel {
                 .listener(listener);
     }
 
-    public void sendCode(LifecycleOwner lifecycleOwner, String codeCaptcha, boolean isPhone, String username) {
+    public MutableLiveData<Boolean> sendRegister(LifecycleOwner lifecycleOwner, String code, boolean isPhone, String username, String password) {
+        MutableLiveData<Boolean> liveData = new MutableLiveData<>();
+        EasyHttp.post(lifecycleOwner)
+                .tag(this)
+                .api(new RegisterApi()
+                        .setUsername(username)
+                        .setPassword(password)
+                        .setCode(code)
+                        .setMode(isPhone ? "1" : "2")
+                        .setInvite("")
+                )
+                .request(new HttpCallback<HttpData>(null) {
+                    @Override
+                    public void onSucceed(HttpData data) {
+                        ToastUtils.show(data.getMessage());
+                        liveData.postValue(true);
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        ToastUtils.show(e.getMessage());
+                        liveData.postValue(false);
+                    }
+                });
+        return liveData;
+    }
+
+    public MutableLiveData<Boolean> sendForget(LifecycleOwner lifecycleOwner, String code, boolean isPhone, String username, String password) {
+        MutableLiveData<Boolean> liveData = new MutableLiveData<>();
+        EasyHttp.post(lifecycleOwner)
+                .tag(this)
+                .api(new ForgetPasswordApi()
+                        .setUsername(username)
+                        .setPassword(password)
+                        .setCode(code)
+                        .setMode(isPhone ? "1" : "2")
+                )
+                .request(new HttpCallback<HttpData>(null) {
+                    @Override
+                    public void onSucceed(HttpData data) {
+                        ToastUtils.show(data.getMessage());
+                        liveData.postValue(true);
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        ToastUtils.show(e.getMessage());
+                        liveData.postValue(false);
+                    }
+                });
+        return liveData;
+    }
+
+    public void sendCode(LifecycleOwner lifecycleOwner, String codeCaptcha, boolean isPhone, String username, String scene) {
         EasyHttp.post(lifecycleOwner)
                 .tag(this)
                 .api(new GetCodeApi()
@@ -55,7 +109,7 @@ public class RegisterViewModel extends ViewModel {
                         .setUsername(username)
                         .setCode(codeCaptcha)
                         .setMode(isPhone ? "1" : "2")
-                        .setScene("register")
+                        .setScene(scene)
                 )
                 .request(new HttpCallback<HttpData>(null) {
                     @Override
@@ -72,27 +126,12 @@ public class RegisterViewModel extends ViewModel {
                 });
     }
 
-    public void sendRegister(LifecycleOwner lifecycleOwner, String codeCaptcha, boolean isPhone, String username) {
-        EasyHttp.post(lifecycleOwner)
-                .tag(this)
-                .api(new RegisterApi()
-                        .setUsername(username)
-                        .setCode(codeCaptcha)
-                        .setMode(isPhone ? "1" : "2")
-                        .setInvite("")
-                )
-                .request(new HttpCallback<HttpData>(null) {
-                    @Override
-                    public void onSucceed(HttpData data) {
-                        captchaSend.postValue(true);
-                    }
+    public void sendRegisterCode(LifecycleOwner lifecycleOwner, String codeCaptcha, boolean isPhone, String username) {
+        sendCode(lifecycleOwner, codeCaptcha, isPhone, username, "register");
+    }
 
-                    @Override
-                    public void onFail(Exception e) {
-                        ToastUtils.show(e.getMessage());
-                        captchaSend.postValue(false);
-                    }
-                });
+    public void sendForgetCode(LifecycleOwner lifecycleOwner, String codeCaptcha, boolean isPhone, String username) {
+        sendCode(lifecycleOwner, codeCaptcha, isPhone, username, "forget");
     }
 
     @Override

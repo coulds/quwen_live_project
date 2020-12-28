@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.helper.SpannableStringHelper;
+import com.hsjskj.quwen.ui.user.activity.UserProtocolActivity;
 
 /**
  * @author : Jun
@@ -57,11 +58,11 @@ public class LoginProtocolView extends LinearLayout implements SpannableStringHe
 
     @Override
     public void protocolClick() {
-        ToastUtils.show("用户服务协议");
+        UserProtocolActivity.start(getContext(), UserProtocolActivity.ID_REGISTER);
     }
 
     @Override
     public void secrecyClick() {
-        ToastUtils.show("点击隐私政策");
+        UserProtocolActivity.start(getContext(), UserProtocolActivity.ID_SECRECY);
     }
 }

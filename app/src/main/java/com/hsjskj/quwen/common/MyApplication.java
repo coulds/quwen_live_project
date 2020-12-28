@@ -22,8 +22,8 @@ import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.SwipeAction;
 import com.hsjskj.quwen.helper.ActivityStackManager;
 import com.hsjskj.quwen.http.cookie.CookieJarImpl;
-import com.hsjskj.quwen.http.cookie.store.MemoryCookieStore;
 import com.hsjskj.quwen.http.cookie.store.SPCookieStore;
+import com.hsjskj.quwen.http.intercept.TokenIntercept;
 import com.hsjskj.quwen.http.model.RequestHandler;
 import com.hsjskj.quwen.http.server.ReleaseServer;
 import com.hsjskj.quwen.http.server.TestServer;
@@ -183,6 +183,7 @@ public final class MyApplication extends Application implements LifecycleOwner {
         builder.readTimeout(AppConfig.TIMEOUT, TimeUnit.MILLISECONDS);
         builder.writeTimeout(AppConfig.TIMEOUT, TimeUnit.MILLISECONDS);
         builder.cookieJar(new CookieJarImpl(new SPCookieStore(application)));
+        builder.addInterceptor(new TokenIntercept());
         return  builder.build();
     }
 }

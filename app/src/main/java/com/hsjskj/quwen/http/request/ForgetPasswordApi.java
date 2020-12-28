@@ -5,14 +5,14 @@ import com.hsjskj.quwen.other.AppConfig;
 
 /**
  *    @author : Jun
- *    time   : 2020年12月28日09:49:05
- *    desc   : 用户注册
+ *    time   : 2020年12月28日14:40:16
+ *    desc   : 用户忘记密码
  */
-public final class RegisterApi implements IRequestApi {
+public final class ForgetPasswordApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "Passport/register";
+        return "Passport/forget";
     }
 
     /** 手机号 */
@@ -23,31 +23,25 @@ public final class RegisterApi implements IRequestApi {
     private String code;
     /** 密码 RSA加密 */
     private String password;
-    /** 邀请码 */
-    private String invite;
 
-    public RegisterApi setUsername(String username) {
+    public ForgetPasswordApi setUsername(String username) {
         this.username = username;
         return this;
     }
 
-    public RegisterApi setCode(String code) {
+    public ForgetPasswordApi setCode(String code) {
         this.code = code;
         return this;
     }
 
-    public RegisterApi setPassword(String password) {
+    public ForgetPasswordApi setPassword(String password) {
         this.password = AppConfig.rsa(password);
         return this;
     }
 
-    public RegisterApi setMode(String mode) {
+    public ForgetPasswordApi setMode(String mode) {
         this.mode = mode;
         return this;
     }
 
-    public RegisterApi setInvite(String invite) {
-        this.invite = invite;
-        return this;
-    }
 }

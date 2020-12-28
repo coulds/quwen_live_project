@@ -1,21 +1,22 @@
 package com.hsjskj.quwen.ui.user.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
-import com.hjq.http.EasyConfig;
-import com.hjq.http.config.IRequestServer;
 import com.hjq.widget.view.RegexEditText;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.action.EditCloseAction;
 import com.hsjskj.quwen.aop.CheckNet;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
@@ -32,7 +33,7 @@ import java.util.regex.Pattern;
  * time   : 2020年12月24日13:42:25
  * desc   : 注册界面
  */
-public final class RegisterActivity extends MyActivity {
+public final class RegisterActivity extends MyActivity implements EditCloseAction {
 
     public static final int REGISTER_TYPE_PHONE = 0;
     public static final int REGISTER_TYPE_MAIL = 1;
@@ -60,6 +61,12 @@ public final class RegisterActivity extends MyActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.register_activity;
+    }
+
+    @Override
+    protected void onDestroy() {
+        mCountdownView.stop();
+        super.onDestroy();
     }
 
     @Override
@@ -110,40 +117,61 @@ public final class RegisterActivity extends MyActivity {
             if (!verifyAccount()) {
                 return;
             }
-            new GraphicInputDialog.Builder(this)
-                    .setHint("请输入验证码")
-                    .setUrlString(registerViewModel.userCaptcha())
-                    .setListener(new GraphicInputDialog.OnListener() {
-                        @Override
-                        public void onConfirm(BaseDialog dialog, String content) {
-                            sendCodeHttp(content);
-                        }
-
-                        @Override
-                        public String getCaptchaUrl() {
-                            return registerViewModel.userCaptcha();
-                        }
-                    })
-                    .show();
-
+            showGraphicInputDialog();
         } else if (v == mCommitView) {
             if (!verifyAccount()) {
+                return;
+            }
+            if (TextUtils.isEmpty(mCodeView.getText().toString().trim())) {
+                toast(R.string.common_code_input_hint);
                 return;
             }
             if (!verifyPassword()) {
                 return;
             }
-            toast(R.string.register_succeed);
-            setResult(RESULT_OK, new Intent()
-                    .putExtra(IntentKey.PHONE, mPhoneView.getText().toString())
-                    .putExtra(IntentKey.PASSWORD, mPasswordView1.getText().toString()));
-            finish();
+            register();
         }
+    }
+
+    private void register() {
+        showDialog();
+        registerViewModel.sendRegister(this
+                , mCodeView.getText().toString()
+                , isPhone()
+                , getAccountStr()
+                , mPasswordView1.getText().toString()
+        ).observe(this, aBoolean -> {
+            hideDialog();
+            if (aBoolean) {
+                setResult(RESULT_OK, new Intent()
+                        .putExtra(IntentKey.PHONE, mPhoneView.getText().toString())
+                        .putExtra(IntentKey.PASSWORD, mPasswordView1.getText().toString()));
+                finish();
+            }
+        });
+    }
+
+    private void showGraphicInputDialog() {
+        new GraphicInputDialog.Builder(this)
+                .setHint(R.string.home_please_enter_verification_code)
+                .setUrlString(registerViewModel.userCaptcha())
+                .setListener(new GraphicInputDialog.OnListener() {
+                    @Override
+                    public void onConfirm(BaseDialog dialog, String content) {
+                        sendCodeHttp(content);
+                    }
+
+                    @Override
+                    public String getCaptchaUrl() {
+                        return registerViewModel.userCaptcha();
+                    }
+                })
+                .show();
     }
 
     @CheckNet
     private void sendCodeHttp(String code) {
-        registerViewModel.sendCode(this, code, isPhone(), getAccountStr());
+        registerViewModel.sendRegisterCode(this, code, isPhone(), getAccountStr());
     }
 
     private String getAccountStr() {
@@ -194,11 +222,11 @@ public final class RegisterActivity extends MyActivity {
     private boolean verifyPassword() {
         String password = mPasswordView1.getText().toString();
         boolean matches = Pattern.compile(RegexEditText.REGEX_PSW).matcher(password).matches();
-        if (matches) {
+        if (!matches) {
             toast(R.string.register_password_hint1);
             return false;
         }
-        if (!mPasswordView1.getText().toString().equals(mPasswordView2.getText().toString())) {
+        if (!password.equals(mPasswordView2.getText().toString())) {
             toast(R.string.common_password_input_unlike);
             return false;
         }
@@ -218,5 +246,16 @@ public final class RegisterActivity extends MyActivity {
     @Override
     public boolean isSwipeEnable() {
         return true;
+    }
+
+    @Override
+    public Activity getCurrentActivity() {
+        return this;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        dispatchTouchEventEdit(ev);
+        return super.dispatchTouchEvent(ev);
     }
 }

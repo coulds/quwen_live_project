@@ -3,6 +3,7 @@ package com.hsjskj.quwen.common;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.hsjskj.quwen.http.response.LoginBean;
 import com.tencent.mmkv.MMKV;
 
 /**
@@ -20,6 +21,8 @@ public class MyUserInfo {
     private static final String KEY_USER_TOKEN = "KEY_USER_TOKEN";
     //用户id
     private static final String KEY_USER_ID = "KEY_USER_ID";
+    //登录bean
+    private static final String KEY_LOGIN_BEAN = "KEY_LOGIN_BEAN";
 
     private MMKV mmkv;
 
@@ -78,6 +81,16 @@ public class MyUserInfo {
     public void setId(String id) {
         checkNullPointer(mmkv);
         mmkv.encode(KEY_USER_ID, id);
+    }
+
+    public void setLogin(LoginBean bean) {
+        checkNullPointer(mmkv);
+        mmkv.encode(KEY_LOGIN_BEAN, bean);
+    }
+
+    public LoginBean getLogin() {
+        checkNullPointer(mmkv);
+        return mmkv.decodeParcelable(KEY_LOGIN_BEAN, LoginBean.class);
     }
 
     //添加其他保存信息.....

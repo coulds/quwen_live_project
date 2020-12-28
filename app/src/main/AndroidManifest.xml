@@ -247,6 +247,10 @@
             android:launchMode="singleTop"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".ui.user.activity.UserProtocolActivity"
+            android:launchMode="singleTop"
+            android:exported="true"/>
 
         <activity
             android:name="com.hsjskj.quwen.ui.copy.CopyActivity"

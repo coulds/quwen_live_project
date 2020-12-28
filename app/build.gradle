@@ -169,7 +169,7 @@ dependencies {
 //    debugImplementation 'com.hjq:logcat:8.2'
 
     // 内存泄漏：https://github.com/square/leakcanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     implementation 'com.tencent:mmkv-static:1.2.2'
     implementation 'com.youth.banner:banner:2.1.0'
