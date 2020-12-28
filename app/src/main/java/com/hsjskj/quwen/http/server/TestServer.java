@@ -1,15 +1,14 @@
 package com.hsjskj.quwen.http.server;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/12/07
+ *    @author : jun
+ *    time   : 2020年12月28日09:46:52
  *    desc   : 测试环境
  */
 public class TestServer extends ReleaseServer {
 
     @Override
     public String getHost() {
-        return "https://www.baidu.com/";
+        return "http://10.0.1.151:4606/";
     }
 }

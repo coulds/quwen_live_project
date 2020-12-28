@@ -39,22 +39,19 @@ public class UserPreviewActivity extends MyMvvmActivity<UserPreviewViewModel> {
                 height = getTitleBar().getHeight();
             }
         });
-        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY > (height / 2)) {
-                    setLeftIcon(R.drawable.arrows_left_ic);
-                } else {
-                    setLeftIcon(R.drawable.arrow_back_fff);
-                }
-                if (scrollY >= height) {
-                    setTitleBarColor(Color.WHITE);
-                } else if (scrollY >= 0) {
-                    float persent = scrollY * 1f / (height);
-                    int alpha = (int) (255 * persent);
-                    int color = Color.argb(alpha, 255, 255, 255);
-                    setTitleBarColor(color);
-                }
+        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > (height / 2)) {
+                setLeftIcon(R.drawable.arrows_left_ic);
+            } else {
+                setLeftIcon(R.drawable.arrow_back_fff);
+            }
+            if (scrollY >= height) {
+                setTitleBarColor(Color.WHITE);
+            } else if (scrollY >= 0) {
+                float persent = scrollY * 1f / (height);
+                int alpha = (int) (255 * persent);
+                int color = Color.argb(alpha, 255, 255, 255);
+                setTitleBarColor(color);
             }
         });
     }

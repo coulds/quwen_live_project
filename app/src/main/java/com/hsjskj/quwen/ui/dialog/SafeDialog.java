@@ -9,7 +9,6 @@ import com.hjq.base.BaseDialog;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.http.model.HttpData;
-import com.hsjskj.quwen.http.request.GetCodeApi;
 import com.hsjskj.quwen.http.request.VerifyCodeApi;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.OnHttpListener;
@@ -73,23 +72,23 @@ public final class SafeDialog {
                     }
 
                     // 获取验证码
-                    EasyHttp.post(this)
-                            .api(new GetCodeApi()
-                                    .setPhone(mPhoneNumber))
-                            .request(new OnHttpListener<HttpData<Void>>() {
-
-                                @Override
-                                public void onSucceed(HttpData<Void> data) {
-                                    ToastUtils.show(R.string.common_code_send_hint);
-                                    mCountdownView.start();
-                                    setCancelable(false);
-                                }
-
-                                @Override
-                                public void onFail(Exception e) {
-                                    ToastUtils.show(e.getMessage());
-                                }
-                            });
+//                    EasyHttp.post(this)
+//                            .api(new GetCodeApi()
+//                                    .setPhone(mPhoneNumber))
+//                            .request(new OnHttpListener<HttpData<Void>>() {
+//
+//                                @Override
+//                                public void onSucceed(HttpData<Void> data) {
+//                                    ToastUtils.show(R.string.common_code_send_hint);
+//                                    mCountdownView.start();
+//                                    setCancelable(false);
+//                                }
+//
+//                                @Override
+//                                public void onFail(Exception e) {
+//                                    ToastUtils.show(e.getMessage());
+//                                }
+//                            });
                     break;
                 case R.id.tv_ui_confirm:
                     if (mCodeView.getText().toString().length() != getResources().getInteger(R.integer.sms_code_length)) {

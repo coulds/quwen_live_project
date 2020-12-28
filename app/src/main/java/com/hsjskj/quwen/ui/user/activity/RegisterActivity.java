@@ -7,16 +7,23 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.hjq.bar.TitleBar;
+import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyConfig;
+import com.hjq.http.config.IRequestServer;
 import com.hjq.widget.view.RegexEditText;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.aop.CheckNet;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.helper.InputTextHelper;
 import com.hsjskj.quwen.other.IntentKey;
 import com.hjq.widget.view.CountdownView;
 import com.hsjskj.quwen.ui.dialog.GraphicInputDialog;
+import com.hsjskj.quwen.ui.user.viewmodel.RegisterViewModel;
 
 import java.util.regex.Pattern;
 
@@ -42,6 +49,7 @@ public final class RegisterActivity extends MyActivity {
     private Button mCommitView;
     private LinearLayout llTypePhone;
     private LinearLayout llTypeMail;
+    private RegisterViewModel registerViewModel;
 
     /**
      * 当前注册账号类型
@@ -56,6 +64,7 @@ public final class RegisterActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         mPhoneView = findViewById(R.id.et_register_phone);
         mMailView = findViewById(R.id.et_register_mail);
         mCountdownView = findViewById(R.id.cv_register_countdown);
@@ -75,6 +84,12 @@ public final class RegisterActivity extends MyActivity {
                 .addView(mPasswordView2)
                 .setMain(mCommitView)
                 .build();
+
+        registerViewModel.getCaptchaSend().observe(this, aBoolean -> {
+            if (aBoolean) {
+                mCountdownView.start();
+            }
+        });
     }
 
     @Override
@@ -97,11 +112,17 @@ public final class RegisterActivity extends MyActivity {
             }
             new GraphicInputDialog.Builder(this)
                     .setHint("请输入验证码")
-                    .setUrlString("https://www.baidu.com/img/bd_logo.png")
-                    .setListener((dialog, content) -> {
-                        //TODO 网络请求
-                        toast(R.string.common_code_send_hint);
-                        mCountdownView.start();
+                    .setUrlString(registerViewModel.userCaptcha())
+                    .setListener(new GraphicInputDialog.OnListener() {
+                        @Override
+                        public void onConfirm(BaseDialog dialog, String content) {
+                            sendCodeHttp(content);
+                        }
+
+                        @Override
+                        public String getCaptchaUrl() {
+                            return registerViewModel.userCaptcha();
+                        }
                     })
                     .show();
 
@@ -117,6 +138,19 @@ public final class RegisterActivity extends MyActivity {
                     .putExtra(IntentKey.PHONE, mPhoneView.getText().toString())
                     .putExtra(IntentKey.PASSWORD, mPasswordView1.getText().toString()));
             finish();
+        }
+    }
+
+    @CheckNet
+    private void sendCodeHttp(String code) {
+        registerViewModel.sendCode(this, code, isPhone(), getAccountStr());
+    }
+
+    private String getAccountStr() {
+        if (isPhone()) {
+            return mPhoneView.getText().toString();
+        } else {
+            return mMailView.getText().toString();
         }
     }
 
@@ -142,14 +176,14 @@ public final class RegisterActivity extends MyActivity {
         if (isPhone()) {
             String phone = mPhoneView.getText().toString();
             boolean matches2 = Pattern.compile(RegexEditText.REGEX_MOBILE).matcher(phone).matches();
-            if (matches2) {
+            if (!matches2) {
                 toast(R.string.common_phone_input_error);
                 return false;
             }
         } else {
             String mail = mMailView.getText().toString();
             boolean matches = Pattern.compile(RegexEditText.REGEX_EMAIL).matcher(mail).matches();
-            if (matches) {
+            if (!matches) {
                 toast(R.string.common_mail_input_error);
                 return false;
             }

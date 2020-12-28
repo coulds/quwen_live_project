@@ -23,6 +23,7 @@ import com.hsjskj.quwen.http.json.IntegerTypeAdapter;
 import com.hsjskj.quwen.http.json.ListTypeAdapter;
 import com.hsjskj.quwen.http.json.LongTypeAdapter;
 import com.hsjskj.quwen.http.json.StringTypeAdapter;
+import com.hsjskj.quwen.other.AppConfig;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hjq.http.EasyLog;
 import com.hjq.http.config.IRequestHandler;
@@ -50,10 +51,10 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/12/07
- *    desc   : 请求处理类
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/12/07
+ * desc   : 请求处理类
  */
 public final class RequestHandler implements IRequestHandler {
 
@@ -113,7 +114,7 @@ public final class RequestHandler implements IRequestHandler {
             try {
                 // 如果这是一个 JSONArray 对象
                 result = new JSONArray(text);
-            }catch (JSONException e) {
+            } catch (JSONException e) {
                 throw new DataException(mApplication.getString(R.string.http_data_explain_error), e);
             }
         } else {
@@ -139,10 +140,10 @@ public final class RequestHandler implements IRequestHandler {
 
             if (result instanceof HttpData) {
                 HttpData model = (HttpData) result;
-                if (model.getCode() == 0) {
+                if (model.getCode() == AppConfig.getHttpSuccessCode()) {
                     // 代表执行成功
                     return result;
-                } else if (model.getCode() == 1001) {
+                } else if (model.getCode() == AppConfig.getHttpLoginTimeCode()) {
                     // 代表登录失效，需要重新登录
                     throw new TokenException(mApplication.getString(R.string.http_account_error));
                 } else {
@@ -155,7 +156,7 @@ public final class RequestHandler implements IRequestHandler {
     }
 
     @Override
-    public Exception requestFail(LifecycleOwner lifecycle,  Exception e) {
+    public Exception requestFail(LifecycleOwner lifecycle, Exception e) {
         // 判断这个异常是不是自己抛的
         if (e instanceof HttpException) {
             if (e instanceof TokenException) {

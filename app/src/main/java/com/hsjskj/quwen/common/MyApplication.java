@@ -21,6 +21,9 @@ import com.hsjskj.quwen.BuildConfig;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.SwipeAction;
 import com.hsjskj.quwen.helper.ActivityStackManager;
+import com.hsjskj.quwen.http.cookie.CookieJarImpl;
+import com.hsjskj.quwen.http.cookie.store.MemoryCookieStore;
+import com.hsjskj.quwen.http.cookie.store.SPCookieStore;
 import com.hsjskj.quwen.http.model.RequestHandler;
 import com.hsjskj.quwen.http.server.ReleaseServer;
 import com.hsjskj.quwen.http.server.TestServer;
@@ -37,14 +40,15 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 
 import static com.scwang.smartrefresh.layout.util.SmartUtil.dp2px;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2018/10/18
+ * @author : Jun
+ * time   : 2020年12月28日09:48:22
  * desc   : 项目中的 Application 基类
  */
 public final class MyApplication extends Application implements LifecycleOwner {
@@ -140,9 +144,9 @@ public final class MyApplication extends Application implements LifecycleOwner {
             server = new ReleaseServer();
         }
 
-        EasyConfig.with(new OkHttpClient())
+        EasyConfig.with(getOkHttpClient(application))
                 // 是否打印日志
-                //.setLogEnabled(AppConfig.isDebug())
+                .setLogEnabled(AppConfig.isDebug())
                 // 设置服务器配置
                 .setServer(server)
                 // 设置请求处理策略
@@ -150,9 +154,10 @@ public final class MyApplication extends Application implements LifecycleOwner {
                 // 设置请求重试次数
                 .setRetryCount(1)
                 // 添加全局请求参数
-                //.addParam("token", "6666666")
+//                .addParam("token", "6666666")
                 // 添加全局请求头
-                //.addHeader("time", "20191030")
+                .addHeader("appVersion", AppConfig.getVersionName())
+                .addHeader("Connection", "keep-alive")
                 // 启用配置
                 .into();
 
@@ -170,5 +175,14 @@ public final class MyApplication extends Application implements LifecycleOwner {
             ARouter.openDebug();
         }
         ARouter.init(application);
+    }
+
+    public static OkHttpClient  getOkHttpClient(Application application){
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(AppConfig.TIMEOUT, TimeUnit.MILLISECONDS);
+        builder.readTimeout(AppConfig.TIMEOUT, TimeUnit.MILLISECONDS);
+        builder.writeTimeout(AppConfig.TIMEOUT, TimeUnit.MILLISECONDS);
+        builder.cookieJar(new CookieJarImpl(new SPCookieStore(application)));
+        return  builder.build();
     }
 }

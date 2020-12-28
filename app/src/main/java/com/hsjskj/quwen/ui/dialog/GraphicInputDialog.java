@@ -9,9 +9,18 @@ import android.widget.ImageView;
 import androidx.annotation.StringRes;
 
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyConfig;
+import com.hjq.http.config.IRequestServer;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.http.glide.GlideApp;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+import okhttp3.HttpUrl;
+
+import static kotlin.random.RandomKt.Random;
 
 /**
  * 图形验证码输入对话框
@@ -26,14 +35,14 @@ public final class GraphicInputDialog {
         private final EditText mInputView;
         private final ImageView ivCode;
         private boolean mAutoDismiss = true;
+        private String captchaId = "";
 
         public Builder(Context context) {
             super(context);
             setContentView(R.layout.user_graphic_dialog);
             mInputView = findViewById(R.id.input_verification_code);
-            setOnClickListener(R.id.btn_commit, R.id.iv_close);
             ivCode = findViewById(R.id.iv_code);
-
+            setOnClickListener(R.id.btn_commit, R.id.iv_close, R.id.iv_code);
             addOnShowListener(this);
         }
 
@@ -105,9 +114,21 @@ public final class GraphicInputDialog {
                         mListener.onCancel(getDialog());
                     }
                     break;
+                case R.id.iv_code:
+                    loadCaptcha();
+                    break;
                 default:
                     break;
             }
+        }
+
+
+        private void loadCaptcha() {
+            if (mListener==null){
+                return;
+            }
+            mInputView.setText("");
+            GlideApp.with(getContext()).load(mListener.getCaptchaUrl()).into(ivCode);
         }
     }
 
@@ -123,5 +144,7 @@ public final class GraphicInputDialog {
          */
         default void onCancel(BaseDialog dialog) {
         }
+
+        String getCaptchaUrl();
     }
 }

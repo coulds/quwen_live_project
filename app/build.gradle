@@ -94,6 +94,10 @@ android {
             outputFileName = "${rootProject.name}_v${variant.versionName}_" + "${releaseTime()}" + ".apk"
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 static def releaseTime() {

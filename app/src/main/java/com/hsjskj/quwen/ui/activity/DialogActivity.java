@@ -469,7 +469,7 @@ public final class DialogActivity extends MyActivity {
                 new GraphicInputDialog.Builder(this)
                         .setHint("请输入验证码")
                         .setUrlString("https://www.baidu.com/img/bd_logo.png")
-                        .setListener((dialog, content) -> toast("输入内容" + content))
+                        .setListener(null)
                         .show();
                 break;
             default:

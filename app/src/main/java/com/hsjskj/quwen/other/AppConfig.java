@@ -1,6 +1,8 @@
 package com.hsjskj.quwen.other;
 
 import com.hsjskj.quwen.BuildConfig;
+import com.hsjskj.quwen.http.rsa.Base64Utils;
+import com.hsjskj.quwen.http.rsa.FileEncryptionManager;
 
 /**
  * @author : Jun
@@ -8,6 +10,8 @@ import com.hsjskj.quwen.BuildConfig;
  * desc   : App 配置管理类
  */
 public final class AppConfig {
+
+    public static final int TIMEOUT=10*1000;
 
     /**
      * 当前是否为 Debug 模式
@@ -45,6 +49,20 @@ public final class AppConfig {
     }
 
     /**
+     * 当前网络响应成功code
+     */
+    public static int getHttpSuccessCode() {
+        return 200;
+    }
+
+    /**
+     * 当前登录超时code
+     */
+    public static int getHttpLoginTimeCode() {
+        return 1001;
+    }
+
+    /**
      * 获取当前公钥
      */
     public static String getRsaPublic() {
@@ -52,5 +70,16 @@ public final class AppConfig {
                 "ww2HcW0PqonoqixADuy4XWH+2gvoF0nN3bbpaNpLbV4Rq9l+j1PBOKAhmB6hqJ05\n" +
                 "Us2Z7TM6lrPGnXqipbnvB5karI7uPYT4dktLEwktziKulcU1f0VyLd+qSmh8/coG\n" +
                 "Eig2RsHcnY80uJIt7QIDAQAB\n";
+    }
+
+    public static String rsa(String str) {
+        try {
+            FileEncryptionManager.getInstance().setRSAKey(getRsaPublic(), "", true);
+            byte[] encryptByte = FileEncryptionManager.getInstance().encryptByPublicKey(str.getBytes());
+            return Base64Utils.encode(encryptByte);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

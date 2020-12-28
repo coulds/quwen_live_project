@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import com.hjq.bar.TitleBar;
+import com.hjq.base.BaseDialog;
 import com.hjq.widget.view.CountdownView;
 import com.hjq.widget.view.RegexEditText;
 import com.hsjskj.quwen.R;
@@ -98,10 +99,17 @@ public final class PhoneMailForgetActivity extends MyActivity {
             new GraphicInputDialog.Builder(this)
                     .setHint("请输入验证码")
                     .setUrlString("https://www.baidu.com/img/bd_logo.png")
-                    .setListener((dialog, content) -> {
-                        //TODO 网络请求
-                        toast(R.string.common_code_send_hint);
-                        mCountdownView.start();
+                    .setListener(new GraphicInputDialog.OnListener() {
+                        @Override
+                        public void onConfirm(BaseDialog dialog, String content) {
+                            toast(R.string.common_code_send_hint);
+                            mCountdownView.start();
+                        }
+
+                        @Override
+                        public String getCaptchaUrl() {
+                            return null;
+                        }
                     })
                     .show();
 

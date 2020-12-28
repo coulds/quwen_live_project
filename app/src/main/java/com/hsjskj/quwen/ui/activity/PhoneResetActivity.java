@@ -12,7 +12,6 @@ import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.helper.InputTextHelper;
 import com.hsjskj.quwen.http.model.HttpData;
-import com.hsjskj.quwen.http.request.GetCodeApi;
 import com.hsjskj.quwen.http.request.PhoneApi;
 import com.hsjskj.quwen.other.IntentKey;
 import com.hjq.http.EasyHttp;
@@ -85,17 +84,17 @@ public final class PhoneResetActivity extends MyActivity {
             }
 
             // 获取验证码
-            EasyHttp.post(this)
-                    .api(new GetCodeApi()
-                            .setPhone(mPhoneView.getText().toString()))
-                    .request(new HttpCallback<HttpData<Void>>(this) {
-
-                        @Override
-                        public void onSucceed(HttpData<Void> data) {
-                            toast(R.string.common_code_send_hint);
-                            mCountdownView.start();
-                        }
-                    });
+//            EasyHttp.post(this)
+//                    .api(new GetCodeApi()
+//                            .setPhone(mPhoneView.getText().toString()))
+//                    .request(new HttpCallback<HttpData<Void>>(this) {
+//
+//                        @Override
+//                        public void onSucceed(HttpData<Void> data) {
+//                            toast(R.string.common_code_send_hint);
+//                            mCountdownView.start();
+//                        }
+//                    });
         } else if (v == mCommitView) {
 
             if (mPhoneView.getText().toString().length() != 11) {

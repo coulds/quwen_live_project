@@ -15,6 +15,7 @@ import com.hjq.base.UiUtlis;
 import com.hjq.toast.ToastUtils;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.action.StatusAction;
 import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.ui.activity.VideoPlayActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
@@ -25,6 +26,7 @@ import com.hsjskj.quwen.ui.home.widget.HomeBannerView;
 import com.hsjskj.quwen.ui.home.widget.HomeLiveView;
 import com.hsjskj.quwen.ui.home.widget.HomeNoticeView;
 import com.hsjskj.quwen.ui.home.widget.HomeVideoView;
+import com.hsjskj.quwen.widget.HintLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -37,7 +39,11 @@ import java.util.List;
  * time   : 2020年12月24日15:47:50
  * desc   : 项目首页
  */
-public final class HomeFragment extends MyFragment<HomeActivity> implements OnRefreshLoadMoreListener, HomeVideoView.HomeVideoViewListener, HomeLiveView.HomeVideoViewListener, BaseAdapter.OnItemClickListener {
+public final class HomeFragment extends MyFragment<HomeActivity> implements OnRefreshLoadMoreListener
+        , HomeVideoView.HomeVideoViewListener
+        , HomeLiveView.HomeVideoViewListener
+        , BaseAdapter.OnItemClickListener
+        , StatusAction {
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView recyclerviewQuerstion;
@@ -73,8 +79,8 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         homeLiveView.setListener(this);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
 
-        mRefreshLayout.autoRefresh();
-
+        onRefresh(mRefreshLayout);
+        showLoading();
         //TODO 需要网络请求 显示广告弹窗
         postDelayed(this::showRewardDialog, 1000);
     }
@@ -115,6 +121,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             homeVideoView.setData(videoData());
             homeLiveView.setData(liveData());
             homeNoticeView.setNotices(noticeData());
+            showComplete();
         }, 1000);
     }
 
@@ -213,4 +220,8 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         }
     }
 
+    @Override
+    public HintLayout getHintLayout() {
+        return findViewById(R.id.hint_layout);
+    }
 }
