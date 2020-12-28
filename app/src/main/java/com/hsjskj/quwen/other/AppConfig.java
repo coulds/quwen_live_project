@@ -59,7 +59,7 @@ public final class AppConfig {
      * 当前登录超时code
      */
     public static int getHttpLoginTimeCode() {
-        return 1001;
+        return 700;
     }
 
     /**

@@ -18,6 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.response.BannerBean;
 import com.hsjskj.quwen.ui.home.activity.ConstellationActivity;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.youth.banner.Banner;
@@ -34,10 +35,10 @@ import java.util.List;
  * time          : 2020年12月24日 16:59
  * description   : quwen_live
  */
-public class HomeBannerView extends FrameLayout implements OnBannerListener<String> {
+public class HomeBannerView extends FrameLayout implements OnBannerListener<BannerBean> {
 
-    private Banner<String, BannerImageAdapter> banner;
-    private List<String> bannerPic;
+    private Banner<BannerBean, BannerImageAdapter> banner;
+    private List<BannerBean> bannerPic;
 
     public HomeBannerView(@NonNull Context context) {
         this(context, null);
@@ -73,13 +74,13 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Stri
         }
     }
 
-    public void setBannerPic(List<String> b) {
+    public void setBannerPic(List<BannerBean> b) {
         if (b == null) {
             return;
         }
         this.bannerPic.clear();
         this.bannerPic.addAll(b);
-        this.banner.setAdapter(new BannerImageAdapter<String>(bannerPic) {
+        this.banner.setAdapter(new BannerImageAdapter<BannerBean>(bannerPic) {
 
             @Override
             public BannerImageHolder onCreateHolder(ViewGroup parent, int viewType) {
@@ -95,10 +96,10 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Stri
             }
 
             @Override
-            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
+            public void onBindView(BannerImageHolder holder, BannerBean data, int position, int size) {
                 //图片加载自己实现
                 GlideApp.with(getContext())
-                        .load(data)
+                        .load(data.pic)
                         .transform(new RoundedCorners((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
                                 , 20, getContext().getResources().getDisplayMetrics())))
                         .into(holder.imageView);
@@ -108,7 +109,7 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Stri
     }
 
     @Override
-    public void OnBannerClick(String data, int position) {
+    public void OnBannerClick(BannerBean data, int position) {
         getContext().startActivity(new Intent(getContext(), ConstellationActivity.class));
     }
 

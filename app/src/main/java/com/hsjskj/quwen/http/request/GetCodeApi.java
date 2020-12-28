@@ -15,15 +15,15 @@ public final class GetCodeApi implements IRequestApi {
     }
 
     /** 手机号 */
-    private String username;
+    public String username;
     /** 发送模式 */
-    private String mode;
+    public String mode;
     /** 图形验证码 */
-    private String code;
+    public String code;
     /** 验证场景 */
-    private String scene;
+    public String scene;
 
-    private String id;
+    public String id;
 
     public GetCodeApi setUsername(String username) {
         this.username = username;

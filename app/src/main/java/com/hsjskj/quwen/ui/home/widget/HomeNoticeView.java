@@ -10,12 +10,14 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.http.response.NoticeBean;
 import com.hsjskj.quwen.ui.activity.BrowserActivity;
 import com.hsjskj.quwen.ui.home.activity.HomePublishActivity;
+import com.hsjskj.quwen.ui.user.activity.UserProtocolActivity;
 import com.hsjskj.quwen.widget.MarqueeView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +28,7 @@ import java.util.List;
 public class HomeNoticeView extends FrameLayout implements View.OnClickListener {
 
     private MarqueeView marqueeView;
+    private List<NoticeBean> notices;
 
     public HomeNoticeView(@NonNull Context context) {
         this(context, null);
@@ -49,13 +52,18 @@ public class HomeNoticeView extends FrameLayout implements View.OnClickListener 
         super.onFinishInflate();
     }
 
-    public void setNotices(List<String> notices) {
-        if (marqueeView == null) {
+    public void setNotices(List<NoticeBean> notices) {
+        if (marqueeView == null || notices == null) {
             return;
         }
-        marqueeView.startWithList(notices);
+        this.notices = notices;
+        List<String> objects = new ArrayList<>();
+        for (int i = 0; i < notices.size(); i++) {
+            objects.add("" + notices.get(i).title);
+        }
+        marqueeView.startWithList(objects);
         marqueeView.setOnItemClickListener((position, textView) -> {
-            BrowserActivity.start(getContext(), "https://www.baidu.com");
+            UserProtocolActivity.start(getContext(), UserProtocolActivity.ID_NOTICE, notices.get(position).id);
         });
     }
 

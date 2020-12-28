@@ -99,12 +99,6 @@ public class RegexEditText extends AppCompatEditText implements InputFilter {
                     case 0x06:
                         setInputRegex(REGEX_NONNULL);
                         break;
-                    case 0x07:
-                        setInputRegex(REGEX_PSW);
-                        break;
-                    case 0x08:
-                        setInputRegex(REGEX_EMAIL);
-                        break;
                     default:
                         break;
                 }

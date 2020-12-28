@@ -8,6 +8,7 @@ import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.http.model.HttpData;
+import com.hsjskj.quwen.http.request.NoticeGetApi;
 import com.hsjskj.quwen.http.request.PasswordApi;
 import com.hsjskj.quwen.http.request.ProtocolGetApi;
 import com.hsjskj.quwen.http.response.ProtocolBean;
@@ -31,6 +32,24 @@ public class UserProtocolRepository extends BaseRepository {
         EasyHttp.post(lifecycleOwner)
                 .tag(this)
                 .api(new ProtocolGetApi().setId(id))
+                .request(new HttpCallback<HttpData<ProtocolBean>>(null) {
+                    @Override
+                    public void onSucceed(HttpData<ProtocolBean> data) {
+                        mutableLiveData.postValue(data.getData());
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        mutableLiveData.postValue(null);
+                    }
+                });
+    }
+
+    public void loadNoticeBean(LifecycleOwner lifecycleOwner, String id) {
+        EasyHttp.post(lifecycleOwner)
+                .tag(this)
+                .api(new NoticeGetApi().setId(id))
                 .request(new HttpCallback<HttpData<ProtocolBean>>(null) {
                     @Override
                     public void onSucceed(HttpData<ProtocolBean> data) {

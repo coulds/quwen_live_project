@@ -2,7 +2,6 @@ package com.hsjskj.quwen.ui.user.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -25,6 +24,7 @@ public class UserProtocolActivity extends MyMvvmActivity<UserProctocolModel> imp
 
     public static final int ID_REGISTER = 1;
     public static final int ID_SECRECY = 2;
+    public static final int ID_NOTICE = -1;
 
     /**
      * id 1注册协议 2隐私政策 3推广规则 4主播签约协议 5直播规则 6抢答规则
@@ -32,6 +32,16 @@ public class UserProtocolActivity extends MyMvvmActivity<UserProctocolModel> imp
     public static void start(Context context, int id) {
         Intent intent = new Intent(context, UserProtocolActivity.class);
         intent.putExtra(IntentKey.ID, id);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 首页咨询详情
+     */
+    public static void start(Context context, int type, String noticeId) {
+        Intent intent = new Intent(context, UserProtocolActivity.class);
+        intent.putExtra(IntentKey.ID, type);
+        intent.putExtra(IntentKey.NOTICE_ID, noticeId);
         context.startActivity(intent);
     }
 
@@ -46,13 +56,18 @@ public class UserProtocolActivity extends MyMvvmActivity<UserProctocolModel> imp
 
         mViewModel.getProtocolBean().observe(this, status -> {
             if (status == null) {
-                showError(v -> mViewModel.loadData(this, String.valueOf(getInt(IntentKey.ID))));
+                showError(v -> loadHttp());
+                return;
             } else {
                 showComplete();
                 mBrowserView.loadDataWithBaseURL("", addHtml(status.content), "text/html", "UTF-8", "");
             }
+            if (!isNotice()) {
+                setTitle(mViewModel.getProtocolTitle(this, getInt(IntentKey.ID)));
+            } else {
+                setTitle("" + status.title);
+            }
         });
-        setTitle(mViewModel.getProtocolTitle(this, getInt(IntentKey.ID)));
     }
 
     @Override
@@ -63,7 +78,19 @@ public class UserProtocolActivity extends MyMvvmActivity<UserProctocolModel> imp
     @Override
     protected void initData() {
         showLoading();
-        mViewModel.loadData(this, String.valueOf(getInt(IntentKey.ID)));
+        loadHttp();
+    }
+
+    private void loadHttp() {
+        if (isNotice()) {
+            mViewModel.loadNoticeData(this, getString(IntentKey.NOTICE_ID));
+        } else {
+            mViewModel.loadData(this, String.valueOf(getInt(IntentKey.ID)));
+        }
+    }
+
+    private boolean isNotice() {
+        return -1 == getInt(IntentKey.ID);
     }
 
     @Override

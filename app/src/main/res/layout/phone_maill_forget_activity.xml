@@ -88,7 +88,7 @@
                     android:maxLines="1"
                     android:maxLength="@integer/email_length"
                     android:singleLine="true"
-                    app:regexType="email" />
+                    />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/cv_register_switch_phone"

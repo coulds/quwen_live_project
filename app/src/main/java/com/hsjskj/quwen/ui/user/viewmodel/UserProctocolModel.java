@@ -31,6 +31,10 @@ public class UserProctocolModel extends BaseViewModel<UserProtocolRepository> {
         repository.loadProtocolBean(lifecycleOwner, id);
     }
 
+    public void loadNoticeData(LifecycleOwner lifecycleOwner, String id) {
+        repository.loadNoticeBean(lifecycleOwner, id);
+    }
+
     //1 注册协议 2隐私政策 3推广规则 4主播签约协议 5直播规则 6抢答规则
     public String getProtocolTitle(Context context, int id) {
         switch (id) {
