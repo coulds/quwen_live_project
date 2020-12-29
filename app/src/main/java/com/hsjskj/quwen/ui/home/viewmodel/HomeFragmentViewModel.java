@@ -71,10 +71,10 @@ public class HomeFragmentViewModel extends ViewModel {
                 });
     }
 
-
+    //1 首页 2 问问 3 消息 4 直播
     private void postHomeBannerValue(List<BannerBean> data, int id) {
         switch (id) {
-            case 0:
+            case 1:
                 bannerHomeLiveData.postValue(data);
                 break;
             default:

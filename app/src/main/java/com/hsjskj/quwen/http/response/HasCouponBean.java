@@ -14,6 +14,6 @@ public class HasCouponBean {
     }
 
     public boolean isShowDialog() {
-        return couponId == null || TextUtils.isEmpty(couponId);
+        return couponId != null && !TextUtils.isEmpty(couponId);
     }
 }

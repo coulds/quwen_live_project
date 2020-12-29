@@ -181,9 +181,9 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
     }
 
     private void sendHttpRecevice(String couponId, BaseDialog dialog) {
-        showLoading();
+        showLoadDialog();
         homeFragmentViewModel.loadHomeHasCoupon(this, couponId).observe(this, aBoolean -> {
-            hideDialog();
+            hideLoadDialog();
             if (aBoolean) {
                 dialog.dismiss();
             }

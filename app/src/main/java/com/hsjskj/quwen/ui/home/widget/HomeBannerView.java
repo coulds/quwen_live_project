@@ -100,6 +100,8 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
                 //图片加载自己实现
                 GlideApp.with(getContext())
                         .load(data.pic)
+                        .placeholder(R.mipmap.default_image)
+                        .error(R.mipmap.default_image)
                         .transform(new RoundedCorners((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
                                 , 20, getContext().getResources().getDisplayMetrics())))
                         .into(holder.imageView);

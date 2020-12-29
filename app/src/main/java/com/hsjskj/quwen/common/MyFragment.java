@@ -7,26 +7,33 @@ import androidx.annotation.Nullable;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.bar.TitleBar;
+import com.hjq.base.BaseDialog;
 import com.hjq.base.BaseFragment;
+import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.TitleBarAction;
 import com.hsjskj.quwen.action.ToastAction;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hjq.http.listener.OnHttpListener;
+import com.hsjskj.quwen.ui.dialog.WaitDialog;
 
 import okhttp3.Call;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 项目中 Fragment 懒加载基类
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 项目中 Fragment 懒加载基类
  */
 public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A>
         implements ToastAction, TitleBarAction, OnHttpListener {
 
-    /** 标题栏对象 */
+    /**
+     * 标题栏对象
+     */
     private TitleBar mTitleBar;
-    /** 状态栏沉浸 */
+    /**
+     * 状态栏沉浸
+     */
     private ImmersionBar mImmersionBar;
 
     @Override
@@ -158,6 +165,23 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A>
         if (isStatusBarEnabled()) {
             // 重新初始化状态栏
             getStatusBarConfig().init();
+        }
+    }
+
+   private BaseDialog waitDialog = null;
+
+    protected void showLoadDialog() {
+        hideLoadDialog();
+        waitDialog = new WaitDialog.Builder(getContext())
+                // 消息文本可以不用填写
+                .setMessage(getString(R.string.common_loading))
+                .show();
+    }
+
+    protected void hideLoadDialog() {
+        if (waitDialog != null) {
+            waitDialog.hide();
+            waitDialog = null;
         }
     }
 }
