@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.hjq.base.UiUtlis;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.http.glide.GlideApp;
@@ -51,14 +52,13 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
     public HomeBannerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_home_banner, this, false);
+       LayoutInflater.from(context).inflate(R.layout.layout_home_banner, this);
 
-        banner = view.findViewById(R.id.banner);
+        banner = findViewById(R.id.banner);
         bannerPic = new ArrayList<>();
 
         banner.setIndicator(new CircleIndicator(getContext()));
         banner.start();
-        addView(view);
     }
 
     @Override
@@ -86,9 +86,13 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
             public BannerImageHolder onCreateHolder(ViewGroup parent, int viewType) {
                 RoundedImageView imageView = new RoundedImageView(parent.getContext());
                 //注意，必须设置为match_parent，这个是viewpager2强制要求的
-                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                MarginLayoutParams params = new MarginLayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
+                params.setMargins(UiUtlis.dp2px(getContext(),15)
+                        ,UiUtlis.dp2px(getContext(),10)
+                        ,UiUtlis.dp2px(getContext(),15)
+                        ,UiUtlis.dp2px(getContext(),10));
                 imageView.setLayoutParams(params);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setCornerRadius(dp2px(8));
@@ -102,8 +106,8 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
                         .load(data.pic)
                         .placeholder(R.mipmap.default_image)
                         .error(R.mipmap.default_image)
-                        .transform(new RoundedCorners((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
-                                , 20, getContext().getResources().getDisplayMetrics())))
+//                        .transform(new RoundedCorners((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
+//                                , 20, getContext().getResources().getDisplayMetrics())))
                         .into(holder.imageView);
             }
         });
