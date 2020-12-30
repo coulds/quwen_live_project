@@ -1,6 +1,5 @@
 package com.hsjskj.quwen.ui.home.activity;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -63,7 +62,7 @@ public class ConstellationActivity extends MyActivity {
                 ToastUtils.show(R.string.home_please_select_a_date);
                 return;
             }
-            startActivity(new Intent(this, ConstellationDetailsActivity.class));
+            ConstellationDetailsActivity.start(getContext(), isSelectMale ? 2 : 1, mStarDateSelect.getDateFormatString());
         }
     }
 

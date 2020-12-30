@@ -63,6 +63,8 @@ public final class IntentKey {
     public static final String REMARK = "remark";
     /** 星座 */
     public static final String CONSTELLATION = "constellation";
+    /** 生日 */
+    public static final String BIRTHDAY = "birthday";
 
     // 地方
 

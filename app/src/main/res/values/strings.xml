@@ -249,5 +249,6 @@
     <string name="home_live_wheat_price">连麦价格</string>
     <string name="home_ask_him_a_question">向他提问</string>
     <string name="home_appointment_host">预约主播</string>
+    <string name="home_constellation_calculation">星座计算中,请稍后</string>
 
 </resources>

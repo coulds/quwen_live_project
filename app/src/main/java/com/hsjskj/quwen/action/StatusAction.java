@@ -34,11 +34,15 @@ public interface StatusAction {
         showLoading(R.raw.loading);
     }
 
-    default void showLoading(@RawRes int id) {
+    default void showLoading(int hint) {
+        showLoading(R.raw.loading,hint);
+    }
+
+    default void showLoading(@RawRes int id,int hintSrcId) {
         HintLayout layout = getHintLayout();
         layout.show();
         layout.setAnim(id);
-        layout.setHint("");
+        layout.setHint(hintSrcId);
         layout.setOnClickListener(null);
     }
 

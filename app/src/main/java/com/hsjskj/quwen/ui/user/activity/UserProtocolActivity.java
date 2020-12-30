@@ -10,6 +10,7 @@ import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.StatusAction;
 import com.hsjskj.quwen.aop.CheckNet;
 import com.hsjskj.quwen.common.MyMvvmActivity;
+import com.hsjskj.quwen.helper.HtmlHelper;
 import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.user.viewmodel.UserProctocolModel;
 import com.hsjskj.quwen.widget.BrowserView;
@@ -60,7 +61,7 @@ public class UserProtocolActivity extends MyMvvmActivity<UserProctocolModel> imp
                 return;
             } else {
                 showComplete();
-                mBrowserView.loadDataWithBaseURL("", addHtml(status.content), "text/html", "UTF-8", "");
+                mBrowserView.loadDataWithBaseURL("", HtmlHelper.addHtml(status.content), "text/html", "UTF-8", "");
             }
             if (!isNotice()) {
                 setTitle(mViewModel.getProtocolTitle(this, getInt(IntentKey.ID)));
@@ -139,10 +140,6 @@ public class UserProtocolActivity extends MyMvvmActivity<UserProctocolModel> imp
         mBrowserView.reload();
     }
 
-    public String addHtml(String content) {
-        String head = "<head><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no\" />" +
-                "<style>* {font-size:15px;padding:0;} img{max-width: 100%; width:auto; height: auto;} video{max-width: 100%; width:100%; height: auto;}</style></head>";
-        return "<html>" + head + "<body style=\"word-wrap:break-word;\">" + content + "</body></html>";
-    }
+
 
 }
