@@ -11,6 +11,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyUserInfo;
+import com.hsjskj.quwen.helper.ActivityStackManager;
 import com.hsjskj.quwen.other.AppConfig;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
@@ -46,7 +47,8 @@ public final class SplashActivity extends MyActivity implements CancelAdapt {
 
         if (!MyUserInfo.getInstance().isLogin()) {
             startActivity(LoginActivity.class);
-            finish();
+            // 进行内存优化，销毁除登录页之外的所有界面
+            ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
             return;
         } else {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {

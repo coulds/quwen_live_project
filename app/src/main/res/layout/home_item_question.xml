@@ -27,6 +27,7 @@
             android:layout_alignTop="@+id/iv_item_avatar"
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@id/iv_item_avatar"
+            android:maxWidth="200dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="去问一哥"
@@ -43,6 +44,7 @@
             android:textSize="11sp" />
 
         <com.hsjskj.quwen.ui.home.widget.StarTagView
+            android:id="@+id/star_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_item_name"
