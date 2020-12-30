@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e6e6e6"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="我的粉丝" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/myfans_SmartRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hsjskj.quwen.widget.HintLayout
+            android:id="@+id/myfans_HintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.hjq.widget.layout.WrapRecyclerView
+                android:id="@+id/myfans_WrapRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.hsjskj.quwen.widget.HintLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

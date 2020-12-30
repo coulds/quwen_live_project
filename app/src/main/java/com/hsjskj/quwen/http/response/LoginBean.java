@@ -21,6 +21,19 @@ public final class LoginBean implements Parcelable {
     public String is_anchor;
     public String token;
 
+    public boolean isSexMale() {
+        return "2".equals(this.sex);
+    }
+
+    public String getUsername() {
+        String str = this.user_nickname;
+        if (str == null) {
+            return this.id;
+        }
+        return str;
+    }
+
+
     public LoginBean(){
 
     }

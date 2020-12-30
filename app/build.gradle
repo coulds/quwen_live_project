@@ -108,6 +108,7 @@ static def releaseTime() {
 dependencies {
     // 基类库
     implementation project(':base')
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     // 自定义 View
     implementation project(':widget')
     // 友盟封装

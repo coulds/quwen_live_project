@@ -4,26 +4,34 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.hjq.base.BaseDialog;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
+import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.UpdateImageApi;
 import com.hsjskj.quwen.ui.dialog.AddressDialog;
+import com.hsjskj.quwen.ui.dialog.DateDialog;
 import com.hsjskj.quwen.ui.dialog.InputDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
+import com.hsjskj.quwen.ui.dialog.SelectDialog;
 
 import java.io.File;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/04/20
- *    desc   : 个人资料
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/04/20
+ * desc   : 个人资料
  */
 public final class PersonalDataActivity extends MyActivity {
 
@@ -33,14 +41,22 @@ public final class PersonalDataActivity extends MyActivity {
     private SettingBar mNameView;
     private SettingBar mAddressView;
 
-    /** 省 */
+    /**
+     * 省
+     */
     private String mProvince = "广东省";
-    /** 市 */
+    /**
+     * 市
+     */
     private String mCity = "广州市";
-    /** 区 */
+    /**
+     * 区
+     */
     private String mArea = "天河区";
 
-    /** 头像地址 */
+    /**
+     * 头像地址
+     */
     private String mAvatarUrl;
 
     @Override
@@ -54,8 +70,8 @@ public final class PersonalDataActivity extends MyActivity {
         mAvatarView = findViewById(R.id.iv_person_data_avatar);
         mIDView = findViewById(R.id.sb_person_data_id);
         mNameView = findViewById(R.id.sb_person_data_name);
-        mAddressView = findViewById(R.id.sb_person_data_address);
-        setOnClickListener(mAvatarLayout, mAvatarView, mNameView, mAddressView);
+        mAddressView = (SettingBar) findViewById(R.id.sb_person_data_address);
+        setOnClickListener(this.mAvatarLayout, this.mAvatarView, this.mNameView, mAddressView, this.mIDView);
     }
 
     @Override
@@ -67,82 +83,77 @@ public final class PersonalDataActivity extends MyActivity {
                 .circleCrop()
                 .into(mAvatarView);
 
-        String address = mProvince + mCity + mArea;
-        mAddressView.setRightText(address);
+        mAddressView.setRightText("1999年12月30日");
+//        GlideApp.with(getContext()).load(MyUserInfo.getInstance().getLogin().avatar).into(mAvatarView);
+        mIDView.setRightText(MyUserInfo.
+                getInstance().getLogin().getUsername());
+        mNameView.setRightText(MyUserInfo.getInstance().getLogin().isSexMale() ? "男" : "女");
     }
 
     @SingleClick
     @Override
     public void onClick(View v) {
-        if (v == mAvatarLayout) {
-            ImageSelectActivity.start(this, data -> {
-
-                if (true) {
-                    mAvatarUrl = data.get(0);
+        if (v == mIDView) {
+            startActivity(NickNameEditActivity.class);
+        } else if (v == mAvatarLayout) {
+            ImageSelectActivity.start(this, new ImageSelectActivity.OnPhotoSelectListener() {
+                @Override
+                public void onSelected(List<String> data) {
                     GlideApp.with(getActivity())
-                            .load(mAvatarUrl)
+                            .load(data.get(0))
+                            .placeholder(R.drawable.avatar_placeholder_ic)
+                            .error(R.drawable.avatar_placeholder_ic)
+                            .circleCrop()
                             .into(mAvatarView);
-                    return;
                 }
-                // 上传头像
-                EasyHttp.post(this)
-                        .api(new UpdateImageApi()
-                                .setImage(new File(data.get(0))))
-                        .request(new HttpCallback<HttpData<String>>(PersonalDataActivity.this) {
-
-                            @Override
-                            public void onSucceed(HttpData<String> data) {
-                                mAvatarUrl = data.getData();
-                                GlideApp.with(getActivity())
-                                        .load(mAvatarUrl)
-                                        .into(mAvatarView);
-                            }
-                        });
             });
         } else if (v == mAvatarView) {
             if (!TextUtils.isEmpty(mAvatarUrl)) {
-                // 查看头像
                 ImagePreviewActivity.start(getActivity(), mAvatarUrl);
             } else {
-                // 选择头像
                 onClick(mAvatarLayout);
             }
         } else if (v == mNameView) {
-            new InputDialog.Builder(this)
-                    // 标题可以不用填写
-                    .setTitle(getString(R.string.personal_data_name_hint))
-                    .setContent(mNameView.getRightText())
-                    //.setHint(getString(R.string.personal_data_name_hint))
-                    //.setConfirm("确定")
-                    // 设置 null 表示不显示取消按钮
-                    //.setCancel("取消")
-                    // 设置点击按钮后不关闭对话框
-                    //.setAutoDismiss(false)
-                    .setListener((dialog, content) -> {
-                        if (!mNameView.getRightText().equals(content)) {
-                            mNameView.setRightText(content);
+            ((SelectDialog.Builder) new SelectDialog.Builder(this)
+                    .setTitle("请选择你的性别"))
+                    .setList("男", "女")
+                    .setSingleSelect()
+                    .setSelect(MyUserInfo.getInstance().getLogin().isSexMale() ? 0 : 1)
+                    .setListener(new SelectDialog.OnListener<String>() {
+                        @Override
+                        public void onSelected(BaseDialog dialog, HashMap<Integer, String> data) {
+                            PersonalDataActivity personalDataActivity = PersonalDataActivity.this;
+                            personalDataActivity.toast((CharSequence) ("确定了：" + data.toString()));
+                            for (Integer integer : data.keySet()) {
+                                PersonalDataActivity.this.mNameView.setRightText(data.get(integer));
+                            }
                         }
-                    })
-                    .show();
+
+                        @Override
+                        public void onCancel(BaseDialog dialog) {
+                            PersonalDataActivity.this.toast((CharSequence) "取消了");
+                        }
+                    }).show();
         } else if (v == mAddressView) {
-            new AddressDialog.Builder(this)
-                    //.setTitle("选择地区")
-                    // 设置默认省份
-                    .setProvince(mProvince)
-                    // 设置默认城市（必须要先设置默认省份）
-                    .setCity(mCity)
-                    // 不选择县级区域
-                    //.setIgnoreArea()
-                    .setListener((dialog, province, city, area) -> {
-                        String address = province + city + area;
-                        if (!mAddressView.getRightText().equals(address)) {
-                            mProvince = province;
-                            mCity = city;
-                            mArea = area;
-                            mAddressView.setRightText(address);
-                        }
-                    })
-                    .show();
+            ((DateDialog.Builder) ((DateDialog.Builder) ((DateDialog.Builder) new DateDialog.Builder(this).setTitle(getString(R.string.date_title))).setConfirm(getString(R.string.common_confirm))).setCancel(getString(R.string.common_cancel))).setListener(new DateDialog.OnListener() {
+
+                @Override
+                public void onSelected(BaseDialog dialog, int year, int month, int day) {
+                    PersonalDataActivity.this.toast((CharSequence) (year + PersonalDataActivity.this.getString(R.string.common_year) + month + PersonalDataActivity.this.getString(R.string.common_month) + day + PersonalDataActivity.this.getString(R.string.common_day)));
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(1, year);
+                    calendar.set(2, month - 1);
+                    calendar.set(5, day);
+                    PersonalDataActivity.this.toast((CharSequence) ("时间戳：" + calendar.getTimeInMillis()));
+                    PersonalDataActivity.this.mAddressView.setRightText(year + PersonalDataActivity.this.getString(R.string.common_year) + month + PersonalDataActivity.this.getString(R.string.common_month) + day + PersonalDataActivity.this.getString(R.string.common_day));
+                }
+
+                @Override
+                public void onCancel(BaseDialog dialog) {
+                    PersonalDataActivity.this.toast((CharSequence) "取消了");
+                }
+            }).show();
         }
+
     }
 }

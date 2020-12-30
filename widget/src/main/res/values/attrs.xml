@@ -50,6 +50,7 @@
         <attr name="bar_rightIcon" format="reference" />
         <attr name="bar_rightColor" format="color" />
         <attr name="bar_rightSize" format="dimension" />
+        <attr name="bar_rightIconSize" format="dimension" />
         <!-- 分割线 -->
         <attr name="bar_lineVisible" format="boolean" />
         <attr name="bar_lineColor" format="reference|color" />

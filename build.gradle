@@ -20,11 +20,11 @@ allprojects {
     repositories {
         jcenter()
         google()
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
-        maven { url 'https://maven.aliyun.com/nexus/content/repositories/central/' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/repositories/central/' }
         maven { url 'https://dl.bintray.com/getactivity/maven/' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'https://maven.google.com' }

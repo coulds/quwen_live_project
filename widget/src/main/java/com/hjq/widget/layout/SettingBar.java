@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
+import com.hjq.base.UiUtlis;
 import com.hjq.widget.R;
 
 /**
@@ -112,8 +113,9 @@ public final class SettingBar extends FrameLayout {
         }
 
         if (array.hasValue(R.styleable.SettingBar_bar_rightIcon)) {
-            setRightIcon(array.getDrawable(R.styleable.SettingBar_bar_rightIcon));
+            setRightIcon(array.getDrawable(R.styleable.SettingBar_bar_rightIcon), array.getDimensionPixelSize(R.styleable.SettingBar_bar_rightIconSize, UiUtlis.dp2px(getContext(), 20.0f)));
         }
+
 
         // 文字颜色设置
         setLeftColor(array.getColor(R.styleable.SettingBar_bar_leftColor, ContextCompat.getColor(getContext(), R.color.black80)));
@@ -235,15 +237,17 @@ public final class SettingBar extends FrameLayout {
     /**
      * 设置右边的图标
      */
-    public SettingBar setRightIcon(@DrawableRes int id) {
-        setRightIcon(ContextCompat.getDrawable(getContext(), id));
+    public SettingBar setRightIcon(int id, int size) {
+        setRightIcon(ContextCompat.getDrawable(getContext(), id), size);
         return this;
     }
 
-    public SettingBar setRightIcon(Drawable drawable) {
-        mRightView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+    public SettingBar setRightIcon(Drawable drawable, int size) {
+        drawable.setBounds(0, 0, size, size);
+        this.mRightView.setCompoundDrawables(null, null, drawable, null);
         return this;
     }
+
 
     public Drawable getRightIcon() {
         return mRightView.getCompoundDrawables()[2];
