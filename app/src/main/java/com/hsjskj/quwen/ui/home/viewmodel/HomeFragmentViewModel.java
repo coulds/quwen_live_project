@@ -11,8 +11,10 @@ import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.CouponRecevieApi;
 import com.hsjskj.quwen.http.request.HomeBannerApi;
+import com.hsjskj.quwen.http.request.HomeVideoListApi;
 import com.hsjskj.quwen.http.response.BannerBean;
 import com.hsjskj.quwen.http.response.HasCouponBean;
+import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.http.response.NoticeBean;
 
 import java.util.ArrayList;

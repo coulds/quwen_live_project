@@ -3,6 +3,7 @@ package com.hsjskj.quwen.ui.home.activity;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,10 +12,12 @@ import com.hjq.base.UiUtlis;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.StatusAction;
+import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyMvvmActivity;
 import com.hsjskj.quwen.helper.ItemDecorationHeleper;
 import com.hsjskj.quwen.ui.activity.VideoPlayActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomeVideoListItemAdapter;
+import com.hsjskj.quwen.ui.home.viewmodel.HomeFragmentViewModel;
 import com.hsjskj.quwen.ui.home.viewmodel.HomeVideoViewModel;
 import com.hsjskj.quwen.widget.HintLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -26,12 +29,13 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
  * time          : 2020年12月26日 09:42
  * description   : 首页视频列表
  */
-public class HomeVideoListActivity extends MyMvvmActivity<HomeVideoViewModel> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
+public class HomeVideoListActivity extends MyActivity implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
     private SmartRefreshLayout mRefreshLayout;
     private HintLayout mHintLayout;
     private WrapRecyclerView mRecyclerview;
     private HomeVideoListItemAdapter adapter;
     private static final int VIDEO_COLUMN = 2;
+    private HomeVideoViewModel homeFragmentViewModel;
 
     @Override
     protected int getLayoutId() {
@@ -40,7 +44,7 @@ public class HomeVideoListActivity extends MyMvvmActivity<HomeVideoViewModel> im
 
     @Override
     protected void initView() {
-        super.initView();
+        homeFragmentViewModel = new ViewModelProvider(this).get(HomeVideoViewModel.class);
         mRefreshLayout = (SmartRefreshLayout) findViewById(R.id.refresh_layout);
         mHintLayout = (HintLayout) findViewById(R.id.hint_layout);
         mRecyclerview = (WrapRecyclerView) findViewById(R.id.recyclerview);
@@ -53,13 +57,16 @@ public class HomeVideoListActivity extends MyMvvmActivity<HomeVideoViewModel> im
 
     @Override
     protected void initData() {
-        mViewModel.getLiveDataVideoList().observe(this, objects -> {
+        homeFragmentViewModel.getHomeVideoLiveData().observe(this, objects -> {
             mRefreshLayout.finishLoadMore();
             mRefreshLayout.finishRefresh();
             showComplete();
             if (adapter.getPageNumber() == 1 && objects != null) {
                 adapter.setData(objects);
             } else {
+                if (objects == null || objects.isEmpty()) {
+                    mRefreshLayout.finishLoadMoreWithNoMoreData();
+                }
                 adapter.addData(objects);
             }
         });
@@ -76,13 +83,13 @@ public class HomeVideoListActivity extends MyMvvmActivity<HomeVideoViewModel> im
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         adapter.setPageNumber(adapter.getPageNumber() + 1);
-        mViewModel.loadDataVideoList(adapter.getPageNumber(), 20);
+        homeFragmentViewModel.loadHomeVideoList(this, adapter.getPageNumber(), 20);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         adapter.setPageNumber(1);
-        mViewModel.loadDataVideoList(adapter.getPageNumber(), 20);
+        homeFragmentViewModel.loadHomeVideoList(this);
     }
 
     @Override

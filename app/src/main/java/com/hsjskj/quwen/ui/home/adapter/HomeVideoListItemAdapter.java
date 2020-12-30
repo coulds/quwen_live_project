@@ -9,13 +9,14 @@ import androidx.annotation.NonNull;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.response.HomeVideoListBean;
 
 /**
  * @author : Jun
  * time          : 2020年12月25日 11:08
  * description   : quwen_live
  */
-public class HomeVideoListItemAdapter extends MyAdapter<Object> {
+public class HomeVideoListItemAdapter extends MyAdapter<HomeVideoListBean.DataBean> {
 
     public HomeVideoListItemAdapter(Context context) {
         super(context);
@@ -38,7 +39,7 @@ public class HomeVideoListItemAdapter extends MyAdapter<Object> {
 
         @Override
         public void onBindView(int position) {
-            GlideApp.with(getContext()).load(getItem(position)).into(imv_image);
+            GlideApp.with(getContext()).load(getItem(position).cover).into(imv_image);
         }
     }
 }

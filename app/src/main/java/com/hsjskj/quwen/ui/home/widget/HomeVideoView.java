@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.ui.home.adapter.HomeVideoAdapter;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public class HomeVideoView extends LinearLayout {
         super.onFinishInflate();
     }
 
-    public void setData(List<String> datas) {
+    public void setData(List<HomeVideoListBean.DataBean> datas) {
         adapter.setData(datas);
     }
 
@@ -77,6 +78,6 @@ public class HomeVideoView extends LinearLayout {
     public interface HomeVideoViewListener {
         void onMoreClick();
 
-        void onItemVideoClick(int index, String url);
+        void onItemVideoClick(int index, HomeVideoListBean.DataBean url);
     }
 }
