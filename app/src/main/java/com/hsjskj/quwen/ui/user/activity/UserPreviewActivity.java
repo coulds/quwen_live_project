@@ -8,6 +8,7 @@ import androidx.core.widget.NestedScrollView;
 
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyMvvmActivity;
+import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.user.viewmodel.UserPreviewViewModel;
 
 /**
@@ -20,8 +21,9 @@ public class UserPreviewActivity extends MyMvvmActivity<UserPreviewViewModel> {
     private NestedScrollView scrollView;
     private int height = 80;
 
-    public static void start(Context context) {
+    public static void start(Context context, String userId) {
         Intent intent = new Intent(context, UserPreviewActivity.class);
+        intent.putExtra(IntentKey.USER_ID, userId);
         context.startActivity(intent);
     }
 

@@ -12,6 +12,8 @@ public final class IntentKey {
 
     /** id */
     public static final String ID = "id";
+    /** userId */
+    public static final String USER_ID = "userId";
     /** token */
     public static final String TOKEN = "token";
     /** 标题 */

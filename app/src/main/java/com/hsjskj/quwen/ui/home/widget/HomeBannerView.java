@@ -40,6 +40,7 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
 
     private Banner<BannerBean, BannerImageAdapter> banner;
     private List<BannerBean> bannerPic;
+    private MarginLayoutParams params;
 
     public HomeBannerView(@NonNull Context context) {
         this(context, null);
@@ -52,11 +53,17 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
     public HomeBannerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-       LayoutInflater.from(context).inflate(R.layout.layout_home_banner, this);
+        LayoutInflater.from(context).inflate(R.layout.layout_home_banner, this);
 
         banner = findViewById(R.id.banner);
         bannerPic = new ArrayList<>();
-
+        params = new MarginLayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        params.setMargins(UiUtlis.dp2px(getContext(), 15)
+                , UiUtlis.dp2px(getContext(), 0)
+                , UiUtlis.dp2px(getContext(), 15)
+                , UiUtlis.dp2px(getContext(), 0));
         banner.setIndicator(new CircleIndicator(getContext()));
         banner.start();
     }
@@ -86,13 +93,6 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
             public BannerImageHolder onCreateHolder(ViewGroup parent, int viewType) {
                 RoundedImageView imageView = new RoundedImageView(parent.getContext());
                 //注意，必须设置为match_parent，这个是viewpager2强制要求的
-                MarginLayoutParams params = new MarginLayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT);
-                params.setMargins(UiUtlis.dp2px(getContext(),15)
-                        ,UiUtlis.dp2px(getContext(),10)
-                        ,UiUtlis.dp2px(getContext(),15)
-                        ,UiUtlis.dp2px(getContext(),10));
                 imageView.setLayoutParams(params);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setCornerRadius(dp2px(8));

@@ -11,9 +11,11 @@ import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.CouponRecevieApi;
 import com.hsjskj.quwen.http.request.HomeBannerApi;
+import com.hsjskj.quwen.http.request.HomePublishListApi;
 import com.hsjskj.quwen.http.request.HomeVideoListApi;
 import com.hsjskj.quwen.http.response.BannerBean;
 import com.hsjskj.quwen.http.response.HasCouponBean;
+import com.hsjskj.quwen.http.response.HomePublishBean;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.http.response.NoticeBean;
 
@@ -141,5 +143,34 @@ public class HomeFragmentViewModel extends ViewModel {
         return mutableLiveData;
     }
 
+
+    private MutableLiveData<List<HomePublishBean.DataBean>> homePublishList;
+
+    public MutableLiveData<List<HomePublishBean.DataBean>> getHomeVideoLiveData() {
+        if (homePublishList == null) {
+            homePublishList = new MutableLiveData<>();
+        }
+        return homePublishList;
+    }
+
+    public void loadHomePublishList(LifecycleOwner lifecycleOwner) {
+        loadHomePublishList(lifecycleOwner, 10, 1);
+    }
+
+    public void loadHomePublishList(LifecycleOwner lifecycleOwner, int limit, int page) {
+        EasyHttp.post(lifecycleOwner)
+                .api(new HomePublishListApi(limit, page))
+                .request(new HttpCallback<HttpData<HomePublishBean>>(null) {
+                    @Override
+                    public void onSucceed(HttpData<HomePublishBean> data) {
+                        homePublishList.postValue(data.getData().data);
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        homePublishList.postValue(new ArrayList<>());
+                    }
+                });
+    }
 
 }

@@ -1,5 +1,7 @@
 package com.hsjskj.quwen.ui.home.activity;
 
+import android.view.View;
+
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
 
@@ -7,8 +9,12 @@ import com.hjq.base.UiUtlis;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.StatusAction;
 import com.hsjskj.quwen.common.MyMvvmActivity;
+import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.response.HomePublishBean;
+import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.home.viewmodel.HomeQuestionViewModel;
 import com.hsjskj.quwen.ui.home.widget.StarTagView;
+import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
 import com.hsjskj.quwen.widget.HintLayout;
 import com.lzy.ninegrid.ImageInfo;
 import com.lzy.ninegrid.NineGridView;
@@ -16,6 +22,7 @@ import com.lzy.ninegrid.preview.NineGridViewClickAdapter;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Jun
@@ -40,23 +47,39 @@ public class HomeQuestionDetails extends MyMvvmActivity<HomeQuestionViewModel> i
     @Override
     protected void initData() {
         mViewModel.getLiveDataDetails().observe(this, o -> {
-            showComplete();
-
-            setViewNinePic(o);
+            if (o == null) {
+                showError(v -> mViewModel.loadDataDetails(this, getString(IntentKey.ID)));
+            } else {
+                showComplete();
+                setViewNinePic(o);
+            }
         });
         showLoading();
-        mViewModel.loadDataDetails();
+        mViewModel.loadDataDetails(this, getString(IntentKey.ID));
     }
 
-    private void setViewNinePic(Object o) {
+    private void setViewNinePic(HomePublishBean.DataBean item) {
         ArrayList<ImageInfo> imageInfo = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            ImageInfo info = new ImageInfo();
-            info.setThumbnailUrl("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2879484891,1434073852&fm=15&gp=0.jpg");
-            info.setBigImageUrl("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2879484891,1434073852&fm=15&gp=0.jpg");
-            imageInfo.add(info);
+        List<String> enclosure = item.enclosure;
+        if (enclosure != null) {
+            for (String s : enclosure) {
+                ImageInfo info = new ImageInfo();
+                info.setThumbnailUrl(s);
+                info.setBigImageUrl(s);
+                imageInfo.add(info);
+            }
         }
         mNineGridView.setAdapter(new NineGridViewClickAdapter(getContext(), imageInfo));
+
+        mIvItemName.setText(item.getShowName());
+        mTvItemTime.setText("" + item.create_time);
+        mTvItemContent.setText("" + item.content);
+        mTvItemTitle.setText("" + item.title);
+        mStarTag.setTagText(item.constellation, item.isMale());
+        GlideApp.with(getContext()).load(item.avatar).into(mIvItemAvatar);
+        mIvItemAvatar.setOnClickListener(v -> {
+            UserPreviewActivity.start(getContext(),item.user_id);
+        });
     }
 
     @Override
