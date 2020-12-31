@@ -22,7 +22,7 @@ public final class LoginBean implements Parcelable {
     public String token;
 
     public boolean isSexMale() {
-        return "2".equals(this.sex);
+        return !"2".equals(this.sex);
     }
 
     public String getUsername() {

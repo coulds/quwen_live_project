@@ -1,33 +1,73 @@
 package com.hsjskj.quwen.ui.activity;
 
 import android.view.View;
+import android.widget.EditText;
+
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.view.ClearEditText;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.aop.CheckNet;
+import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
+import com.hsjskj.quwen.common.MyUserInfo;
+import com.hsjskj.quwen.http.model.HttpData;
+import com.hsjskj.quwen.http.request.UsersetNickApi;
+
+import okhttp3.Call;
 
 public class NickNameEditActivity extends MyActivity {
-    ClearEditText clearEditText;
+    EditText clearEditText;
 
-    /* access modifiers changed from: protected */
-    @Override // com.hjq.base.BaseActivity
+    @Override
     public int getLayoutId() {
         return R.layout.activity_nickname_edit;
     }
 
-    /* access modifiers changed from: protected */
-    @Override // com.hjq.base.BaseActivity
+    @Override
     public void initView() {
-        this.clearEditText = (ClearEditText) findViewById(R.id.et_publish_title);
+        clearEditText = findViewById(R.id.et_publish_title);
     }
 
-    /* access modifiers changed from: protected */
-    @Override // com.hjq.base.BaseActivity
+    @Override
     public void initData() {
     }
 
-    @Override // com.hsjskj.quwen.action.TitleBarAction, com.hjq.bar.OnTitleBarListener
+    @CheckNet
+    @SingleClick
+    @Override
     public void onRightClick(View v) {
-        this.clearEditText.getEditableText().toString();
-        toast("保存成功");
+        String string = clearEditText.getText().toString();
+        if (string == null){
+            toast("输入不能为空");
+        }else {
+
+            EasyHttp.post(this)
+                    .tag(this)
+                    .api(new UsersetNickApi().setvalue(string))
+                    .request(new HttpCallback<HttpData<Void>>(null) {
+                        @Override
+                        public void onSucceed(HttpData<Void> data) {
+                            toast(data.getMessage());
+                            MyUserInfo.getInstance().getLogin().user_nickname =string;
+                            MyUserInfo.getInstance().upDataUserInfo();
+                        }
+
+                        @Override
+                        public void onFail(Exception e) {
+                            super.onFail(e);
+                            toast(e.getMessage());
+                        }
+
+                        @Override
+                        public void onEnd(Call call) {
+                            super.onEnd(call);
+                            hideDialog();
+                        }
+                    });
+        }
+
+        showDialog();
+
     }
 }

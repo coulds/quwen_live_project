@@ -93,6 +93,10 @@ public class MyUserInfo {
         return mmkv.decodeParcelable(KEY_LOGIN_BEAN, LoginBean.class);
     }
 
+    public void upDataUserInfo(){
+
+    }
+
     //添加其他保存信息.....
 
     //清空用户信息，保留安装时间
