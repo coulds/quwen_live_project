@@ -1,6 +1,7 @@
 package com.hsjskj.quwen.ui.dialog;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import androidx.annotation.StringRes;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyConfig;
 import com.hjq.http.config.IRequestServer;
+import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.http.glide.GlideApp;
@@ -103,9 +105,14 @@ public final class GraphicInputDialog {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_commit:
+                    String input = mInputView.getText().toString();
+                    if (TextUtils.isEmpty(input.trim())) {
+                        ToastUtils.show(mInputView.getHint().toString());
+                        return;
+                    }
                     autoDismiss();
                     if (mListener != null) {
-                        mListener.onConfirm(getDialog(), mInputView.getText().toString());
+                        mListener.onConfirm(getDialog(), input);
                     }
                     break;
                 case R.id.iv_close:
@@ -124,7 +131,7 @@ public final class GraphicInputDialog {
 
 
         private void loadCaptcha() {
-            if (mListener==null){
+            if (mListener == null) {
                 return;
             }
             mInputView.setText("");
