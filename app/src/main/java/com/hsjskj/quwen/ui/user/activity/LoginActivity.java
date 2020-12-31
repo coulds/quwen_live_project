@@ -20,7 +20,7 @@ import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.helper.InputTextHelper;
-import com.hsjskj.quwen.http.response.LoginBean;
+import com.hsjskj.quwen.http.response.UserInfoBean;
 import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.user.viewmodel.LoginViewModel;
@@ -146,7 +146,7 @@ public final class LoginActivity extends MyActivity
         });
     }
 
-    private void loginResult(LoginBean a) {
+    private void loginResult(UserInfoBean a) {
         if (a != null) {
             MyUserInfo.getInstance().setToken(a.token);
             MyUserInfo.getInstance().setId(a.id);

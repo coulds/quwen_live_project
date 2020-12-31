@@ -49,7 +49,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         , HomeVideoView.HomeVideoViewListener
         , HomeLiveView.HomeVideoViewListener
         , BaseAdapter.OnItemClickListener
-        , StatusAction, StatusTwoAction {
+        , StatusAction{
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView recyclerviewQuerstion;
@@ -102,11 +102,6 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             mRefreshLayout.finishRefresh();
             if (mAdapter.getPageNumber() == 1 && dataBeans != null) {
                 mAdapter.setData(dataBeans);
-                if (dataBeans.isEmpty()) {
-                    showEmptyTwo();
-                } else {
-                    showCompleteTwo();
-                }
             } else {
                 if (dataBeans == null || dataBeans.isEmpty()) {
                     mRefreshLayout.finishLoadMoreWithNoMoreData();
@@ -120,7 +115,6 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
 
         onRefresh(mRefreshLayout);
         showLoading();
-        showLoadingTwo();
         homeFragmentViewModel.loadHomeHasCoupon(this).observe(this, hasCouponBean -> {
             if (hasCouponBean.isShowDialog()) {
                 showRewardDialog(hasCouponBean.couponId);
@@ -242,8 +236,4 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         return findViewById(R.id.hint_layout);
     }
 
-    @Override
-    public HintLayout getHintLayoutTwo() {
-        return findViewById(R.id.hint_layout2);
-    }
 }

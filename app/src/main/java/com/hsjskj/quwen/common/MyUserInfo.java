@@ -3,7 +3,7 @@ package com.hsjskj.quwen.common;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.hsjskj.quwen.http.response.LoginBean;
+import com.hsjskj.quwen.http.response.UserInfoBean;
 import com.tencent.mmkv.MMKV;
 
 /**
@@ -83,18 +83,18 @@ public class MyUserInfo {
         mmkv.encode(KEY_USER_ID, id);
     }
 
-    public void setLogin(LoginBean bean) {
+    public void setLogin(UserInfoBean bean) {
         checkNullPointer(mmkv);
         mmkv.encode(KEY_LOGIN_BEAN, bean);
     }
 
-    public LoginBean getLogin() {
+    public UserInfoBean getLogin() {
         checkNullPointer(mmkv);
-        return mmkv.decodeParcelable(KEY_LOGIN_BEAN, LoginBean.class);
+        return mmkv.decodeParcelable(KEY_LOGIN_BEAN, UserInfoBean.class);
     }
 
-    public void upDataUserInfo(){
-
+    public void upDataUserInfo() {
+        
     }
 
     //添加其他保存信息.....

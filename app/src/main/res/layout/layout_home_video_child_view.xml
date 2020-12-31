@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:src="@color/colorAccent"
-        app:riv_corner_radius="10dp" />
+        app:riv_corner_radius="8dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="25dp"

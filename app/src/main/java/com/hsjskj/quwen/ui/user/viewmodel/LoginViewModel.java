@@ -9,7 +9,7 @@ import com.hjq.http.listener.HttpCallback;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.LoginApi;
-import com.hsjskj.quwen.http.response.LoginBean;
+import com.hsjskj.quwen.http.response.UserInfoBean;
 
 /**
  * @author : Jun
@@ -18,17 +18,17 @@ import com.hsjskj.quwen.http.response.LoginBean;
  */
 public class LoginViewModel extends ViewModel {
 
-    public MutableLiveData<LoginBean> sendLogin(LifecycleOwner lifecycleOwner, String username, String password) {
-        MutableLiveData<LoginBean> liveData = new MutableLiveData<>();
+    public MutableLiveData<UserInfoBean> sendLogin(LifecycleOwner lifecycleOwner, String username, String password) {
+        MutableLiveData<UserInfoBean> liveData = new MutableLiveData<>();
         EasyHttp.post(lifecycleOwner)
                 .tag(this)
                 .api(new LoginApi()
                         .setUsername(username)
                         .setPassword(password)
                 )
-                .request(new HttpCallback<HttpData<LoginBean>>(null) {
+                .request(new HttpCallback<HttpData<UserInfoBean>>(null) {
                     @Override
-                    public void onSucceed(HttpData<LoginBean> data) {
+                    public void onSucceed(HttpData<UserInfoBean> data) {
                         ToastUtils.show(data.getMessage());
                         liveData.postValue(data.getData());
                     }

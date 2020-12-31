@@ -44,18 +44,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <com.hsjskj.quwen.widget.HintLayout
-                        android:id="@+id/hint_layout2"
+                    <com.hjq.widget.layout.WrapRecyclerView
+                        android:id="@+id/recyclerviewQuerstion"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.hjq.widget.layout.WrapRecyclerView
-                            android:id="@+id/recyclerviewQuerstion"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="#F8F8F8"
-                            tools:listitem="@layout/home_item_question" />
-                    </com.hsjskj.quwen.widget.HintLayout>
+                        android:layout_height="match_parent"
+                        android:background="#F8F8F8"
+                        tools:listitem="@layout/home_item_question" />
 
 
                 </LinearLayout>
