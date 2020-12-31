@@ -13,11 +13,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.base.BaseAdapter;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.DebugLog;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyMvvmActivity;
+import com.hsjskj.quwen.http.model.HttpData;
+import com.hsjskj.quwen.http.request.PasswordApi;
+import com.hsjskj.quwen.http.response.TxCosBean;
 import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomePublishAdapter;
@@ -70,20 +75,35 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
 
         //TODO 未实现上传腾讯云服务器
 //        listener=new UploadTxImpl(this,"","","");
-        listener = new UploadListener() {
-            @Override
-            public void upload(UploadBean bean, UploadCallback callback) {
-                new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    bean.setmResultUrl(bean.getLocalPath());
-                    callback.onSuccess(bean);
-                }, 1000);
-            }
+//        listener = new UploadListener() {
+//            @Override
+//            public void upload(UploadBean bean, UploadCallback callback) {
+//                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+//                    bean.setmResultUrl(bean.getLocalPath());
+//                    callback.onSuccess(bean);
+//                }, 1000);
+//            }
+//
+//            @Override
+//            public void cancel() {
+//
+//            }
+//        };
+        EasyHttp.post(this)
+                .api("Config/cos")
+                .request(new HttpCallback<HttpData<TxCosBean>>(this) {
 
-            @Override
-            public void cancel() {
+                    @Override
+                    public void onSucceed(HttpData<TxCosBean> data) {
+                        listener = new UploadTxImpl(getContext(), data.data);
+                    }
 
-            }
-        };
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        ToastUtils.show(e.getMessage());
+                    }
+                });
     }
 
     @Override
@@ -96,6 +116,10 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
 
     @Override
     public void onRightClick(View v) {
+        if (listener == null) {
+            ToastUtils.show("获取cos失败");
+            return;
+        }
         String title = etPublishTitle.getText().toString();
         String content = etPublishContent.getText().toString();
         showDialog();

@@ -3,6 +3,7 @@ package com.hsjskj.quwen.upload;
 import android.content.Context;
 import android.util.Log;
 
+import com.hsjskj.quwen.http.response.TxCosBean;
 import com.tencent.cos.xml.CosXmlService;
 import com.tencent.cos.xml.CosXmlServiceConfig;
 import com.tencent.cos.xml.exception.CosXmlClientException;
@@ -37,22 +38,33 @@ public class UploadTxImpl implements UploadListener {
     private String mCosImagePath;
     private Context context;
 
-    private String secretId = "COS_SECRETID"; //永久密钥 secretId
-    private String secretKey = "COS_SECRETKEY"; //永久密钥 secretKey
+    private String secretId = ""; //永久密钥 secretId
+    private String secretKey = ""; //永久密钥 secretKey
 
-    public UploadTxImpl(Context context, String mRegion, String mBucketName, String mCosImagePath) {
+    public UploadTxImpl(Context context, TxCosBean txCosBean) {
         this.context = context;
-        this.mRegion = mRegion;
-        this.mBucketName = mBucketName;
-        this.mCosImagePath = mCosImagePath;
-
-        mImageOnSuccessCallback = url -> {
-            if (mVideoUploadBean == null) {
-                return;
+        this.mRegion = txCosBean.region;
+        this.mBucketName = txCosBean.bucket;
+        this.mCosImagePath = "/";
+        secretId = txCosBean.secretId;
+        secretKey = txCosBean.secretKey;
+        mImageOnSuccessCallback = new OnSuccessCallback() {
+            @Override
+            public void onUploadSuccess(String url) {
+                if (mVideoUploadBean == null) {
+                    return;
+                }
+                mVideoUploadBean.setmResultUrl(url);
+                if (mVideoUploadCallback != null) {
+                    mVideoUploadCallback.onSuccess(mVideoUploadBean);
+                }
             }
-            mVideoUploadBean.setmResultUrl(url);
-            if (mVideoUploadCallback != null) {
-                mVideoUploadCallback.onSuccess(mVideoUploadBean);
+
+            @Override
+            public void onUploadError() {
+                if (mVideoUploadCallback != null) {
+                    mVideoUploadCallback.onFailure();
+                }
             }
         };
     }
@@ -71,13 +83,13 @@ public class UploadTxImpl implements UploadListener {
     public void startUpload() {
         try {
             //使用永久密钥
-            QCloudCredentialProvider qCloudCredentialProvider = new ShortTimeCredentialProvider(secretId, secretKey, 300);
+            QCloudCredentialProvider qCloudCredentialProvider = new ShortTimeCredentialProvider(secretId, secretKey, 1000000);
             //使用临时密钥  需要后台加，，既然前端写了，，直接使用永久的吧
 //            SessionQCloudCredentials credentials = new SessionQCloudCredentials(secretId, secretKey, token, expiredTime);
 //            QCloudCredentialProvider qCloudCredentialProvider = new StaticCredentialProvider(credentials);
             CosXmlServiceConfig serviceConfig = new CosXmlServiceConfig.Builder()
                     .setRegion(mRegion)
-                    .isHttps(true)
+//                    .isHttps(true)
                     .builder();
             mCosXmlService = new CosXmlService(context, serviceConfig, qCloudCredentialProvider);
         } catch (Exception e) {
@@ -124,6 +136,9 @@ public class UploadTxImpl implements UploadListener {
                 } else {
                     serviceException.printStackTrace();
                 }
+                if (callback != null) {
+                    callback.onUploadError();
+                }
             }
         });
 
@@ -148,5 +163,6 @@ public class UploadTxImpl implements UploadListener {
 
     public interface OnSuccessCallback {
         void onUploadSuccess(String url);
+        void onUploadError();
     }
 }
