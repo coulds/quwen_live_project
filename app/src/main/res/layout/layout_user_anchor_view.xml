@@ -7,18 +7,6 @@
         android:orientation="vertical"
         android:paddingHorizontal="15dp">
 
-        <com.zhy.view.flowlayout.FlowLayout
-            android:id="@+id/flowLayoutTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="13dp">
-
-            <com.hsjskj.quwen.ui.user.widget.UserPerviewTagView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </com.zhy.view.flowlayout.FlowLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

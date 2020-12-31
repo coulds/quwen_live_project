@@ -9,6 +9,7 @@
         android:id="@+id/hint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
@@ -19,7 +20,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -27,91 +28,152 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_bg"
                         android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/user_inf_bg" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_bg2"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/user_preview_bg" />
+                        android:layout_marginTop="100dp"
+                        android:minHeight="180dp"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="7dp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_nickname"
+                            android:layout_width="160dp"
+                            android:layout_height="28dp"
+                            android:text="阿鹿小姐的长胡须"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <com.hsjskj.quwen.ui.home.widget.StarTagView
+                                android:id="@+id/star_tag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <com.hsjskj.quwen.ui.home.widget.StarTagView
+                                android:id="@+id/star_lv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp" />
+                        </LinearLayout>
+
+                        <com.zhy.view.flowlayout.FlowLayout
+                            android:id="@+id/flowLayoutTag"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="13dp">
+
+                            <com.hsjskj.quwen.ui.user.widget.UserPerviewTagView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </com.zhy.view.flowlayout.FlowLayout>
+                    </LinearLayout>
+
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/iv_item_avatar"
-                        android:layout_width="88dp"
-                        android:layout_height="88dp"
-                        android:layout_below="@id/iv_bg"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
                         android:layout_marginStart="12dp"
-                        android:layout_marginTop="-44dp"
                         android:src="@color/colorAccent"
+                        app:layout_constraintBottom_toBottomOf="@+id/ll_bg2"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_bg2"
                         app:riv_oval="true" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_follow"
-                        style="@style/HomeFollowStyle"
-                        android:layout_alignBottom="@+id/iv_item_avatar"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="20dp"
-                        android:text="+关注" />
 
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="7dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_nickname"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:text="福贵茉莉"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="16sp" />
+                        android:layout_marginTop="200dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="57dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <com.hsjskj.quwen.ui.home.widget.StarTagView
-                        android:id="@+id/star_tag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            app:srcCompat="@drawable/user_info_icon_follow" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="2dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_follow_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="@color/homeColor2a2a2a"
-                        android:textSize="18sp" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_follow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="关注"
+                            android:textColor="#FFFF509F"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home_follow"
-                        android:textColor="@color/homeColor616161"
-                        android:textSize="10sp" />
+                        android:gravity="bottom"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="2dp"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_item_avatar"
+                        app:layout_constraintLeft_toRightOf="@id/iv_item_avatar">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_fans_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:text="0"
-                        android:textColor="@color/homeColor2a2a2a"
-                        android:textSize="18sp" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_follow"
+                            android:textColor="#FFA8AAB7"
+                            android:textSize="13sp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home_fans"
-                        android:textColor="@color/homeColor616161"
-                        android:textSize="10sp" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_follow_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="3dp"
+                            android:text="0"
+                            android:textColor="#FF363441"
+                            android:textSize="18sp" />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/home_fans"
+                            android:textColor="#FFA8AAB7"
+                            android:textSize="13sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_fans_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="3dp"
+                            android:text="0"
+                            android:textColor="#FF363441"
+                            android:textSize="18sp" />
+
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <com.hsjskj.quwen.ui.user.widget.UserPerviewAnchorView
                     android:layout_width="match_parent"

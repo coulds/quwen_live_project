@@ -130,6 +130,8 @@ public final class HintLayout extends FrameLayout {
     private void initLayout() {
 
         mMainLayout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.widget_hint_layout, this, false);
+        //自己大小取决于外面大小
+        mMainLayout.setLayoutParams(getLayoutParams());
 
         mImageView = mMainLayout.findViewById(R.id.iv_hint_icon);
         mTextView = mMainLayout.findViewById(R.id.iv_hint_text);

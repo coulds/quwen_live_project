@@ -60,9 +60,12 @@ public class UserPreviewActivity extends MyMvvmActivity<UserPreviewViewModel> im
         }
     }
 
+    public void getHttpData() {
+        mViewModel.loadUserInfoLiveData(this, getString(IntentKey.USER_ID));
+    }
+
     @Override
     protected void initData() {
-        showLoading();
         mViewModel.getFollowUserInfoLiveData().observe(this, aBoolean -> {
             if (aBoolean) {
                 isFollow = !isFollow;
@@ -74,9 +77,11 @@ public class UserPreviewActivity extends MyMvvmActivity<UserPreviewViewModel> im
                 showComplete();
                 upgradeUserInfo(userInfoBean);
             } else {
-                showError(v -> onClick(tvFollow));
+                showError(v -> getHttpData());
             }
         });
+        showLoading();
+        getHttpData();
     }
 
     private void upgradeUserInfo(UserInfoBean userInfoBean) {

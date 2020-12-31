@@ -34,17 +34,17 @@ public class UserPerviewAnchorView extends FrameLayout {
     public UserPerviewAnchorView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         dataBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_user_anchor_view, this, true);
-        dataBinding.flowLayoutTag.removeAllViews();
-        MarginLayoutParams marginLayoutParams = new MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        marginLayoutParams.setMargins(0, 0, UiUtlis.dp2px(getContext(), 8), UiUtlis.dp2px(getContext(), 8));
-        for (int i = 0; i < 6; i++) {
-            UserPerviewTagView tagView = new UserPerviewTagView(getContext());
-            tagView.setLayoutParams(marginLayoutParams);
-            tagView.setTextContent("标签");
-            if (i == 5) {
-                tagView.setTextContent("标签标签标签标签标签标签标签");
-            }
-            dataBinding.flowLayoutTag.addView(tagView);
-        }
+//        dataBinding.flowLayoutTag.removeAllViews();
+//        MarginLayoutParams marginLayoutParams = new MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        marginLayoutParams.setMargins(0, 0, UiUtlis.dp2px(getContext(), 8), UiUtlis.dp2px(getContext(), 8));
+//        for (int i = 0; i < 6; i++) {
+//            UserPerviewTagView tagView = new UserPerviewTagView(getContext());
+//            tagView.setLayoutParams(marginLayoutParams);
+//            tagView.setTextContent("标签");
+//            if (i == 5) {
+//                tagView.setTextContent("标签标签标签标签标签标签标签");
+//            }
+//            dataBinding.flowLayoutTag.addView(tagView);
+//        }
     }
 }

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import com.hjq.base.UiUtlis;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
+import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.http.response.HomePublishBean;
 import com.hsjskj.quwen.ui.home.widget.StarTagView;

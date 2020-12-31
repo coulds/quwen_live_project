@@ -18,6 +18,7 @@ public final class UserInfoBean implements Parcelable {
     public int sex;
     public String constellation;
     public int is_anchor;
+    public int exp;
     public int attention_to_me_count;
     public int i_attention_count;
     public String professional;
@@ -27,6 +28,9 @@ public final class UserInfoBean implements Parcelable {
     public int price;
     public int comments_count;
     public List<String> label;
+
+    public UserInfoBean() {
+    }
 
     protected UserInfoBean(Parcel in) {
         id = in.readInt();
