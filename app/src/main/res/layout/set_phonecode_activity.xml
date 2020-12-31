@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#FAFAFA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:title="手机号"
+        app:titleStyle="bold" />
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_version_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="17736838313"
+        android:layout_marginTop="39dp"
+       >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:textColor="#6AB2F9"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="7dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/dialog_send_cod_bg"
+            android:text="发送验证码" />
+
+
+
+
+    </com.hjq.widget.layout.SettingBar>
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/sb_input_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="请输入验证码"
+        app:bar_leftColor="#B7C1CC"
+        android:layout_marginTop="0.5dp"
+        />
+
+    <Button
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_width="303dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_selector"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="确定"/>
+
+</LinearLayout>

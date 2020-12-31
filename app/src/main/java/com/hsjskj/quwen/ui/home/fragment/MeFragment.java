@@ -14,6 +14,7 @@ import com.hsjskj.quwen.ui.activity.PersonalDataActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hsjskj.quwen.ui.activity.SettingActivity;
+import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
 
 /**
  * @author :Jun
@@ -53,7 +54,8 @@ public final class MeFragment extends MyFragment<HomeActivity> {
         } else if (id == R.id.setting_btn) {
             startActivity(SettingActivity.class);
         } else if (id == R.id.touxiang) {
-            startActivity(PersonalDataActivity.class);
+//            startActivity(PersonalDataActivity.class);
+            UserPreviewActivity.start(getContext(), MyUserInfo.getInstance().getId());
         }
 
     }

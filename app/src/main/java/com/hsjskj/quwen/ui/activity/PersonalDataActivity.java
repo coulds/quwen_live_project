@@ -78,7 +78,7 @@ public final class PersonalDataActivity extends MyActivity {
             @Override
             public void onChanged(Integer s) {
                 MyUserInfo.getInstance().getLogin().sex = "" + s;
-                mNameView.setRightText(s!=2 ? "男" : "女");
+                mNameView.setRightText(s != 2 ? "男" : "女");
                 MyUserInfo.getInstance().upDataUserInfo();
             }
 
@@ -102,64 +102,68 @@ public final class PersonalDataActivity extends MyActivity {
     @SingleClick
     @Override
     public void onClick(View v) {
-        if (v == mIDView) {
-            startActivity(NickNameEditActivity.class);
-        } else if (v == mAvatarLayout) {
-            ImageSelectActivity.start(this, new ImageSelectActivity.OnPhotoSelectListener() {
-                @Override
-                public void onSelected(List<String> data) {
-                    GlideApp.with(getActivity())
-                            .load(data.get(0))
-                            .placeholder(R.drawable.avatar_placeholder_ic)
-                            .error(R.drawable.avatar_placeholder_ic)
-                            .circleCrop()
-                            .into(mAvatarView);
-                }
-            });
-        } else if (v == mAvatarView) {
-
-        } else if (v == mNameView) {
-            ((SelectDialog.Builder) new SelectDialog.Builder(this)
-                    .setTitle("请选择你的性别"))
-                    .setList("男", "女")
-                    .setSingleSelect()
-                    .setSelect(MyUserInfo.getInstance().getLogin().isSexMale() ? 0 : 1)
-                    .setListener(new SelectDialog.OnListener<String>() {
-                        @Override
-                        public void onSelected(BaseDialog dialog, HashMap<Integer, String> data) {
-                            PersonalDataActivity personalDataActivity = PersonalDataActivity.this;
-                            personalDataActivity.toast((CharSequence) ("确定了：" + data.toString()));
-                            for (Integer integer : data.keySet()) {
-                                userInfoViewModel.loadUserInfoSexBean(PersonalDataActivity.this, integer + 1);
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancel(BaseDialog dialog) {
-                            PersonalDataActivity.this.toast((CharSequence) "取消了");
-                        }
-                    }).show();
-        } else if (v == mAddressView) {
-            ((DateDialog.Builder) ((DateDialog.Builder) ((DateDialog.Builder) new DateDialog.Builder(this).setTitle(getString(R.string.date_title))).setConfirm(getString(R.string.common_confirm))).setCancel(getString(R.string.common_cancel))).setListener(new DateDialog.OnListener() {
-
-                @Override
-                public void onSelected(BaseDialog dialog, int year, int month, int day) {
-//                    PersonalDataActivity.this.toast((CharSequence) (year + PersonalDataActivity.this.getString(R.string.common_year) + month + PersonalDataActivity.this.getString(R.string.common_month) + day + PersonalDataActivity.this.getString(R.string.common_day)));
-//                    Calendar calendar = Calendar.getInstance();
-//                    calendar.set(1, year);
-//                    calendar.set(2, month - 1);
-//                    calendar.set(5, day);
-//                    PersonalDataActivity.this.toast((CharSequence) ("时间戳：" + calendar.getTimeInMillis()));
-                    userInfoViewModel.loadUserInfoBean(PersonalDataActivity.this, year + "-" + month + "-" + day);
-                }
-
-                @Override
-                public void onCancel(BaseDialog dialog) {
-                    PersonalDataActivity.this.toast((CharSequence) "取消了");
-                }
-            }).show();
-        }
-
+//        if (v == mIDView) {
+//            startActivity(NickNameEditActivity.class);
+//        } else if (v == mAvatarLayout) {
+//            ImageSelectActivity.start(this, new ImageSelectActivity.OnPhotoSelectListener() {
+//                @Override
+//                public void onSelected(List<String> data) {
+//                    GlideApp.with(getActivity())
+//                            .load(data.get(0))
+//                            .placeholder(R.drawable.avatar_placeholder_ic)
+//                            .error(R.drawable.avatar_placeholder_ic)
+//                            .circleCrop()
+//                            .into(mAvatarView);
+//
+//                    userInfoViewModel.loadUserInfoAvatarBean(PersonalDataActivity.this,data.get(0));
+//
+//                }
+//            });
+//        } else if (v == mAvatarView) {
+//
+//        } else if (v == mNameView) {
+//            ((SelectDialog.Builder) new SelectDialog.Builder(this)
+//                    .setTitle("请选择你的性别"))
+//                    .setList("男", "女")
+//                    .setSingleSelect()
+//                    .setSelect(MyUserInfo.getInstance().getLogin().isSexMale() ? 0 : 1)
+//                    .setListener(new SelectDialog.OnListener<String>() {
+//                        @Override
+//                        public void onSelected(BaseDialog dialog, HashMap<Integer, String> data) {
+//                            PersonalDataActivity personalDataActivity = PersonalDataActivity.this;
+//                            personalDataActivity.toast((CharSequence) ("确定了：" + data.toString()));
+//                            for (Integer integer : data.keySet()) {
+//                                userInfoViewModel.loadUserInfoSexBean(PersonalDataActivity.this, integer + 1);
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancel(BaseDialog dialog) {
+//                            PersonalDataActivity.this.toast((CharSequence) "取消了");
+//                        }
+//                    }).show();
+//        } else if (v == mAddressView) {
+//            ((DateDialog.Builder) ((DateDialog.Builder) ((DateDialog.Builder) new DateDialog.Builder(this).setTitle(getString(R.string.date_title))).setConfirm(getString(R.string.common_confirm))).setCancel(getString(R.string.common_cancel))).setListener(new DateDialog.OnListener() {
+//
+//                @Override
+//                public void onSelected(BaseDialog dialog, int year, int month, int day) {
+////                    PersonalDataActivity.this.toast((CharSequence) (year + PersonalDataActivity.this.getString(R.string.common_year) + month + PersonalDataActivity.this.getString(R.string.common_month) + day + PersonalDataActivity.this.getString(R.string.common_day)));
+////                    Calendar calendar = Calendar.getInstance();
+////                    calendar.set(1, year);
+////                    calendar.set(2, month - 1);
+////                    calendar.set(5, day);
+////                    PersonalDataActivity.this.toast((CharSequence) ("时间戳：" + calendar.getTimeInMillis()));
+//                    userInfoViewModel.loadUserInfoBean(PersonalDataActivity.this, year + "-" + month + "-" + day);
+//                }
+//
+//                @Override
+//                public void onCancel(BaseDialog dialog) {
+//                    PersonalDataActivity.this.toast((CharSequence) "取消了");
+//                }
+//            }).show();
+//        }
+//
+//    }
     }
 }

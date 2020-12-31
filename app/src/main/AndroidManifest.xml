@@ -260,6 +260,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+
+        <activity
+            android:name="com.hsjskj.quwen.ui.activity.AboutQuWenActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
