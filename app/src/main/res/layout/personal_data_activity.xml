@@ -20,7 +20,7 @@
         app:bar_leftText="@string/personal_data_head">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_person_data_avatar"
+            android:id="@+id/iv_person_data_avatar1"
             android:layout_width="63dp"
             android:layout_height="63dp"
             android:layout_gravity="right|center_vertical|center_horizontal|center|end"

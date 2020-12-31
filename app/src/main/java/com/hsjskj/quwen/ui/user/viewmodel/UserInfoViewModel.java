@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hsjskj.quwen.http.model.HttpData;
+import com.hsjskj.quwen.http.request.UserSetAvatarApi;
 import com.hsjskj.quwen.http.request.UserSetBirthApi;
 import com.hsjskj.quwen.http.request.UserSetSexApi;
 import com.hsjskj.quwen.http.request.UsersetNickApi;
@@ -93,6 +94,33 @@ public class UserInfoViewModel extends ViewModel {
                     public void onFail(Exception e) {
                         super.onFail(e);
                         mutableLiveNickData.postValue("");
+                    }
+                });
+    }
+
+
+    private  MutableLiveData<String> mutableLiveAvatarData;
+    public MutableLiveData<String> getUserInfoAvatarBean() {
+        if (mutableLiveAvatarData == null) {
+            mutableLiveAvatarData = new MutableLiveData<>();
+        }
+        return mutableLiveAvatarData;
+    }
+    public void loadUserInfoAvatarBean(LifecycleOwner lifecycleOwner, String value) {
+        EasyHttp.post(lifecycleOwner)
+                .tag(this)
+                .api(new UserSetAvatarApi())
+                .request(new HttpCallback<HttpData<Void>>(null) {
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        mutableLiveAvatarData.postValue(value);
+                    }
+
+                    @Override
+
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        mutableLiveAvatarData.postValue("");
                     }
                 });
     }
