@@ -31,6 +31,10 @@ public class HomePublishBean {
             return user_nickname;
         }
 
+        public boolean isSetMale() {
+            return sex != 0;
+        }
+
         public boolean isMale() {
             return sex != 2;
         }

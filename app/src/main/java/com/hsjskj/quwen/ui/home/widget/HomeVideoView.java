@@ -1,16 +1,20 @@
 package com.hsjskj.quwen.ui.home.widget;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hjq.base.UiUtlis;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.ui.home.adapter.HomeVideoAdapter;
@@ -42,6 +46,16 @@ public class HomeVideoView extends LinearLayout {
         initView();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                int layoutPosition = parent.getChildLayoutPosition(view);
+                if (layoutPosition == 0) {
+                    outRect.left = UiUtlis.dp2px(getContext(), 15);
+                }
+            }
+        });
         adapter = new HomeVideoAdapter(getContext());
         adapter.setOnItemClickListener((recyclerView, itemView, position) -> {
             if (listener != null) {

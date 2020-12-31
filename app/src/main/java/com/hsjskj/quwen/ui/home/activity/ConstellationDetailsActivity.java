@@ -70,7 +70,7 @@ public class ConstellationDetailsActivity extends MyActivity implements StatusAc
         mViewModel.getLiveDataDetails().observe(this, o -> {
             if (o != null) {
                 showComplete();
-                mStarTag.setTagText(o.name, getInt(IntentKey.SEX) == 2);
+                mStarTag.setTagText(o.name, getInt(IntentKey.SEX) == 2,true);
                 mBrowserView.loadDataWithBaseURL("", HtmlHelper.addHtml(o.fortune), "text/html", "UTF-8", "");
             } else {
                 showError(v -> loadHttp());
@@ -81,7 +81,7 @@ public class ConstellationDetailsActivity extends MyActivity implements StatusAc
         //是否是一个男的
         boolean b = getInt(IntentKey.SEX) == 2;
         mIvSex.setImageResource(b ? R.drawable.star_male : R.drawable.star_female);
-        mStarTag.setTagText("", b);
+        mStarTag.setTagText("", b,true);
         mTvTime.setText(getString(IntentKey.BIRTHDAY));
 
         showLoading(R.string.home_constellation_calculation);

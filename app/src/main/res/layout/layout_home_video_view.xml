@@ -40,7 +40,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_title_1"
-        android:layout_marginStart="15dp"
         tools:itemCount="3"
         tools:layoutManager="GridLayoutManager"
         tools:listitem="@layout/layout_home_video_child_view"

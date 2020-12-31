@@ -75,7 +75,7 @@ public class HomeQuestionDetails extends MyMvvmActivity<HomeQuestionViewModel> i
         mTvItemTime.setText("" + item.create_time);
         mTvItemContent.setText("" + item.content);
         mTvItemTitle.setText("" + item.title);
-        mStarTag.setTagText(item.constellation, item.isMale());
+        mStarTag.setTagText(item.constellation, item.isMale(),item.isSetMale());
         GlideApp.with(getContext()).load(item.avatar).into(mIvItemAvatar);
         mIvItemAvatar.setOnClickListener(v -> {
             UserPreviewActivity.start(getContext(),item.user_id);

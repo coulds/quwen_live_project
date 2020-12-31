@@ -79,7 +79,7 @@ public final class HomeAdapter extends MyAdapter<HomePublishBean.DataBean> {
             tv_item_time.setText("" + item.create_time);
             tv_item_content.setText("" + item.content);
             tv_item_title.setText("" + item.title);
-            star_tag.setTagText(item.constellation, item.isMale());
+            star_tag.setTagText(item.constellation, item.isMale(),item.isSetMale());
             GlideApp.with(getContext()).load(item.avatar).into(iv_item_avatar);
             iv_item_avatar.setOnClickListener(v -> {
                 UserPreviewActivity.start(getContext(), item.user_id);
