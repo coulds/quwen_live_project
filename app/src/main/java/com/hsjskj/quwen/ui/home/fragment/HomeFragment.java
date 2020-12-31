@@ -16,6 +16,7 @@ import com.hjq.toast.ToastUtils;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.StatusAction;
+import com.hsjskj.quwen.action.StatusTwoAction;
 import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.other.IntentKey;
@@ -48,7 +49,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         , HomeVideoView.HomeVideoViewListener
         , HomeLiveView.HomeVideoViewListener
         , BaseAdapter.OnItemClickListener
-        , StatusAction {
+        , StatusAction, StatusTwoAction {
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView recyclerviewQuerstion;
@@ -101,6 +102,11 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             mRefreshLayout.finishRefresh();
             if (mAdapter.getPageNumber() == 1 && dataBeans != null) {
                 mAdapter.setData(dataBeans);
+                if (dataBeans.isEmpty()) {
+                    showEmptyTwo();
+                } else {
+                    showCompleteTwo();
+                }
             } else {
                 if (dataBeans == null || dataBeans.isEmpty()) {
                     mRefreshLayout.finishLoadMoreWithNoMoreData();
@@ -114,6 +120,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
 
         onRefresh(mRefreshLayout);
         showLoading();
+        showLoadingTwo();
         homeFragmentViewModel.loadHomeHasCoupon(this).observe(this, hasCouponBean -> {
             if (hasCouponBean.isShowDialog()) {
                 showRewardDialog(hasCouponBean.couponId);
@@ -225,7 +232,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
         if (recyclerView == recyclerviewQuerstion) {
             startActivity(new Intent(getContext(), HomeQuestionDetails.class)
-                    .putExtra(IntentKey.ID,mAdapter.getItem(position).id)
+                    .putExtra(IntentKey.ID, mAdapter.getItem(position).id)
             );
         }
     }
@@ -233,5 +240,10 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
     @Override
     public HintLayout getHintLayout() {
         return findViewById(R.id.hint_layout);
+    }
+
+    @Override
+    public HintLayout getHintLayoutTwo() {
+        return findViewById(R.id.hint_layout2);
     }
 }

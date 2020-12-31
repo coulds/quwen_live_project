@@ -7,5 +7,6 @@
     <TextView
         android:id="@+id/tv_item_constellation"
         style="@style/HomeConstellationMaleStyle"
+        android:gravity="center"
         android:text="狮子座" />
 </LinearLayout>

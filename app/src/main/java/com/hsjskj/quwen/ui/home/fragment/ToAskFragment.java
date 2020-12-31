@@ -1,5 +1,8 @@
 package com.hsjskj.quwen.ui.home.fragment;
 
+import android.app.Application;
+import android.content.Intent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.hjq.permissions.OnPermission;
@@ -7,7 +10,10 @@ import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyFragment;
+import com.hsjskj.quwen.common.MyUserInfo;
+import com.hsjskj.quwen.helper.ActivityStackManager;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
+import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 
 import java.util.List;
 
@@ -18,7 +24,6 @@ import java.util.List;
  */
 public class ToAskFragment extends MyFragment<HomeActivity> {
 
-    private TextView tv_device;
 
     public static ToAskFragment newInstance() {
         return new ToAskFragment();
@@ -31,25 +36,24 @@ public class ToAskFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        tv_device = findViewById(R.id.tv_device);
+        setOnClickListener(R.id.login_out);
     }
 
     @Override
     protected void initData() {
-        XXPermissions.with(getActivity())
-                .permission(Permission.CAMERA)
-                .request(new OnPermission() {
-                    @Override
-                    public void hasPermission(List<String> granted, boolean all) {
-                        if (all) {
-                        }
-                    }
 
-                    @Override
-                    public void noPermission(List<String> denied, boolean quick) {
-
-                    }
-                });
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.login_out) {
+            Application application = ActivityStackManager.getInstance().getApplication();
+            Intent intent = new Intent(application, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            application.startActivity(intent);
+            // 销毁除了登录页之外的界面
+            MyUserInfo.getInstance().clearUserInfo();
+            ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+        }
+    }
 }

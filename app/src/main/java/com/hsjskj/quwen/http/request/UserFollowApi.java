@@ -5,19 +5,19 @@ import com.hjq.http.config.IRequestApi;
 /**
  * @author : Jun
  * time   : 2019/12/07
- * desc   : 获取用户信息
+ * desc   : 关注/取关
  */
-public final class UserInfoApi implements IRequestApi {
+public final class UserFollowApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "User/userInfo";
+        return "User/follow";
     }
 
 
     public String touid;
 
-    public UserInfoApi(String touid) {
+    public UserFollowApi(String touid) {
         this.touid = touid;
     }
 }
