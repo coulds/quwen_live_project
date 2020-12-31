@@ -260,12 +260,27 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-
+        <!--关于去问-->
         <activity
             android:name="com.hsjskj.quwen.ui.activity.AboutQuWenActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+        <!--设置邮箱，发送邮箱验证码-->
+        <activity
+            android:name="com.hsjskj.quwen.ui.activity.EmailCodeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <!--设置手机号，发送手机验证码-->
+        <activity
+            android:name="com.hsjskj.quwen.ui.activity.SetPhoneCodeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
 
     </application>
 
