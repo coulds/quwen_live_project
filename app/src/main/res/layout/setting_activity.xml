@@ -11,87 +11,102 @@
         android:layout_height="wrap_content"
         app:title="@string/setting_title" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_language"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="63dp"
-        app:bar_leftText="头像"
-        app:bar_rightColor="#ffffff"
-        app:bar_rightIcon="@drawable/p2"
-        app:bar_rightIconSize="54dp" />
+        android:layout_height="match_parent">
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:bar_leftText="昵称"
-        app:bar_rightIcon="@drawable/arrows_right_ic"
-        app:bar_rightIconSize="18dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_language"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                app:bar_leftText="头像"
+                app:bar_rightColor="#ffffff"
+                app:bar_rightIcon="@drawable/p2"
+                app:bar_rightIconSize="54dp" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:bar_leftText="性别"
-        app:bar_rightIcon="@drawable/arrows_right_ic" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftText="昵称"
+                app:bar_rightIcon="@drawable/arrows_right_ic"
+                app:bar_rightIconSize="18dp" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:bar_leftText="出生日期"
-        app:bar_rightIcon="@drawable/arrows_right_ic" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftText="性别"
+                app:bar_rightIcon="@drawable/arrows_right_ic" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_agreement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:bar_leftText="手机号"
-        app:bar_rightIcon="@drawable/arrows_right_ic" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftText="出生日期"
+                app:bar_rightIcon="@drawable/arrows_right_ic" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:bar_leftText="邮箱"
-        app:bar_rightIcon="@drawable/arrows_right_ic" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_agreement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:bar_leftText="手机号"
+                app:bar_rightIcon="@drawable/arrows_right_ic" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:bar_leftText="绑定微信"
-        app:bar_rightIcon="@drawable/arrows_right_ic" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftText="邮箱"
+                app:bar_rightIcon="@drawable/arrows_right_ic" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_cache"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:bar_leftText="修改密码"
-        app:bar_rightIcon="@drawable/arrows_right_ic" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftText="绑定微信"
+                app:bar_rightIcon="@drawable/arrows_right_ic" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_setting_exit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:bar_leftText="问题反馈" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_cache"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:bar_leftText="修改密码"
+                app:bar_rightIcon="@drawable/arrows_right_ic" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_fankui_about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:bar_leftText="关于去问"
-        app:bar_rightIcon="@drawable/arrows_right_ic" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_setting_exit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:bar_leftText="问题反馈" />
 
-    <com.hjq.widget.layout.SettingBar
-        android:id="@+id/sb_tuichu_about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="125dp"
-        android:paddingLeft="142dp"
-        app:bar_leftColor="#ff0000"
-        app:bar_leftText="退出当前账号" />
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_fankui_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftText="关于去问"
+                app:bar_rightIcon="@drawable/arrows_right_ic" />
+
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_tuichu_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="125dp"
+                android:paddingLeft="142dp"
+                app:bar_leftColor="#ff0000"
+                app:bar_leftText="退出当前账号" />
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
 </LinearLayout>

@@ -14,6 +14,7 @@ import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.LogoutApi;
 import com.hsjskj.quwen.other.AppConfig;
 import com.hsjskj.quwen.ui.dialog.MenuDialog;
+import com.hsjskj.quwen.ui.dialog.MessageDialog;
 import com.hsjskj.quwen.ui.dialog.SafeDialog;
 import com.hsjskj.quwen.ui.dialog.UpdateDialog;
 import com.hjq.http.EasyHttp;
@@ -37,6 +38,7 @@ public final class SettingActivity extends MyActivity
 
     @Override
     protected void initView() {
+        setOnClickListener(R.id.sb_tuichu_about);
 
     }
 
@@ -48,6 +50,40 @@ public final class SettingActivity extends MyActivity
     @SingleClick
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.sb_tuichu_about:
+
+                new MessageDialog.Builder(this)
+                        // 标题可以不用填写
+                        .setTitle("退出登录")
+                        // 内容必须要填写
+                        .setMessage("是否退出当前登录")
+                        // 确定按钮文本
+                        .setConfirm(getString(R.string.common_confirm))
+                        // 设置 null 表示不显示取消按钮
+                        .setCancel(getString(R.string.common_cancel))
+                        // 设置点击按钮后不关闭对话框
+                        //.setAutoDismiss(false)
+                        .setListener(new MessageDialog.OnListener() {
+
+                            @Override
+                            public void onConfirm(BaseDialog dialog) {
+                                startActivity(LoginActivity.class);
+                                // 进行内存优化，销毁除登录页之外的所有界面
+                                ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+                            }
+
+                            @Override
+                            public void onCancel(BaseDialog dialog) {
+                                toast("取消了");
+
+                            }
+                        })
+                        .show();
+
+                break;
+
+        }
 //        switch (v.getId()) {
 //            case R.id.sb_setting_language:
 //                // 底部选择框
@@ -121,7 +157,7 @@ public final class SettingActivity extends MyActivity
 //                    return;
 //                }
 //
-//                // 退出登录
+////                // 退出登录
 //                EasyHttp.post(this)
 //                        .api(new LogoutApi())
 //                        .request(new HttpCallback<HttpData<Void>>(this) {
