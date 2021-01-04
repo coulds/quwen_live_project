@@ -2,33 +2,21 @@ package com.hsjskj.quwen.ui.home.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.base.BaseAdapter;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.DebugLog;
-import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyMvvmActivity;
-import com.hsjskj.quwen.http.model.HttpData;
-import com.hsjskj.quwen.http.request.PasswordApi;
-import com.hsjskj.quwen.http.response.TxCosBean;
 import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomePublishAdapter;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
-import com.hsjskj.quwen.upload.UploadBean;
-import com.hsjskj.quwen.upload.UploadCallback;
 import com.hsjskj.quwen.upload.UploadListener;
 import com.hsjskj.quwen.upload.UploadTxImpl;
 
@@ -73,37 +61,16 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
         publishRecyclerview.setLayoutManager(new GridLayoutManager(this, MAX_SELECT_NUMBER));
         publishRecyclerview.setAdapter(publishAdapter);
 
-        //TODO 未实现上传腾讯云服务器
-//        listener=new UploadTxImpl(this,"","","");
-//        listener = new UploadListener() {
-//            @Override
-//            public void upload(UploadBean bean, UploadCallback callback) {
-//                new Handler(Looper.getMainLooper()).postDelayed(() -> {
-//                    bean.setmResultUrl(bean.getLocalPath());
-//                    callback.onSuccess(bean);
-//                }, 1000);
-//            }
-//
-//            @Override
-//            public void cancel() {
-//
-//            }
-//        };
-        EasyHttp.post(this)
-                .api("Config/cos")
-                .request(new HttpCallback<HttpData<TxCosBean>>(this) {
+        mViewModel.getTxCosLiveBean().observe(this, txCosBean -> {
+            if (txCosBean != null) {
+                listener = new UploadTxImpl(getContext(), txCosBean);
+            }
+        });
+        loadTxCos();
+    }
 
-                    @Override
-                    public void onSucceed(HttpData<TxCosBean> data) {
-                        listener = new UploadTxImpl(getContext(), data.data);
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                        ToastUtils.show(e.getMessage());
-                    }
-                });
+    private void loadTxCos() {
+        mViewModel.loadTxCos(this);
     }
 
     @Override
@@ -117,7 +84,8 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
     @Override
     public void onRightClick(View v) {
         if (listener == null) {
-            ToastUtils.show("获取cos失败");
+            loadTxCos();
+            ToastUtils.show("获取上传cos失败");
             return;
         }
         String title = etPublishTitle.getText().toString();

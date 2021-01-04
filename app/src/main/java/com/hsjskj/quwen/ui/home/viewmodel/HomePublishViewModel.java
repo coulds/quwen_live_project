@@ -16,11 +16,13 @@ import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.HomePublishApi;
+import com.hsjskj.quwen.http.response.TxCosBean;
 import com.hsjskj.quwen.ui.copy.CopyRepository;
 import com.hsjskj.quwen.ui.home.repository.HomePublishRepository;
 import com.hsjskj.quwen.upload.UploadBean;
 import com.hsjskj.quwen.upload.UploadCallback;
 import com.hsjskj.quwen.upload.UploadListener;
+import com.hsjskj.quwen.upload.UploadTxImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +124,34 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
                     }
                 });
         return mutableLiveData;
+    }
+
+    private MutableLiveData<TxCosBean> txCosLiveBean;
+
+    public MutableLiveData<TxCosBean> getTxCosLiveBean() {
+        if (txCosLiveBean == null) {
+            txCosLiveBean = new MutableLiveData<>();
+        }
+        return txCosLiveBean;
+    }
+
+    public void loadTxCos(LifecycleOwner lifecycleOwner) {
+        EasyHttp.post(lifecycleOwner)
+                .api("Config/cos")
+                .request(new HttpCallback<HttpData<TxCosBean>>(null) {
+
+                    @Override
+                    public void onSucceed(HttpData<TxCosBean> data) {
+                        txCosLiveBean.postValue(data.getData());
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        txCosLiveBean.postValue(null);
+                        ToastUtils.show(e.getMessage());
+                    }
+                });
     }
 
     @Override

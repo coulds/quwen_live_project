@@ -143,9 +143,6 @@ public final class RegisterActivity extends MyActivity implements EditCloseActio
         ).observe(this, aBoolean -> {
             hideDialog();
             if (aBoolean) {
-                setResult(RESULT_OK, new Intent()
-                        .putExtra(IntentKey.PHONE, mPhoneView.getText().toString())
-                        .putExtra(IntentKey.PASSWORD, mPasswordView1.getText().toString()));
                 finish();
             }
         });
