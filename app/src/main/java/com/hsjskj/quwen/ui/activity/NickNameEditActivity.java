@@ -5,7 +5,6 @@ import android.widget.EditText;
 
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
-import com.hjq.widget.view.ClearEditText;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.CheckNet;
 import com.hsjskj.quwen.aop.SingleClick;
@@ -13,6 +12,8 @@ import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.UsersetNickApi;
+import com.hsjskj.quwen.http.response.UserInfoBean;
+import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
 
 import okhttp3.Call;
 
@@ -38,19 +39,18 @@ public class NickNameEditActivity extends MyActivity {
     @Override
     public void onRightClick(View v) {
         String string = clearEditText.getText().toString();
-        if (string == null){
+        if (string == null) {
             toast("输入不能为空");
-        }else {
-
+        } else {
             EasyHttp.post(this)
                     .tag(this)
                     .api(new UsersetNickApi().setvalue(string))
                     .request(new HttpCallback<HttpData<Void>>(null) {
                         @Override
                         public void onSucceed(HttpData<Void> data) {
-                            toast(data.getMessage());
-                            MyUserInfo.getInstance().getLogin().user_nickname =string;
-                            MyUserInfo.getInstance().upDataUserInfo();
+                            UserInfoBean userInfoBean = MyUserInfo.getInstance().getLogin();
+                            userInfoBean.user_nickname = string;
+                            UserPreviewRepository.getCurrentUserInfoLiveData().postValue(userInfoBean);
                         }
 
                         @Override

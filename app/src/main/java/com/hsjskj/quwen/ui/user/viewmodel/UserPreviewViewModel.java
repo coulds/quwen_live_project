@@ -22,6 +22,10 @@ public class UserPreviewViewModel extends BaseViewModel<UserPreviewRepository> {
         super(application);
     }
 
+    public MutableLiveData<UserInfoBean> getCurrentUserInfoLiveData() {
+        return UserPreviewRepository.getCurrentUserInfoLiveData();
+    }
+
     public MutableLiveData<UserInfoBean> getUserInfoLiveData() {
         return repository.getUserInfoLiveData();
     }

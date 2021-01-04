@@ -7,6 +7,7 @@ import com.hjq.base.mvvm.BaseRepository;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.toast.ToastUtils;
+import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.UserFollowApi;
 import com.hsjskj.quwen.http.request.UserInfoApi;
@@ -22,6 +23,12 @@ public class UserPreviewRepository extends BaseRepository {
     @Override
     public void clear() {
         super.clear();
+    }
+
+    private static MutableLiveData<UserInfoBean> currentUserInfoLiveData = new MutableLiveData<>();
+
+    public static MutableLiveData<UserInfoBean> getCurrentUserInfoLiveData() {
+        return currentUserInfoLiveData;
     }
 
     private MutableLiveData<UserInfoBean> userInfoLiveData;
@@ -40,6 +47,9 @@ public class UserPreviewRepository extends BaseRepository {
                     @Override
                     public void onSucceed(HttpData<UserInfoBean> data) {
                         userInfoLiveData.postValue(data.getData());
+                        if (toUid.equals(MyUserInfo.getInstance().getId())) {
+                            currentUserInfoLiveData.postValue(data.getData());
+                        }
                     }
 
                     @Override

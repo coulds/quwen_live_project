@@ -11,7 +11,7 @@ import com.hsjskj.quwen.http.rsa.FileEncryptionManager;
  */
 public final class AppConfig {
 
-    public static final int TIMEOUT=10*1000;
+    public static final int TIMEOUT = 10 * 1000;
 
     /**
      * 当前是否为 Debug 模式
@@ -69,14 +69,29 @@ public final class AppConfig {
         return "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5S456hcCgbmoGen0gFLdHerV1\n" +
                 "ww2HcW0PqonoqixADuy4XWH+2gvoF0nN3bbpaNpLbV4Rq9l+j1PBOKAhmB6hqJ05\n" +
                 "Us2Z7TM6lrPGnXqipbnvB5karI7uPYT4dktLEwktziKulcU1f0VyLd+qSmh8/coG\n" +
-                "Eig2RsHcnY80uJIt7QIDAQAB\n";
+                "Eig2RsHcnY80uJIt7QIDAQAB";
+    }
+
+    public static String getRsaPrivate() {
+        return "";
     }
 
     public static String rsa(String str) {
         try {
-            FileEncryptionManager.getInstance().setRSAKey(getRsaPublic(), "", true);
+            FileEncryptionManager.getInstance().setRSAKey(getRsaPublic(), getRsaPrivate(), true);
             byte[] encryptByte = FileEncryptionManager.getInstance().encryptByPublicKey(str.getBytes());
             return Base64Utils.encode(encryptByte);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public static String deRsa(String str) {
+        try {
+            FileEncryptionManager instance = FileEncryptionManager.getInstance();
+            byte[] bytes = instance.decryptByPrivateKey(str.getBytes());
+            return Base64Utils.encode(bytes);
         } catch (Exception e) {
             e.printStackTrace();
             return "";

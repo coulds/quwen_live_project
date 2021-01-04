@@ -9,12 +9,12 @@ import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.response.UserInfoBean;
 import com.hsjskj.quwen.ui.activity.MyFansActivity;
-import com.hsjskj.quwen.ui.activity.PersonalDataActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
-import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hsjskj.quwen.ui.activity.SettingActivity;
 import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
+import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
 
 /**
  * @author :Jun
@@ -40,9 +40,24 @@ public final class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initData() {
-        GlideApp.with(getContext()).load(MyUserInfo.getInstance().getLogin().avatar).into((ImageView) findViewById(R.id.touxiang));
-        ((TextView) findViewById(R.id.textView)).setText(MyUserInfo.getInstance().getLogin().getUsername());
+        UserPreviewRepository.getCurrentUserInfoLiveData().observe(this, this::setUserInfoView);
+        UserInfoBean login = MyUserInfo.getInstance().getLogin();
+        setUserInfoView(login);
+    }
 
+    private void setUserInfoView(UserInfoBean userInfoView) {
+        GlideApp.with(this)
+                .load(userInfoView.avatar)
+                .placeholder(R.drawable.avatar_placeholder_ic)
+                .error(R.drawable.avatar_placeholder_ic)
+                .circleCrop()
+                .into(((ImageView) findViewById(R.id.touxiang)));
+
+        ((TextView) findViewById(R.id.textView)).setText(userInfoView.getUsername());
+        ((TextView) findViewById(R.id.gz_number)).setText("" + userInfoView.i_attention_count);
+        ((TextView) findViewById(R.id.fs_number)).setText("" + userInfoView.attention_to_me_count);
+        ((TextView) findViewById(R.id.jyz_number)).setText("" + userInfoView.exp);
+        ((TextView) findViewById(R.id.textView2)).setText("Lv" + userInfoView.level);
     }
 
     @SingleClick
@@ -54,7 +69,6 @@ public final class MeFragment extends MyFragment<HomeActivity> {
         } else if (id == R.id.setting_btn) {
             startActivity(SettingActivity.class);
         } else if (id == R.id.touxiang) {
-//            startActivity(PersonalDataActivity.class);
             UserPreviewActivity.start(getContext(), MyUserInfo.getInstance().getId());
         }
 

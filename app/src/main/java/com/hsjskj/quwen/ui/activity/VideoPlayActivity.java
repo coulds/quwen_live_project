@@ -17,6 +17,8 @@ import com.hsjskj.quwen.widget.PlayerView;
 
 import java.io.File;
 
+import me.jessyan.autosize.internal.CancelAdapt;
+
 /**
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/AndroidProject
@@ -24,7 +26,7 @@ import java.io.File;
  *    desc   : 视频播放界面
  */
 public final class VideoPlayActivity extends MyActivity
-        implements SwipeAction, PlayerView.onGoBackListener {
+        implements CancelAdapt, SwipeAction, PlayerView.onGoBackListener {
 
     public static void start(Context context, File file) {
         if (file == null || !file.isFile()) {

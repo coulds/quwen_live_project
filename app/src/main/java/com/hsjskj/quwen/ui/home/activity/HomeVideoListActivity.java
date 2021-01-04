@@ -15,6 +15,7 @@ import com.hsjskj.quwen.action.StatusAction;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyMvvmActivity;
 import com.hsjskj.quwen.helper.ItemDecorationHeleper;
+import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.ui.activity.VideoPlayActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomeVideoListItemAdapter;
 import com.hsjskj.quwen.ui.home.viewmodel.HomeFragmentViewModel;
@@ -94,6 +95,7 @@ public class HomeVideoListActivity extends MyActivity implements StatusAction, O
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        VideoPlayActivity.start(this, "http://vfx.mtime.cn/Video/2019/06/29/mp4/190629004821240734.mp4", "速度与激情特别行动");
+        HomeVideoListBean.DataBean item = adapter.getItem(position);
+        VideoPlayActivity.start(this, ""+item.url, ""+item.title);
     }
 }

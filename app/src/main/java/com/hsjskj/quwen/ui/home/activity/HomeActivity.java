@@ -3,22 +3,30 @@ package com.hsjskj.quwen.ui.home.activity;
 import android.view.KeyEvent;
 import android.view.View;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.hjq.base.BaseFragmentAdapter;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyFragment;
+import com.hsjskj.quwen.common.MyUserInfo;
+import com.hsjskj.quwen.event.UserInfoUpgradeEvent;
 import com.hsjskj.quwen.helper.ActivityStackManager;
 import com.hsjskj.quwen.helper.DoubleClickHelper;
 import com.hsjskj.quwen.other.KeyboardWatcher;
-import com.hsjskj.quwen.ui.home.fragment.FindFragment;
+import com.hsjskj.quwen.ui.dialog.WaitDialog;
 import com.hsjskj.quwen.ui.home.fragment.HomeFragment;
 import com.hsjskj.quwen.ui.home.fragment.HomeLiveFragment;
 import com.hsjskj.quwen.ui.home.fragment.MeFragment;
 import com.hsjskj.quwen.ui.home.fragment.MessageFragment;
 import com.hsjskj.quwen.ui.home.fragment.ToAskFragment;
 import com.hsjskj.quwen.ui.home.widget.HomeBottomNavigationView;
+import com.hsjskj.quwen.ui.user.viewmodel.UserPreviewViewModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @author : Jun
@@ -30,6 +38,7 @@ public final class HomeActivity extends MyActivity
 
     private ViewPager mViewPager;
     private HomeBottomNavigationView mBottomNavigationView;
+    private UserPreviewViewModel mViewModel;
 
     private BaseFragmentAdapter<MyFragment> mPagerAdapter;
 
@@ -48,6 +57,23 @@ public final class HomeActivity extends MyActivity
 
         KeyboardWatcher.with(this)
                 .setListener(this);
+        mViewModel = new ViewModelProvider(this).get(UserPreviewViewModel.class);
+        mViewModel.getCurrentUserInfoLiveData().observeForever(userInfoBean -> {
+            MyUserInfo.getInstance().setLogin(userInfoBean);
+        });
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpgradeUserInfoEvent(UserInfoUpgradeEvent event) {
+        //需要更新用户信息,防止频繁调用
+        postDelayed(() -> {
+            if (!isFinishing()) {
+                mViewModel.loadUserInfoLiveData(this, MyUserInfo.getInstance().getId());
+            }
+        }, 200);
     }
 
     @Override

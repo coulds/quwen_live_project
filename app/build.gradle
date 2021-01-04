@@ -25,7 +25,7 @@ android {
 //        }
 
         // 混淆配置
-        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-app.pro'
+//        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-app.pro'
     }
 
     // APK 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2
@@ -62,11 +62,11 @@ android {
             debuggable false
             jniDebuggable false
             // 移除无用的资源文件
-            shrinkResources true
+            shrinkResources false
             // ZipAlign 优化
-            zipAlignEnabled true
+            zipAlignEnabled false
             // 设置混淆
-            minifyEnabled true
+            minifyEnabled false
             // 正式环境下的 BuglyId
             buildConfigField 'String', 'BUGLY_ID', '\"请自行替换 Bugly 上面的 AppID\"'
             signingConfig signingConfigs.config

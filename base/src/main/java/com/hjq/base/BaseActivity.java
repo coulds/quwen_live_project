@@ -17,6 +17,8 @@ import com.hjq.base.action.BundleAction;
 import com.hjq.base.action.ClickAction;
 import com.hjq.base.action.HandlerAction;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Random;
 
 /**
@@ -75,6 +77,9 @@ public abstract class BaseActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
         removeCallbacks();
         super.onDestroy();
     }
