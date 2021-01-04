@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.glide.GlideConfig;
 
 /**
  * @author : Jun
@@ -48,7 +49,7 @@ public class HomePublishAdapter extends MyAdapter<Object> {
             } else {
                 ivItemDeleted.setVisibility(View.VISIBLE);
             }
-            GlideApp.with(getContext()).load(getItem(position)).into(ivItemImage);
+            GlideApp.with(getContext()).load(getItem(position)).apply(GlideConfig.requestOptions).into(ivItemImage);
         }
     }
 

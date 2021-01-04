@@ -12,6 +12,7 @@ import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.glide.GlideConfig;
 import com.hsjskj.quwen.http.response.HomePublishBean;
 import com.hsjskj.quwen.ui.home.widget.StarTagView;
 import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
@@ -81,7 +82,7 @@ public final class HomeAdapter extends MyAdapter<HomePublishBean.DataBean> {
             tv_item_content.setText("" + item.content);
             tv_item_title.setText("" + item.title);
             star_tag.setTagText(item.constellation, item.isMale(),item.isSetMale());
-            GlideApp.with(getContext()).load(item.avatar).into(iv_item_avatar);
+            GlideApp.with(getContext()).load(item.avatar).apply(GlideConfig.requestOptionsAvatar).into(iv_item_avatar);
             iv_item_avatar.setOnClickListener(v -> {
                 UserPreviewActivity.start(getContext(), item.user_id);
             });

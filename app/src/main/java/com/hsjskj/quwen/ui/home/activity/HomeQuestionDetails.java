@@ -11,6 +11,7 @@ import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.StatusAction;
 import com.hsjskj.quwen.common.MyMvvmActivity;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.glide.GlideConfig;
 import com.hsjskj.quwen.http.response.HomePublishBean;
 import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.home.viewmodel.HomeQuestionViewModel;
@@ -76,7 +77,7 @@ public class HomeQuestionDetails extends MyMvvmActivity<HomeQuestionViewModel> i
         mTvItemContent.setText("" + item.content);
         mTvItemTitle.setText("" + item.title);
         mStarTag.setTagText(item.constellation, item.isMale(),item.isSetMale());
-        GlideApp.with(getContext()).load(item.avatar).into(mIvItemAvatar);
+        GlideApp.with(getContext()).load(item.avatar).apply(GlideConfig.requestOptionsAvatar).into(mIvItemAvatar);
         mIvItemAvatar.setOnClickListener(v -> {
             UserPreviewActivity.start(getContext(),item.user_id);
         });

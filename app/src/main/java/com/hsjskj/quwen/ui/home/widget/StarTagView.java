@@ -2,6 +2,7 @@ package com.hsjskj.quwen.ui.home.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
@@ -42,6 +43,11 @@ public class StarTagView extends FrameLayout {
      */
     public void setTagText(String s, boolean isMale, boolean isSetMale) {
         if (tv_item_constellation != null) {
+            if (s == null || "".equals(s)|| TextUtils.isEmpty(s)) {
+                setVisibility(GONE);
+            } else {
+                setVisibility(VISIBLE);
+            }
             tv_item_constellation.setText(s);
 
             if (isMale) {

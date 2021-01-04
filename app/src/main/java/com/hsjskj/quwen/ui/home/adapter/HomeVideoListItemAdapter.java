@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.glide.GlideConfig;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
 
 /**
@@ -43,7 +44,7 @@ public class HomeVideoListItemAdapter extends MyAdapter<HomeVideoListBean.DataBe
         @Override
         public void onBindView(int position) {
             tv_item_title.setText("" + getItem(position).title);
-            GlideApp.with(getContext()).load(getItem(position).cover).into(imv_image);
+            GlideApp.with(getContext()).load(getItem(position).cover).apply(GlideConfig.requestOptions).into(imv_image);
         }
     }
 }
