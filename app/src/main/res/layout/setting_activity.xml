@@ -27,7 +27,7 @@
                 android:layout_height="63dp"
                 app:bar_leftText="头像">
 
-                <com.makeramen.roundedimageview.RoundedImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_person_data_avatar"
                     android:layout_width="54dp"
                     android:layout_height="54dp"

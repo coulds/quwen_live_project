@@ -74,6 +74,14 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
     }
 
     @Override
+    protected void onDestroy() {
+        if (listener!=null){
+            listener.cancel();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     protected void initData() {
         pics = new ArrayList<>();
         pics.add(R.drawable.publish_defalut_icon);

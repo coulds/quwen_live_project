@@ -48,7 +48,6 @@ public final class MeFragment extends MyFragment<HomeActivity> {
     private void setUserInfoView(UserInfoBean userInfoView) {
         GlideApp.with(this)
                 .load(userInfoView.avatar)
-                .placeholder(R.drawable.avatar_placeholder_ic)
                 .error(R.drawable.avatar_placeholder_ic)
                 .circleCrop()
                 .into(((ImageView) findViewById(R.id.touxiang)));

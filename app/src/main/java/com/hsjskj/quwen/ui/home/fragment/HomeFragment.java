@@ -97,7 +97,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         homeFragmentViewModel.getHomeNoticeLiveData().observe(this, noticeBean -> {
             homeNoticeView.setNotices(Collections.singletonList(noticeBean));
         });
-        homeFragmentViewModel.getHomeVideoLiveData().observe(this, dataBeans -> {
+        homeFragmentViewModel.getHomePublishLiveData().observe(this, dataBeans -> {
             mRefreshLayout.finishLoadMore();
             mRefreshLayout.finishRefresh();
             if (mAdapter.getPageNumber() == 1 && dataBeans != null) {

@@ -66,6 +66,13 @@ public final class HomeActivity extends MyActivity
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //调用 更新当前用户信息
+        EventBus.getDefault().post(new UserInfoUpgradeEvent());
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUpgradeUserInfoEvent(UserInfoUpgradeEvent event) {
         //需要更新用户信息,防止频繁调用

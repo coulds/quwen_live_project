@@ -146,7 +146,7 @@ public class HomeFragmentViewModel extends ViewModel {
 
     private MutableLiveData<List<HomePublishBean.DataBean>> homePublishList;
 
-    public MutableLiveData<List<HomePublishBean.DataBean>> getHomeVideoLiveData() {
+    public MutableLiveData<List<HomePublishBean.DataBean>> getHomePublishLiveData() {
         if (homePublishList == null) {
             homePublishList = new MutableLiveData<>();
         }

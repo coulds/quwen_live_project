@@ -33,7 +33,7 @@ public class UserPreviewRepository extends BaseRepository {
 
     public void loadCurrentUserInfoLiveData(LifecycleOwner lifecycleOwner) {
         EasyHttp.post(lifecycleOwner)
-                .api(new UserInfoApi(MyUserInfo.getInstance().getId()))
+                .api("User/myInfo")
                 .request(new HttpCallback<HttpData<UserInfoBean>>(null) {
                     @Override
                     public void onSucceed(HttpData<UserInfoBean> data) {

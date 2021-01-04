@@ -3,11 +3,9 @@ package com.hsjskj.quwen.common;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.hsjskj.quwen.event.UserInfoUpgradeEvent;
 import com.hsjskj.quwen.http.response.UserInfoBean;
 import com.tencent.mmkv.MMKV;
 
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author : Jun
@@ -97,7 +95,7 @@ public class MyUserInfo {
     }
 
     public void upDataUserInfo() {
-        EventBus.getDefault().post(new UserInfoUpgradeEvent());
+//        EventBus.getDefault().post(new UserInfoUpgradeEvent());
     }
 
     //添加其他保存信息.....

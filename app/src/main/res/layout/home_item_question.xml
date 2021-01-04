@@ -13,12 +13,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_item_avatar"
             android:layout_width="41dp"
             android:layout_height="41dp"
-            android:src="@color/colorAccent"
-            app:riv_oval="true" />
+            android:src="@color/colorAccent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_name"
