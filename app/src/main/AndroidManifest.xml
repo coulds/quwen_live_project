@@ -281,6 +281,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <!--设置密码，发送手机验证码-->
+        <activity
+            android:name="com.hsjskj.quwen.ui.activity.SetPassWordActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
 
     </application>
 
