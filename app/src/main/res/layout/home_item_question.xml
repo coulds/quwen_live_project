@@ -17,21 +17,36 @@
             android:id="@+id/iv_item_avatar"
             android:layout_width="41dp"
             android:layout_height="41dp"
-            android:src="@color/colorAccent"/>
+            android:src="@color/colorAccent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_item_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/iv_item_avatar"
-            android:layout_marginStart="8dp"
+            android:layout_alignBottom="@id/iv_item_avatar"
             android:layout_toEndOf="@id/iv_item_avatar"
-            android:maxWidth="200dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="去问一哥"
-            android:textColor="@color/homeColor696969"
-            android:textSize="14sp" />
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingStart="8dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxWidth="200dp"
+                android:singleLine="true"
+                android:text="去问一哥"
+                android:textColor="@color/homeColor696969"
+                android:textSize="14sp" />
+
+            <com.hsjskj.quwen.ui.home.widget.StarTagView
+                android:id="@+id/star_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_time"
@@ -42,13 +57,6 @@
             android:textColor="@color/color999"
             android:textSize="11sp" />
 
-        <com.hsjskj.quwen.ui.home.widget.StarTagView
-            android:id="@+id/star_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_item_name"
-            android:layout_alignStart="@id/tv_item_name"
-            android:layout_marginTop="2dp" />
 
     </RelativeLayout>
 

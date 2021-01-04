@@ -61,8 +61,12 @@ public class HomeVideoListActivity extends MyActivity implements StatusAction, O
         homeFragmentViewModel.getHomeVideoLiveData().observe(this, objects -> {
             mRefreshLayout.finishLoadMore();
             mRefreshLayout.finishRefresh();
-            showComplete();
-            if (adapter.getPageNumber() == 1 && objects != null) {
+            if (adapter.getPageNumber() == 1) {
+                if (objects == null || objects.isEmpty()) {
+                    showEmpty();
+                } else {
+                    showComplete();
+                }
                 adapter.setData(objects);
             } else {
                 if (objects == null || objects.isEmpty()) {
@@ -96,6 +100,6 @@ public class HomeVideoListActivity extends MyActivity implements StatusAction, O
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
         HomeVideoListBean.DataBean item = adapter.getItem(position);
-        VideoPlayActivity.start(this, ""+item.url, ""+item.title);
+        VideoPlayActivity.start(this, "" + item.url, "" + item.title);
     }
 }

@@ -1,6 +1,8 @@
 package com.hsjskj.quwen.ui.home.fragment;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.view.View;
 
@@ -49,7 +51,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         , HomeVideoView.HomeVideoViewListener
         , HomeLiveView.HomeVideoViewListener
         , BaseAdapter.OnItemClickListener
-        , StatusAction{
+        , StatusAction {
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView recyclerviewQuerstion;
@@ -100,7 +102,14 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
         homeFragmentViewModel.getHomePublishLiveData().observe(this, dataBeans -> {
             mRefreshLayout.finishLoadMore();
             mRefreshLayout.finishRefresh();
-            if (mAdapter.getPageNumber() == 1 && dataBeans != null) {
+            if (mAdapter.getPageNumber() == 1) {
+                if (dataBeans == null || dataBeans.isEmpty()) {
+                    recyclerviewQuerstion.setVisibility(View.GONE);
+                    findViewById(R.id.tv_no_data).setVisibility(View.VISIBLE);
+                } else {
+                    recyclerviewQuerstion.setVisibility(View.VISIBLE);
+                    findViewById(R.id.tv_no_data).setVisibility(View.GONE);
+                }
                 mAdapter.setData(dataBeans);
             } else {
                 if (dataBeans == null || dataBeans.isEmpty()) {
@@ -132,6 +141,12 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
                 if (getContext() != null) {
                     outRect.bottom = UiUtlis.dp2px(getContext(), 10);
                 }
+            }
+
+            @Override
+            public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.onDraw(c, parent, state);
+                c.drawColor(Color.parseColor("#F8F8F8"));
             }
         });
         mAdapter.setOnItemClickListener(this);

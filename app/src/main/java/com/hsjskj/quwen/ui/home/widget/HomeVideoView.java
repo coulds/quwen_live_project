@@ -80,11 +80,11 @@ public class HomeVideoView extends LinearLayout {
     }
 
     public void setData(List<HomeVideoListBean.DataBean> datas) {
-        if (datas == null || datas.isEmpty()) {
-            setVisibility(GONE);
-        } else {
-            setVisibility(VISIBLE);
-        }
+//        if (datas == null || datas.isEmpty()) {
+//            setVisibility(GONE);
+//        } else {
+//            setVisibility(VISIBLE);
+//        }
         adapter.setData(datas);
     }
 
