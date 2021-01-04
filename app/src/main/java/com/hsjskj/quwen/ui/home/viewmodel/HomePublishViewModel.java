@@ -90,7 +90,8 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
         listener.upload(new UploadBean(s), new UploadCallback() {
             @Override
             public void onSuccess(UploadBean bean) {
-                remoteUrls.add(bean.getmResultUrl());
+                //给后台传name就行
+                remoteUrls.add(bean.getFileName());
                 if (count.decrementAndGet() == 0) {
                     mutableLiveData.postValue(true);
                     return;

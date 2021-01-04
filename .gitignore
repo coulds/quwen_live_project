@@ -6,6 +6,8 @@
 /.cxx
 /.externalNativeBuild
 
+/app/release
+/app/debug
 *.iml
 .DS_Store
 local.properties
