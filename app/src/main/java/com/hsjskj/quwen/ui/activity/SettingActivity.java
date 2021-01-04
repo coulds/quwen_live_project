@@ -171,6 +171,7 @@ public final class SettingActivity extends MyActivity
                             ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
                         }
 
+
                         @Override
                         public void onCancel(BaseDialog dialog) {
                         }

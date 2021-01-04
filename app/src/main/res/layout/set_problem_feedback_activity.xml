@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -72,7 +73,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="13dp"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -81,13 +82,23 @@
             android:layout_marginStart="16dp"
             android:background="@drawable/problem_feedback_back"
             android:gravity="center">
-
             <ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:src="@drawable/addimage" />
         </RelativeLayout>
+
+
+        <com.hjq.widget.layout.WrapRecyclerView
+            android:id="@+id/problemfeedback_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="15dp"
+            tools:itemCount="3"
+            tools:layoutManager="GridLayoutManager"
+            tools:listitem="@layout/item_publish_pic_view"
+            tools:spanCount="3" />
 
 
 
