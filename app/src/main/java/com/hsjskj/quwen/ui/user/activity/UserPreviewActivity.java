@@ -170,27 +170,27 @@ public class UserPreviewActivity extends MyMvvmActivity<UserPreviewViewModel> im
     }
 
     private void initViewScrollView() {
-        scrollView = findViewById(R.id.nestedScrollView);
-        scrollView.post(() -> {
-            if (getTitleBar() != null) {
-                height = findViewById(R.id.iv_bg).getMeasuredHeight() * 2 / 3;
-            }
-        });
-        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (scrollY > (height / 2)) {
-                setLeftIcon(R.drawable.arrows_left_ic);
-            } else {
-                setLeftIcon(R.drawable.arrow_back_fff);
-            }
-            if (scrollY >= height) {
-                setTitleBarColor(Color.WHITE);
-            } else if (scrollY >= 0) {
-                float persent = scrollY * 1f / (height);
-                int alpha = (int) (255 * persent);
-                int color = Color.argb(alpha, 255, 255, 255);
-                setTitleBarColor(color);
-            }
-        });
+//        scrollView = findViewById(R.id.nestedScrollView);
+//        scrollView.post(() -> {
+//            if (getTitleBar() != null) {
+//                height = findViewById(R.id.iv_bg).getMeasuredHeight() * 2 / 3;
+//            }
+//        });
+//        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+//            if (scrollY > (height / 2)) {
+//                setLeftIcon(R.drawable.arrows_left_ic);
+//            } else {
+//                setLeftIcon(R.drawable.arrow_back_fff);
+//            }
+//            if (scrollY >= height) {
+//                setTitleBarColor(Color.WHITE);
+//            } else if (scrollY >= 0) {
+//                float persent = scrollY * 1f / (height);
+//                int alpha = (int) (255 * persent);
+//                int color = Color.argb(alpha, 255, 255, 255);
+//                setTitleBarColor(color);
+//            }
+//        });
     }
 
     public void setTitleBarColor(int color) {
