@@ -20,6 +20,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/white"
         android:hint="请输入您的昵称"
+        android:paddingLeft="16dp"
         android:maxLength="64"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
