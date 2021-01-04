@@ -31,6 +31,22 @@ public class UserPreviewRepository extends BaseRepository {
         return currentUserInfoLiveData;
     }
 
+    public void loadCurrentUserInfoLiveData(LifecycleOwner lifecycleOwner) {
+        EasyHttp.post(lifecycleOwner)
+                .api(new UserInfoApi(MyUserInfo.getInstance().getId()))
+                .request(new HttpCallback<HttpData<UserInfoBean>>(null) {
+                    @Override
+                    public void onSucceed(HttpData<UserInfoBean> data) {
+                        currentUserInfoLiveData.postValue(data.getData());
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        ToastUtils.show(e.getMessage());
+                    }
+                });
+    }
+
     private MutableLiveData<UserInfoBean> userInfoLiveData;
 
     public MutableLiveData<UserInfoBean> getUserInfoLiveData() {
@@ -47,9 +63,6 @@ public class UserPreviewRepository extends BaseRepository {
                     @Override
                     public void onSucceed(HttpData<UserInfoBean> data) {
                         userInfoLiveData.postValue(data.getData());
-                        if (toUid.equals(MyUserInfo.getInstance().getId())) {
-                            currentUserInfoLiveData.postValue(data.getData());
-                        }
                     }
 
                     @Override

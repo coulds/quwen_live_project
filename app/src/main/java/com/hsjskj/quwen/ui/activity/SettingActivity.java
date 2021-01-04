@@ -108,7 +108,7 @@ public final class SettingActivity extends MyActivity
 
         mAddressView.setRightText("" + infoBean.birthday);
         mIDView.setRightText(infoBean.getUsername());
-        mNameView.setRightText(infoBean.isSexMale() ? "男" : "女");
+        mNameView.setRightText(infoBean.isSetMale() ? infoBean.isSexMale() ? "男" : "女" : "未设置");
     }
 
     @SingleClick
@@ -129,7 +129,7 @@ public final class SettingActivity extends MyActivity
                     .setTitle("请选择你的性别")
                     .setList("男", "女")
                     .setSingleSelect()
-                    .setSelect(MyUserInfo.getInstance().getLogin().isSexMale() ? 0 : 1)
+                    .setSelect(!MyUserInfo.getInstance().getLogin().isSexMale() ? 1 : 0)
                     .setListener(new SelectDialog.OnListener<String>() {
                         @Override
                         public void onSelected(BaseDialog dialog, HashMap<Integer, String> data) {

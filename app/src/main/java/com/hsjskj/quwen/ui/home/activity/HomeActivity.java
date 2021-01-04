@@ -71,7 +71,7 @@ public final class HomeActivity extends MyActivity
         //需要更新用户信息,防止频繁调用
         postDelayed(() -> {
             if (!isFinishing()) {
-                mViewModel.loadUserInfoLiveData(this, MyUserInfo.getInstance().getId());
+                mViewModel.loadCurrentUserInfoLiveData(this);
             }
         }, 200);
     }
