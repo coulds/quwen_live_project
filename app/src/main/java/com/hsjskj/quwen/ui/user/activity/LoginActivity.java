@@ -94,15 +94,7 @@ public final class LoginActivity extends MyActivity
     @Override
     public void onRightClick(View v) {
         // 跳转到注册界面
-        startActivityForResult(RegisterActivity.class, (resultCode, data) -> {
-            // 如果已经注册成功，就执行登录操作
-            if (resultCode == RESULT_OK && data != null) {
-                mPhoneView.setText(data.getStringExtra(IntentKey.PHONE));
-                mPasswordView.setText(data.getStringExtra(IntentKey.PASSWORD));
-                mPasswordView.setSelection(mPasswordView.getText().length());
-                onClick(mCommitView);
-            }
-        });
+        startActivity(RegisterActivity.class);
     }
 
     @SingleClick

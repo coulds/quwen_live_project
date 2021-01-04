@@ -49,6 +49,9 @@ public class HomeStarSelectDateView extends FrameLayout implements View.OnClickL
                 .setTitle(getString(R.string.date_title))
                 .setConfirm(getString(R.string.common_confirm))
                 .setCancel(getString(R.string.common_cancel))
+                .setDay(day)
+                .setMonth(month)
+                .setYear(year)
                 .setListener(new DateDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog, int y, int m, int d) {

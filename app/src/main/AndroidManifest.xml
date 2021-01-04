@@ -37,7 +37,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute,LockedOrientationActivity"
         tools:replace="android:allowBackup,android:supportsRtl"
         tools:targetApi="n">
-
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <!-- 适配 Android 7.0 文件意图 -->
         <provider
             android:name="androidx.core.content.FileProvider"

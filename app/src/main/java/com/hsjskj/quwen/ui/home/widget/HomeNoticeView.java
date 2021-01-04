@@ -10,7 +10,9 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.hjq.permissions.Permission;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.aop.Permissions;
 import com.hsjskj.quwen.http.response.NoticeBean;
 import com.hsjskj.quwen.ui.activity.BrowserActivity;
 import com.hsjskj.quwen.ui.home.activity.HomePublishActivity;
@@ -79,6 +81,9 @@ public class HomeNoticeView extends FrameLayout implements View.OnClickListener 
         }
     }
 
+    @Permissions({Permission.READ_EXTERNAL_STORAGE
+            , Permission.WRITE_EXTERNAL_STORAGE
+            , Permission.READ_PHONE_STATE})
     @Override
     public void onClick(View v) {
         HomePublishActivity.start(getContext());
