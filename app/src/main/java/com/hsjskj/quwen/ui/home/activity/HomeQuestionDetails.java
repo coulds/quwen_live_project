@@ -1,6 +1,7 @@
 package com.hsjskj.quwen.ui.home.activity;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
@@ -19,7 +20,6 @@ import com.hsjskj.quwen.widget.HintLayout;
 import com.lzy.ninegrid.ImageInfo;
 import com.lzy.ninegrid.NineGridView;
 import com.lzy.ninegrid.preview.NineGridViewClickAdapter;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class HomeQuestionDetails extends MyMvvmActivity<HomeQuestionViewModel> implements StatusAction {
     private HintLayout mHintLayout;
-    private RoundedImageView mIvItemAvatar;
+    private ImageView mIvItemAvatar;
     private AppCompatTextView mIvItemName;
     private StarTagView mStarTag;
     private AppCompatTextView mTvItemTime;
@@ -91,7 +91,7 @@ public class HomeQuestionDetails extends MyMvvmActivity<HomeQuestionViewModel> i
     protected void initView() {
         super.initView();
         mHintLayout = (HintLayout) findViewById(R.id.hint_layout);
-        mIvItemAvatar = (RoundedImageView) findViewById(R.id.iv_item_avatar);
+        mIvItemAvatar =findViewById(R.id.iv_item_avatar);
         mIvItemName = (AppCompatTextView) findViewById(R.id.iv_item_name);
         mStarTag = (StarTagView) findViewById(R.id.star_tag);
         mTvItemTime = (AppCompatTextView) findViewById(R.id.tv_item_time);
