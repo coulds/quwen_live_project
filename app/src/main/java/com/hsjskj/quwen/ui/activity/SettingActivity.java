@@ -21,10 +21,14 @@ import com.hsjskj.quwen.ui.dialog.DateDialog;
 import com.hsjskj.quwen.ui.dialog.MessageDialog;
 import com.hsjskj.quwen.ui.dialog.SelectDialog;
 import com.hjq.widget.view.SwitchButton;
+import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
 import com.hsjskj.quwen.ui.user.activity.PorblemFeedBackActivity;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
 import com.hsjskj.quwen.ui.user.viewmodel.UserInfoViewModel;
+import com.hsjskj.quwen.upload.UploadBean;
+import com.hsjskj.quwen.upload.UploadCallback;
+import com.hsjskj.quwen.upload.UploadTxImpl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -131,6 +135,30 @@ public final class SettingActivity extends MyActivity
         mNameView.setRightText(infoBean.isSetMale() ? infoBean.isSexMale() ? "男" : "女" : "未设置");
     }
 
+    private void upAvatar(String path) {
+        HomePublishViewModel viewModel = new ViewModelProvider(this).get(HomePublishViewModel.class);
+        viewModel.getTxCosLiveBean().observe(this, txCosBean -> {
+            if (txCosBean != null) {
+                UploadTxImpl listener = new UploadTxImpl(getContext(), txCosBean);
+                listener.upload(new UploadBean(path), new UploadCallback() {
+                    @Override
+                    public void onSuccess(UploadBean bean) {
+                        userInfoViewModel.loadUserInfoAvatarBean(SettingActivity.this, bean.getFileName());
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        toast("上传失败");
+                    }
+                });
+            } else {
+                toast("上传失败");
+            }
+        });
+        viewModel.loadTxCos(this);
+    }
+
+
     @SingleClick
     @Override
     public void onClick(View v) {
@@ -142,7 +170,7 @@ public final class SettingActivity extends MyActivity
             ImageSelectActivity.start(this, new ImageSelectActivity.OnPhotoSelectListener() {
                 @Override
                 public void onSelected(List<String> data) {
-                    userInfoViewModel.loadUserInfoAvatarBean(SettingActivity.this, data.get(0));
+                    upAvatar(data.get(0));
                 }
             });
         } else if (v == mNameView) {
