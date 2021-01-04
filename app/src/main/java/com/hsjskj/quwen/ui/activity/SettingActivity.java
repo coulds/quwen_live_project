@@ -3,6 +3,7 @@ package com.hsjskj.quwen.ui.activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,6 +21,7 @@ import com.hsjskj.quwen.ui.dialog.DateDialog;
 import com.hsjskj.quwen.ui.dialog.MessageDialog;
 import com.hsjskj.quwen.ui.dialog.SelectDialog;
 import com.hjq.widget.view.SwitchButton;
+import com.hsjskj.quwen.ui.user.activity.PorblemFeedBackActivity;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
 import com.hsjskj.quwen.ui.user.viewmodel.UserInfoViewModel;
@@ -41,7 +43,15 @@ public final class SettingActivity extends MyActivity
     private SettingBar mIDView;
     private SettingBar mNameView;
     private SettingBar mAddressView;
-    private SettingBar msb_tuichu_about;
+    private SettingBar mproblemfeedView;
+
+    private SettingBar mphoneView;
+    private SettingBar memailView;
+    private SettingBar mbindweixinView;
+    private SettingBar msetpasswordViwe;
+    private SettingBar maboutView;
+
+    private TextView msb_tuichu_about;
     private UserInfoViewModel userInfoViewModel;
 
     @Override
@@ -56,11 +66,21 @@ public final class SettingActivity extends MyActivity
         mAvatarView = findViewById(R.id.iv_person_data_avatar);
         mIDView = findViewById(R.id.sb_setting_update);
         mNameView = findViewById(R.id.sb_setting_phone);
+
+        mphoneView = findViewById(R.id.sb_phone_view);
+        memailView = findViewById(R.id.sb_email_about);
+        mbindweixinView = findViewById(R.id.sb_weixin_auto);
+        msetpasswordViwe = findViewById(R.id.sb_setting_password_about);
+        maboutView = findViewById(R.id.sb_guanyu_about);
+
+
+
         msb_tuichu_about = findViewById(R.id.sb_tuichu_about);
+        mproblemfeedView = findViewById(R.id.sb_problem_feed_back_about);
         mAddressView = (SettingBar) findViewById(R.id.sb_setting_password);
 
 
-        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about);
+        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about,this.mproblemfeedView,this.mphoneView,this.memailView,this.mbindweixinView,this.msetpasswordViwe,this.maboutView);
 
     }
 
@@ -114,6 +134,7 @@ public final class SettingActivity extends MyActivity
     @SingleClick
     @Override
     public void onClick(View v) {
+
 
         if (v == mIDView) {
             startActivity(NickNameEditActivity.class);
@@ -177,7 +198,16 @@ public final class SettingActivity extends MyActivity
                         }
                     })
                     .show();
-
+        }else if (v == mproblemfeedView){
+            startActivity(PorblemFeedBackActivity.class);
+        }else if (v == mphoneView){
+            startActivity(SetPhoneCodeActivity.class);
+        }else if (v == memailView){
+            startActivity(EmailCodeActivity.class);
+        }else if(v == msetpasswordViwe){
+            startActivity(SetPassWordActivity.class);
+        }else if (v == maboutView){
+            startActivity(AboutQuWenActivity.class);
         }
 
     }

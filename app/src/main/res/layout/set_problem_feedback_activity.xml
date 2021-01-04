@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -76,18 +77,7 @@
         android:layout_marginTop="13dp"
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/problem_feedback_back"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:src="@drawable/addimage" />
-        </RelativeLayout>
+
 
 
         <com.hjq.widget.layout.WrapRecyclerView

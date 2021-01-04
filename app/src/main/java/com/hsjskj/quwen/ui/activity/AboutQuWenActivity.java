@@ -6,7 +6,7 @@ import com.hsjskj.quwen.common.MyActivity;
 /**
  * @author : sen
  * time          : 2020年12月31日 16:10
- * description   : quwen_live
+ * description   :  <!--关于去问-->
  */
 public class AboutQuWenActivity extends MyActivity {
     @Override
