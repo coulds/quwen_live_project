@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.glide.GlideConfig;
 import com.lzy.ninegrid.NineGridView;
 
 /**
@@ -16,7 +17,7 @@ public class GlideImageLoader implements NineGridView.ImageLoader {
 
     @Override
     public void onDisplayImage(Context context, ImageView imageView, String url) {
-        GlideApp.with(context).load(url).into(imageView);
+        GlideApp.with(context).load(url).apply(GlideConfig.requestOptions).into(imageView);
     }
 
     @Override

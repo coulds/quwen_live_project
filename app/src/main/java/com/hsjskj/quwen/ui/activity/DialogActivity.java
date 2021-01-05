@@ -393,7 +393,7 @@ public final class DialogActivity extends MyActivity {
                         // 分享描述
                         .setShareDescription("AndroidProject")
                         // 分享缩略图
-                        .setShareLogo(R.mipmap.launcher_ic)
+                        .setShareLogo(R.mipmap.ic_launcher)
                         // 分享链接
                         .setShareUrl("https://github.com/getActivity/AndroidProject")
                         .setListener(new UmengShare.OnShareListener() {
