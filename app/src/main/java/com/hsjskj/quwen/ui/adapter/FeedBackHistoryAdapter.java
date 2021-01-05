@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.ui.user.activity.MessageActivity;
+
+import java.util.List;
 
 /**
  * @author : sen
@@ -17,6 +20,13 @@ import com.hsjskj.quwen.R;
  * description   : quwen_live
  */
 public class FeedBackHistoryAdapter extends RecyclerView.Adapter<FeedBackHistoryAdapter.ViewHolder> {
+    private List<Object> messageActivityList;
+
+
+    public FeedBackHistoryAdapter(List<Object> messageActivityList){
+        this.messageActivityList = messageActivityList;
+
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout leftLayout;
@@ -41,12 +51,22 @@ public class FeedBackHistoryAdapter extends RecyclerView.Adapter<FeedBackHistory
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if (position%2==0){
+            holder.leftLayout.setVisibility(View.VISIBLE);
+            holder.rightLayout.setVisibility(View.GONE);
+            holder.lefMsg.setText("1111111");
+        }else {
+            holder.rightLayout.setVisibility(View.VISIBLE);
+            holder.leftLayout.setVisibility(View.GONE);
+            holder.rightMsg.setText("222222");
+        }
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 2;
     }
 
 

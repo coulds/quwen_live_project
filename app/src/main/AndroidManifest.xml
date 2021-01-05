@@ -323,6 +323,12 @@
         <activity android:name=".ui.my.activity.CouponActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.hsjskj.quwen.ui.user.activity.FeedBackHistoryActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
 

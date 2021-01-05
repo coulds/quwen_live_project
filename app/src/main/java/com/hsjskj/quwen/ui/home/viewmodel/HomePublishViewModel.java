@@ -71,7 +71,6 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
                         ToastUtils.show(voidHttpData.getMessage());
                         mutableLiveData.postValue(true);
                     } else {
-                        ToastUtils.show("发布失败");
                         mutableLiveData.postValue(false);
                     }
                 });
@@ -122,6 +121,7 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
                     @Override
                     public void onFail(Exception e) {
                         mutableLiveData.postValue(null);
+                        ToastUtils.show(""+e.getMessage());
                     }
                 });
         return mutableLiveData;

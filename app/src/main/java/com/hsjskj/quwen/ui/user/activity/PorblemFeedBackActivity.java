@@ -3,17 +3,20 @@ package com.hsjskj.quwen.ui.user.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.base.BaseAdapter;
+import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.DebugLog;
 import com.hsjskj.quwen.common.MyMvvmActivity;
 import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
+import com.hsjskj.quwen.ui.adapter.FeedBackHistoryAdapter;
 import com.hsjskj.quwen.ui.home.adapter.ProblemFeedBackAdapter;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
 import com.hsjskj.quwen.upload.UploadListener;
@@ -22,20 +25,25 @@ import com.hsjskj.quwen.upload.UploadTxImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hsjskj.quwen.ui.user.activity.MessageActivity.TYPE_RECEVED;
+
 /**
  * @author : sen
  * time          : 2021年01月04日 11:28
- * description   : quwen_live
+ * description   : 问题反馈
  */
-public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel> implements BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener {
-
+public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel> implements BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener, View.OnClickListener {
+    private Button commit_button;
     private RecyclerView problemfeedRecyclerview;
-    private EditText etproblemTitle;
+    private EditText etproblemphone;
     private EditText etproblemContent;
     private ProblemFeedBackAdapter problemFeedBackAdapter;
     private List<Object> problempics;
     private static final int MAX_SELECT_NUMBER1 = 3;
     private UploadListener listener1;
+
+    private List<MessageActivity> messageActivityList = new ArrayList<>();
+    private FeedBackHistoryAdapter feedBackHistoryAdapter;
 
 
     @DebugLog
@@ -53,17 +61,20 @@ public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel
     @Override
     protected void initView() {
         super.initView();
+        initMsag();
         problemfeedRecyclerview = findViewById(R.id.problemfeedback_recyclerview);
 
-//        etproblemTitle = findViewById(R.id.et_publish_title);
-//        etproblemContent = findViewById(R.id.et_publish_content);
+        etproblemphone = findViewById(R.id.et_input_phone);
+        etproblemContent = findViewById(R.id.et_input_context);
+        commit_button = findViewById(R.id.commit_btn);
+
 
         problemFeedBackAdapter = new ProblemFeedBackAdapter(this);
         problemFeedBackAdapter.setOnItemClickListener(this);
         problemFeedBackAdapter.setOnChildClickListener(R.id.iv_item_deleted, this);
         problemfeedRecyclerview.setLayoutManager(new GridLayoutManager(this, MAX_SELECT_NUMBER1));
         problemfeedRecyclerview.setAdapter(problemFeedBackAdapter);
-
+        setOnClickListener(this.commit_button);
         mViewModel.getTxCosLiveBean().observe(this, txCosBean -> {
             if (txCosBean != null) {
                 listener1 = new UploadTxImpl(getContext(), txCosBean);
@@ -76,14 +87,44 @@ public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel
         mViewModel.loadTxCos(this);
     }
 
+    @Override
+    public void onRightClick(View v) {
+        finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        String string_phone = etproblemphone.getText().toString();
+        String string_content = etproblemContent.getText().toString();
+        if (v == commit_button){
+            if (etproblemphone == null && etproblemContent==null){
+                toast("输入为空");
+            }else {
+                commit_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MessageActivity messageActivity = new MessageActivity(string_content,MessageActivity.TYPE_SENT);
+                        messageActivityList.add(messageActivity);
+                        feedBackHistoryAdapter.notifyItemChanged(messageActivityList.size()-1);
+                    }
+                });
 
 
+            }
+        }
+    }
+
+    public void initMsag(){
+
+    }
 
     @Override
     protected void initData() {
         problempics = new ArrayList<>();
         problempics.add(R.drawable.publish_defalut_icon);
         problemFeedBackAdapter.setData(problempics);
+
+
     }
 
 
@@ -121,6 +162,7 @@ public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel
         problempics.remove(position);
         problemFeedBackAdapter.notifyDataSetChanged();
     }
+
 
 
 }
