@@ -52,4 +52,9 @@
     <color name="homeColorHomeDialogButton2">#E4B953</color>
     <color name="homeColorHomeDialogButtonText">#F32929</color>
 
+    <!--button选中颜色-->
+    <color name="textContentSelect">#14DBE1</color>
+    <!--button未选中颜色-->
+    <color name="textContentDisSelect">#A1A4AD</color>
+
 </resources>

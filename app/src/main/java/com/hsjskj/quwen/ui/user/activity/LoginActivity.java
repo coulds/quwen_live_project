@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+//import com.alibaba.android.arouter.facade.annotation.Route;
 import com.hjq.base.route.RouteUtil;
 import com.hjq.widget.view.RegexEditText;
 import com.hsjskj.quwen.R;
@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * time   : 2020年12月24日10:58:33
  * desc   : 登录界面
  */
-@Route(path = RouteUtil.PATH_LOGIN_INVALID)
+//@Route(path = RouteUtil.PATH_LOGIN_INVALID)
 public final class LoginActivity extends MyActivity
         implements UmengLogin.OnLoginListener, EditCloseAction {
 

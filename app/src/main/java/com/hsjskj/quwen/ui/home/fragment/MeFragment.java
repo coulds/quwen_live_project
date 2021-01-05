@@ -10,6 +10,8 @@ import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.http.response.UserInfoBean;
+import com.hsjskj.quwen.ui.activity.AccountBalanceActivity;
+import com.hsjskj.quwen.ui.activity.AccountMoneyActivity;
 import com.hsjskj.quwen.ui.activity.MyFansActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.activity.SettingActivity;
@@ -34,7 +36,7 @@ public final class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout);
+        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout);
 
     }
 
@@ -69,6 +71,11 @@ public final class MeFragment extends MyFragment<HomeActivity> {
             startActivity(SettingActivity.class);
         } else if (id == R.id.touxiang) {
             UserPreviewActivity.start(getContext(), MyUserInfo.getInstance().getId());
+        }else if (id == R.id.xian_jin_layout) {
+            //现金账户
+            AccountBalanceActivity.start(getContext());
+        }else if(id==R.id.yu_er_layout){
+            AccountMoneyActivity.start(getContext());
         }
 
     }

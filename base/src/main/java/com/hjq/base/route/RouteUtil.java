@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 
-import com.alibaba.android.arouter.facade.Postcard;
-import com.alibaba.android.arouter.launcher.ARouter;
+//import com.alibaba.android.arouter.facade.Postcard;
+//import com.alibaba.android.arouter.launcher.ARouter;
 
 /**
  * @author Jun
@@ -34,32 +34,32 @@ public class RouteUtil {
     /**
      * 启动页
      */
-    public static void forwardLauncher(Context context) {
-        ARouter.getInstance().build(PATH_LAUNCHER)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                .navigation();
-    }
-
-    /**
-     * 登录过期
-     */
-    public static void forwardLoginInvalid(String tip) {
-        ARouter.getInstance().build(PATH_LOGIN_INVALID)
-                .withString(KEY_LOGIN_TIP, tip)
-                .navigation();
-    }
-
-    /**
-     * 跳转带参数
-     *
-     * @param context
-     * @param object
-     */
-    public static void forwardObject(Context context, Parcelable object) {
-        Postcard postcard = ARouter.getInstance().build(PATH_OBJECT);
-        postcard.withParcelable(KEY_OBJECT, object);
-        postcard.navigation(context);
-    }
+//    public static void forwardLauncher(Context context) {
+//        ARouter.getInstance().build(PATH_LAUNCHER)
+//                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                .navigation();
+//    }
+//
+//    /**
+//     * 登录过期
+//     */
+//    public static void forwardLoginInvalid(String tip) {
+//        ARouter.getInstance().build(PATH_LOGIN_INVALID)
+//                .withString(KEY_LOGIN_TIP, tip)
+//                .navigation();
+//    }
+//
+//    /**
+//     * 跳转带参数
+//     *
+//     * @param context
+//     * @param object
+//     */
+//    public static void forwardObject(Context context, Parcelable object) {
+//        Postcard postcard = ARouter.getInstance().build(PATH_OBJECT);
+//        postcard.withParcelable(KEY_OBJECT, object);
+//        postcard.navigation(context);
+//    }
 
 
     //.........................

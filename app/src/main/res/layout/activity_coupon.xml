@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="优惠券" />
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/my_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_below="@+id/img_user_background"
+        android:background="@color/white"
+        app:tl_indicator_width="20dp"
+        app:tl_textSelectColor="@color/textColor"
+        app:tl_textUnselectColor="#B8B8B8"
+        app:tl_textsize="15sp"
+        app:tl_indicator_color="#14DBE1"
+        app:tl_underline_height="0dp" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_coupon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

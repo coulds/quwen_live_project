@@ -195,4 +195,9 @@ dependencies {
     // 图片压缩：https://github.com/Curzibn/Luban
     // 对象存储：https://github.com/leavesC/DoKV
     // 对象注解：https://www.jianshu.com/p/f1f888e4a35f
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    //tabLayout
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 }
