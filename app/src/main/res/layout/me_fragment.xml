@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fafafa"
+    android:background="#FAFAFA"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -140,7 +140,7 @@
                     android:layout_height="22dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/p4"
+                    android:src="@drawable/pic3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -174,7 +174,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="32dp"
-                        android:src="@drawable/p3"
+                        android:src="@drawable/pic2"
                         android:visibility="visible" />
 
                     <Button
@@ -184,7 +184,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="30dp"
-                        android:background="@drawable/p1"
+                        android:background="@drawable/pic1"
                         android:text="立即邀请"
                         android:textColor="#ffffff" />
                 </RelativeLayout>
@@ -216,7 +216,7 @@
                             android:id="@+id/imageView3"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p8" />
+                            android:src="@drawable/pic4" />
 
                         <TextView
                             android:id="@+id/textView6"
@@ -239,7 +239,7 @@
                             android:id="@+id/imageViews3"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p9" />
+                            android:src="@drawable/pic5" />
 
                         <TextView
                             android:id="@+id/textViews6"
@@ -262,7 +262,7 @@
                             android:id="@+id/imageViewss3"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p11" />
+                            android:src="@drawable/pic6" />
 
                         <TextView
                             android:id="@+id/textViewss6"
@@ -285,7 +285,7 @@
                             android:id="@+id/imageViewsss3"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p10" />
+                            android:src="@drawable/pic7" />
 
                         <TextView
                             android:id="@+id/textViewsss6"
@@ -313,7 +313,7 @@
                 android:layout_height="196dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/dialog_rounded_corner_bg10">
 
@@ -335,12 +335,13 @@
                             android:id="@+id/imageView33"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p22" />
+                            android:src="@drawable/pic8" />
 
                         <TextView
                             android:id="@+id/textView66"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="我要开播"
                             android:textColor="#666666" />
                     </LinearLayout>
@@ -357,12 +358,13 @@
                             android:id="@+id/imageViews333"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p16" />
+                            android:src="@drawable/pic9" />
 
                         <TextView
                             android:id="@+id/textViews6666"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="收益管理"
                             android:textColor="#666666" />
                     </LinearLayout>
@@ -379,12 +381,13 @@
                             android:id="@+id/imageViewss33"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p15" />
+                            android:src="@drawable/pic10" />
 
                         <TextView
                             android:id="@+id/textViewss66"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="直播管理"
                             android:textColor="#666666" />
                     </LinearLayout>
@@ -401,12 +404,13 @@
                             android:id="@+id/imageViewsss33"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p14" />
+                            android:src="@drawable/pic11" />
 
                         <TextView
                             android:id="@+id/textViewsss66"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="认证管理"
                             android:textColor="#666666" />
                     </LinearLayout>
@@ -430,12 +434,13 @@
                             android:id="@+id/imageViews33"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p18" />
+                            android:src="@drawable/pic12" />
 
                         <TextView
                             android:id="@+id/textViews66"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="我要抢答"
                             android:textColor="#666666" />
                     </LinearLayout>
@@ -452,12 +457,13 @@
                             android:id="@+id/imageViewss333"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p19" />
+                            android:src="@drawable/pic13" />
 
                         <TextView
                             android:id="@+id/textViewss6666"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="自荐管理"
                             android:textColor="#666666" />
                     </LinearLayout>
@@ -474,12 +480,13 @@
                             android:id="@+id/imageViewwss33"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p20" />
+                            android:src="@drawable/pic14" />
 
                         <TextView
                             android:id="@+id/textViewwss66"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="预约管理"
                             android:textColor="#666666" />
                     </LinearLayout>
@@ -509,8 +516,9 @@
                 android:layout_height="119dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="15dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/dialog_rounded_corner_bg10">
 
                 <TextView
@@ -541,7 +549,7 @@
                             android:id="@+id/imageViewww33"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p8" />
+                            android:src="@drawable/pic15" />
 
                         <TextView
                             android:id="@+id/textViewww66"
@@ -564,7 +572,7 @@
                             android:id="@+id/imageViewwws3"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p21" />
+                            android:src="@drawable/pic16" />
 
                         <TextView
                             android:id="@+id/textViewwws6"
@@ -587,7 +595,7 @@
                             android:id="@+id/imageViewss3333"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/p17" />
+                            android:src="@drawable/pic17" />
 
                         <TextView
                             android:id="@+id/textViewss66666"

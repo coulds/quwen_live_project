@@ -51,6 +51,9 @@ public class NickNameEditActivity extends MyActivity {
                             UserInfoBean userInfoBean = MyUserInfo.getInstance().getLogin();
                             userInfoBean.user_nickname = string;
                             UserPreviewRepository.getCurrentUserInfoLiveData().postValue(userInfoBean);
+                            toast("修改成功");
+                            finish();
+
                         }
 
                         @Override

@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.home.activity;
+package com.hsjskj.quwen.ui.user.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,13 +9,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.base.BaseAdapter;
-import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.DebugLog;
 import com.hsjskj.quwen.common.MyMvvmActivity;
 import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
-import com.hsjskj.quwen.ui.home.adapter.HomePublishAdapter;
 import com.hsjskj.quwen.ui.home.adapter.ProblemFeedBackAdapter;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
 import com.hsjskj.quwen.upload.UploadListener;
