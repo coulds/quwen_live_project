@@ -8,6 +8,7 @@
     android:layout_height="match_parent">
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/back_history_child_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="问题反馈"
@@ -53,6 +54,7 @@
         android:textStyle="bold"
         />
 
+
     <com.hjq.widget.view.ClearEditText
         android:id="@+id/et_input_context"
         android:layout_width="match_parent"
@@ -62,14 +64,13 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/problem_feedback_back"
         android:gravity="top"
-        android:paddingTop="12dp"
         android:hint="您可以在这里输入内容..."
         android:maxLength="64"
         android:paddingLeft="12dp"
+        android:paddingTop="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColorHint"
         android:textSize="14sp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,6 +95,7 @@
 
     </LinearLayout>
     <Button
+        android:id="@+id/commit_btn"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:layout_width="303dp"

@@ -22,6 +22,7 @@ import com.hsjskj.quwen.ui.dialog.MessageDialog;
 import com.hsjskj.quwen.ui.dialog.SelectDialog;
 import com.hjq.widget.view.SwitchButton;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
+import com.hsjskj.quwen.ui.user.activity.FeedBackHistoryActivity;
 import com.hsjskj.quwen.ui.user.activity.PorblemFeedBackActivity;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
@@ -227,7 +228,7 @@ public final class SettingActivity extends MyActivity
                     })
                     .show();
         }else if (v == mproblemfeedView){
-            startActivity(PorblemFeedBackActivity.class);
+            startActivity(FeedBackHistoryActivity.class);
         }else if (v == mphoneView){
             startActivity(SetPhoneCodeActivity.class);
         }else if (v == memailView){
