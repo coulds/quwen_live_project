@@ -105,14 +105,17 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             mRefreshLayout.finishLoadMore();
             mRefreshLayout.finishRefresh();
             if (mAdapter.getPageNumber() == 1) {
-                if (dataBeans == null || dataBeans.isEmpty()) {
+                if (dataBeans == null) {
+                    return;
+                }
+                if (dataBeans.isEmpty()) {
                     recyclerviewQuerstion.setVisibility(View.GONE);
                     findViewById(R.id.tv_no_data).setVisibility(View.VISIBLE);
                 } else {
-                    MyCacheInfo.getInstance().setHomePublishCache(JSON.toJSONString(dataBeans));
                     recyclerviewQuerstion.setVisibility(View.VISIBLE);
                     findViewById(R.id.tv_no_data).setVisibility(View.GONE);
                 }
+                MyCacheInfo.getInstance().setHomePublishCache(JSON.toJSONString(dataBeans));
                 mAdapter.setData(dataBeans);
             } else {
                 if (dataBeans == null || dataBeans.isEmpty()) {

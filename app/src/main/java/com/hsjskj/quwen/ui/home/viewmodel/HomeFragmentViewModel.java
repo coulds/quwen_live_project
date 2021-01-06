@@ -74,7 +74,7 @@ public class HomeFragmentViewModel extends ViewModel {
 
                     @Override
                     public void onFail(Exception e) {
-                        postHomeBannerValue(new ArrayList<>(), id);
+                        postHomeBannerValue(null, id);
                     }
                 });
     }
@@ -182,7 +182,7 @@ public class HomeFragmentViewModel extends ViewModel {
 
                     @Override
                     public void onFail(Exception e) {
-                        homePublishList.postValue(new ArrayList<>());
+                        homePublishList.postValue(null);
                     }
                 });
     }
