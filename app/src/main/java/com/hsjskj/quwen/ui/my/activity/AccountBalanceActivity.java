@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.activity;
+package com.hsjskj.quwen.ui.my.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,20 +6,16 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
-import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.adapter.AccountBalanceAdapter;
-import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 /**
  * Administrator :ZB
@@ -69,7 +65,7 @@ public class AccountBalanceActivity extends MyActivity  {
         Intent intent =new Intent();
         switch (v.getId()){
             case R.id.line_right:
-                intent.setClass(AccountBalanceActivity.this,WithdrawalActivity.class);
+                intent.setClass(AccountBalanceActivity.this, WithdrawalActivity.class);
                 startActivity(intent);
                 break;
 

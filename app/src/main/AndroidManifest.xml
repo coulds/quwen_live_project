@@ -300,22 +300,22 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.AccountMoneyActivity"
+        <activity android:name=".ui.my.activity.AccountMoneyActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.WithdrawalActivity"
+        <activity android:name=".ui.my.activity.WithdrawalActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.AccountBalanceActivity"
+        <activity android:name=".ui.my.activity.AccountBalanceActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.MoneyDetailedActivity"
+        <activity android:name=".ui.my.activity.MoneyDetailedActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

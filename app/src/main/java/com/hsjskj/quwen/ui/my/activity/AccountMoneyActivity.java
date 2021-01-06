@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.activity;
+package com.hsjskj.quwen.ui.my.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,16 +20,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.module.AppGlideModule;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.model.ButtonModel;
+import com.hsjskj.quwen.ui.activity.RecordActivity;
 import com.hsjskj.quwen.ui.adapter.RechargeButtonAdapter;
-import com.hsjskj.quwen.ui.my.activity.CouponActivity;
 
 import java.util.ArrayList;
 import java.util.List;

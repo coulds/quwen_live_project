@@ -1,18 +1,12 @@
 package com.hsjskj.quwen.ui.my.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
-import com.hsjskj.quwen.ui.activity.MoneyDetailedActivity;
-import com.hsjskj.quwen.ui.adapter.AccountBalanceAdapter;
 
 /**
  * Administrator :ZB

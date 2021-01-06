@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.activity;
+package com.hsjskj.quwen.ui.my.activity;
 
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
