@@ -1,29 +1,17 @@
 package com.hsjskj.quwen.ui.my.adapter;
 
 import android.content.Context;
-import android.text.InputType;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
-import com.hsjskj.quwen.helper.KeyboardUtils;
-import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.model.ButtonModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,8 +23,8 @@ public class RechargeButtonAdapter extends MyAdapter<ButtonModel> {
     private List<ButtonModel> list;
     private Context context;
     private int getPos;//选中的item
-    private static final int TYPE_TEXT=1;
-    private static final int TYPE_INPUT=2;
+    private static final int TYPE_TEXT = 1;
+    private static final int TYPE_INPUT = 2;
 
     public RechargeButtonAdapter(@NonNull Context context, List<ButtonModel> list) {
         super(context);
@@ -46,9 +34,9 @@ public class RechargeButtonAdapter extends MyAdapter<ButtonModel> {
 
     @Override
     public int getItemViewType(int position) {
-        if (position==(getItemCount()-1)){
+        if (position == (getItemCount() - 1)) {
             return TYPE_INPUT;
-        }else {
+        } else {
             return TYPE_TEXT;
         }
     }
@@ -56,9 +44,9 @@ public class RechargeButtonAdapter extends MyAdapter<ButtonModel> {
     @NonNull
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType==TYPE_INPUT){
+        if (viewType == TYPE_INPUT) {
             return new ViewHolderInput();
-        }else {
+        } else {
             return new ViewHolder();
         }
     }
@@ -126,24 +114,21 @@ public class RechargeButtonAdapter extends MyAdapter<ButtonModel> {
 
         @Override
         public void onBindView(int position) {
-            edContent.setText("输入数量");
             if (position != getPos) {//getPos当前选中的position
                 edContent.setBackgroundResource(R.drawable.shape_radius_6_gry);
                 edContent.setTextColor(context.getResources().getColor(R.color.textContentDisSelect));
-
+                edContent.clearFocus();
+                edContent.setOnFocusChangeListener((v, hasFocus) -> {
+                    if (hasFocus) {
+                        edContent.post(() -> getList(position));
+                    }
+                });
             } else {
                 edContent.setBackgroundResource(R.drawable.shape_radius_6_bule);
                 edContent.setTextColor(context.getResources().getColor(R.color.textContentSelect));
+                edContent.requestFocus();
+                edContent.setOnFocusChangeListener(null);
             }
-            edContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (hasFocus){
-                        getList(position);
-                        KeyboardUtils.showKeyboard(v);
-                    }
-                }
-            });
 
         }
     }
