@@ -6,7 +6,9 @@ import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hjq.widget.view.SwitchButton;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.aop.SingleClick;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.ui.adapter.FeedBackHistoryAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -19,7 +21,7 @@ import java.util.List;
  * time          : 2021年01月04日 16:02
  * description   : 反馈历史
  */
-public class FeedBackHistoryActivity extends MyActivity {
+public class FeedBackHistoryActivity extends MyActivity{
     private Button history_btn;
     private SmartRefreshLayout smartRefreshLayout;
     private List<Object> messagelist;
@@ -52,9 +54,9 @@ public class FeedBackHistoryActivity extends MyActivity {
 
     @Override
     public void onClick(View v) {
-        if (v == history_btn){
-            startActivity(PorblemFeedBackActivity.class);
-        }
+       if (v == history_btn){
+           startActivity(PorblemFeedBackActivity.class);
+       }
 
     }
 }

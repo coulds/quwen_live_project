@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- 窗口背景颜色 -->
@@ -46,6 +46,8 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/button_selector</item>
         <item name="android:foreground">@null</item>
+
+
     </style>
 
     <!-- 不带圆角按钮样式 -->
@@ -62,12 +64,12 @@
     <style name="EditTextStyle">
         <item name="android:background">@null</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:textColorHint">#B8B8B8</item>
+        <item name="android:textColorHint">#A1A4AD</item>
         <item name="android:textColor">#333333</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingBottom">10dp</item>
-        <item name="android:paddingStart">10dp</item>
-        <item name="android:paddingEnd">10dp</item>
+<!--        <item name="android:paddingTop">10dp</item>-->
+<!--        <item name="android:paddingBottom">10dp</item>-->
+<!--        <item name="android:paddingStart">10dp</item>-->
+<!--        <item name="android:paddingEnd">10dp</item>-->
     </style>
 
     <style name="EditTextStyleRegister" parent="EditTextStyle">
@@ -102,7 +104,29 @@
         <item name="android:text">@string/common_code_send</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">16sp</item>
+
     </style>
+
+    <style name="CountdownViewStyles">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:minWidth">90dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/common_code_send</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/countdown_selector</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+
+
+
+
+
 
     <!-- 注册切换文本样式 -->
     <style name="SwitchMailboxViewStyle">
