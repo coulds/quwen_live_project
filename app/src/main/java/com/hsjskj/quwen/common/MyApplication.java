@@ -60,6 +60,7 @@ public final class MyApplication extends Application implements LifecycleOwner {
         super.onCreate();
         mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         MyUserInfo.getInstance().initContext(this);
+        MyCacheInfo.getInstance().initContext(this);
         NineGridView.setImageLoader(new GlideImageLoader());
         initSdk(this);
     }
