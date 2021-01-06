@@ -17,6 +17,7 @@ import com.hsjskj.quwen.common.MyMvvmActivity;
 import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
 import com.hsjskj.quwen.ui.adapter.FeedBackHistoryAdapter;
+import com.hsjskj.quwen.ui.dialog.HintDialog;
 import com.hsjskj.quwen.ui.home.adapter.ProblemFeedBackAdapter;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
 import com.hsjskj.quwen.upload.UploadListener;
@@ -61,7 +62,7 @@ public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel
     @Override
     protected void initView() {
         super.initView();
-        initMsag();
+
         problemfeedRecyclerview = findViewById(R.id.problemfeedback_recyclerview);
 
         etproblemphone = findViewById(R.id.et_input_phone);
@@ -97,26 +98,23 @@ public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel
         String string_phone = etproblemphone.getText().toString();
         String string_content = etproblemContent.getText().toString();
         if (v == commit_button){
-            if (etproblemphone == null && etproblemContent==null){
-                toast("输入为空");
+            if (string_phone.equals("") || string_content.equals("")){
+                toast("输入的内容和联系方式不能为空");
             }else {
-                commit_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MessageActivity messageActivity = new MessageActivity(string_content,MessageActivity.TYPE_SENT);
-                        messageActivityList.add(messageActivity);
-                        feedBackHistoryAdapter.notifyItemChanged(messageActivityList.size()-1);
-                    }
-                });
-
+//                MessageActivity messageActivity = new MessageActivity(string_content,MessageActivity.TYPE_SENT);
+//                messageActivityList.add(messageActivity);
+//                feedBackHistoryAdapter.notifyItemChanged(messageActivityList.size()-1);
+                new HintDialog.Builder(this)
+                        .setIcon(HintDialog.ICON_FINISH)
+                        .setMessage("修改完成")
+                        .show();
+                finish();
 
             }
         }
     }
 
-    public void initMsag(){
 
-    }
 
     @Override
     protected void initData() {
