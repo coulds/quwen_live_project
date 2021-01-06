@@ -1,5 +1,8 @@
 package com.hsjskj.quwen.ui.my.activity;
 
+import android.content.Context;
+import android.content.Intent;
+
 import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -16,15 +19,19 @@ import java.util.List;
 
 /**
  * Administrator :ZB
- * 2021/1/5 0005
+ * 2021/1/6 0006
  * describe :
  **/
-public class CouponActivity extends MyActivity {
+public class MyReleaseActivity extends MyActivity {
     private TitleBar title;
     private ViewPager vpCoupon;
     private CommonTabLayout tabLayout;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private List<String> mTitles=new ArrayList<>();
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MyReleaseActivity.class);
+        context.startActivity(intent);
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.activity_coupon;
@@ -33,17 +40,16 @@ public class CouponActivity extends MyActivity {
     @Override
     protected void initView() {
         title=findViewById(R.id.title);
-        title.setTitle("优惠券");
+        title.setTitle("我的发布");
         vpCoupon=findViewById(R.id.vp_coupon);
         tabLayout=findViewById(R.id.my_tab_layout);
-        mTitles.add("未使用");
-        mTitles.add("已使用");
-        mTitles.add("已过期");
+        mTitles.add("去问");
+        mTitles.add("问问");
         for (String mTitle : mTitles) {
             mTabEntities.add(new TabEntity(mTitle, 0, 0));
         }
         tabLayout.setTabData(mTabEntities);
-        vpCoupon.setAdapter(new CouponPageAdapter(getSupportFragmentManager(),"1"));
+        vpCoupon.setAdapter(new CouponPageAdapter(getSupportFragmentManager(),"2"));
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
-import com.hsjskj.quwen.ui.adapter.AccountBalanceAdapter;
+import com.hsjskj.quwen.ui.my.adapter.AccountBalanceAdapter;
 
 /**
  * Administrator :ZB

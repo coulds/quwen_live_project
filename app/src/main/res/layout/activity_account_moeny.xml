@@ -107,12 +107,14 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:fitsSystemWindows="true"
                 android:id="@+id/re_money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/view_left"
                 android:layout_marginRight="@dimen/view_right"
-                android:overScrollMode="never" />
+                android:overScrollMode="never"
+                android:descendantFocusability="beforeDescendants"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

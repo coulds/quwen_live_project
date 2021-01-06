@@ -1,5 +1,6 @@
 package com.hsjskj.quwen.ui.home.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import com.hsjskj.quwen.ui.my.activity.AccountMoneyActivity;
 import com.hsjskj.quwen.ui.activity.MyFansActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.activity.SettingActivity;
+import com.hsjskj.quwen.ui.my.activity.CouponActivity;
+import com.hsjskj.quwen.ui.my.activity.MyReleaseActivity;
 import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
 
@@ -36,7 +39,7 @@ public final class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout);
+        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout,R.id.fa_bu_layout,R.id.youhuijuan_layout);
 
     }
 
@@ -76,6 +79,11 @@ public final class MeFragment extends MyFragment<HomeActivity> {
             AccountBalanceActivity.start(getContext());
         }else if(id==R.id.yu_er_layout){
             AccountMoneyActivity.start(getContext());
+        }else if(id==R.id.fa_bu_layout){
+            MyReleaseActivity.start(getContext());
+        }else if(id==R.id.youhuijuan_layout){
+            Intent intent = new Intent(getContext(), CouponActivity.class);
+            startActivity(intent);
         }
 
     }

@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.adapter;
+package com.hsjskj.quwen.ui.my.adapter;
 
 import android.content.Context;
 import android.content.Intent;

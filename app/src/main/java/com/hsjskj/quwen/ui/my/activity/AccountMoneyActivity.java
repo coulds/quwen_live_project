@@ -1,5 +1,6 @@
 package com.hsjskj.quwen.ui.my.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,18 +17,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+import com.hjq.base.BaseAdapter;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.action.EditCloseAction;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.model.ButtonModel;
 import com.hsjskj.quwen.ui.activity.RecordActivity;
-import com.hsjskj.quwen.ui.adapter.RechargeButtonAdapter;
+import com.hsjskj.quwen.ui.my.adapter.RechargeButtonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +41,7 @@ import java.util.List;
  * 2021/1/5 0005
  * describe :
  **/
-public class AccountMoneyActivity extends MyActivity {
+public class AccountMoneyActivity extends MyActivity  {
     private RecyclerView reMoney;
     private ButtonModel buttonModel;
     private TextView tvContent;
@@ -86,7 +90,14 @@ public class AccountMoneyActivity extends MyActivity {
 
         reMoney = findViewById(R.id.re_money);
         rechargeButtonAdapter = new RechargeButtonAdapter(this, list);
-        reMoney.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL));
+        rechargeButtonAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+                rechargeButtonAdapter.getList(position);
+            }
+        });
+        reMoney.setNestedScrollingEnabled(true);
+        reMoney.setLayoutManager(new GridLayoutManager(getContext(),3));
         reMoney.setAdapter(rechargeButtonAdapter);
         title.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
