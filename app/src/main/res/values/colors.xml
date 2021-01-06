@@ -10,6 +10,10 @@
 
     <!-- 按钮按压时的颜色 -->
     <color name="colorButtonPressed">#AA69E8FE</color>
+    <color name="colorButtonPressedStart">#AA14DBE1</color>
+    <color name="colorButtonPressedEnd">#AA07C8E5</color>
+    <color name="colorButtonStart">#14DBE1</color>
+    <color name="colorButtonEnd">#07C8E5</color>
     <!-- 按钮禁用时的颜色 -->
     <color name="colorButtonDisable">#BBBBBB</color>
     <!-- 分割线的颜色 -->

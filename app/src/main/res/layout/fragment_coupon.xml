@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,13 +13,31 @@
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/rv_coupon"
-            android:overScrollMode="never"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/rv_coupon"
+                android:overScrollMode="never"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.hjq.widget.layout.WrapRecyclerView
+                android:visibility="gone"
+                android:id="@+id/re_Release"
+                android:background="#F7F9FA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/home_item_question" />
+
+            <include
+                android:id="@+id/no_data"
+                layout="@layout/layout_no_data_view"/>
+
+        </FrameLayout>
+
+
 
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter

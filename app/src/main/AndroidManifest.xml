@@ -315,11 +315,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+
         <activity android:name=".ui.my.activity.MoneyDetailedActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <!--优惠券查看-->
         <activity android:name=".ui.my.activity.CouponActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
@@ -337,6 +339,12 @@
             android:screenOrientation="portrait" />
 
 
+
+        <!--我的发布-->
+        <activity android:name=".ui.my.activity.MyReleaseActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
 
 
