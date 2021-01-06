@@ -13,7 +13,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 
-import com.alibaba.android.arouter.launcher.ARouter;
+//import com.alibaba.android.arouter.launcher.ARouter;
 import com.billy.android.swipe.SmartSwipeBack;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.initializer.LightBarInitializer;
@@ -170,11 +170,11 @@ public final class MyApplication extends Application implements LifecycleOwner {
         });
 
         //初始化 ARouter
-        if (BuildConfig.DEBUG) {
-            ARouter.openLog();
-            ARouter.openDebug();
-        }
-        ARouter.init(application);
+//        if (BuildConfig.DEBUG) {
+//            ARouter.openLog();
+//            ARouter.openDebug();
+//        }
+//        ARouter.init(application);
     }
 
     public static OkHttpClient  getOkHttpClient(Application application){
