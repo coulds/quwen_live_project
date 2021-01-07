@@ -110,6 +110,7 @@ public class RechargeButtonAdapter extends MyAdapter<ButtonModel> {
         private ViewHolderInput() {
             super(R.layout.item_button2);
             edContent = (EditText) findViewById(R.id.ed_content);
+
         }
 
         @Override

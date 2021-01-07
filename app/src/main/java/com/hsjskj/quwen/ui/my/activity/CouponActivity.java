@@ -1,5 +1,6 @@
 package com.hsjskj.quwen.ui.my.activity;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -9,7 +10,10 @@ import com.hjq.bar.TitleBar;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.ui.my.adapter.CouponPageAdapter;
+import com.hsjskj.quwen.ui.my.viewmodel.MyCouponViewModel;
 import com.hsjskj.quwen.widget.TabEntity;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +23,7 @@ import java.util.List;
  * 2021/1/5 0005
  * describe :
  **/
-public class CouponActivity extends MyActivity {
+public class CouponActivity extends MyActivity  {
     private TitleBar title;
     private ViewPager vpCoupon;
     private CommonTabLayout tabLayout;
@@ -78,4 +82,6 @@ public class CouponActivity extends MyActivity {
     protected void initData() {
 
     }
+
+
 }

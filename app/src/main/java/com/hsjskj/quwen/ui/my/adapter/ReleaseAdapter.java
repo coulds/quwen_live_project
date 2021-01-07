@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import com.hjq.base.UiUtlis;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
+import com.hsjskj.quwen.http.response.HomePublishBean;
 import com.hsjskj.quwen.ui.home.widget.StarTagView;
 import com.lzy.ninegrid.NineGridView;
 
@@ -19,7 +20,7 @@ import com.lzy.ninegrid.NineGridView;
  * 2021/1/6 0006
  * describe :
  **/
-public class ReleaseAdapter extends MyAdapter<String> {
+public class ReleaseAdapter extends MyAdapter<HomePublishBean.DataBean> {
     private int TYPE_LEFT = 1;
     private int TYPE_RIGHT = 2;
     private int TYPE;

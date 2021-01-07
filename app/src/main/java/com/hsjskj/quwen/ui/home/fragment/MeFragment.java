@@ -11,13 +11,14 @@ import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.http.response.UserInfoBean;
-import com.hsjskj.quwen.ui.activity.MyConcernActivity;
 import com.hsjskj.quwen.ui.my.activity.AccountBalanceActivity;
 import com.hsjskj.quwen.ui.my.activity.AccountMoneyActivity;
 import com.hsjskj.quwen.ui.activity.MyFansActivity;
 import com.hsjskj.quwen.ui.home.activity.HomeActivity;
 import com.hsjskj.quwen.ui.activity.SettingActivity;
 import com.hsjskj.quwen.ui.my.activity.CouponActivity;
+import com.hsjskj.quwen.ui.my.activity.ExtensionActivity;
+import com.hsjskj.quwen.ui.my.activity.ExtensionAdministrationActivity;
 import com.hsjskj.quwen.ui.my.activity.MyReleaseActivity;
 import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
@@ -40,7 +41,7 @@ public final class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout,R.id.fa_bu_layout,R.id.youhuijuan_layout,R.id.gz_layout);
+        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout,R.id.fa_bu_layout,R.id.youhuijuan_layout,R.id.wo_tuiguang_layout,R.id.tuiguang_layout);
 
     }
 
@@ -85,8 +86,10 @@ public final class MeFragment extends MyFragment<HomeActivity> {
         }else if(id==R.id.youhuijuan_layout){
             Intent intent = new Intent(getContext(), CouponActivity.class);
             startActivity(intent);
-        }else if (id==R.id.gz_layout){
-            startActivity(MyConcernActivity.class);
+        }else if(id==R.id.wo_tuiguang_layout){
+            ExtensionActivity.start(getContext());
+        }else  if(id==R.id.tuiguang_layout){
+            ExtensionAdministrationActivity.start(getContext());
         }
 
     }

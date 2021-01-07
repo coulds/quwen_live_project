@@ -83,6 +83,13 @@
                 app:bar_rightIcon="@drawable/arrows_right_ic" />
 
             <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_bankCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftText="银行卡"
+                app:bar_rightIcon="@drawable/arrows_right_ic" />
+
+            <com.hjq.widget.layout.SettingBar
                 android:id="@+id/sb_setting_password_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

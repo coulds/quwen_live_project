@@ -9,41 +9,38 @@
         android:id="@+id/srl_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        <com.hsjskj.quwen.widget.HintLayout
+            android:id="@+id/hint_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/rv_coupon"
-                android:overScrollMode="never"
+            android:layout_height="wrap_content">
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/rv_coupon"
+                    android:overScrollMode="never"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-            <com.hjq.widget.layout.WrapRecyclerView
-                android:visibility="gone"
-                android:id="@+id/re_Release"
-                android:background="#F7F9FA"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/home_item_question" />
-
-            <include
-                android:id="@+id/no_data"
-                layout="@layout/layout_no_data_view"/>
-
-        </FrameLayout>
-
-
+                <com.hjq.widget.layout.WrapRecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/re_Release"
+                    android:background="#F7F9FA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/home_item_question" />
 
 
-        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlClassicsSpinnerStyle="Translate" />
+            </FrameLayout>
+
+        </com.hsjskj.quwen.widget.HintLayout>
+
+
+
+
+
+
 
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

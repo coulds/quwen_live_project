@@ -1,4 +1,4 @@
-package com.hsjskj.quwen.ui.activity;
+package com.hsjskj.quwen.ui.my.activity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

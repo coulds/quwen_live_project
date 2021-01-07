@@ -22,6 +22,7 @@ import com.hsjskj.quwen.ui.dialog.MessageDialog;
 import com.hsjskj.quwen.ui.dialog.SelectDialog;
 import com.hjq.widget.view.SwitchButton;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
+import com.hsjskj.quwen.ui.my.activity.BankCardActivity;
 import com.hsjskj.quwen.ui.user.activity.FeedBackHistoryActivity;
 import com.hsjskj.quwen.ui.user.activity.PorblemFeedBackActivity;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
@@ -56,6 +57,7 @@ public final class SettingActivity extends MyActivity
     private SettingBar msetpasswordViwe;
     private SettingBar maboutView;
     private SettingBar mwechatView;
+    private SettingBar sb_bankCard;
 
     private TextView msb_tuichu_about;
     private UserInfoViewModel userInfoViewModel;
@@ -79,6 +81,7 @@ public final class SettingActivity extends MyActivity
         msetpasswordViwe = findViewById(R.id.sb_setting_password_about);
         maboutView = findViewById(R.id.sb_guanyu_about);
         mwechatView =findViewById(R.id.sb_weixin_auto);
+        sb_bankCard =findViewById(R.id.sb_bankCard);
 
 
         msb_tuichu_about = findViewById(R.id.sb_tuichu_about);
@@ -240,6 +243,8 @@ public final class SettingActivity extends MyActivity
             startActivity(AboutQuWenActivity.class);
         }else if (v == mwechatView){
             startActivity(WeChatActivity.class);
+        }else if(v==sb_bankCard){
+            startActivity(BankCardActivity.class);
         }
 
     }

@@ -50,7 +50,7 @@ android {
             // 设置混淆
             minifyEnabled false
             // 开发环境下的 BuglyId
-            buildConfigField 'String', 'BUGLY_ID', '\"请自行替换 Bugly 上面的 AppID\"'
+            buildConfigField 'String', 'BUGLY_ID', '\"72bc585c11"'
             signingConfig signingConfigs.config
 
             ndk {
@@ -68,7 +68,7 @@ android {
             // 设置混淆
             minifyEnabled false
             // 正式环境下的 BuglyId
-            buildConfigField 'String', 'BUGLY_ID', '\"请自行替换 Bugly 上面的 AppID\"'
+            buildConfigField 'String', 'BUGLY_ID', '\"72bc585c11\"'
             signingConfig signingConfigs.config
 
             ndk {
@@ -140,6 +140,7 @@ dependencies {
     // 图片加载框架：https://github.com/bumptech/glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
     // 状态栏沉浸：https://github.com/gyf-dev/ImmersionBar
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
@@ -200,4 +201,8 @@ dependencies {
 
     //tabLayout
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
+    //二维码
+    implementation 'com.king.zxing:zxing-lite:1.1.1'
+
 }
