@@ -251,4 +251,11 @@
     <string name="home_appointment_host">预约主播</string>
     <string name="home_constellation_calculation">星座计算中,请稍后</string>
 
+
+    <string name="context">感谢您对主播和去问平台的信任!兼听则明,偏听则暗,一个微小的建议,一句普通的话语,都可能改变我们的一生。但是,我们在此不得不提醒您,任何个人的建议或推测均源于经验或直觉,不属于科学范畴,不可能100%准确,也不可能让您100%满意,故主播和測測平台均不对任何建议或推測提供承诺或担保。 主播的所有言论和服务,均属于其个人言论,并不代表测测平台的意见和立场。若主播违规,您可以向管理员进行举报和投诉。如果用户出现谩骂行为,涉及黃赌毒话题,涉及封建迷信或邪教,勒索和诽谤主播,或者与主播发生咨询聊天之外的任何关系,测测可以做出相应的处罚措施,并不会退款,请您慎重</string>
+
+    <string name="extension_name">请输入姓名</string>
+    <string name="extension_phone">请输入电话号码</string>
+    <string name="extension_positive">请选择身份证正面</string>
+    <string name="extension_verso">请选择身份证反面</string>
 </resources>

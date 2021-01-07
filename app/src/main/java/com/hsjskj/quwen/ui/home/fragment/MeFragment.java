@@ -20,6 +20,7 @@ import com.hsjskj.quwen.ui.activity.SettingActivity;
 import com.hsjskj.quwen.ui.my.activity.CouponActivity;
 import com.hsjskj.quwen.ui.my.activity.ExtensionActivity;
 import com.hsjskj.quwen.ui.my.activity.ExtensionAdministrationActivity;
+import com.hsjskj.quwen.ui.my.activity.ExtensionAssessmentActivity;
 import com.hsjskj.quwen.ui.my.activity.MyReleaseActivity;
 import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
@@ -42,7 +43,7 @@ public final class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout,R.id.fa_bu_layout,R.id.youhuijuan_layout,R.id.wo_tuiguang_layout,R.id.tuiguang_layout,R.id.gz_layout);
+        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout,R.id.fa_bu_layout,R.id.youhuijuan_layout,R.id.wo_tuiguang_layout,R.id.tuiguang_layout,R.id.gz_layout,R.id.kaohe_layout);
 
     }
 
@@ -93,6 +94,8 @@ public final class MeFragment extends MyFragment<HomeActivity> {
             ExtensionAdministrationActivity.start(getContext());
         }else if (id==R.id.gz_layout){
             startActivity(MyConcernActivity.class);
+        }else if(id==R.id.kaohe_layout){
+            ExtensionAssessmentActivity.start(getContext());
         }
 
     }
