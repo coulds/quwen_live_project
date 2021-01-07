@@ -67,13 +67,6 @@ public class HomeVideoView extends LinearLayout {
             }
         });
         recyclerView.setAdapter(adapter);
-        try {
-            String cache = MyCacheInfo.getInstance().getHomeVideoCache();
-            if (!"".equals(cache) && !TextUtils.isEmpty(cache)) {
-                setData(JSON.parseArray(cache, HomeVideoListBean.DataBean.class));
-            }
-        } catch (Exception e) {
-        }
     }
 
     private void initView() {
@@ -96,9 +89,10 @@ public class HomeVideoView extends LinearLayout {
 //        } else {
 //            setVisibility(VISIBLE);
 //        }
-        if (datas != null) {
-            MyCacheInfo.getInstance().setHomeVideoCache(JSON.toJSONString(datas));
+        if (datas == null) {
+            return;
         }
+        MyCacheInfo.getInstance().setHomeVideoCache(JSON.toJSONString(datas));
         adapter.setData(datas);
     }
 

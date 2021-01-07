@@ -99,6 +99,7 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             homeBannerView.setBannerPic(bannerBeans);
         });
         homeFragmentViewModel.getHomeNoticeLiveData().observe(this, noticeBean -> {
+            showComplete();
             homeNoticeView.setNotices(Collections.singletonList(noticeBean));
         });
         homeFragmentViewModel.getHomePublishLiveData().observe(this, dataBeans -> {
@@ -168,10 +169,14 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        //加载轮播图
+        //刷新
         mAdapter.setPageNumber(1);
+        //加载轮播图缓存
+        homeFragmentViewModel.loadHomeBannerCache();
         homeFragmentViewModel.loadHomeBanner(this);
         homeFragmentViewModel.loadHomeNotice(this);
+        //加载视频缓存
+        homeVideoViewModel.loadHomeVideoListCache();
         homeVideoViewModel.loadHomeVideoList(this);
         //加载发布数据缓存
         homeFragmentViewModel.loadHomePublishCacheList();

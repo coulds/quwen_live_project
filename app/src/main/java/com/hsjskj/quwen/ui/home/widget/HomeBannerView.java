@@ -2,7 +2,6 @@ package com.hsjskj.quwen.ui.home.widget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -13,12 +12,9 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import com.alibaba.fastjson.JSON;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.hjq.base.UiUtlis;
-import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyCacheInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
@@ -70,13 +66,6 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
         banner.setIndicator(new CircleIndicator(getContext()));
         banner.start();
 
-        try {
-            String cache = MyCacheInfo.getInstance().getHomeBannerCache();
-            if (!"".equals(cache) && !TextUtils.isEmpty(cache)) {
-                setBannerPic(JSON.parseArray(cache, BannerBean.class));
-            }
-        } catch (Exception e) {
-        }
     }
 
     @Override

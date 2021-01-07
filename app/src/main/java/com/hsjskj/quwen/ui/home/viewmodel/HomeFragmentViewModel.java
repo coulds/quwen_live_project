@@ -62,6 +62,19 @@ public class HomeFragmentViewModel extends ViewModel {
         loadBanner(lifecycleOwner, 1);
     }
 
+    public void loadHomeBannerCache() {
+        try {
+            String cache = MyCacheInfo.getInstance().getHomeBannerCache();
+            if (!"".equals(cache) && !TextUtils.isEmpty(cache)) {
+                List<BannerBean> bannerBeans = JSON.parseArray(cache, BannerBean.class);
+                if (bannerBeans!=null&&!bannerBeans.isEmpty()){
+                    postHomeBannerValue(bannerBeans, 1);
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
     //1 首页 2 问问 3 消息 4 直播
     private void loadBanner(LifecycleOwner lifecycleOwner, @IntRange(from = 1, to = 4) int id) {
         EasyHttp.post(lifecycleOwner)
