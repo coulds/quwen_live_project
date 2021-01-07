@@ -11,6 +11,7 @@ import com.hsjskj.quwen.common.MyFragment;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.http.response.UserInfoBean;
+import com.hsjskj.quwen.ui.activity.MyConcernActivity;
 import com.hsjskj.quwen.ui.my.activity.AccountBalanceActivity;
 import com.hsjskj.quwen.ui.my.activity.AccountMoneyActivity;
 import com.hsjskj.quwen.ui.activity.MyFansActivity;
@@ -41,7 +42,7 @@ public final class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout,R.id.fa_bu_layout,R.id.youhuijuan_layout,R.id.wo_tuiguang_layout,R.id.tuiguang_layout);
+        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout,R.id.fa_bu_layout,R.id.youhuijuan_layout,R.id.wo_tuiguang_layout,R.id.tuiguang_layout,R.id.gz_layout);
 
     }
 
@@ -90,6 +91,8 @@ public final class MeFragment extends MyFragment<HomeActivity> {
             ExtensionActivity.start(getContext());
         }else  if(id==R.id.tuiguang_layout){
             ExtensionAdministrationActivity.start(getContext());
+        }else if (id==R.id.gz_layout){
+            startActivity(MyConcernActivity.class);
         }
 
     }
