@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 public class MyFansActivity extends MyActivity implements StatusAction, OnRefreshLoadMoreListener {
     private FollowAdapter adapter;
+
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_my_fans;
