@@ -4,12 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.lifecycle.Observer;
 
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
+import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyMvvmActivity;
+import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
 import com.hsjskj.quwen.ui.dialog.ExtensionDialog;
 import com.hsjskj.quwen.ui.my.viewmodel.ExtensionAssessmentModel;
@@ -30,10 +37,13 @@ public class ExtensionAssessmentActivity extends MyMvvmActivity<ExtensionAssessm
     private UploadListener listener;
     private String font;
     private String back;
-    public static void start(Context context){
+    private EditText edName,edPhone,edCode;
+
+    public static void start(Context context) {
         Intent intent = new Intent(context, ExtensionAssessmentActivity.class);
         context.startActivity(intent);
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_extension_assessment;
@@ -41,9 +51,13 @@ public class ExtensionAssessmentActivity extends MyMvvmActivity<ExtensionAssessm
 
     @Override
     protected void initView() {
-        title=findViewById(R.id.title);
+        super.initView();
+        title = findViewById(R.id.title);
+        edName=findViewById(R.id.ed_name);
+        edPhone=findViewById(R.id.ed_phone);
+        edCode=findViewById(R.id.ed_code);
         // 推广弹窗
-         BaseDialog waitDialog = new ExtensionDialog.Builder(this)
+        BaseDialog waitDialog = new ExtensionDialog.Builder(this)
                 .show();
 
         title.setOnTitleBarListener(new OnTitleBarListener() {
@@ -63,14 +77,14 @@ public class ExtensionAssessmentActivity extends MyMvvmActivity<ExtensionAssessm
                 waitDialog.show();
             }
         });
-        setOnClickListener(R.id.photo_left,R.id.photo_right,R.id.button);
-
+        setOnClickListener(R.id.photo_left, R.id.photo_right, R.id.button);
 
 
     }
+
     @Override
     protected void onDestroy() {
-        if (listener!=null){
+        if (listener != null) {
             listener.cancel();
         }
         super.onDestroy();
@@ -78,24 +92,28 @@ public class ExtensionAssessmentActivity extends MyMvvmActivity<ExtensionAssessm
 
     @Override
     protected void initData() {
-       /* mViewModel.getTxCosLiveBean().observe(this, txCosBean -> {
+        mViewModel.getTxCosLiveBean().observe(this, txCosBean -> {
             if (txCosBean != null) {
                 listener = new UploadTxImpl(getContext(), txCosBean);
             }
         });
-        loadTxCos();*/
+        loadTxCos();
+    }
+
+    private void loadTxCos() {
+        mViewModel.loadTxCos(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+
+        switch (v.getId()) {
             case R.id.photo_left:
                 ImageSelectActivity.start(this, new ImageSelectActivity.OnPhotoSelectListener() {
                     @Override
                     public void onSelected(List<String> data) {
-                        font=data.get(0);
-
-                        Log.d("TAG", "onSelected: "+ data.get(0));
+                        font = data.get(0);
+                        GlideApp.with(getContext()).load(font).into(((ImageView) findViewById(R.id.photo_left)));
 
                     }
                 });
@@ -104,14 +122,26 @@ public class ExtensionAssessmentActivity extends MyMvvmActivity<ExtensionAssessm
                 ImageSelectActivity.start(this, new ImageSelectActivity.OnPhotoSelectListener() {
                     @Override
                     public void onSelected(List<String> data) {
-                        back=data.get(0);
+                        back = data.get(0);
+                        GlideApp.with(getContext()).load(font).into(((ImageView) findViewById(R.id.photo_right)));
                     }
                 });
                 break;
             case R.id.button:
-
+                if (listener == null) {
+                    loadTxCos();
+                    ToastUtils.show("获取上传cos失败");
+                    return;
+                }
+                mViewModel.submitExtension(this, font, back, edName.getText().toString(), edPhone.getText().toString(), edCode.getText().toString(), listener).observe(this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean aBoolean) {
+                        if (aBoolean) {
+                            finish();
+                        }
+                    }
+                });
                 break;
-
             default:
                 break;
         }

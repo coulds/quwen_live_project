@@ -32,6 +32,7 @@
             android:textSize="14sp" />
 
         <EditText
+            android:id="@+id/ed_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -63,6 +64,7 @@
             android:textSize="14sp" />
 
         <EditText
+            android:id="@+id/ed_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -95,6 +97,7 @@
             android:textSize="14sp" />
 
         <EditText
+            android:id="@+id/ed_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
