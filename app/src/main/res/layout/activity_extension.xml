@@ -6,164 +6,187 @@
     android:background="@color/myColor38CAFC"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:scaleType="centerCrop"
+        android:src="@drawable/extension_bottom" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/extension_bottom"
-            android:layout_weight="1" />
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+
         <com.hjq.bar.TitleBar
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="推广好友"
-            app:leftIcon="@drawable/arrow_back_fff"
             android:background="#0000"
+            app:leftIcon="@drawable/arrow_back_fff"
             app:lineColor="#0000"
-            app:titleColor="@color/white"
             app:rightColor="@color/white"
-            app:rightTitle="申请推广会员"/>
+            app:rightTitle="申请推广会员"
+            app:title="推广好友"
+            app:titleColor="@color/white" />
+
         <ImageView
             android:id="@+id/stars_small"
-            android:layout_below="@+id/title"
             android:layout_width="9.8dp"
             android:layout_height="9.8dp"
+            android:layout_below="@+id/title"
             android:layout_marginLeft="93dp"
             android:layout_marginTop="4dp"
-            android:src="@drawable/stars_small"/>
+            android:src="@drawable/stars_small" />
+
         <LinearLayout
             android:id="@+id/extension_content"
-            android:layout_below="@+id/stars_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:gravity="center"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/extension_content"
-                android:layout_marginLeft="25.5dp" />
+                android:layout_marginLeft="25.5dp"
+                android:background="@drawable/extension_content" />
+
             <ImageView
                 android:layout_width="9.8dp"
                 android:layout_height="9.8dp"
                 android:layout_marginLeft="28dp"
-                android:src="@drawable/start_big"/>
+                android:src="@drawable/start_big" />
         </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/rl_code"
-            android:layout_marginLeft="20.5dp"
-            android:layout_marginRight="35dp"
-            android:layout_below="@+id/extension_content"
             android:layout_width="match_parent"
-            android:layout_height="324dp"
-            android:background="@drawable/q_r_code">
+            android:layout_height="324dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="-5dp"
+                android:src="@drawable/extension_could_left" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="-10dp"
+                android:layout_marginTop="87dp"
+                android:src="@drawable/extension_could_left" />
+
+            <ImageView
+                android:id="@+id/iv_code_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/q_r_code" />
+
             <TextView
                 android:id="@+id/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
+                android:layout_alignLeft="@id/iv_code_bg"
+                android:layout_marginStart="43dp"
                 android:layout_marginTop="50dp"
                 android:text="APP名字："
                 android:textColor="@color/white"
                 android:textSize="11sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="去问"
-                android:layout_toRightOf="@+id/app_name"
-                android:layout_marginTop="48dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="48dp"
+                android:layout_toRightOf="@+id/app_name"
+                android:text="去问"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
+
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="可通过应用市场直接搜索"
                 android:layout_below="@+id/app_name"
                 android:layout_alignLeft="@+id/app_name"
                 android:layout_marginTop="1dp"
+                android:text="可通过应用市场直接搜索"
                 android:textColor="@color/white"
                 android:textSize="11sp" />
-            <cn.bingoogolapple.qrcode.zxing.ZXingView
+
+            <ImageView
                 android:id="@+id/iv_code"
                 android:layout_width="142dp"
                 android:layout_height="142dp"
-                android:layout_marginTop="105.5dp"
-                android:layout_marginLeft="95.5dp"
-                app:qrcv_animTime="1000"
-                app:qrcv_borderColor="@android:color/white"
-                app:qrcv_borderSize="1dp"
-                app:qrcv_cornerColor="@color/colorPrimaryDark"
-                app:qrcv_cornerLength="20dp"
-                app:qrcv_cornerSize="3dp"
-                app:qrcv_maskColor="#33FFFFFF"
-                app:qrcv_rectWidth="200dp"
-                app:qrcv_scanLineColor="@color/colorPrimaryDark"
-                app:qrcv_scanLineSize="1dp"
-                app:qrcv_topOffset="90dp" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="105dp"
+                android:src="@color/gray" />
+
+
             <TextView
-                android:layout_below="@+id/iv_code"
-                android:layout_marginLeft="129.5dp"
-                android:layout_marginRight="115dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="47dp"
                 android:text="扫码二维码"
-                android:layout_marginTop="11dp"
                 android:textColor="@color/myColorff373737"
                 android:textSize="13sp" />
         </RelativeLayout>
+
         <TextView
             android:id="@+id/code_bottom_context"
-            android:layout_marginTop="8.5dp"
-            android:layout_below="@+id/rl_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
+            android:layout_marginTop="8.5dp"
             android:lineSpacingExtra="10dp"
+            android:paddingHorizontal="25dp"
             android:text="去问在星座是一款XXXXXXXXXX,推荐人和被推荐人完成注册的新用户都可以获赠50积分，每个推荐人"
             android:textColor="@color/white"
-            android:textSize="13sp"
-            />
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/button1"
-            android:layout_below="@+id/code_bottom_context"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="30dp"
             android:layout_height="67dp"
+            android:layout_below="@+id/code_bottom_context"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/extension_button"
             android:gravity="center"
             android:text="保存图片"
-            android:textColor="@color/white"
-            android:background="@drawable/extension_button"
-            android:layout_centerHorizontal="true"/>
+            android:textColor="@color/white" />
+
         <Button
             android:id="@+id/button2"
-            android:layout_below="@+id/button1"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="30dp"
             android:layout_height="67dp"
+            android:layout_below="@+id/button1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/extension_button"
             android:gravity="center"
             android:text="复制链接"
-            android:textColor="@color/white"
-            android:background="@drawable/extension_button"
-            android:layout_centerHorizontal="true"/>
+            android:textColor="@color/white" />
 
-    </RelativeLayout>
-    
+        <View
+            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+    </LinearLayout>
 
 </FrameLayout>
