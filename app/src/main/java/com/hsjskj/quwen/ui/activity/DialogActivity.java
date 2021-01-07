@@ -359,7 +359,7 @@ public final class DialogActivity extends MyActivity {
                         //.setMinute(59)
                         // 设置秒数
                         //.setSecond(59)
-                        // 不选择秒数
+                        // 不选择秒数m
                         //.setIgnoreSecond()
                         .setListener(new TimeDialog.OnListener() {
 

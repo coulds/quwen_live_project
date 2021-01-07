@@ -1,20 +1,19 @@
 package com.hsjskj.quwen.ui.my.activity;
 
-import android.view.View;
-import android.widget.RelativeLayout;
-
+import android.os.Bundle;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
 
-/**
- * Administrator :ZB
- * 2021/1/4 0004
- * describe :
- **/
-public class WithdrawalActivity extends MyActivity {
+public class AddBankCardActivity extends MyActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_withdrawal;
+        return  R.layout.activity_add_banck_card;
     }
 
     @Override
@@ -26,5 +25,4 @@ public class WithdrawalActivity extends MyActivity {
     protected void initData() {
 
     }
-
 }
