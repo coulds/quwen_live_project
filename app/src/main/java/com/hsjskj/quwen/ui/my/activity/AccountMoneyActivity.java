@@ -1,6 +1,5 @@
 package com.hsjskj.quwen.ui.my.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,19 +17,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseAdapter;
 import com.hsjskj.quwen.R;
-import com.hsjskj.quwen.action.EditCloseAction;
 import com.hsjskj.quwen.common.MyActivity;
+import com.hsjskj.quwen.helper.KeyboardUtils;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.model.ButtonModel;
-import com.hsjskj.quwen.ui.activity.RecordActivity;
 import com.hsjskj.quwen.ui.my.adapter.RechargeButtonAdapter;
 
 import java.util.ArrayList;
@@ -94,6 +90,7 @@ public class AccountMoneyActivity extends MyActivity  {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
                 rechargeButtonAdapter.getList(position);
+                KeyboardUtils.hideKeyboard(itemView);
             }
         });
         reMoney.setNestedScrollingEnabled(true);

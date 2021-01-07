@@ -295,7 +295,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.RecordActivity"
+            android:name=".ui.my.activity.RecordActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -335,6 +335,12 @@
 
         <!--我的发布-->
         <activity android:name=".ui.my.activity.MyReleaseActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+
+        <activity android:name=".ui.my.activity.ExtensionActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
