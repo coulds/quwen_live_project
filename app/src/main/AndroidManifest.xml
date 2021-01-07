@@ -2,29 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hsjskj.quwen">
-
     <!-- 联网权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- 访问网络状态 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 访问网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <!-- 外部存储读写权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 外部存储读写权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- 拍照权限 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <!-- 安装包的权限 -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-
-    <!--  麦克风权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 拍照权限 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 安装包的权限 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 麦克风权限 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
-        android:name="com.hsjskj.quwen.common.MyApplication"
+        android:name=".common.MyApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -37,24 +26,23 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute,LockedOrientationActivity"
         tools:replace="android:allowBackup,android:supportsRtl"
         tools:targetApi="n">
+        <activity android:name=".ui.my.activity.AddBankCardActivity"></activity>
+        <activity android:name=".ui.my.activity.BankCardActivity" />
+
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />
-        <!-- 适配 Android 7.0 文件意图 -->
+            android:required="false" /> <!-- 适配 Android 7.0 文件意图 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
-
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>
-
-        <!-- 闪屏界面 -->
+        </provider> <!-- 闪屏界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
@@ -67,230 +55,181 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-
-        <!-- 崩溃界面 -->
+        </activity> <!-- 崩溃界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.CrashActivity"
+            android:name=".ui.activity.CrashActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:process=":crash"
-            android:screenOrientation="landscape" />
-
-        <!-- 引导界面 -->
+            android:screenOrientation="landscape" /> <!-- 引导界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.GuideActivity"
+            android:name=".ui.activity.GuideActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- App 首页 -->
+            android:screenOrientation="portrait" /> <!-- App 首页 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.home.activity.HomeActivity"
+            android:name=".ui.home.activity.HomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-
-        <!-- 登录界面 -->
+            android:screenOrientation="portrait" /> <!-- 登录界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.user.activity.LoginActivity"
+            android:name=".ui.user.activity.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 注册界面 -->
+            android:screenOrientation="portrait" /> <!-- 注册界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.user.activity.RegisterActivity"
+            android:name=".ui.user.activity.RegisterActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 设置界面 -->
+            android:screenOrientation="portrait" /> <!-- 设置界面 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.SettingActivity"
+            android:name=".ui.activity.SettingActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/setting_title"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 忘记密码 -->
+            android:screenOrientation="portrait" /> <!-- 忘记密码 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.PasswordForgetActivity"
+            android:name=".ui.activity.PasswordForgetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/password_forget_title"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hsjskj.quwen.ui.user.activity.PhoneMailForgetActivity"
+            android:name=".ui.user.activity.PhoneMailForgetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/password_forget_title"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 重置密码 -->
+            android:screenOrientation="portrait" /> <!-- 重置密码 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.PasswordResetActivity"
+            android:name=".ui.activity.PasswordResetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/password_reset_title"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 手机号更换 -->
+            android:screenOrientation="portrait" /> <!-- 手机号更换 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.PhoneResetActivity"
+            android:name=".ui.activity.PhoneResetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/phone_reset_title"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 关于我们 -->
+            android:screenOrientation="portrait" /> <!-- 关于我们 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.AboutActivity"
+            android:name=".ui.activity.AboutActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/about_title"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 个人资料 -->
+            android:screenOrientation="portrait" /> <!-- 个人资料 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.PersonalDataActivity"
+            android:name=".ui.activity.PersonalDataActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/personal_data_title"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 浏览器 -->
+            android:screenOrientation="portrait" /> <!-- 浏览器 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.BrowserActivity"
+            android:name=".ui.activity.BrowserActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/web_title"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 拍照选择 -->
+            android:screenOrientation="portrait" /> <!-- 拍照选择 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.CameraActivity"
+            android:name=".ui.activity.CameraActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 图片选择 -->
+            android:screenOrientation="portrait" /> <!-- 图片选择 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.ImageSelectActivity"
+            android:name=".ui.activity.ImageSelectActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/image_select_title"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 查看大图 -->
+            android:screenOrientation="portrait" /> <!-- 查看大图 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.ImagePreviewActivity"
+            android:name=".ui.activity.ImagePreviewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 播放视频 -->
+            android:screenOrientation="portrait" /> <!-- 播放视频 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.VideoPlayActivity"
+            android:name=".ui.activity.VideoPlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
-            android:theme="@style/FullScreenTheme" />
-
-        <!-- 选择视频 -->
+            android:theme="@style/FullScreenTheme" /> <!-- 选择视频 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.VideoSelectActivity"
+            android:name=".ui.activity.VideoSelectActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 对话框案例 -->
+            android:screenOrientation="portrait" /> <!-- 对话框案例 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.DialogActivity"
+            android:name=".ui.activity.DialogActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!-- 状态案例 -->
+            android:screenOrientation="portrait" /> <!-- 状态案例 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.StatusActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hsjskj.quwen.ui.home.activity.ConstellationActivity"
+            android:name=".ui.activity.StatusActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hsjskj.quwen.ui.home.activity.ConstellationDetailsActivity"
+            android:name=".ui.home.activity.ConstellationActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hsjskj.quwen.ui.home.activity.HomeVideoListActivity"
+            android:name=".ui.home.activity.ConstellationDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hsjskj.quwen.ui.home.activity.HomeQuestionDetails"
+            android:name=".ui.home.activity.HomeVideoListActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hsjskj.quwen.ui.home.activity.HomePublishActivity"
+            android:name=".ui.home.activity.HomeQuestionDetails"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.home.activity.HomePublishActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.activity.UserPreviewActivity"
             android:exported="true"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.user.activity.UserProtocolActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.NickNameEditActivity"
+            android:name=".ui.activity.NickNameEditActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.MyFansActivity"
+            android:name=".ui.activity.MyFansActivity"
             android:exported="true"
             android:launchMode="singleTop" />
-
         <activity
-            android:name="com.hsjskj.quwen.ui.copy.CopyActivity"
+            android:name=".ui.copy.CopyActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!--关于去问-->
+            android:screenOrientation="portrait" /> <!-- 关于去问 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.AboutQuWenActivity"
+            android:name=".ui.activity.AboutQuWenActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!--设置邮箱，发送邮箱验证码-->
+            android:screenOrientation="portrait" /> <!-- 设置邮箱，发送邮箱验证码 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.EmailCodeActivity"
+            android:name=".ui.activity.EmailCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!--设置手机号，发送手机验证码-->
+            android:screenOrientation="portrait" /> <!-- 设置手机号，发送手机验证码 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.SetPhoneCodeActivity"
+            android:name=".ui.activity.SetPhoneCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <!--设置密码，发送手机验证码-->
+            android:screenOrientation="portrait" /> <!-- 设置密码，发送手机验证码 -->
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.SetPassWordActivity"
+            android:name=".ui.activity.SetPassWordActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -299,40 +238,36 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.my.activity.AccountMoneyActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.my.activity.WithdrawalActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.my.activity.AccountBalanceActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.my.activity.MoneyDetailedActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.my.activity.CouponActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-
         <activity
-            android:name="com.hsjskj.quwen.ui.user.activity.FeedBackHistoryActivity"
+            android:name=".ui.my.activity.AccountMoneyActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
-
-
+        <activity
+            android:name=".ui.my.activity.WithdrawalActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.activity.AccountBalanceActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.activity.MoneyDetailedActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.activity.CouponActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.user.activity.FeedBackHistoryActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

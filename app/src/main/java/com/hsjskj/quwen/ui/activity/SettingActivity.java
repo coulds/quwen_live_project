@@ -22,8 +22,8 @@ import com.hsjskj.quwen.ui.dialog.MessageDialog;
 import com.hsjskj.quwen.ui.dialog.SelectDialog;
 import com.hjq.widget.view.SwitchButton;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
+import com.hsjskj.quwen.ui.my.activity.BankCardActivity;
 import com.hsjskj.quwen.ui.user.activity.FeedBackHistoryActivity;
-import com.hsjskj.quwen.ui.user.activity.PorblemFeedBackActivity;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
 import com.hsjskj.quwen.ui.user.viewmodel.UserInfoViewModel;
@@ -53,6 +53,7 @@ public final class SettingActivity extends MyActivity
     private SettingBar mphoneView;
     private SettingBar memailView;
     private SettingBar mbindweixinView;
+    private SettingBar sb_bankCard;
     private SettingBar msetpasswordViwe;
     private SettingBar maboutView;
 
@@ -75,6 +76,7 @@ public final class SettingActivity extends MyActivity
         mphoneView = findViewById(R.id.sb_phone_view);
         memailView = findViewById(R.id.sb_email_about);
         mbindweixinView = findViewById(R.id.sb_weixin_auto);
+        sb_bankCard = findViewById(R.id.sb_bankCard);
         msetpasswordViwe = findViewById(R.id.sb_setting_password_about);
         maboutView = findViewById(R.id.sb_guanyu_about);
 
@@ -85,7 +87,7 @@ public final class SettingActivity extends MyActivity
         mAddressView = (SettingBar) findViewById(R.id.sb_setting_password);
 
 
-        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about,this.mproblemfeedView,this.mphoneView,this.memailView,this.mbindweixinView,this.msetpasswordViwe,this.maboutView);
+        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about,this.mproblemfeedView,this.mphoneView,this.memailView,this.mbindweixinView,this.sb_bankCard,this.msetpasswordViwe,this.maboutView);
 
     }
 
@@ -237,6 +239,8 @@ public final class SettingActivity extends MyActivity
             startActivity(SetPassWordActivity.class);
         }else if (v == maboutView){
             startActivity(AboutQuWenActivity.class);
+        }else if(v==sb_bankCard){
+            startActivity(BankCardActivity.class);
         }
 
     }
