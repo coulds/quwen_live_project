@@ -54,7 +54,7 @@ public class FeedBackHistoryAdapter extends RecyclerView.Adapter<FeedBackHistory
         if (position%2==0){
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
-            holder.lefMsg.setText("1111111");
+            holder.lefMsg.setText("111111113123312131232312313132123131231321313");
         }else {
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.leftLayout.setVisibility(View.GONE);

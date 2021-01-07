@@ -27,9 +27,10 @@
     </item>
 
     <!-- 默认状态 -->
-    <item>
+    <item >
         <shape android:shape="rectangle">
             <corners android:radius="30dp" />
+            <solid android:color="#14DBE1"/>
             <stroke android:color="@color/colorAccent"
                 android:width="1dp"/>
         </shape>

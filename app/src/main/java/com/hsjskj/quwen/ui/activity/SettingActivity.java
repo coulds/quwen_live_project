@@ -55,6 +55,7 @@ public final class SettingActivity extends MyActivity
     private SettingBar mbindweixinView;
     private SettingBar msetpasswordViwe;
     private SettingBar maboutView;
+    private SettingBar mwechatView;
 
     private TextView msb_tuichu_about;
     private UserInfoViewModel userInfoViewModel;
@@ -77,7 +78,7 @@ public final class SettingActivity extends MyActivity
         mbindweixinView = findViewById(R.id.sb_weixin_auto);
         msetpasswordViwe = findViewById(R.id.sb_setting_password_about);
         maboutView = findViewById(R.id.sb_guanyu_about);
-
+        mwechatView =findViewById(R.id.sb_weixin_auto);
 
 
         msb_tuichu_about = findViewById(R.id.sb_tuichu_about);
@@ -85,7 +86,7 @@ public final class SettingActivity extends MyActivity
         mAddressView = (SettingBar) findViewById(R.id.sb_setting_password);
 
 
-        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about,this.mproblemfeedView,this.mphoneView,this.memailView,this.mbindweixinView,this.msetpasswordViwe,this.maboutView);
+        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about,this.mproblemfeedView,this.mphoneView,this.memailView,this.mbindweixinView,this.msetpasswordViwe,this.maboutView,this.mwechatView);
 
     }
 
@@ -237,6 +238,8 @@ public final class SettingActivity extends MyActivity
             startActivity(SetPassWordActivity.class);
         }else if (v == maboutView){
             startActivity(AboutQuWenActivity.class);
+        }else if (v == mwechatView){
+            startActivity(WeChatActivity.class);
         }
 
     }

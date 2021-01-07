@@ -2,6 +2,7 @@ package com.hsjskj.quwen.ui.home.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSON;
 import com.hjq.base.UiUtlis;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.common.MyCacheInfo;
+import com.hsjskj.quwen.http.response.BannerBean;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.ui.home.adapter.HomeVideoAdapter;
 
@@ -85,6 +89,10 @@ public class HomeVideoView extends LinearLayout {
 //        } else {
 //            setVisibility(VISIBLE);
 //        }
+        if (datas == null) {
+            return;
+        }
+        MyCacheInfo.getInstance().setHomeVideoCache(JSON.toJSONString(datas));
         adapter.setData(datas);
     }
 

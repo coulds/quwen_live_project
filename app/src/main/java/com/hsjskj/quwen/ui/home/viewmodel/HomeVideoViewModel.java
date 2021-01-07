@@ -1,12 +1,16 @@
 package com.hsjskj.quwen.ui.home.viewmodel;
 
 
+import android.text.TextUtils;
+
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.alibaba.fastjson.JSON;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hsjskj.quwen.common.MyCacheInfo;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.HomeVideoListApi;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
@@ -33,6 +37,18 @@ public class HomeVideoViewModel extends ViewModel {
     public void loadHomeVideoList(LifecycleOwner lifecycleOwner) {
         loadHomeVideoList(lifecycleOwner, 20, 1);
     }
+    public void loadHomeVideoListCache() {
+        try {
+            String cache = MyCacheInfo.getInstance().getHomeVideoCache();
+            if (!"".equals(cache) && !TextUtils.isEmpty(cache)) {
+                List<HomeVideoListBean.DataBean> dataBeans = JSON.parseArray(cache, HomeVideoListBean.DataBean.class);
+                if (dataBeans!=null&&!dataBeans.isEmpty()){
+                    videoHomeLiveData.postValue(dataBeans);
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
 
     public void loadHomeVideoList(LifecycleOwner lifecycleOwner, int limit, int page) {
         EasyHttp.post(lifecycleOwner)
@@ -45,7 +61,7 @@ public class HomeVideoViewModel extends ViewModel {
 
                     @Override
                     public void onFail(Exception e) {
-                        videoHomeLiveData.postValue(new ArrayList<>());
+                        videoHomeLiveData.postValue(null);
                     }
                 });
     }
