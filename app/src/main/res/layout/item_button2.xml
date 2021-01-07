@@ -10,7 +10,8 @@
         android:layout_height="52dp"
         android:gravity="center"
         android:background="@null"
-        android:text="输入数量"
+        android:inputType="numberDecimal"
+        android:hint="输入数量"
         android:layout_margin="8dp"
         android:textSize="15sp" />
 

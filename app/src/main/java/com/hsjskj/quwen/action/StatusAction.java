@@ -31,18 +31,20 @@ public interface StatusAction {
      * 显示加载中
      */
     default void showLoading() {
-        showLoading(R.raw.loading);
+        showLoading(R.raw.loading,0);
     }
 
     default void showLoading(int hint) {
         showLoading(R.raw.loading,hint);
     }
 
-    default void showLoading(@RawRes int id,int hintSrcId) {
+    default void showLoading(@RawRes int id, int hintSrcId) {
         HintLayout layout = getHintLayout();
         layout.show();
         layout.setAnim(id);
-        layout.setHint(hintSrcId);
+        if (hintSrcId>0){
+            layout.setHint(hintSrcId);
+        }
         layout.setOnClickListener(null);
     }
 

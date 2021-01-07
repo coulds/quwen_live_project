@@ -1,13 +1,17 @@
 package com.hsjskj.quwen.ui.home.viewmodel;
 
+import android.text.TextUtils;
+
 import androidx.annotation.IntRange;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.alibaba.fastjson.JSON;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.toast.ToastUtils;
+import com.hsjskj.quwen.common.MyCacheInfo;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.CouponRecevieApi;
 import com.hsjskj.quwen.http.request.HomeBannerApi;
@@ -58,6 +62,19 @@ public class HomeFragmentViewModel extends ViewModel {
         loadBanner(lifecycleOwner, 1);
     }
 
+    public void loadHomeBannerCache() {
+        try {
+            String cache = MyCacheInfo.getInstance().getHomeBannerCache();
+            if (!"".equals(cache) && !TextUtils.isEmpty(cache)) {
+                List<BannerBean> bannerBeans = JSON.parseArray(cache, BannerBean.class);
+                if (bannerBeans!=null&&!bannerBeans.isEmpty()){
+                    postHomeBannerValue(bannerBeans, 1);
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
     //1 首页 2 问问 3 消息 4 直播
     private void loadBanner(LifecycleOwner lifecycleOwner, @IntRange(from = 1, to = 4) int id) {
         EasyHttp.post(lifecycleOwner)
@@ -70,7 +87,7 @@ public class HomeFragmentViewModel extends ViewModel {
 
                     @Override
                     public void onFail(Exception e) {
-                        postHomeBannerValue(new ArrayList<>(), id);
+                        postHomeBannerValue(null, id);
                     }
                 });
     }
@@ -157,6 +174,16 @@ public class HomeFragmentViewModel extends ViewModel {
         loadHomePublishList(lifecycleOwner, 10, 1);
     }
 
+    public void loadHomePublishCacheList() {
+        try {
+            String cache = MyCacheInfo.getInstance().getHomePublishCache();
+            if (!"".equals(cache) && !TextUtils.isEmpty(cache)) {
+                homePublishList.postValue(JSON.parseArray(cache, HomePublishBean.DataBean.class));
+            }
+        } catch (Exception e) {
+        }
+    }
+
     public void loadHomePublishList(LifecycleOwner lifecycleOwner, int limit, int page) {
         EasyHttp.post(lifecycleOwner)
                 .api(new HomePublishListApi(limit, page))
@@ -168,7 +195,7 @@ public class HomeFragmentViewModel extends ViewModel {
 
                     @Override
                     public void onFail(Exception e) {
-                        homePublishList.postValue(new ArrayList<>());
+                        homePublishList.postValue(null);
                     }
                 });
     }

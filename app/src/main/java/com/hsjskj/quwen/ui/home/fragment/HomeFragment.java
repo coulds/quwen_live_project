@@ -4,27 +4,24 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSON;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseAdapter;
 import com.hjq.base.BaseDialog;
 import com.hjq.base.UiUtlis;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
-import com.hjq.toast.ToastUtils;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.StatusAction;
-import com.hsjskj.quwen.action.StatusTwoAction;
+import com.hsjskj.quwen.common.MyCacheInfo;
 import com.hsjskj.quwen.common.MyFragment;
-import com.hsjskj.quwen.http.model.HttpData;
-import com.hsjskj.quwen.http.request.HomeBannerApi;
-import com.hsjskj.quwen.http.response.BannerBean;
+import com.hsjskj.quwen.http.response.HomePublishBean;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.activity.VideoPlayActivity;
@@ -102,19 +99,24 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
             homeBannerView.setBannerPic(bannerBeans);
         });
         homeFragmentViewModel.getHomeNoticeLiveData().observe(this, noticeBean -> {
+            showComplete();
             homeNoticeView.setNotices(Collections.singletonList(noticeBean));
         });
         homeFragmentViewModel.getHomePublishLiveData().observe(this, dataBeans -> {
             mRefreshLayout.finishLoadMore();
             mRefreshLayout.finishRefresh();
             if (mAdapter.getPageNumber() == 1) {
-                if (dataBeans == null || dataBeans.isEmpty()) {
+                if (dataBeans == null) {
+                    return;
+                }
+                if (dataBeans.isEmpty()) {
                     recyclerviewQuerstion.setVisibility(View.GONE);
                     findViewById(R.id.tv_no_data).setVisibility(View.VISIBLE);
                 } else {
                     recyclerviewQuerstion.setVisibility(View.VISIBLE);
                     findViewById(R.id.tv_no_data).setVisibility(View.GONE);
                 }
+                MyCacheInfo.getInstance().setHomePublishCache(JSON.toJSONString(dataBeans));
                 mAdapter.setData(dataBeans);
             } else {
                 if (dataBeans == null || dataBeans.isEmpty()) {
@@ -167,11 +169,17 @@ public final class HomeFragment extends MyFragment<HomeActivity> implements OnRe
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        //加载轮播图
+        //刷新
         mAdapter.setPageNumber(1);
+        //加载轮播图缓存
+        homeFragmentViewModel.loadHomeBannerCache();
         homeFragmentViewModel.loadHomeBanner(this);
         homeFragmentViewModel.loadHomeNotice(this);
+        //加载视频缓存
+        homeVideoViewModel.loadHomeVideoListCache();
         homeVideoViewModel.loadHomeVideoList(this);
+        //加载发布数据缓存
+        homeFragmentViewModel.loadHomePublishCacheList();
         homeFragmentViewModel.loadHomePublishList(this);
         //模拟数据 直播数据
         postDelayed(() -> {

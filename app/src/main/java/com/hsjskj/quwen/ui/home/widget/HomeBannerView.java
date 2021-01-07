@@ -12,12 +12,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.alibaba.fastjson.JSON;
 import com.hjq.base.UiUtlis;
-import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.common.MyCacheInfo;
 import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.http.response.BannerBean;
 import com.hsjskj.quwen.ui.home.activity.ConstellationActivity;
@@ -66,6 +65,7 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
                 , UiUtlis.dp2px(getContext(), 0));
         banner.setIndicator(new CircleIndicator(getContext()));
         banner.start();
+
     }
 
     @Override
@@ -87,6 +87,7 @@ public class HomeBannerView extends FrameLayout implements OnBannerListener<Bann
         }
         this.bannerPic.clear();
         this.bannerPic.addAll(b);
+        MyCacheInfo.getInstance().setHomeBannerCache(JSON.toJSONString(b));
         this.banner.setAdapter(new BannerImageAdapter<BannerBean>(bannerPic) {
 
             @Override
