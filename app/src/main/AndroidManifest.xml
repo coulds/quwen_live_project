@@ -260,6 +260,10 @@
             android:name="com.hsjskj.quwen.ui.activity.MyFansActivity"
             android:exported="true"
             android:launchMode="singleTop" />
+        <activity
+            android:name="com.hsjskj.quwen.ui.activity.MyConcernActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
 
         <activity
             android:name="com.hsjskj.quwen.ui.copy.CopyActivity"
@@ -347,10 +351,12 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hsjskj.quwen.ui.activity.WeChatActivity"
+            android:name="com.hsjskj.quwen.ui.activity.WeChatAfctivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+
 
 
 

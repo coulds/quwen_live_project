@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#F5F5F5"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:orientation="vertical">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleSize="18sp"
         app:title="反馈历史"
+        app:titleSize="18sp"
         app:titleStyle="bold" />
 
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/back_history_refresh"
+    <com.hsjskj.quwen.widget.HintLayout
+        android:id="@+id/hint_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/back_history_recyclerview"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/back_history_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            android:layout_height="match_parent"
+            app:srlEnableLoadMore="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/back_history_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </com.hsjskj.quwen.widget.HintLayout>
+
 
     <Button
-      android:layout_marginBottom="40dp"
         android:id="@+id/back_history_btn"
-        android:layout_gravity="center"
         android:layout_width="303dp"
         android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/button_selector"
+        android:text="我要反馈"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:text="我要反馈"/>
-
+        android:textSize="16sp" />
 
 
 </LinearLayout>
