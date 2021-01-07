@@ -360,6 +360,8 @@
 
         <activity android:name=".ui.my.activity.AddBankCardActivity"/>
         <activity android:name=".ui.my.activity.BankCardActivity" />
+        <activity android:name=".ui.user.activity.EvaluationActivity"/>
+        <activity android:name=".ui.user.activity.WriteEvaluationActivity"/>
 
     </application>
 

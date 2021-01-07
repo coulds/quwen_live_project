@@ -89,7 +89,10 @@ public final class SettingActivity extends MyActivity
         mAddressView = (SettingBar) findViewById(R.id.sb_setting_password);
 
 
-        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about,this.mproblemfeedView,this.mphoneView,this.memailView,this.mbindweixinView,this.msetpasswordViwe,this.maboutView,this.mwechatView);
+        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about,this.mproblemfeedView
+                ,this.mphoneView,this.memailView,this.mbindweixinView,this.msetpasswordViwe,this.maboutView,this.mwechatView
+                ,sb_bankCard
+        );
 
     }
 
