@@ -17,8 +17,7 @@ import com.hsjskj.quwen.R;
  */
 public final class WaitDialog {
 
-    public static final class Builder
-            extends BaseDialog.Builder<Builder> {
+    public static final class Builder extends BaseDialog.Builder<Builder> {
 
         private final TextView mMessageView;
 

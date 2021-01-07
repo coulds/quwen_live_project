@@ -360,6 +360,20 @@
 
         <activity android:name=".ui.my.activity.AddBankCardActivity"/>
         <activity android:name=".ui.my.activity.BankCardActivity" />
+        <!-- 推广管理-->
+        <activity android:name=".ui.my.activity.ExtensionAdministrationActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+
+
+        <!--推广考核-->
+        <activity android:name=".ui.my.activity.ExtensionAssessmentActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
 
     </application>
 

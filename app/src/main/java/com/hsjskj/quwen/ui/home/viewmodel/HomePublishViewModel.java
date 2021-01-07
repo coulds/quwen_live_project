@@ -2,6 +2,7 @@ package com.hsjskj.quwen.ui.home.viewmodel;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -59,6 +60,7 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
 
         //图片真实路径
         ArrayList<Object> objects = new ArrayList<>(list.subList(1, list.size()));
+        Log.d("TAG", "submitPublish: "+objects);
         //上传图片
         AtomicInteger count = new AtomicInteger(objects.size());
         MutableLiveData<Boolean> picsLiveData = new MutableLiveData<>();
