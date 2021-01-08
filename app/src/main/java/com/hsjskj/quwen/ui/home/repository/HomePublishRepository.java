@@ -53,6 +53,41 @@ public class HomePublishRepository extends BaseRepository {
 
     }
 
+    public void upLoadPicsNew(List<UploadBean> list, AtomicInteger count, UploadListener listener
+            , MutableLiveData<Boolean> mutableLiveData, List<String> remoteUrls) {
+        UploadBean uploadBean = list.get(0);
+        if (uploadBean.isUpload()) {
+            //这里 只会是编辑，，因为已经上传过，所以 跳过上传
+            resultSuccess(uploadBean, remoteUrls, count, mutableLiveData, list, listener);
+        }else {
+            listener.upload(uploadBean, new UploadCallback() {
+                @Override
+                public void onSuccess(UploadBean bean) {
+                    resultSuccess(bean, remoteUrls, count, mutableLiveData, list, listener);
+                }
+
+                @Override
+                public void onFailure() {
+                    mutableLiveData.postValue(false);
+                }
+            });
+        }
+
+
+    }
+
+    private boolean resultSuccess(UploadBean bean, List<String> remoteUrls, AtomicInteger count, MutableLiveData<Boolean> mutableLiveData, List<UploadBean> list, UploadListener listener) {
+        //给后台传name就行
+        remoteUrls.add(bean.getFileName());
+        if (count.decrementAndGet() == 0) {
+            mutableLiveData.postValue(true);
+            return true;
+        }
+        list.remove(0);
+        upLoadPicsNew(list, count, listener, mutableLiveData, remoteUrls);
+        return false;
+    }
+
 
     private MutableLiveData<TxCosBean> txCosLiveBean;
 

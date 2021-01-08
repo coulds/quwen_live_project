@@ -17,6 +17,7 @@ import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.HomePublishApi;
+import com.hsjskj.quwen.http.request.HomePublishEditApi;
 import com.hsjskj.quwen.http.response.TxCosBean;
 import com.hsjskj.quwen.ui.copy.CopyRepository;
 import com.hsjskj.quwen.ui.home.repository.HomePublishRepository;
@@ -40,7 +41,7 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
         super(application);
     }
 
-    public MutableLiveData<Boolean> submitPublish(LifecycleOwner lifecycleOwner, String title, String content, List<Object> list, UploadListener listener) {
+    public MutableLiveData<Boolean> submitPublish(LifecycleOwner lifecycleOwner, String id, String title, String content, List<UploadBean> list, UploadListener listener) {
         MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
         if (TextUtils.isEmpty(title)) {
             ToastUtils.show(R.string.home_please_enter_the_title_to_be_published);
@@ -58,9 +59,14 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
             return mutableLiveData;
         }
 
-        //图片真实路径
-        ArrayList<Object> objects = new ArrayList<>(list.subList(1, list.size()));
-        Log.d("TAG", "submitPublish: "+objects);
+        //图片真实路径 过滤掉添加add icon
+        ArrayList<UploadBean> objects;
+        if ("".equals(list.get(0).getLocalPath()) || TextUtils.isEmpty(list.get(0).getLocalPath())) {
+            objects = new ArrayList<>(list.subList(1, list.size()));
+        } else {
+            objects = new ArrayList<>(list);
+        }
+        Log.d("TAG", "submitPublish: " + objects);
         //上传图片
         AtomicInteger count = new AtomicInteger(objects.size());
         MutableLiveData<Boolean> picsLiveData = new MutableLiveData<>();
@@ -68,14 +74,27 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
         picsLiveData.observeForever(o -> {
             if (o) {
                 //图片上传成功 -》 提交信息
-                loadHomeVideoList(lifecycleOwner, title, content, remoteUrls).observe(lifecycleOwner, voidHttpData -> {
-                    if (voidHttpData != null) {
-                        ToastUtils.show(voidHttpData.getMessage());
-                        mutableLiveData.postValue(true);
-                    } else {
-                        mutableLiveData.postValue(false);
-                    }
-                });
+                if (null == id || TextUtils.isEmpty(id)) {
+                    loadHomeVideoList(lifecycleOwner, title, content, remoteUrls).observe(lifecycleOwner, voidHttpData -> {
+                        if (voidHttpData != null) {
+                            ToastUtils.show(voidHttpData.getMessage());
+                            mutableLiveData.postValue(true);
+                        } else {
+                            mutableLiveData.postValue(false);
+                        }
+                    });
+                } else {
+                    loadHomeVideoList(lifecycleOwner, id, title, content, remoteUrls).observe(lifecycleOwner, voidHttpData -> {
+                        if (voidHttpData != null) {
+                            ToastUtils.show(voidHttpData.getMessage());
+                            mutableLiveData.postValue(true);
+                        } else {
+                            mutableLiveData.postValue(false);
+                        }
+                    });
+                }
+
+
             } else {
                 ToastUtils.show("图片上传失败");
                 mutableLiveData.postValue(false);
@@ -85,9 +104,9 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
         return mutableLiveData;
     }
 
-    private void upLoadPics(List<Object> list, AtomicInteger count, UploadListener listener
+    private void upLoadPics(List<UploadBean> list, AtomicInteger count, UploadListener listener
             , MutableLiveData<Boolean> mutableLiveData, List<String> remoteUrls) {
-        repository.upLoadPics(list, count, listener, mutableLiveData, remoteUrls);
+        repository.upLoadPicsNew(list, count, listener, mutableLiveData, remoteUrls);
     }
 
     public MutableLiveData<HttpData<Void>> loadHomeVideoList(LifecycleOwner lifecycleOwner, String title, String content, List<String> enclosures) {
@@ -95,6 +114,26 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
         EasyHttp.post(lifecycleOwner)
                 .tag(this)
                 .api(new HomePublishApi(title, content, enclosures))
+                .request(new HttpCallback<HttpData<Void>>(null) {
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        mutableLiveData.postValue(data);
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        mutableLiveData.postValue(null);
+                        ToastUtils.show("" + e.getMessage());
+                    }
+                });
+        return mutableLiveData;
+    }
+
+    public MutableLiveData<HttpData<Void>> loadHomeVideoList(LifecycleOwner lifecycleOwner, String id, String title, String content, List<String> enclosures) {
+        MutableLiveData<HttpData<Void>> mutableLiveData = new MutableLiveData<>();
+        EasyHttp.post(lifecycleOwner)
+                .tag(this)
+                .api(new HomePublishEditApi(id, title, content, enclosures))
                 .request(new HttpCallback<HttpData<Void>>(null) {
                     @Override
                     public void onSucceed(HttpData<Void> data) {

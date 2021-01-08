@@ -26,6 +26,7 @@ public class HomePublishBean {
         private String status;
         public String constellation;
         public List<String> enclosure;
+        public List<String> enclosure_key;
         protected DataBean(){
 
         }
@@ -41,6 +42,7 @@ public class HomePublishBean {
             status = in.readString();
             constellation = in.readString();
             enclosure = in.createStringArrayList();
+            enclosure_key = in.createStringArrayList();
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
@@ -176,6 +178,7 @@ public class HomePublishBean {
             dest.writeString(status);
             dest.writeString(constellation);
             dest.writeStringList(enclosure);
+            dest.writeStringList(enclosure_key);
         }
     }
 }

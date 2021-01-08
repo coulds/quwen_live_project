@@ -11,6 +11,11 @@ public class UploadBean {
     private String localPath = "";
     private String mResultUrl = "";
     private String fileName = "";
+    private boolean isUpload;//是否已经上传
+
+    public boolean isUpload() {
+        return isUpload;
+    }
 
     public String getFileName() {
         return fileName;
@@ -36,9 +41,14 @@ public class UploadBean {
         this.mResultUrl = mResultUrl;
     }
 
-    public UploadBean(String localPath, String fileName) {
+    public UploadBean(String localPath, String fileName, boolean b) {
         this.localPath = localPath;
-        this.fileName = System.currentTimeMillis() + "_" + fileName;
+        this.fileName = fileName;
+        this.isUpload = b;
+    }
+
+    public UploadBean() {
+        this.isUpload = true;
     }
 
     public UploadBean(String localPath) {
@@ -48,5 +58,6 @@ public class UploadBean {
         } catch (Exception e) {
             this.fileName = System.currentTimeMillis() + "_";
         }
+        this.isUpload = false;
     }
 }

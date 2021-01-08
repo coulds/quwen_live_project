@@ -19,6 +19,7 @@ import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomePublishAdapter;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
+import com.hsjskj.quwen.upload.UploadBean;
 import com.hsjskj.quwen.upload.UploadListener;
 import com.hsjskj.quwen.upload.UploadTxImpl;
 
@@ -36,7 +37,7 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
     private EditText etPublishTitle;
     private EditText etPublishContent;
     private HomePublishAdapter publishAdapter;
-    private List<Object> pics;
+    private List<UploadBean> pics;
     private static final int MAX_SELECT_NUMBER = 3;
     private UploadListener listener;
     private HomePublishBean.DataBean bean = null;//编辑时 传的id  可空
@@ -95,18 +96,18 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
     @Override
     protected void initData() {
         pics = new ArrayList<>();
-        pics.add(R.drawable.publish_defalut_icon);
+        pics.add(new UploadBean());
         publishAdapter.setData(pics);
 
 
-        if (bean != null && bean.enclosure != null) {
+        if (bean != null && bean.enclosure != null && bean.enclosure_key != null) {
             List<String> enclosure = bean.enclosure;
-            for (String s : enclosure) {
+            for (int i = 0; i < enclosure.size(); i++) {
                 if (pics.size() == MAX_SELECT_NUMBER) {
                     publishAdapter.isShowAdd = false;
                     pics.remove(0);//移除第一张占位
                 }
-                pics.add(s);
+                pics.add(new UploadBean(enclosure.get(i), bean.enclosure_key.get(i), true));
             }
             publishAdapter.notifyDataSetChanged();
         }
@@ -128,7 +129,7 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
         String title = etPublishTitle.getText().toString();
         String content = etPublishContent.getText().toString();
         showDialog();
-        mViewModel.submitPublish(this, title, content, pics, listener).observe(this, o -> {
+        mViewModel.submitPublish(this, null == bean ? null : bean.id, title, content, pics, listener).observe(this, o -> {
             hideDialog();
             if (o) {
                 finish();
@@ -149,7 +150,7 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
                     publishAdapter.isShowAdd = false;
                     pics.remove(0);//移除第一张占位
                 }
-                pics.add(stringUrl);
+                pics.add(new UploadBean(stringUrl));
                 publishAdapter.notifyDataSetChanged();
             });
         } else {
@@ -161,7 +162,7 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
         if (!publishAdapter.isShowAdd) {
             publishAdapter.isShowAdd = true;
-            pics.add(0, R.drawable.publish_defalut_icon);
+            pics.add(0, new UploadBean());
         }
         pics.remove(position);
         publishAdapter.notifyDataSetChanged();
