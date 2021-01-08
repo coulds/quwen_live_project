@@ -21,6 +21,7 @@ public abstract class MySmartRefreshLayoutActivity<T> extends MyActivity impleme
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView mRecyclerview;
+    private MyAdapter<T> myAdapter;
 
     public abstract MyAdapter<T> getAdapter();
 
@@ -40,9 +41,9 @@ public abstract class MySmartRefreshLayoutActivity<T> extends MyActivity impleme
         mRefreshLayout = findViewById(R.id.refresh_layout);
         mRecyclerview = findViewById(R.id.recyclerview);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        getAdapter();
+        myAdapter = getAdapter();
         initRecycler(mRecyclerview);
-        mRecyclerview.setAdapter(getAdapter());
+        mRecyclerview.setAdapter(myAdapter);
         setTitle(getTitleStr());
     }
 
@@ -53,14 +54,14 @@ public abstract class MySmartRefreshLayoutActivity<T> extends MyActivity impleme
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        getAdapter().setPageNumber((getAdapter().getPageNumber() + 1));
-        loadHttp(getAdapter().getPageNumber());
+        myAdapter.setPageNumber((myAdapter.getPageNumber() + 1));
+        loadHttp(myAdapter.getPageNumber());
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        getAdapter().setPageNumber(1);
-        loadHttp(getAdapter().getPageNumber());
+        myAdapter.setPageNumber(1);
+        loadHttp(myAdapter.getPageNumber());
     }
 
     protected void finishRefresh() {
@@ -69,18 +70,18 @@ public abstract class MySmartRefreshLayoutActivity<T> extends MyActivity impleme
     }
 
     protected void setAdapterList(List<T> objects) {
-        if (getAdapter().getPageNumber() == 1) {
+        if (myAdapter.getPageNumber() == 1) {
             if (objects == null || objects.isEmpty()) {
                 showEmpty();
             } else {
                 showComplete();
             }
-            getAdapter().setData(objects);
+            myAdapter.setData(objects);
         } else {
             if (objects == null || objects.isEmpty()) {
                 mRefreshLayout.finishLoadMoreWithNoMoreData();
             }
-            getAdapter().addData(objects);
+            myAdapter.addData(objects);
         }
     }
 
