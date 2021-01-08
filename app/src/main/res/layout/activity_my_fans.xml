@@ -21,76 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-<!--            <LinearLayout-->
-<!--                android:layout_marginTop="1dp"-->
-<!--                android:background="@color/white"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="76dp"-->
-<!--                android:orientation="horizontal">-->
 
-<!--                <ImageView-->
-<!--                    android:layout_width="44dp"-->
-<!--                    android:layout_height="44dp"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:src="@drawable/p2"/>-->
-
-<!--                <LinearLayout-->
-
-<!--                    android:layout_weight="1"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="8dp"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="恩林元的小猴子"/>-->
-
-
-<!--                    <LinearLayout-->
-<!--                        android:paddingVertical="6dp"-->
-<!--                        android:paddingHorizontal="6dp"-->
-<!--                        android:orientation="horizontal"-->
-<!--                        android:layout_marginTop="4dp"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:background="@drawable/myconcern_constellation_bg"-->
-<!--                        android:layout_height="wrap_content">-->
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:src="@drawable/home_sex_male"/>-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginStart="2dp"-->
-<!--                            android:textSize="10dp"-->
-<!--                            android:textColor="#14DBE1"-->
-<!--                            android:text="狮子座"/>-->
-<!--                    </LinearLayout>-->
-
-
-<!--                </LinearLayout>-->
-
-<!--                <com.hjq.widget.view.CountdownView-->
-
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center|end"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:background="@drawable/button_selector"-->
-<!--                    android:paddingHorizontal="23dp"-->
-<!--                    android:paddingVertical="5dp"-->
-<!--                    android:text="关注"-->
-<!--                    android:textColor="@color/white" />-->
-
-
-<!--            </LinearLayout>-->
 
             <com.hjq.widget.layout.WrapRecyclerView
                 android:id="@+id/myfans_WrapRecyclerView"

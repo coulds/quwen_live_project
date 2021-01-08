@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 //import com.alibaba.android.arouter.facade.annotation.Route;
 import com.hjq.base.route.RouteUtil;
@@ -63,7 +64,7 @@ public final class LoginActivity extends MyActivity
 
     @Override
     protected void initView() {
-        loginViewModel = new LoginViewModel();
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         mPhoneView = findViewById(R.id.et_login_phone);
         mPasswordView = findViewById(R.id.et_login_password);
         mForgetView = findViewById(R.id.tv_login_forget);

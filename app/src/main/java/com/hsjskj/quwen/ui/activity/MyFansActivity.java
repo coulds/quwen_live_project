@@ -1,81 +1,60 @@
 package com.hsjskj.quwen.ui.activity;
 
+import android.view.View;
+
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.hjq.base.BaseAdapter;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
-import com.hsjskj.quwen.action.StatusAction;
-import com.hsjskj.quwen.common.MyActivity;
+import com.hsjskj.quwen.common.MyAdapter;
+import com.hsjskj.quwen.common.MySmartRefreshLayoutActivity;
+import com.hsjskj.quwen.http.response.FansBean;
 import com.hsjskj.quwen.ui.adapter.FollowAdapter;
-import com.hsjskj.quwen.widget.HintLayout;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
-import java.util.ArrayList;
+import com.hsjskj.quwen.ui.user.viewmodel.MyFansViewModel;
 
-public class MyFansActivity extends MyActivity implements StatusAction, OnRefreshLoadMoreListener {
+public class MyFansActivity extends MySmartRefreshLayoutActivity<FansBean.DataBean> implements BaseAdapter.OnChildClickListener {
     private FollowAdapter adapter;
-
+    private MyFansViewModel myFansViewModel;
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_my_fans;
+    public MyAdapter<FansBean.DataBean> getAdapter() {
+        adapter = new FollowAdapter(this);
+        adapter.setOnChildClickListener(R.id.fans_stuta, this);
+        return adapter;
     }
 
     @Override
-    public void initView() {
-        WrapRecyclerView mrecyclerView = (WrapRecyclerView) findViewById(R.id.myfans_WrapRecyclerView);
-        SmartRefreshLayout myfans_SmartRefreshLayout = (SmartRefreshLayout) findViewById(R.id.myfans_SmartRefreshLayout);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        this.adapter = new FollowAdapter(this);
-        mrecyclerView.setLayoutManager(manager);
-        mrecyclerView.setAdapter(this.adapter);
-        myfans_SmartRefreshLayout.setOnRefreshLoadMoreListener(this);
+    public void initRecycler(WrapRecyclerView mRecyclerview) {
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void loadHttp(int page) {
+        myFansViewModel.loadmyfans(this, 10, page);
+    }
+
+    @Override
+    public String getTitleStr() {
+        return "我的粉丝";
+    }
+
+    @Override
+    protected void initData() {
+        myFansViewModel = new ViewModelProvider(this).get(MyFansViewModel.class);
+        myFansViewModel.getmyfans().observe(this, s -> {
+            finishRefresh();
+            setAdapterList(s);
+        });
         showLoading();
-        onRefresh(myfans_SmartRefreshLayout);
+        loadHttp(1);
     }
 
     @Override
-    public void initData() {
+    public void onChildClick(RecyclerView recyclerView, View childView, int position) {
+        toast("gusisisi");
     }
 
-    @Override
-    public void onLoadMore(final RefreshLayout refreshLayout) {
-        FollowAdapter followAdapter = this.adapter;
-        followAdapter.setPageNumber(followAdapter.getPageNumber() + 1);
-        postDelayed(new Runnable() {
-
-            public void run() {
-                MyFansActivity.this.showComplete();
-                refreshLayout.finishLoadMore();
-                ArrayList<Object> objects = new ArrayList<>();
-                objects.add(new Object());
-                objects.add(new Object());
-                objects.add(new Object());
-                MyFansActivity.this.adapter.addData(objects);
-            }
-        }, 1000);
-    }
-
-    @Override
-    public void onRefresh(final RefreshLayout refreshLayout) {
-        this.adapter.setPageNumber(1);
-        postDelayed(new Runnable() {
-
-            public void run() {
-                MyFansActivity.this.showComplete();
-                refreshLayout.finishRefresh();
-                ArrayList<Object> objects = new ArrayList<>();
-                objects.add(new Object());
-                objects.add(new Object());
-                objects.add(new Object());
-                MyFansActivity.this.adapter.setData(objects);
-            }
-        }, 1000);
-    }
-
-    @Override
-    public HintLayout getHintLayout() {
-        return (HintLayout) findViewById(R.id.myfans_HintLayout);
-    }
 }

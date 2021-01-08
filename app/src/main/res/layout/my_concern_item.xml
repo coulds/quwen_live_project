@@ -67,6 +67,7 @@
         </LinearLayout>
 
         <com.hsjskj.quwen.widget.FollowAppCompatButton
+            android:id="@+id/fans_stuta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="17dp"

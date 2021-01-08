@@ -8,11 +8,13 @@ import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.BackHistoryApi;
+import com.hsjskj.quwen.http.request.MyFansApi;
 import com.hsjskj.quwen.http.request.UserSetAvatarApi;
 import com.hsjskj.quwen.http.request.UserSetBirthApi;
 import com.hsjskj.quwen.http.request.UserSetSexApi;
 import com.hsjskj.quwen.http.request.UsersetNickApi;
 import com.hsjskj.quwen.http.response.BackFeedHistoryListBean;
+import com.hsjskj.quwen.http.response.FansBean;
 
 import java.util.Collections;
 import java.util.List;
@@ -157,6 +159,9 @@ public class UserInfoViewModel extends ViewModel {
                     }
                 });
     }
+
+
+
 
 
 
