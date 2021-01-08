@@ -122,7 +122,7 @@ public class ExtensionAssessmentActivity extends MyMvvmActivity<ExtensionAssessm
                     @Override
                     public void onSelected(List<String> data) {
                         back = data.get(0);
-                        GlideApp.with(getContext()).load(font).into(((ImageView) findViewById(R.id.photo_right)));
+                        GlideApp.with(getContext()).load(back).into(((ImageView) findViewById(R.id.photo_right)));
                     }
                 });
                 break;
@@ -132,9 +132,11 @@ public class ExtensionAssessmentActivity extends MyMvvmActivity<ExtensionAssessm
                     ToastUtils.show("获取上传cos失败");
                     return;
                 }
+                showDialog();
                 mViewModel.submitExtension(this, font, back, edName.getText().toString(), edPhone.getText().toString(), edCode.getText().toString(), listener).observe(this, new Observer<Boolean>() {
                     @Override
                     public void onChanged(Boolean aBoolean) {
+                        hideDialog();
                         if (aBoolean) {
                             finish();
                         }

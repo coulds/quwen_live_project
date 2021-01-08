@@ -107,7 +107,7 @@
             android:background="@null"
             android:gravity="right"
             android:hint="请输入证件号"
-            android:inputType="number"
+            android:digits="0123456789Xx"
             android:textColor="@color/myColorffabaeb8"
             android:textSize="14sp" />
     </RelativeLayout>

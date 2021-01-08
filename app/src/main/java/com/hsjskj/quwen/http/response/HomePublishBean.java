@@ -1,5 +1,8 @@
 package com.hsjskj.quwen.http.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -11,7 +14,7 @@ public class HomePublishBean {
 
     public List<DataBean> data;
 
-    public static class DataBean {
+    public static class DataBean  implements Parcelable {
         public String id;
         public String user_id;
         public String title;
@@ -23,6 +26,36 @@ public class HomePublishBean {
         private String status;
         public String constellation;
         public List<String> enclosure;
+        public List<String> enclosure_key;
+        protected DataBean(){
+
+        }
+        protected DataBean(Parcel in) {
+            id = in.readString();
+            user_id = in.readString();
+            title = in.readString();
+            content = in.readString();
+            create_time = in.readString();
+            user_nickname = in.readString();
+            avatar = in.readString();
+            sex = in.readInt();
+            status = in.readString();
+            constellation = in.readString();
+            enclosure = in.createStringArrayList();
+            enclosure_key = in.createStringArrayList();
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel in) {
+                return new DataBean(in);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
 
         public String getStatus() {
             return status;
@@ -125,6 +158,27 @@ public class HomePublishBean {
 
         public boolean isMale() {
             return sex != 2;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(id);
+            dest.writeString(user_id);
+            dest.writeString(title);
+            dest.writeString(content);
+            dest.writeString(create_time);
+            dest.writeString(user_nickname);
+            dest.writeString(avatar);
+            dest.writeInt(sex);
+            dest.writeString(status);
+            dest.writeString(constellation);
+            dest.writeStringList(enclosure);
+            dest.writeStringList(enclosure_key);
         }
     }
 }
