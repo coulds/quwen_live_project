@@ -45,8 +45,11 @@ public class ExtensionAssessmentModel extends BaseViewModel<HomePublishRepositor
             , String name, String mobile, String idCard, UploadListener listener
     ) {
         MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
-        isjudge(front,back,name,mobile,idCard);
-
+        boolean isjudge = isjudge(front, back, name, mobile, idCard);
+        if (!isjudge) {
+            mutableLiveData.postValue(false);
+            return mutableLiveData;
+        }
         //上传前
         listener.upload(new UploadBean(front), new UploadCallback() {
             @Override
@@ -54,16 +57,15 @@ public class ExtensionAssessmentModel extends BaseViewModel<HomePublishRepositor
                 listener.upload(new UploadBean(back), new UploadCallback() {
                     @Override
                     public void onSuccess(UploadBean backBean) {
-
                         String fileNameFront = frontBean.getFileName();
                         String fileNameBack = backBean.getFileName();
-
-                        loadExtension(lifecycleOwner, name, mobile, idCard, fileNameFront, fileNameBack).observe(lifecycleOwner, mutableLiveData::postValue);
+                        loadExtension(lifecycleOwner, mutableLiveData, name, mobile, idCard, fileNameFront, fileNameBack);
                     }
 
                     @Override
                     public void onFailure() {
                         ToastUtils.show("身份证后失败");
+                        mutableLiveData.postValue(false);
                     }
                 });
             }
@@ -71,45 +73,46 @@ public class ExtensionAssessmentModel extends BaseViewModel<HomePublishRepositor
             @Override
             public void onFailure() {
                 ToastUtils.show("身份证前失败");
+                mutableLiveData.postValue(false);
             }
         });
 //
         return mutableLiveData;
     }
 
-    private void isjudge(String front, String back
+    private boolean isjudge(String front, String back
             , String name, String mobile, String idCard) {
         if (TextUtils.isEmpty(name)) {
             ToastUtils.show(R.string.extension_name);
-            return;
+            return false;
         }
         if (TextUtils.isEmpty(mobile)) {
             ToastUtils.show(R.string.extension_phone);
 
-            return;
+            return false;
         }
         if (TextUtils.isEmpty(idCard)) {
             ToastUtils.show(R.string.extension_code);
-            return;
+            return false;
         }
         if (TextUtils.isEmpty(front)) {
             ToastUtils.show(R.string.extension_positive);
-            return;
+            return false;
         }
         if (TextUtils.isEmpty(back)) {
             ToastUtils.show(R.string.extension_verso);
-            return;
+            return false;
         }
+        return true;
     }
 
-    public MutableLiveData<Boolean> loadExtension(LifecycleOwner lifecycleOwner, String name, String mobile, String idCard, String front, String back) {
-        MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+    public void loadExtension(LifecycleOwner lifecycleOwner, MutableLiveData<Boolean> mutableLiveData, String name, String mobile, String idCard, String front, String back) {
         EasyHttp.post(lifecycleOwner)
                 .tag(this)
                 .api(new ExtensionAssessPostApi(name, mobile, idCard, front, back))
-                .request(new HttpCallback<HttpData<Void>>(null) {
+                .request(new HttpCallback<HttpData>(null) {
                     @Override
-                    public void onSucceed(HttpData<Void> data) {
+                    public void onSucceed(HttpData data) {
                         mutableLiveData.postValue(true);
                     }
 
@@ -119,8 +122,6 @@ public class ExtensionAssessmentModel extends BaseViewModel<HomePublishRepositor
                         ToastUtils.show("" + e.getMessage());
                     }
                 });
-
-        return mutableLiveData;
     }
 
     @Override

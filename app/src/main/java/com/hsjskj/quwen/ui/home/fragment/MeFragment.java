@@ -44,7 +44,7 @@ public final class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout,R.id.yu_er_layout,R.id.xian_jin_layout,R.id.fa_bu_layout,R.id.youhuijuan_layout,R.id.wo_tuiguang_layout,R.id.tuiguang_layout,R.id.gz_layout,R.id.kaohe_layout);
+        setOnClickListener(R.id.setting_btn, R.id.touxiang, R.id.fs_layout, R.id.yu_er_layout, R.id.xian_jin_layout, R.id.fa_bu_layout, R.id.youhuijuan_layout, R.id.wo_tuiguang_layout, R.id.tuiguang_layout, R.id.gz_layout, R.id.kaohe_layout);
 
     }
 
@@ -79,27 +79,31 @@ public final class MeFragment extends MyFragment<HomeActivity> {
             startActivity(SettingActivity.class);
         } else if (id == R.id.touxiang) {
             UserPreviewActivity.start(getContext(), MyUserInfo.getInstance().getId());
-        }else if (id == R.id.xian_jin_layout) {
+        } else if (id == R.id.xian_jin_layout) {
             //现金账户
             AccountBalanceActivity.start(getContext());
-        }else if(id==R.id.yu_er_layout){
+        } else if (id == R.id.yu_er_layout) {
             AccountMoneyActivity.start(getContext());
-        }else if(id==R.id.fa_bu_layout){
+        } else if (id == R.id.fa_bu_layout) {
             MyReleaseActivity.start(getContext());
-        }else if(id==R.id.youhuijuan_layout){
+        } else if (id == R.id.youhuijuan_layout) {
             Intent intent = new Intent(getContext(), CouponActivity.class);
             startActivity(intent);
-        }else if(id==R.id.wo_tuiguang_layout){
+        } else if (id == R.id.wo_tuiguang_layout) {
             ExtensionActivity.start(getContext());
-        }else  if(id==R.id.tuiguang_layout){
+        } else if (id == R.id.tuiguang_layout) {
             ExtensionAdministrationActivity.start(getContext());
-        }else if (id==R.id.gz_layout){
+        } else if (id == R.id.gz_layout) {
             startActivity(MyConcernActivity.class);
-        }else if(id==R.id.kaohe_layout){
-            //已经成为推广员
-            ExtensionAssessmentToActivity.start(getContext());
-            //还没有成为推广员
-           // ExtensionAssessmentActivity.start(getContext());
+        } else if (id == R.id.kaohe_layout) {
+            boolean promoterStatus = MyUserInfo.getInstance().getLogin().isPromoterStatus();
+            if (promoterStatus) {
+                //已经成为推广员
+                ExtensionAssessmentToActivity.start(getContext());
+            } else {
+                //还没有成为推广员
+                ExtensionAssessmentActivity.start(getContext());
+            }
         }
 
     }

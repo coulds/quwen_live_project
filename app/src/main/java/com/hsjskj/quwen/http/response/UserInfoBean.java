@@ -38,6 +38,7 @@ public final class UserInfoBean implements Parcelable {
     public int price;
     public int comments_count;
     public int is_follow;
+    public String is_promoter;
     public List<String> label;
 
     public UserInfoBean() {
@@ -48,6 +49,10 @@ public final class UserInfoBean implements Parcelable {
             return "" + id;
         }
         return user_nickname;
+    }
+
+    public boolean isPromoterStatus() {
+        return "1".equals(is_promoter);
     }
 
     public String getUsername() {
