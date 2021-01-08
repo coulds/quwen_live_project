@@ -14,14 +14,18 @@ import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.DebugLog;
 import com.hsjskj.quwen.common.MyMvvmActivity;
+import com.hsjskj.quwen.event.FeedBackEvent;
 import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
 import com.hsjskj.quwen.ui.adapter.FeedBackHistoryAdapter;
 import com.hsjskj.quwen.ui.dialog.HintDialog;
 import com.hsjskj.quwen.ui.home.adapter.ProblemFeedBackAdapter;
 import com.hsjskj.quwen.ui.home.viewmodel.HomePublishViewModel;
+import com.hsjskj.quwen.ui.user.viewmodel.UserProblemBackViewModel;
 import com.hsjskj.quwen.upload.UploadListener;
 import com.hsjskj.quwen.upload.UploadTxImpl;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +37,7 @@ import static com.hsjskj.quwen.ui.user.activity.MessageActivity.TYPE_RECEVED;
  * time          : 2021年01月04日 11:28
  * description   : 问题反馈
  */
-public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel> implements BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener, View.OnClickListener {
+public class PorblemFeedBackActivity extends MyMvvmActivity<UserProblemBackViewModel> implements BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener, View.OnClickListener {
     private Button commit_button;
     private RecyclerView problemfeedRecyclerview;
     private EditText etproblemphone;
@@ -41,10 +45,7 @@ public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel
     private ProblemFeedBackAdapter problemFeedBackAdapter;
     private List<Object> problempics;
     private static final int MAX_SELECT_NUMBER1 = 3;
-    private UploadListener listener1;
-
-    private List<MessageActivity> messageActivityList = new ArrayList<>();
-    private FeedBackHistoryAdapter feedBackHistoryAdapter;
+    private UploadListener listener;
 
 
     @DebugLog
@@ -78,7 +79,7 @@ public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel
         setOnClickListener(this.commit_button);
         mViewModel.getTxCosLiveBean().observe(this, txCosBean -> {
             if (txCosBean != null) {
-                listener1 = new UploadTxImpl(getContext(), txCosBean);
+                listener = new UploadTxImpl(getContext(), txCosBean);
             }
         });
         loadTxCos();
@@ -94,24 +95,31 @@ public class PorblemFeedBackActivity extends MyMvvmActivity<HomePublishViewModel
     }
 
     @Override
+    protected void onDestroy() {
+        if (listener!=null){
+            listener.cancel();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void onClick(View v) {
         String string_phone = etproblemphone.getText().toString();
         String string_content = etproblemContent.getText().toString();
-        if (v == commit_button){
-            if (string_phone.equals("") || string_content.equals("")){
-                toast("输入的内容和联系方式不能为空");
-            }else {
-//                MessageActivity messageActivity = new MessageActivity(string_content,MessageActivity.TYPE_SENT);
-//                messageActivityList.add(messageActivity);
-//                feedBackHistoryAdapter.notifyItemChanged(messageActivityList.size()-1);
-                new HintDialog.Builder(this)
-                        .setIcon(HintDialog.ICON_FINISH)
-                        .setMessage("修改完成")
-                        .show();
-                finish();
 
-            }
+        if (listener == null) {
+            loadTxCos();
+            ToastUtils.show("获取上传cos失败");
+            return;
         }
+        showDialog();
+        mViewModel.submitfback(this, string_phone, string_content, problempics, listener).observe(this, o -> {
+            hideDialog();
+            if (o) {
+                EventBus.getDefault().post(new FeedBackEvent());
+                finish();
+            }
+        });
     }
 
 

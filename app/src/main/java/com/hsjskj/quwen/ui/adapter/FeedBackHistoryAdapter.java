@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hsjskj.quwen.R;
+import com.hsjskj.quwen.http.response.BackFeedHistoryListBean;
 import com.hsjskj.quwen.ui.user.activity.MessageActivity;
 
 import java.util.List;
@@ -20,11 +21,48 @@ import java.util.List;
  * description   : quwen_live
  */
 public class FeedBackHistoryAdapter extends RecyclerView.Adapter<FeedBackHistoryAdapter.ViewHolder> {
-    private List<Object> messageActivityList;
+    private List<BackFeedHistoryListBean.DataBean> messageActivityList;
 
 
-    public FeedBackHistoryAdapter(List<Object> messageActivityList){
+    public FeedBackHistoryAdapter(List<BackFeedHistoryListBean.DataBean> messageActivityList) {
         this.messageActivityList = messageActivityList;
+
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.problembackhistory_message_item, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        BackFeedHistoryListBean.DataBean item = messageActivityList.get(position);
+
+
+        if ("1".equals(item.mold)) {
+            holder.rightLayout.setVisibility(View.VISIBLE);
+            holder.leftLayout.setVisibility(View.GONE);
+            holder.right_phone.setText(item.phone);
+            holder.rightMsg.setText(item.content);
+            holder.right_times.setText(item.create_time);
+        } else {
+            holder.leftLayout.setVisibility(View.VISIBLE);
+            holder.rightLayout.setVisibility(View.GONE);
+            holder.left_times.setText(item.create_time);
+            holder.lefMsg.setText(item.content);
+            holder.left_times.setText(item.create_time);
+
+
+        }
+
 
     }
 
@@ -33,43 +71,27 @@ public class FeedBackHistoryAdapter extends RecyclerView.Adapter<FeedBackHistory
         LinearLayout rightLayout;
         TextView lefMsg;
         TextView rightMsg;
+        TextView right_phone;
+        TextView right_times;
+        TextView left_times;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            leftLayout = (LinearLayout)itemView.findViewById(R.id.left_layout);
-            rightLayout = (LinearLayout)itemView.findViewById(R.id.right_layout);
-            lefMsg = (TextView)itemView.findViewById(R.id.left_msg);
-            rightMsg = (TextView)itemView.findViewById(R.id.right_msg);
+            leftLayout = (LinearLayout) itemView.findViewById(R.id.left_layout);
+            rightLayout = (LinearLayout) itemView.findViewById(R.id.right_layout);
+            lefMsg = (TextView) itemView.findViewById(R.id.left_msg);
+            rightMsg = (TextView) itemView.findViewById(R.id.right_msg);
+            right_phone = (TextView) itemView.findViewById(R.id.right_phone_code);
+            right_times = (TextView) itemView.findViewById(R.id.right_time);
+            left_times = (TextView) itemView.findViewById(R.id.left_time);
+
         }
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.problembackhistory_message_item,parent,false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (position%2==0){
-            holder.leftLayout.setVisibility(View.VISIBLE);
-            holder.rightLayout.setVisibility(View.GONE);
-            holder.lefMsg.setText("111111113123312131232312313132123131231321313");
-        }else {
-            holder.rightLayout.setVisibility(View.VISIBLE);
-            holder.leftLayout.setVisibility(View.GONE);
-            holder.rightMsg.setText("222222");
-        }
-
-
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return messageActivityList.size();
     }
-
-
 
 
 }

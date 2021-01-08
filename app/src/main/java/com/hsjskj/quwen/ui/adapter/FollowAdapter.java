@@ -18,11 +18,13 @@ public class FollowAdapter extends MyAdapter<Object> {
 
     public final class ViewHolder extends BaseAdapter.ViewHolder {
         private ViewHolder() {
-            super(R.layout.item_myfens_and_follow_view);
+            super(R.layout.my_concern_item);
         }
 
         @Override
         public void onBindView(int position) {
         }
+
+
     }
 }

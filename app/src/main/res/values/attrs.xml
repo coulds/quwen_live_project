@@ -83,4 +83,8 @@
         <attr name="mvAnimDuration" format="integer|reference" />
     </declare-styleable>
 
+    <!-- 是否关注 -->
+    <declare-styleable name="FollowAppCompatButton">
+        <attr name="isFollow" format="boolean" />
+    </declare-styleable>
 </resources>

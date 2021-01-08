@@ -7,10 +7,15 @@ import androidx.lifecycle.ViewModel;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hsjskj.quwen.http.model.HttpData;
+import com.hsjskj.quwen.http.request.BackHistoryApi;
 import com.hsjskj.quwen.http.request.UserSetAvatarApi;
 import com.hsjskj.quwen.http.request.UserSetBirthApi;
 import com.hsjskj.quwen.http.request.UserSetSexApi;
 import com.hsjskj.quwen.http.request.UsersetNickApi;
+import com.hsjskj.quwen.http.response.BackFeedHistoryListBean;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author : sen
@@ -121,6 +126,34 @@ public class UserInfoViewModel extends ViewModel {
                     public void onFail(Exception e) {
                         super.onFail(e);
                         mutableLiveAvatarData.postValue("");
+                    }
+                });
+    }
+
+
+    private  MutableLiveData<List<BackFeedHistoryListBean.DataBean>> mutableLivebackhistoryData;
+    public MutableLiveData<List<BackFeedHistoryListBean.DataBean>> getbackhistory() {
+        if (mutableLivebackhistoryData == null) {
+            mutableLivebackhistoryData = new MutableLiveData<>();
+        }
+        return mutableLivebackhistoryData;
+    }
+    public void loadbackhistory(LifecycleOwner lifecycleOwner, String limit,int page) {
+        EasyHttp.post(lifecycleOwner)
+                .tag(this)
+                .api(new BackHistoryApi().setvalue(limit,page))
+                .request(new HttpCallback<HttpData<BackFeedHistoryListBean>>(null) {
+                    @Override
+                    public void onSucceed(HttpData<BackFeedHistoryListBean> data) {
+                        List<BackFeedHistoryListBean.DataBean> data1 = data.getData().data;
+                        Collections.reverse(data1);
+                        mutableLivebackhistoryData.postValue(data1);
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        mutableLivebackhistoryData.postValue(null);
                     }
                 });
     }
