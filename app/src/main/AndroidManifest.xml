@@ -379,6 +379,12 @@
             android:screenOrientation="portrait" />
 
 
+        <activity android:name=".ui.my.activity.ExtensionAssessmentToActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+
 
 
     </application>

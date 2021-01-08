@@ -208,7 +208,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/view_left"
             android:layout_marginTop="25dp"
-            android:src="@drawable/assessment_code_icon2" />
+            android:src="@drawable/assessment_code_icon3" />
 
         <TextView
             android:layout_width="160dp"

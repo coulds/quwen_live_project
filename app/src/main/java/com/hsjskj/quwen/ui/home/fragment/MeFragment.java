@@ -21,6 +21,7 @@ import com.hsjskj.quwen.ui.my.activity.CouponActivity;
 import com.hsjskj.quwen.ui.my.activity.ExtensionActivity;
 import com.hsjskj.quwen.ui.my.activity.ExtensionAdministrationActivity;
 import com.hsjskj.quwen.ui.my.activity.ExtensionAssessmentActivity;
+import com.hsjskj.quwen.ui.my.activity.ExtensionAssessmentToActivity;
 import com.hsjskj.quwen.ui.my.activity.MyReleaseActivity;
 import com.hsjskj.quwen.ui.user.activity.UserPreviewActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
@@ -95,7 +96,10 @@ public final class MeFragment extends MyFragment<HomeActivity> {
         }else if (id==R.id.gz_layout){
             startActivity(MyConcernActivity.class);
         }else if(id==R.id.kaohe_layout){
-            ExtensionAssessmentActivity.start(getContext());
+            //已经成为推广员
+            ExtensionAssessmentToActivity.start(getContext());
+            //还没有成为推广员
+           // ExtensionAssessmentActivity.start(getContext());
         }
 
     }

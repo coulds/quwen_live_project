@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/myColorFAFAFA"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:lineColor="#0000"
+        app:title="申请推广" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/extension_stat1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="24dp"
+            android:text="已认证"
+            android:textColor="@color/myColorff38d58f"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/view_left"
+            android:text="姓名"
+            android:textColor="@color/myColorffabaeb8"
+
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/ed_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/view_right"
+            android:layout_toRightOf="@+id/tv_name"
+            android:gravity="right"
+            android:textColor="@color/myColorff32303d"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/view_left"
+            android:text="手机"
+            android:textColor="@color/myColorffabaeb8"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/ed_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/view_right"
+            android:layout_toRightOf="@+id/tv_phone"
+            android:gravity="right"
+            android:textColor="@color/myColorff32303d"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/view_left"
+            android:text="证件号"
+            android:textColor="@color/myColorffabaeb8"
+
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/ed_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/view_right"
+            android:layout_toRightOf="@+id/tv_code"
+            android:gravity="right"
+            android:textColor="@color/myColorff32303d"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:paddingTop="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="@dimen/view_left"
+            android:text="证件照片"
+            android:textColor="@color/myColorff333333"
+            android:textSize="14sp" />
+    </LinearLayout>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/photo_bottom_right"
+            android:layout_width="152dp"
+            android:layout_height="105dp"
+            android:layout_below="@+id/tv_right1"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="11.5dp"
+            android:src="@drawable/assessment_code_icon2" />
+
+        <ImageView
+            android:id="@+id/photo_bottom_left"
+            android:layout_width="143dp"
+            android:layout_height="96dp"
+            android:layout_below="@+id/tv_right1"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="23dp"
+            android:layout_marginLeft="@dimen/view_left"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/assessment_code_icon3" />
+    </RelativeLayout>
+</LinearLayout>
