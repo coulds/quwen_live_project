@@ -106,7 +106,6 @@ public class ExtensionAssessmentActivity extends MyMvvmActivity<ExtensionAssessm
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.photo_left:
                 ImageSelectActivity.start(this, new ImageSelectActivity.OnPhotoSelectListener() {

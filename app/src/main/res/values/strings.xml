@@ -258,4 +258,5 @@
     <string name="extension_phone">请输入电话号码</string>
     <string name="extension_positive">请选择身份证正面</string>
     <string name="extension_verso">请选择身份证反面</string>
+    <string name="extension_code">请输入身份证号</string>
 </resources>

@@ -2,6 +2,7 @@ package com.hsjskj.quwen.ui.my.viewmodel;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -17,6 +18,7 @@ import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.ExtensionAssessPostApi;
 import com.hsjskj.quwen.http.response.TxCosBean;
 import com.hsjskj.quwen.ui.home.repository.HomePublishRepository;
+import com.hsjskj.quwen.ui.my.Utils.PhoneFormatCheckUtils;
 import com.hsjskj.quwen.upload.UploadBean;
 import com.hsjskj.quwen.upload.UploadCallback;
 import com.hsjskj.quwen.upload.UploadListener;
@@ -43,6 +45,7 @@ public class ExtensionAssessmentModel extends BaseViewModel<HomePublishRepositor
             , String name, String mobile, String idCard, UploadListener listener
     ) {
         MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+        isjudge(front,back,name,mobile,idCard);
 
         //上传前
         listener.upload(new UploadBean(front), new UploadCallback() {
@@ -54,26 +57,7 @@ public class ExtensionAssessmentModel extends BaseViewModel<HomePublishRepositor
 
                         String fileNameFront = frontBean.getFileName();
                         String fileNameBack = backBean.getFileName();
-                        if (TextUtils.isEmpty(name)) {
-                            ToastUtils.show(R.string.extension_name);
-                            mutableLiveData.postValue(false);
-                            return ;
-                        }
-                        if (TextUtils.isEmpty(mobile)) {
-                            ToastUtils.show(R.string.extension_phone);
-                            mutableLiveData.postValue(false);
-                            return ;
-                        }
-                        if (TextUtils.isEmpty(front)) {
-                            ToastUtils.show(R.string.extension_positive);
-                            mutableLiveData.postValue(false);
-                            return ;
-                        }
-                        if (TextUtils.isEmpty(back)) {
-                            ToastUtils.show(R.string.extension_verso);
-                            mutableLiveData.postValue(false);
-                            return ;
-                        }
+
                         loadExtension(lifecycleOwner, name, mobile, idCard, fileNameFront, fileNameBack).observe(lifecycleOwner, mutableLiveData::postValue);
                     }
 
@@ -89,23 +73,33 @@ public class ExtensionAssessmentModel extends BaseViewModel<HomePublishRepositor
                 ToastUtils.show("身份证前失败");
             }
         });
-//        picsLiveData.observeForever(o -> {
-//            if (o) {
-//                //图片上传成功 -》 提交信息
-//                loadExtension(lifecycleOwner, ).observe(lifecycleOwner, voidHttpData -> {
-//                    if (voidHttpData != null) {
-//                        ToastUtils.show(voidHttpData.getMessage());
-//                        mutableLiveData.postValue(true);
-//                    } else {
-//                        mutableLiveData.postValue(false);
-//                    }
-//                });
-//            } else {
-//                ToastUtils.show("图片上传失败");
-//                mutableLiveData.postValue(false);
-//            }
-//        });
+//
         return mutableLiveData;
+    }
+
+    private void isjudge(String front, String back
+            , String name, String mobile, String idCard) {
+        if (TextUtils.isEmpty(name)) {
+            ToastUtils.show(R.string.extension_name);
+            return;
+        }
+        if (TextUtils.isEmpty(mobile)) {
+            ToastUtils.show(R.string.extension_phone);
+
+            return;
+        }
+        if (TextUtils.isEmpty(idCard)) {
+            ToastUtils.show(R.string.extension_code);
+            return;
+        }
+        if (TextUtils.isEmpty(front)) {
+            ToastUtils.show(R.string.extension_positive);
+            return;
+        }
+        if (TextUtils.isEmpty(back)) {
+            ToastUtils.show(R.string.extension_verso);
+            return;
+        }
     }
 
     public MutableLiveData<Boolean> loadExtension(LifecycleOwner lifecycleOwner, String name, String mobile, String idCard, String front, String back) {
