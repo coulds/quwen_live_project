@@ -1,5 +1,6 @@
 package com.hsjskj.quwen.ui.my.fragment;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -7,6 +8,7 @@ import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.action.StatusAction;
 import com.hsjskj.quwen.common.MyAdapter;
 import com.hsjskj.quwen.common.MySmartRefreshLayoutFragment;
+import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.response.CouponBean;
 import com.hsjskj.quwen.http.response.HomePublishBean;
 import com.hsjskj.quwen.ui.my.adapter.CouponAdapter;
@@ -55,7 +57,11 @@ public class MyReleaseFragment extends MySmartRefreshLayoutFragment<HomePublishB
             finishRefresh();
             setAdapterList(dataBeans);
         });
-
+        myCouponViewModel.postReleaseDeleteLiveData().observe(this, new Observer<HttpData>() {
+            @Override
+            public void onChanged(HttpData httpData) {
+            }
+        });
         showLoading();
         loadHttp(1);
     }

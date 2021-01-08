@@ -13,6 +13,7 @@ import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.CouponGetApi;
 import com.hsjskj.quwen.http.request.HomeBannerApi;
+import com.hsjskj.quwen.http.request.MyReleasePostApi;
 import com.hsjskj.quwen.http.request.ReleaseLeftGetApi;
 import com.hsjskj.quwen.http.response.BannerBean;
 import com.hsjskj.quwen.http.response.CouponBean;
@@ -90,22 +91,21 @@ public class MyCouponViewModel extends ViewModel {
         return mutableLiveData;
     }
     public void loadMyReleaseDelete(LifecycleOwner lifecycleOwner,String id){
-      /*  EasyHttp.post(lifecycleOwner)
-                .api(new ReleaseLeftGetApi(limit,page))
-                .request(new HttpCallback<HttpData<HomePublishBean>>(null) {
+        EasyHttp.post(lifecycleOwner)
+                .api(new MyReleasePostApi(id))
+                .request(new HttpCallback<HttpData>(null) {
                     @Override
-                    public void onSucceed(HttpData<HomePublishBean> data) {
-                        homePublishList.postValue(data.getData().data);
+                    public void onSucceed(HttpData data) {
+                        mutableLiveData.postValue(data);
 
                     }
 
                     @Override
                     public void onFail(Exception e) {
                         Log.d("TAG", "onFail: "+e.getMessage());
-                        homePublishList.postValue(new ArrayList<>());
                         ToastUtils.show(e.getMessage());
 
                     }
-                });*/
+                });
     }
 }
