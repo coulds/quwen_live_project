@@ -17,7 +17,7 @@ public class BaseViewModel<T extends BaseRepository> extends AndroidViewModel {
 
     protected T repository;
 
-    public BaseViewModel(@NonNull Application application) {
+    public BaseViewModel(@NonNull Application application){
         super(application);
         context = application;
         repository = TUtil.getInstance(this, 0);
