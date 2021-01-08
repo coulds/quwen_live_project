@@ -1,7 +1,6 @@
 package com.hsjskj.quwen.ui.my.viewmodel;
 
 import com.hsjskj.quwen.ui.my.object.BankCard;
-
 import java.util.List;
 
 public interface RequestDataBackListener {

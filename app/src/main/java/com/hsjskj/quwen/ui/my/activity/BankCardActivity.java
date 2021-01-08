@@ -2,13 +2,8 @@ package com.hsjskj.quwen.ui.my.activity;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.gson.Gson;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.ui.my.adapter.BankCardAdapter;
@@ -19,7 +14,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +22,7 @@ public class BankCardActivity extends MyActivity {
     List<BankCard.DataBean> bankCards;
     SmartRefreshLayout refresh_layout;
     BankCardAdapter bankCardAdapter;
+    int page=1;
 
     @Override
     protected int getLayoutId() {
@@ -42,14 +37,24 @@ public class BankCardActivity extends MyActivity {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 refreshlayout.finishRefresh();//传入false表示刷新失败
+                page=1;
+                initData();
             }
         });
         refresh_layout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
                 refreshlayout.finishLoadMore();//传入false表示加载失败
+                page++;
+                initData();
             }
         });
+
+        bankCards = new ArrayList<>();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rcv_bankCard.setLayoutManager(linearLayoutManager);
+        bankCardAdapter = new BankCardAdapter(this, bankCards);
+        rcv_bankCard.setAdapter(bankCardAdapter);
     }
 
     @Override
@@ -57,12 +62,13 @@ public class BankCardActivity extends MyActivity {
         //初始化数据
 
         BankCardNetworkRequest bankCardNetworkRequest = new BankCardNetworkRequest();
-        bankCardNetworkRequest.getBankCardList(this,1, new RequestDataBackListener() {
+        bankCardNetworkRequest.getBankCardList(this,page, new RequestDataBackListener() {
             @Override
             public void onFinish(List<BankCard.DataBean> responseData) {
                 //第一页清空
-                bankCards.clear();
-
+                if (page==1){
+                    bankCards.clear();
+                }
                 bankCards.addAll(responseData);
                 bankCardAdapter.notifyDataSetChanged();
             }
@@ -72,16 +78,15 @@ public class BankCardActivity extends MyActivity {
                 Log.e("printStackTrace", "" + e);
             }
         });
-        bankCards = new ArrayList<>();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rcv_bankCard.setLayoutManager(linearLayoutManager);
-        bankCardAdapter = new BankCardAdapter(this, bankCards);
-        rcv_bankCard.setAdapter(bankCardAdapter);
+
     }
 
 
     @Override
     public void onRightClick(View v) {
-        startActivity(AddBankCardActivity.class);
+        startActivityForResult(AddBankCardActivity.class, (resultCode, data) -> {
+            //回调
+            initData();
+        });
     }
 }

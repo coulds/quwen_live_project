@@ -53,8 +53,9 @@ public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.BankCa
     @Override
     public void onBindViewHolder(@NonNull BankCardViewHolder holder, int position) {
         BankCard.DataBean bankCard = bankCards.get(position);
-        holder.tv_bankAccount.setText(bankCard.bank_name);
-        holder.tv_bankCardNumber.setText(bankCard.number);
+        Log.e("BankCardAdapter", "开户银行="+bankCard.account_info.bank_name);
+        holder.tv_bankAccount.setText(bankCard.account_info.bank_name);
+        holder.tv_bankCardNumber.setText(bankCard.account_info.number);
     }
 
     @Override
