@@ -1,5 +1,7 @@
 package com.hsjskj.quwen.http.response;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.List;
 
 /**
@@ -9,9 +11,11 @@ import java.util.List;
  */
 public class ConcernBean {
 
+    @JSONField(name = "data")
     public List<concernDataBean> concerndata;
 
     public static class concernDataBean{
+        public String status="1";
         public String touid;
         public String avatar;
         public String user_nickname;

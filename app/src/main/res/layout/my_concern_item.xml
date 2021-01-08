@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="#E6E6E6"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_marginTop="1dp"
@@ -19,7 +19,7 @@
             android:layout_height="44dp"
             android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/p2"/>
+            android:src="@drawable/avatar_placeholder_ic"/>
 
         <LinearLayout
 
@@ -74,9 +74,9 @@
             android:paddingVertical="5dp"
             android:layout_marginRight="16dp"
             android:layout_gravity="center_vertical"
-            android:text="关注"
+            android:text=""
             android:textSize="12sp"
-            app:isFollow="false" />
+            app:isFollow="true" />
 
 
     </LinearLayout>

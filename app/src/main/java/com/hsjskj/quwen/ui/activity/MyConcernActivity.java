@@ -25,8 +25,22 @@ import com.hsjskj.quwen.ui.user.viewmodel.MyConcernViewModel;
 public class MyConcernActivity extends MySmartRefreshLayoutActivity<ConcernBean.concernDataBean> implements BaseAdapter.OnChildClickListener {
     private MyConcernAdapter concernAdapter;
     private MyConcernViewModel concernViewModel;
+    private Boolean isstuta = true;
     @Override
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
+        showDialog();
+        concernViewModel.loadFollowUserInfoLiveData(this,concernAdapter.getItem(position).touid).observe(this,s->{
+            hideDialog();
+            if (s){
+                String status = concernAdapter.getItem(position).status;
+                if ("1".equals(status)) {
+                    concernAdapter.getItem(position).status = "0";
+                } else {
+                    concernAdapter.getItem(position).status = "1";
+                }
+                concernAdapter.notifyItemChanged(position);
+            }
+        });
 
     }
 
@@ -61,8 +75,9 @@ public class MyConcernActivity extends MySmartRefreshLayoutActivity<ConcernBean.
             finishRefresh();
             setAdapterList(s);
         });
-        showDialog();
+        showLoading();
         loadHttp(1);
 
     }
+
 }

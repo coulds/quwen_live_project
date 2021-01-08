@@ -9,9 +9,15 @@ import com.hjq.http.config.IRequestApi;
  *    desc   : 退出登录
  */
 public final class LogoutApi implements IRequestApi {
-
+    public String msg;
+    public String data;
     @Override
     public String getApi() {
         return "user/logout";
+    }
+    public LogoutApi setvalue(String msg,String data){
+        this.data= data;
+        this.msg = msg;
+        return this;
     }
 }

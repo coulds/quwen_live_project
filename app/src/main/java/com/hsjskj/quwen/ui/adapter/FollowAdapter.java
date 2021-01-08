@@ -12,6 +12,7 @@ import com.hsjskj.quwen.http.glide.GlideApp;
 import com.hsjskj.quwen.http.glide.GlideConfig;
 import com.hsjskj.quwen.http.response.FansBean;
 import com.hsjskj.quwen.ui.user.viewmodel.UserInfoViewModel;
+import com.hsjskj.quwen.widget.FollowAppCompatButton;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class FollowAdapter extends MyAdapter<FansBean.DataBean> {
 
     public final class ViewHolder extends BaseAdapter.ViewHolder {
         private ImageView fans_touxiang;
-        private TextView fans_stuta;
+        private FollowAppCompatButton fans_stuta;
         private TextView fans_id;
         private TextView fans_nickname;
 
@@ -36,7 +37,7 @@ public class FollowAdapter extends MyAdapter<FansBean.DataBean> {
             super(R.layout.my_concern_item);
             fans_touxiang = (ImageView) findViewById(R.id.fans_touxiang);
             fans_nickname = (TextView) findViewById(R.id.fans_title);
-            fans_stuta= (TextView) findViewById(R.id.fans_stuta);
+            fans_stuta= (FollowAppCompatButton) findViewById(R.id.fans_stuta);
 
 
         }
@@ -49,7 +50,19 @@ public class FollowAdapter extends MyAdapter<FansBean.DataBean> {
                     .apply(GlideConfig.requestOptionsAvatar)
                     .into(fans_touxiang);
             fans_nickname.setText(getItem(position).user_nickname);
-            fans_stuta.setText(getItem(position).status);
+
+            if ("1".equals(getItem(position).status)){
+                fans_stuta.setText("已关注");
+                fans_stuta.setFollow(true);
+
+            }else {
+
+
+                fans_stuta.setText("未关注");
+                fans_stuta.setFollow(false);
+            }
+
+
 
 
         }

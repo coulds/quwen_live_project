@@ -9,6 +9,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
+import com.hjq.toast.ToastUtils;
 import com.hjq.widget.layout.SettingBar;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.SingleClick;
@@ -16,6 +19,8 @@ import com.hsjskj.quwen.common.MyActivity;
 import com.hsjskj.quwen.common.MyUserInfo;
 import com.hsjskj.quwen.helper.ActivityStackManager;
 import com.hsjskj.quwen.http.glide.GlideApp;
+import com.hsjskj.quwen.http.model.HttpData;
+import com.hsjskj.quwen.http.request.LogoutApi;
 import com.hsjskj.quwen.http.response.UserInfoBean;
 import com.hsjskj.quwen.ui.dialog.DateDialog;
 import com.hsjskj.quwen.ui.dialog.MessageDialog;
@@ -27,6 +32,7 @@ import com.hsjskj.quwen.ui.user.activity.FeedBackHistoryActivity;
 import com.hsjskj.quwen.ui.user.activity.PorblemFeedBackActivity;
 import com.hsjskj.quwen.ui.user.activity.LoginActivity;
 import com.hsjskj.quwen.ui.user.repositioy.UserPreviewRepository;
+import com.hsjskj.quwen.ui.user.viewmodel.LogoutViewModle;
 import com.hsjskj.quwen.ui.user.viewmodel.UserInfoViewModel;
 import com.hsjskj.quwen.upload.UploadBean;
 import com.hsjskj.quwen.upload.UploadCallback;
@@ -61,6 +67,7 @@ public final class SettingActivity extends MyActivity
 
     private TextView msb_tuichu_about;
     private UserInfoViewModel userInfoViewModel;
+    private LogoutViewModle logoutViewModle;
 
     @Override
     protected int getLayoutId() {
@@ -70,6 +77,7 @@ public final class SettingActivity extends MyActivity
     @Override
     protected void initView() {
         userInfoViewModel = new ViewModelProvider(this).get(UserInfoViewModel.class);
+        logoutViewModle = new ViewModelProvider(this).get(LogoutViewModle.class);
         mAvatarLayout = findViewById(R.id.sb_setting_language);
         mAvatarView = findViewById(R.id.iv_person_data_avatar);
         mIDView = findViewById(R.id.sb_setting_update);
@@ -80,8 +88,8 @@ public final class SettingActivity extends MyActivity
         mbindweixinView = findViewById(R.id.sb_weixin_auto);
         msetpasswordViwe = findViewById(R.id.sb_setting_password_about);
         maboutView = findViewById(R.id.sb_guanyu_about);
-        mwechatView =findViewById(R.id.sb_weixin_auto);
-        sb_bankCard =findViewById(R.id.sb_bankCard);
+        mwechatView = findViewById(R.id.sb_weixin_auto);
+        sb_bankCard = findViewById(R.id.sb_bankCard);
 
 
         msb_tuichu_about = findViewById(R.id.sb_tuichu_about);
@@ -89,9 +97,9 @@ public final class SettingActivity extends MyActivity
         mAddressView = (SettingBar) findViewById(R.id.sb_setting_password);
 
 
-        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about,this.mproblemfeedView
-                ,this.mphoneView,this.memailView,this.mbindweixinView,this.msetpasswordViwe,this.maboutView,this.mwechatView
-                ,sb_bankCard
+        setOnClickListener(this.mAvatarLayout, this.mNameView, mAddressView, this.mIDView, this.msb_tuichu_about, this.mproblemfeedView
+                , this.mphoneView, this.memailView, this.mbindweixinView, this.msetpasswordViwe, this.maboutView, this.mwechatView
+                , sb_bankCard
         );
 
     }
@@ -127,7 +135,8 @@ public final class SettingActivity extends MyActivity
             }
 
         });
-        setUserInfoView(MyUserInfo.getInstance().getLogin());
+
+
     }
 
     private void setUserInfoView(UserInfoBean infoBean) {
@@ -221,11 +230,14 @@ public final class SettingActivity extends MyActivity
                     .setConfirm(getString(R.string.common_confirm))
                     .setCancel(getString(R.string.common_cancel))
                     .setListener(new MessageDialog.OnListener() {
-
                         @Override
                         public void onConfirm(BaseDialog dialog) {
-                            startActivity(LoginActivity.class);
-                            ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+                            logoutViewModle.getLiveData().observe(SettingActivity.this, Void -> {
+                                MyUserInfo.getInstance().clearUserInfo();
+                                startActivity(LoginActivity.class);
+                                ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+                            });
+                            logoutViewModle.sendLogout(SettingActivity.this, "", "1");
                         }
 
 
@@ -234,19 +246,19 @@ public final class SettingActivity extends MyActivity
                         }
                     })
                     .show();
-        }else if (v == mproblemfeedView){
+        } else if (v == mproblemfeedView) {
             startActivity(FeedBackHistoryActivity.class);
-        }else if (v == mphoneView){
+        } else if (v == mphoneView) {
             startActivity(SetPhoneCodeActivity.class);
-        }else if (v == memailView){
+        } else if (v == memailView) {
             startActivity(EmailCodeActivity.class);
-        }else if(v == msetpasswordViwe){
+        } else if (v == msetpasswordViwe) {
             startActivity(SetPassWordActivity.class);
-        }else if (v == maboutView){
+        } else if (v == maboutView) {
             startActivity(AboutQuWenActivity.class);
-        }else if (v == mwechatView){
+        } else if (v == mwechatView) {
             startActivity(WeChatActivity.class);
-        }else if(v==sb_bankCard){
+        } else if (v == sb_bankCard) {
             startActivity(BankCardActivity.class);
         }
 

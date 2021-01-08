@@ -2,6 +2,7 @@ package com.hsjskj.quwen.ui.activity;
 
 import android.view.View;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,7 +55,20 @@ public class MyFansActivity extends MySmartRefreshLayoutActivity<FansBean.DataBe
 
     @Override
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
-        toast("gusisisi");
+        showDialog();
+        myFansViewModel.loadFollowUserInfoLiveData(this, adapter.getItem(position).touid).observe(this, aBoolean -> {
+            hideDialog();
+            if (aBoolean) {
+                //关注 或者取关成功
+                String status = adapter.getItem(position).status;
+                if ("1".equals(status)) {
+                    adapter.getItem(position).status = "0";
+                } else {
+                    adapter.getItem(position).status = "1";
+                }
+                adapter.notifyItemChanged(position);
+            }
+        });
     }
 
 }
