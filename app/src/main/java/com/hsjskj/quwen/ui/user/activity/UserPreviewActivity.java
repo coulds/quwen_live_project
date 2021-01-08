@@ -138,10 +138,10 @@ public class UserPreviewActivity extends MyMvvmActivity<UserPreviewViewModel> im
         tvFollowNumber.setText("" + userInfoBean.i_attention_count);
         isFollow = userInfoBean.isFollow();
         upgradeStatusFollow();
-        if (!userInfoBean.isAnchor()) {
-            userAnchorView.setVisibility(View.GONE);
-            return;
-        }
+//        if (!userInfoBean.isAnchor()) {
+//            userAnchorView.setVisibility(View.GONE);
+//            return;
+//        }
         //主播信息
         userAnchorView.setVisibility(View.VISIBLE);
         userAnchorView.setUserInfo(userInfoBean);

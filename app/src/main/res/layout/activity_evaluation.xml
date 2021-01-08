@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <com.hjq.bar.TitleBar
+        android:id="@+id/tb_titleBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:title="主播评价(20)"
+        app:titleSize="18sp"
+        app:titleColor="#1A1A1A"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="16dp"
+        />
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/to_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tb_titleBar"
+        android:layout_above="@id/btn_evaluation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        >
+        <com.hsjskj.quwen.widget.HintLayout
+            android:id="@+id/hint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_evaluations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+        </com.hsjskj.quwen.widget.HintLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <Button
+        android:id="@+id/btn_evaluation"
+        android:layout_width="303dp"
+        android:layout_height="44dp"
+        android:text="我要评价"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_radius_22_bule"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="34dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@id/btn_bottom"
+        android:layout_centerHorizontal="true"
+
+        />
+    <Button
+        android:id="@+id/btn_bottom"
+        android:layout_gravity="center"
+        android:layout_width="134dp"
+        android:layout_height="5dp"
+        android:background="@drawable/bottom_bar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+
+        />
+
+</RelativeLayout>

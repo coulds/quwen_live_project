@@ -7,7 +7,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_bottom"
         >
 
         <com.hjq.bar.TitleBar
@@ -18,15 +19,24 @@
             app:rightColor="#333333"
             app:titleStyle="bold"
             />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_bankCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-    />
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_bankCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+
+                />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     </LinearLayout>
     <Button
+        android:id="@+id/btn_bottom"
         android:layout_gravity="center"
         android:layout_width="134dp"
         android:layout_height="5dp"

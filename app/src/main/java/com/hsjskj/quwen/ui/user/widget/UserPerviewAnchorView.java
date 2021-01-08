@@ -1,11 +1,14 @@
 package com.hsjskj.quwen.ui.user.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
 import com.hsjskj.quwen.http.response.UserInfoBean;
+import com.hsjskj.quwen.ui.user.activity.EvaluationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,7 @@ public class UserPerviewAnchorView extends FrameLayout implements TabLayout.OnTa
     private TextView tvCommentNumber;
     private List<UserInfoBean> list;
     private RecyclerViewAdapter mAdapter;
+    private LinearLayout ll_click_more;
     private ViewPager2.OnPageChangeCallback mCallback = new ViewPager2.OnPageChangeCallback() {
 
         private int mPreviousScrollState, mScrollState = SCROLL_STATE_IDLE;
@@ -73,15 +78,22 @@ public class UserPerviewAnchorView extends FrameLayout implements TabLayout.OnTa
         LayoutInflater.from(context).inflate(R.layout.layout_user_anchor_view, this);
         mTabLayout = findViewById(R.id.tb_user_info_tab);
         mViewPager = findViewById(R.id.vp_user_info_page);
+        ll_click_more = findViewById(R.id.ll_click_more);//
         tvCommentNumber = findViewById(R.id.tv_comment_number);
         list = new ArrayList<>();
         mAdapter = new RecyclerViewAdapter(context);
         mViewPager.setAdapter(mAdapter);
-
         mTabLayout.addTab(mTabLayout.newTab().setText("关于TA"), true);
 //        mTabLayout.addTab(mTabLayout.newTab().setText("评价(0)"));
         mTabLayout.addOnTabSelectedListener(this);
         mViewPager.registerOnPageChangeCallback(mCallback);
+        ll_click_more.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),EvaluationActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
