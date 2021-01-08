@@ -2,10 +2,8 @@ package com.hsjskj.quwen.ui.my.activity;
 
 import android.content.Intent;
 import android.view.View;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hjq.base.BaseAdapter;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
