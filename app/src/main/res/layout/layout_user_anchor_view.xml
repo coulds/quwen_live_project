@@ -46,7 +46,7 @@
                 android:layout_height="13dp"
                 android:layout_marginStart="3dp"
                 android:src="@drawable/arrow_right"
-                android:tint="#FF353340" />
+                app:tint="#FF353340" />
         </LinearLayout>
     </LinearLayout>
 
