@@ -8,7 +8,7 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/home_go_ask_the_video" />
+        app:title="通用列表" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_layout"

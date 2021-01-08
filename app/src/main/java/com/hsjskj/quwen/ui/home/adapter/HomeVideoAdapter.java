@@ -1,16 +1,15 @@
 package com.hsjskj.quwen.ui.home.adapter;
 
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.common.MyAdapter;
 import com.hsjskj.quwen.http.glide.GlideApp;
-import com.hsjskj.quwen.http.glide.GlideConfig;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
 
 /**
@@ -19,9 +18,13 @@ import com.hsjskj.quwen.http.response.HomeVideoListBean;
  * description   : quwen_live
  */
 public class HomeVideoAdapter extends MyAdapter<HomeVideoListBean.DataBean> {
+    public RequestOptions requestOptions;
 
     public HomeVideoAdapter(Context context) {
         super(context);
+        requestOptions = new RequestOptions()
+                .placeholder(R.drawable.defalut_home_video)
+                .error(R.drawable.defalut_home_video);
     }
 
     @NonNull
@@ -41,7 +44,7 @@ public class HomeVideoAdapter extends MyAdapter<HomeVideoListBean.DataBean> {
 
         @Override
         public void onBindView(int position) {
-            GlideApp.with(getContext()).load(getItem(position).cover).apply(GlideConfig.requestOptions).into(imv_image);
+            GlideApp.with(getContext()).load(getItem(position).cover).apply(requestOptions).into(imv_image);
         }
     }
 }
