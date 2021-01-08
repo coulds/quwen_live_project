@@ -105,4 +105,5 @@ public final class IntentKey {
 
 
     public static final String NOTICE_ID = "notice_id";
+    public static final String PublishBean = "PublishBean";
 }

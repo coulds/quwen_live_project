@@ -13,6 +13,8 @@ import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.aop.DebugLog;
 import com.hsjskj.quwen.common.MyMvvmActivity;
+import com.hsjskj.quwen.http.response.HomePublishBean;
+import com.hsjskj.quwen.other.IntentKey;
 import com.hsjskj.quwen.ui.activity.ImagePreviewActivity;
 import com.hsjskj.quwen.ui.activity.ImageSelectActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomePublishAdapter;
@@ -37,10 +39,18 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
     private List<Object> pics;
     private static final int MAX_SELECT_NUMBER = 3;
     private UploadListener listener;
+    private HomePublishBean.DataBean bean = null;//编辑时 传的id  可空
 
     @DebugLog
     public static void start(Context context) {
         Intent intent = new Intent(context, HomePublishActivity.class);
+        context.startActivity(intent);
+    }
+
+    @DebugLog
+    public static void start(Context context, HomePublishBean.DataBean bean) {
+        Intent intent = new Intent(context, HomePublishActivity.class);
+        intent.putExtra(IntentKey.PublishBean, bean);
         context.startActivity(intent);
     }
 
@@ -52,6 +62,7 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
     @Override
     protected void initView() {
         super.initView();
+        bean = getParcelable(IntentKey.PublishBean);
         publishRecyclerview = findViewById(R.id.publish_recyclerview);
         etPublishTitle = findViewById(R.id.et_publish_title);
         etPublishContent = findViewById(R.id.et_publish_content);
@@ -75,7 +86,7 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
 
     @Override
     protected void onDestroy() {
-        if (listener!=null){
+        if (listener != null) {
             listener.cancel();
         }
         super.onDestroy();
@@ -86,6 +97,24 @@ public class HomePublishActivity extends MyMvvmActivity<HomePublishViewModel> im
         pics = new ArrayList<>();
         pics.add(R.drawable.publish_defalut_icon);
         publishAdapter.setData(pics);
+
+
+        if (bean != null && bean.enclosure != null) {
+            List<String> enclosure = bean.enclosure;
+            for (String s : enclosure) {
+                if (pics.size() == MAX_SELECT_NUMBER) {
+                    publishAdapter.isShowAdd = false;
+                    pics.remove(0);//移除第一张占位
+                }
+                pics.add(s);
+            }
+            publishAdapter.notifyDataSetChanged();
+        }
+
+        if (bean != null) {
+            etPublishTitle.setText("" + bean.title);
+            etPublishContent.setText("" + bean.content);
+        }
 
     }
 

@@ -82,29 +82,28 @@ public class MyCouponViewModel extends ViewModel {
                 });
     }
 
-    private MutableLiveData<HttpData> mutableLiveData;
+    private MutableLiveData<Integer> mutableLiveData;
 
-    public MutableLiveData<HttpData> postReleaseDeleteLiveData(){
+    public MutableLiveData<Integer> postReleaseDeleteLiveData(){
         if (mutableLiveData == null) {
             mutableLiveData = new MutableLiveData<>();
         }
         return mutableLiveData;
     }
-    public void loadMyReleaseDelete(LifecycleOwner lifecycleOwner,String id){
+    public void loadMyReleaseDelete(LifecycleOwner lifecycleOwner,String id,int index){
         EasyHttp.post(lifecycleOwner)
                 .api(new MyReleasePostApi(id))
                 .request(new HttpCallback<HttpData>(null) {
                     @Override
                     public void onSucceed(HttpData data) {
-                        mutableLiveData.postValue(data);
+                        mutableLiveData.postValue(index);
 
                     }
 
                     @Override
                     public void onFail(Exception e) {
-                        Log.d("TAG", "onFail: "+e.getMessage());
                         ToastUtils.show(e.getMessage());
-
+                        mutableLiveData.postValue(-1);
                     }
                 });
     }

@@ -4,8 +4,6 @@
     android:orientation="vertical"
     android:layout_marginTop="10dp"
     android:background="@drawable/shape_radius_12_white"
-    android:layout_marginLeft="@dimen/view_left"
-    android:layout_marginRight="@dimen/view_right"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView

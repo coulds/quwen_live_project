@@ -71,12 +71,12 @@ public class ReleaseAdapter extends MyAdapter<HomePublishBean.DataBean> {
             title.setText(item.getTitle() + ":" + item.getContent());
             time.setText(item.getCreate_time());
             status.setText(item.getStatus());
-            if (item.getStatus().equals("待审核")) {
+            if (item.getStatus().equals("已打回")) {
+                tv_edit.setVisibility(View.VISIBLE);
+            } else {
                 tv_edit.setVisibility(View.GONE);
             }
-            if (item.getStatus().equals("已打回")) {
-
-            }
+            delete.setVisibility(View.VISIBLE);
             ArrayList<ImageInfo> imageInfo = new ArrayList<>();
             List<String> enclosure = item.enclosure;
             if (enclosure != null) {
@@ -88,12 +88,12 @@ public class ReleaseAdapter extends MyAdapter<HomePublishBean.DataBean> {
                 }
             }
 
-            delete.setOnClickListener(new View.OnClickListener() {
+           /* delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     itemViewListener.delete(item.getId(),position);
                 }
-            });
+            });*/
             nineGridView.setAdapter(new NineGridViewClickAdapter(getContext(), imageInfo));
         }
     }
@@ -134,4 +134,6 @@ public class ReleaseAdapter extends MyAdapter<HomePublishBean.DataBean> {
     public void setItemViewListener(ItemViewListener itemViewListener) {
         this.itemViewListener = itemViewListener;
     }
+
+
 }
