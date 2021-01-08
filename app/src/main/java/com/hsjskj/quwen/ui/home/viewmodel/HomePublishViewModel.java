@@ -2,6 +2,7 @@ package com.hsjskj.quwen.ui.home.viewmodel;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -59,6 +60,7 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
 
         //图片真实路径
         ArrayList<Object> objects = new ArrayList<>(list.subList(1, list.size()));
+        Log.d("TAG", "submitPublish: "+objects);
         //上传图片
         AtomicInteger count = new AtomicInteger(objects.size());
         MutableLiveData<Boolean> picsLiveData = new MutableLiveData<>();
@@ -85,26 +87,7 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
 
     private void upLoadPics(List<Object> list, AtomicInteger count, UploadListener listener
             , MutableLiveData<Boolean> mutableLiveData, List<String> remoteUrls) {
-        String s = (String) list.get(0);
-        listener.upload(new UploadBean(s), new UploadCallback() {
-            @Override
-            public void onSuccess(UploadBean bean) {
-                //给后台传name就行
-                remoteUrls.add(bean.getFileName());
-                if (count.decrementAndGet() == 0) {
-                    mutableLiveData.postValue(true);
-                    return;
-                }
-                list.remove(0);
-                upLoadPics(list, count, listener, mutableLiveData, remoteUrls);
-            }
-
-            @Override
-            public void onFailure() {
-                mutableLiveData.postValue(false);
-            }
-        });
-
+        repository.upLoadPics(list, count, listener, mutableLiveData, remoteUrls);
     }
 
     public MutableLiveData<HttpData<Void>> loadHomeVideoList(LifecycleOwner lifecycleOwner, String title, String content, List<String> enclosures) {
@@ -121,38 +104,19 @@ public class HomePublishViewModel extends BaseViewModel<HomePublishRepository> {
                     @Override
                     public void onFail(Exception e) {
                         mutableLiveData.postValue(null);
-                        ToastUtils.show(""+e.getMessage());
+                        ToastUtils.show("" + e.getMessage());
                     }
                 });
         return mutableLiveData;
     }
 
-    private MutableLiveData<TxCosBean> txCosLiveBean;
 
     public MutableLiveData<TxCosBean> getTxCosLiveBean() {
-        if (txCosLiveBean == null) {
-            txCosLiveBean = new MutableLiveData<>();
-        }
-        return txCosLiveBean;
+        return repository.getTxCosLiveBean();
     }
 
     public void loadTxCos(LifecycleOwner lifecycleOwner) {
-        EasyHttp.post(lifecycleOwner)
-                .api("Config/cos")
-                .request(new HttpCallback<HttpData<TxCosBean>>(null) {
-
-                    @Override
-                    public void onSucceed(HttpData<TxCosBean> data) {
-                        txCosLiveBean.postValue(data.getData());
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                        txCosLiveBean.postValue(null);
-                        ToastUtils.show(e.getMessage());
-                    }
-                });
+        repository.loadTxCos(lifecycleOwner);
     }
 
     @Override

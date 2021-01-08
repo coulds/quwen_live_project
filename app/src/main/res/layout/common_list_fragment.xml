@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.hsjskj.quwen.widget.HintLayout
+        android:id="@+id/hint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hjq.widget.layout.WrapRecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" />
+    </com.hsjskj.quwen.widget.HintLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hjq.base.BaseAdapter;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
 import com.hsjskj.quwen.action.StatusAction;
@@ -126,6 +127,13 @@ public class CouponFragment extends MyFragment implements OnRefreshLoadMoreListe
             releaseAdapter = new ReleaseAdapter(getContext(), 1);
             reRelease.setLayoutManager(new LinearLayoutManager(getContext()));
             reRelease.setAdapter(releaseAdapter);
+            releaseAdapter.setOnChildClickListener(R.id.delete, new BaseAdapter.OnChildClickListener() {
+                @Override
+                public void onChildClick(RecyclerView recyclerView, View childView, int position) {
+
+                }
+            });
+
         }
         initListener();
     }
@@ -136,7 +144,7 @@ public class CouponFragment extends MyFragment implements OnRefreshLoadMoreListe
             couponAdapter.setPageNumber(couponAdapter.getPageNumber() + 1);
             myCouponViewModel.loadMyCoupon(this, tag, 7, couponAdapter.getPageNumber());
         }else {
-            releaseAdapter.setPageNumber(couponAdapter.getPageNumber() + 1);
+            releaseAdapter.setPageNumber(releaseAdapter.getPageNumber() + 1);
             myCouponViewModel.loadMyReleaseLeft(this,6,releaseAdapter.getPageNumber());
         }
     }

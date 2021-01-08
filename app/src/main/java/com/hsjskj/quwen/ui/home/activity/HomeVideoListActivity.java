@@ -2,7 +2,6 @@ package com.hsjskj.quwen.ui.home.activity;
 
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,95 +10,63 @@ import com.hjq.base.BaseAdapter;
 import com.hjq.base.UiUtlis;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.hsjskj.quwen.R;
-import com.hsjskj.quwen.action.StatusAction;
-import com.hsjskj.quwen.common.MyActivity;
-import com.hsjskj.quwen.common.MyMvvmActivity;
+import com.hsjskj.quwen.common.MyAdapter;
+import com.hsjskj.quwen.common.MySmartRefreshLayoutActivity;
 import com.hsjskj.quwen.helper.ItemDecorationHeleper;
 import com.hsjskj.quwen.http.response.HomeVideoListBean;
 import com.hsjskj.quwen.ui.activity.VideoPlayActivity;
 import com.hsjskj.quwen.ui.home.adapter.HomeVideoListItemAdapter;
-import com.hsjskj.quwen.ui.home.viewmodel.HomeFragmentViewModel;
 import com.hsjskj.quwen.ui.home.viewmodel.HomeVideoViewModel;
-import com.hsjskj.quwen.widget.HintLayout;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 /**
  * @author : Jun
  * time          : 2020年12月26日 09:42
  * description   : 首页视频列表
  */
-public class HomeVideoListActivity extends MyActivity implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
-    private SmartRefreshLayout mRefreshLayout;
-    private HintLayout mHintLayout;
-    private WrapRecyclerView mRecyclerview;
+public class HomeVideoListActivity extends MySmartRefreshLayoutActivity<HomeVideoListBean.DataBean> implements BaseAdapter.OnItemClickListener {
     private HomeVideoListItemAdapter adapter;
     private static final int VIDEO_COLUMN = 2;
     private HomeVideoViewModel homeFragmentViewModel;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.home_video_list_activity;
+    public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+        HomeVideoListBean.DataBean item = adapter.getItem(position);
+        VideoPlayActivity.start(this, "" + item.url, "" + item.title);
     }
 
     @Override
-    protected void initView() {
-        homeFragmentViewModel = new ViewModelProvider(this).get(HomeVideoViewModel.class);
-        mRefreshLayout = (SmartRefreshLayout) findViewById(R.id.refresh_layout);
-        mHintLayout = (HintLayout) findViewById(R.id.hint_layout);
-        mRecyclerview = (WrapRecyclerView) findViewById(R.id.recyclerview);
-        mRecyclerview.setLayoutManager(new GridLayoutManager(this, VIDEO_COLUMN));
+    public MyAdapter<HomeVideoListBean.DataBean> getAdapter() {
         adapter = new HomeVideoListItemAdapter(this);
         adapter.setOnItemClickListener(this);
-        mRecyclerview.setAdapter(adapter);
+        return adapter;
+    }
+
+    @Override
+    public void initRecycler(WrapRecyclerView mRecyclerview) {
+        mRecyclerview.setLayoutManager(new GridLayoutManager(this, VIDEO_COLUMN));
         ItemDecorationHeleper.addVideoItemDecoration(mRecyclerview, UiUtlis.dp2px(getContext(), 8), VIDEO_COLUMN);
     }
 
     @Override
+    public void loadHttp(int page) {
+        homeFragmentViewModel.loadHomeVideoList(this,20 , page);
+    }
+
+    @Override
+    public String getTitleStr() {
+        return getResources().getString(R.string.home_go_ask_the_video);
+    }
+
+    @Override
     protected void initData() {
+        homeFragmentViewModel = new ViewModelProvider(this).get(HomeVideoViewModel.class);
         homeFragmentViewModel.getHomeVideoLiveData().observe(this, objects -> {
-            mRefreshLayout.finishLoadMore();
-            mRefreshLayout.finishRefresh();
-            if (adapter.getPageNumber() == 1) {
-                if (objects == null || objects.isEmpty()) {
-                    showEmpty();
-                } else {
-                    showComplete();
-                }
-                adapter.setData(objects);
-            } else {
-                if (objects == null || objects.isEmpty()) {
-                    mRefreshLayout.finishLoadMoreWithNoMoreData();
-                }
-                adapter.addData(objects);
-            }
+            finishRefresh();
+            setAdapterList(objects);
         });
-        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+
+        //显示加载 页面 同时访问网络加载第一页
         showLoading();
-        onRefresh(mRefreshLayout);
-    }
-
-    @Override
-    public HintLayout getHintLayout() {
-        return mHintLayout;
-    }
-
-    @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        adapter.setPageNumber(adapter.getPageNumber() + 1);
-        homeFragmentViewModel.loadHomeVideoList(this, adapter.getPageNumber(), 20);
-    }
-
-    @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        adapter.setPageNumber(1);
-        homeFragmentViewModel.loadHomeVideoList(this);
-    }
-
-    @Override
-    public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        HomeVideoListBean.DataBean item = adapter.getItem(position);
-        VideoPlayActivity.start(this, "" + item.url, "" + item.title);
+        loadHttp(1);
     }
 }

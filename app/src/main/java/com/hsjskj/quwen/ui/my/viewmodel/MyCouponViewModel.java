@@ -13,6 +13,7 @@ import com.hjq.toast.ToastUtils;
 import com.hsjskj.quwen.http.model.HttpData;
 import com.hsjskj.quwen.http.request.CouponGetApi;
 import com.hsjskj.quwen.http.request.HomeBannerApi;
+import com.hsjskj.quwen.http.request.MyReleasePostApi;
 import com.hsjskj.quwen.http.request.ReleaseLeftGetApi;
 import com.hsjskj.quwen.http.response.BannerBean;
 import com.hsjskj.quwen.http.response.CouponBean;
@@ -75,6 +76,33 @@ public class MyCouponViewModel extends ViewModel {
                     public void onFail(Exception e) {
                         Log.d("TAG", "onFail: "+e.getMessage());
                         homePublishList.postValue(new ArrayList<>());
+                        ToastUtils.show(e.getMessage());
+
+                    }
+                });
+    }
+
+    private MutableLiveData<HttpData> mutableLiveData;
+
+    public MutableLiveData<HttpData> postReleaseDeleteLiveData(){
+        if (mutableLiveData == null) {
+            mutableLiveData = new MutableLiveData<>();
+        }
+        return mutableLiveData;
+    }
+    public void loadMyReleaseDelete(LifecycleOwner lifecycleOwner,String id){
+        EasyHttp.post(lifecycleOwner)
+                .api(new MyReleasePostApi(id))
+                .request(new HttpCallback<HttpData>(null) {
+                    @Override
+                    public void onSucceed(HttpData data) {
+                        mutableLiveData.postValue(data);
+
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        Log.d("TAG", "onFail: "+e.getMessage());
                         ToastUtils.show(e.getMessage());
 
                     }
